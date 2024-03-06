@@ -1,4 +1,4 @@
-from collections.abc import Generator
+from collections.abc import Generator, Iterable
 from dataclasses import dataclass
 
 import solver
@@ -10,7 +10,7 @@ class JudgeResult:
     score: float
 
 
-def judge_results(results: list[solver.Result]) -> Generator[JudgeResult, None, None]:
+def judge_results(results: Iterable[solver.Result]) -> Generator[JudgeResult, None, None]:
     """For each result, determine whether the result is good (the two cpc methods agreed) or bad (they disagreed)"""
     # Compare ignoring case
     return (
