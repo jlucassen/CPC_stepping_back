@@ -2,7 +2,7 @@ from openai import OpenAI
 
 
 class LLM:
-    def __init(self, openai: OpenAI, model_name):
+    def __init__(self, openai: OpenAI, model_name):
         self.model_name = model_name
         self.openai = openai
 
@@ -16,7 +16,7 @@ class LLM:
             ],
             model=self.model_name,
         )
-        return chat_completion.messages[-1].content
+        return chat_completion.choices[0].message.content
 
     def one_token_completion(self, prompt):
         return self.openai.completions.create(

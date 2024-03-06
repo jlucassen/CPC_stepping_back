@@ -12,7 +12,6 @@ class JudgeResult:
 
 def judge_results(results: Iterable[solver.Result]) -> Generator[JudgeResult, None, None]:
     """For each result, determine whether the result is good (the two cpc methods agreed) or bad (they disagreed)"""
-    # Compare ignoring case
     return (
         JudgeResult(
             result=result,
