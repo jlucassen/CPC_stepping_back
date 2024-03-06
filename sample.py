@@ -1,3 +1,4 @@
+from collections.abc import Generator
 from dataclasses import dataclass
 
 from llm import LLM
@@ -24,9 +25,10 @@ def create_long_answer(llm: LLM, problem: Problem):
     return Answer(text=response)
 
 
-def split_into_samples(answer, chunk_length) -> list[Context]:
-    """Splits the given answer into increasingly large context chunks, each sample being chunk_length characters
-    longer than the previous one"""
-    return [Context(text=slice(i + chunk_length)) for i in range(0, len(answer.text), chunk_length)]
+def checkpoints(document: str, chunk_length) -> Generator[Context, None, None]:
+    """
+    Enumerates progressively larger pieces of the document. So for document ABCD, returns [A, AB, ABC, ABCD]
+    """
+    return (Context(text=slice(i + chunk_length)) for i in range(0, len(document), chunk_length))
 
 
