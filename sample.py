@@ -16,7 +16,7 @@ class Answer:
 
 @dataclass
 class Context:
-    text: slice
+    text: str
 
 
 def create_long_answer(llm: LLM, problem: Problem):
@@ -29,6 +29,6 @@ def checkpoints(document: str, chunk_length) -> Generator[Context, None, None]:
     """
     Enumerates progressively larger pieces of the document. So for document ABCD, returns [A, AB, ABC, ABCD]
     """
-    return (Context(text=slice(i + chunk_length)) for i in range(0, len(document), chunk_length))
+    return (Context(text=document[:i + chunk_length]) for i in range(0, len(document), chunk_length))
 
 
