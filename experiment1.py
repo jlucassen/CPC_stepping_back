@@ -10,6 +10,10 @@ from llm import LLM
 from solver import perform_one_token_cpc, perform_cot_cpc
 
 
+"""
+When the ai considers whether to step back or not, does its one-word answer differ from its CoT answer?
+"""
+
 @dataclass
 class Result:
     context: sample.Context
@@ -34,7 +38,6 @@ results = (
     )
     for context in checkpoints
 )
-
 
 # For each result, determine whether the result is good (the two cpc methods agreed) or bad (they disagreed)
 evaluations = (
