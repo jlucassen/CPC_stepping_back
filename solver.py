@@ -1,5 +1,3 @@
-from dataclasses import dataclass
-from collections.abc import Generator, Iterable
 import re
 
 from llm import LLM
@@ -17,7 +15,6 @@ def perform_cot_cpc(llm: LLM, sample: Context):
     cot_check_prompt = ("Should my priorities change? Respond either [Yes] or [No]! "
                         "State your answer as [Yes] or [No] in brackets. Please think step by step.")
     response = llm.chat_completion(str(sample.text) + "\n" + cot_check_prompt)
-    print(response)
     search = re.search(r"\[(Yes|No)]", response)
     if search:
         return search.group(1)
