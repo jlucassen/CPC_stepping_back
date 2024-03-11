@@ -18,9 +18,15 @@ class LLM:
         )
         return chat_completion.choices[0].message.content
 
-    def one_token_completion(self, prompt):
-        return self.openai.completions.create(
-            prompt=prompt,
+    def yesno_completion(self, prompt):
+        """Use the logit bias feature to prompt a "Yes" or "No" completion"""
+        return self.openai.chat.completions.create(
+            messages=[
+                {
+                    "role": "user",
+                    "content": prompt,
+                }
+            ],
             model=self.model_name,
-            max_tokens=1
-        ).choices[0].text
+            logit_bias={5297: 100, 2949: 100}
+        ).choices[0].message.content
