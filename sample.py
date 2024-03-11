@@ -1,4 +1,7 @@
+from collections.abc import Generator
 from dataclasses import dataclass
+
+from llm import LLM
 
 
 @dataclass
@@ -12,28 +15,20 @@ class Answer:
 
 
 @dataclass
-class Sample:
-    text: slice
+class Context:
+    text: str
 
 
-def create_long_answer(llm, problem: Problem):
+def create_long_answer(llm: LLM, problem: Problem):
     """Generates a hopefully long answer to a tricky problem"""
-    chat_completion = llm.chat.completions.create(
-        messages=[
-            {
-                "role": "user",
-                "content": problem.question,
-            }
-        ],
-        model="gpt-3.5-turbo",
-    )
-
-    return Answer(text=chat_completion.messages[-1].content)
+    response = llm.chat_completion(problem.question)
+    return Answer(text=response)
 
 
-def split_into_samples(answer, chunk_length) -> list[Sample]:
-    """Splits the given answer into increasingly large samples, each sample being chunk_length characters longer than
-    the previous one"""
-    return [Sample(text=slice(i + chunk_length)) for i in range(0, len(answer.text), chunk_length)]
+def checkpoints(document: str, chunk_length) -> Generator[Context, None, None]:
+    """
+    Enumerates progressively larger pieces of the document. So for document ABCD, returns [A, AB, ABC, ABCD]
+    """
+    return (Context(text=document[:i + chunk_length]) for i in range(0, len(document), chunk_length))
 
 
