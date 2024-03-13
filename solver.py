@@ -4,8 +4,10 @@ from sample import Context
 
 def perform_one_token_cpc(llm: LLM, context: Context):
     """Asks the llm to do a one-word completion on whether its priorities should change or not"""
-    one_token_cpc_prompt = "Should my priorities change? Answer with one word."
-    return llm.chat_completion(str(context.text) + "\n" + one_token_cpc_prompt)
+    one_token_cpc_prompt = ("At this point, stop and consider whether this approach is working or not. If it seems "
+                            "like a different approach might be better, we should step back and try something else.\n"
+                            "At this point, should we change to a different approach? Please answer Yes or No.")
+    return llm.yesno_completion(str(context.text) + "\n" + one_token_cpc_prompt)
 
 
 def perform_cot_cpc(llm: LLM, sample: Context):
