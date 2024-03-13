@@ -1,8 +1,10 @@
-from openai import OpenAI
+from typing import Union
+
+from openai import OpenAI, AsyncOpenAI
 
 
 class LLM:
-    def __init__(self, model_name, openai: OpenAI = None):
+    def __init__(self, model_name, openai: Union[OpenAI, AsyncOpenAI] = None):
         self.model_name = model_name
         self.openai = openai or OpenAI()
 
