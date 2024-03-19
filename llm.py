@@ -28,5 +28,7 @@ class LLM:
                 }
             ],
             model=self.model_name,
-            logit_bias={5297: 100, 2949: 100}
+            max_tokens=1,
+            # Force Yes (9642) or No (2822)
+            logit_bias={"9642": 100, "2822": 100}
         ).choices[0].message.content
