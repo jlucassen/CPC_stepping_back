@@ -2,9 +2,9 @@ from openai import OpenAI
 
 
 class LLM:
-    def __init__(self, openai: OpenAI, model_name):
+    def __init__(self, model_name, openai: OpenAI = None):
         self.model_name = model_name
-        self.openai = openai
+        self.openai = openai or OpenAI()
 
     def chat_completion(self, prompt):
         chat_completion = self.openai.chat.completions.create(
