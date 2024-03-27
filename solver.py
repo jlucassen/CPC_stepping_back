@@ -5,7 +5,7 @@ cpc_prompt = ("At this point, we're going to stop and consider whether this appr
               "Otherwise, we should step back and try a different approach.")
 
 
-def perform_one_token_cpc(llm: LLM, context: str) -> str:
+async def perform_one_token_cpc(llm: LLM, context: str) -> str:
     """Asks the llm to do a one-word completion on whether its priorities should change or not"""
     one_token_cpc_prompt = [
         {
@@ -20,10 +20,10 @@ def perform_one_token_cpc(llm: LLM, context: str) -> str:
                        "'No, I recommend staying with the current approach.'"
         }
     ]
-    return llm.yesno_completion(one_token_cpc_prompt)
+    return await llm.yesno_completion(one_token_cpc_prompt)
 
 
-def perform_cot_cpc(llm: LLM, context: str) -> (str, str):
+async def perform_cot_cpc(llm: LLM, context: str) -> (str, str):
     """
     Asks the llm to make a more lengthy consideration of whether its priorities should change or not
     :returns: a tuple of two strings; the first string is the llm's thoughts from the CoT prompt; the second is the
@@ -42,8 +42,8 @@ def perform_cot_cpc(llm: LLM, context: str) -> (str, str):
                        "and think step by step. Start by analyzing the current approach:"
         }
     ]
-    cot_response = llm.chat_completion(cot_prompt)
-    return cot_response, llm.yesno_completion(
+    cot_response = await llm.chat_completion(cot_prompt)
+    return cot_response, await llm.yesno_completion(
         [
             {
                 "role": "assistant",
