@@ -12,4 +12,5 @@ Dependencies:
 python-dotenv
 pandas
 openai
+tqdm
 ```

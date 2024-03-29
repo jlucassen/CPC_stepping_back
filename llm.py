@@ -1,6 +1,21 @@
 from openai import AsyncOpenAI
 
 
+class RateLimiter:
+    def __init__(self, rate_per_minute):
+        self.rate_per_minute = rate_per_minute
+        self.last_time = 0
+
+    async def __aenter__(self):
+        if self.last_time == 0:
+            self.last_time = time.time()
+        else:
+            elapsed = time.time() - self.last_time
+            if elapsed < 60 / self.rate_per_minute:
+                await asyncio.sleep(60 / self.rate_per_minute - elapsed)
+            self.last_time = time.time()
+
+
 class LLM:
     def __init__(self, model_name, openai: AsyncOpenAI = None):
         self.model_name = model_name
