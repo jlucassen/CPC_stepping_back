@@ -1,3 +1,6 @@
+import asyncio
+import time
+
 from openai import AsyncOpenAI
 
 
