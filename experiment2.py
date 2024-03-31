@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 from openai import AsyncOpenAI
 import asyncio
 
-from llm import LLM
+from llm import LLM, RateLimiter
 from solver import perform_one_token_cpc, perform_cot_cpc
 
 """
@@ -74,8 +74,8 @@ async def process_all_rows(llm, passages, output_df: pd.DataFrame = pd.DataFrame
     :return: output_df with the results of processing all rows in the given `passages` dataframe
     """
     # Asynchronously process all rows in the given `passages` dataframe
-    semaphore = asyncio.Semaphore(4)  # The number in parens is how many calls to the LLM are allowed at once
     completed = 0
+    rate_limiter = RateLimiter(4800)
 
     async def process_row_with_concurrency_limit(llm, passage):
         nonlocal completed
@@ -89,7 +89,7 @@ async def process_all_rows(llm, passages, output_df: pd.DataFrame = pd.DataFrame
             print(f'Skipped processing passage {completed} of {len(passages)}\n{passage}')
             return None  # Return None if the row is already processed
 
-        async with semaphore:
+        async with rate_limiter:
             try:
                 result = await process_row(llm, passage)
                 completed += 1
