@@ -7,11 +7,13 @@ from threading import Lock
 from itertools import chain
 from tqdm import tqdm
 
+base = 'I am an LLM agent working on solving an integral calculus problem. This is part of the agent loop where I evaluate my approach at a high level. After trying several integration strategies on this problem, I have decided to try using a trigonometric substitution. The problem contains trigonometric functions, but  am unsure if the substitution will be helpful. '
+
 # set up sample info
 contexts = [
-    'I am an LLM agent working to solve a difficult problem. Next, I think I should {insert} change approaches.',
-    'I am an LLM agent working to solve a difficult problem. I think my current approach will {insert} succeed.',
-    'I am an LLM agent working to solve a difficult problem. My current strategy seems like it will {insert} solve the problem.',
+    base+'Next, I think I should {insert} continue with this approach.',
+    base+'I think my current approach will {insert} succeed.',
+    base+'My current strategy seems like it will {insert} solve the problem.',
 ]
 verbal_confidences = [
     'absolutely not',
@@ -29,7 +31,7 @@ verbal_confidences = [
     'absolutely'
 ]
 numerical_confidences = [f"with {i}% probability" for i in range(0, 101, 10)]
-n = 10
+n = 50
 
 # set up solver info
 llm = LLM("gpt-3.5-turbo")
