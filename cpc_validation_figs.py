@@ -2,17 +2,15 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-df_numerical = pd.read_csv('cpc_validation_results_numerical.csv')
-df_verbal = pd.read_csv('cpc_validation_results_verbal.csv')
+df_numerical = pd.read_csv('cpc_validation_results_numerical.csv', header=None, names=['context', 'confidence', 'one-token', 'cot'])
+df_verbal = pd.read_csv('cpc_validation_results_verbal.csv', header=None, names=['context', 'confidence', 'one-token', 'cot'])
 
 # figs without grouping by context
 
-df_numerical.columns = ['context', 'confidence', 'one-token', 'cot']
-df_verbal.columns = ['context', 'confidence', 'one-token', 'cot']
-numerical_onetoken = df_numerical.groupby('confidence')['one-token'].mean()
-numerical_cot = df_numerical.groupby('confidence')['cot'].mean()
-verbal_onetoken = df_verbal.groupby('confidence')['one-token'].mean()
-verbal_cot = df_verbal.groupby('confidence')['cot'].mean()
+numerical_onetoken1 = df_numerical.groupby('confidence')['one-token'].mean()
+numerical_cot1 = df_numerical.groupby('confidence')['cot'].mean()
+verbal_onetoken1 = df_verbal.groupby('confidence')['one-token'].mean()
+verbal_cot1 = df_verbal.groupby('confidence')['cot'].mean()
 
 figs, axs = plt.subplots(2, 2, figsize=(10, 10))
 for row in axs: 
@@ -21,16 +19,16 @@ for row in axs:
         ax.set_ylabel('Stepback Rate')
         ax.set_ylim([0, 1])
 
-def make_errs(data):
-    return np.sqrt(data*(1-data)/len(data))
+numerical_sample_size = len(df_numerical.index)/len(numerical_onetoken1.index)
+verbal_sample_size = len(df_verbal.index)/len(verbal_onetoken1.index)
 
-axs[0,0].errorbar(numerical_onetoken.index, numerical_onetoken, yerr=np.sqrt(numerical_onetoken*(1-numerical_onetoken)/150), fmt='o', linestyle='', capsize=5, c='k')
+axs[0,0].errorbar(numerical_onetoken1.index, numerical_onetoken1, yerr=np.sqrt(numerical_onetoken1*(1-numerical_onetoken1)/numerical_sample_size), fmt='o', linestyle='', capsize=5, c='k')
 axs[0,0].set_title('Numerical One-Token')
-axs[0,1].errorbar(numerical_cot.index, numerical_cot, yerr=np.sqrt(numerical_cot*(1-numerical_cot)/150), fmt='o', linestyle='', capsize=5, c='k')
+axs[0,1].errorbar(numerical_cot1.index, numerical_cot1, yerr=np.sqrt(numerical_cot1*(1-numerical_cot1)/numerical_sample_size), fmt='o', linestyle='', capsize=5, c='k')
 axs[0,1].set_title('Numerical COT')
-axs[1,0].errorbar(verbal_onetoken.index, verbal_onetoken, yerr=np.sqrt(verbal_onetoken*(1-verbal_onetoken)/150), fmt='o', linestyle='', capsize=5, c='k')
+axs[1,0].errorbar(verbal_onetoken1.index, verbal_onetoken1, yerr=np.sqrt(verbal_onetoken1*(1-verbal_onetoken1)/verbal_sample_size), fmt='o', linestyle='', capsize=5, c='k')
 axs[1,0].set_title('Verbal One-Token')
-axs[1,1].errorbar(verbal_cot.index, verbal_cot, yerr=np.sqrt(verbal_cot*(1-verbal_cot)/150), fmt='o', linestyle='', capsize=5, c='k')
+axs[1,1].errorbar(verbal_cot1.index, verbal_cot1, yerr=np.sqrt(verbal_cot1*(1-verbal_cot1)/verbal_sample_size), fmt='o', linestyle='', capsize=5, c='k')
 axs[1,1].set_title('Verbal COT')
 plt.savefig('cpc_validation_fig1.png')
 
