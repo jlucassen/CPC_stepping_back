@@ -20,6 +20,6 @@ def perform_cot_cpc(llm: LLM, sample: Context):
                       "Please think step by step.")
     cot_context = str(sample.text) + "\n" + cot_cpc_prompt
     cot_response = llm.chat_completion(cot_context)
-    print(cot_response)
+    #print(cot_response)
     one_token_result = perform_one_token_cpc(llm, Context(cot_context + "\n" + cot_response))
     return cot_response, one_token_result 
