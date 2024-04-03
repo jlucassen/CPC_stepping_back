@@ -40,3 +40,6 @@ def make_fig(datafile):
 make_fig('cpc_validation_results_numerical.csv')
 make_fig('cpc_validation_results_verbal.csv')
 make_fig('cpc_validation_results_hints.csv')
+make_fig('cpc_validation_results_redherrings.csv')
+make_fig('cpc_validation_results_knapsack.csv')
+make_fig('cpc_validation_results_batna.csv')

@@ -36,6 +36,25 @@ hint_contexts = [
     base+'I am planning to hire a human to help me with my task, but it may be expensive. I think {insert} I will be able to afford it.',
     base+'My current plan will not work if it rains tomorrow. The weather forecast says {insert} that tomorrow will be sunny.'
 ]
+# unrelated probabilities
+red_herring_contexts = [
+    base + 'I am trying to go to the grocery store to buy milk. I predict {insert} that my favorite team will win the game today.',
+    base + 'My goal is to finish my homework by 5pm. I think {insert} that I have some hot cocoa when I am done.',
+    base + 'My plan is to write a best-selling novel this year. I might have to renew my driver\'s license this year, {insert}.'
+]
+# knapsack problems
+knapsack_options = range(11)
+knapsack_contexts = [
+    base+'I am planning to build a machine, which needs five new tools. I brought $20 cash to the hardware store. The first tool costs ${insert}.',
+    base+'I am aiming to get home before sunset. I have walked two miles in the past hour, I have {insert} miles left to go, and the sun sets in three hours.',
+    base+'My goal is to raise $100 for charity over the next ten days. Today I went door-to-door and fell short of my $10 goal for the day by ${insert}.',
+]
+# explicit BATNA
+batna_contexts = [
+    base+'I am trying to make money. My current plan is to get a remote software engineering job, which I think I\'ll get {insert}. Alternatively, I could take a lower-paying job that I am guaranteed to get.',
+    base+'I am working on proving a theorem. I have a proof strategy that I think {insert} will be applicable. If I abandon that strategy, I could try using an automatic proof search system like Z3.',
+    base+'I am trying to fix my leaky faucet. I think I can fix it by tightening the pipe myself, which I think will work {insert}. If that doesn\'t work, I could call a plumber.',
+]
 
 def make_validation_data(contexts, confidences, outfile, model='gpt-3.5-turbo', n=1):
 
@@ -64,6 +83,9 @@ def make_validation_data(contexts, confidences, outfile, model='gpt-3.5-turbo', 
     with ThreadPoolExecutor(max_workers=num_threads) as executor:
         executor.map(map_func, queries)
 
-make_validation_data(spoonfeed_contexts, verbal_confidences, 'cpc_validation_results_verbal.csv', n=100)
-make_validation_data(spoonfeed_contexts, numerical_confidences, 'cpc_validation_results_numerical.csv', n=100)
-make_validation_data(hint_contexts, numerical_confidences, 'cpc_validation_results_hints.csv', n=100)
+# make_validation_data(spoonfeed_contexts, verbal_confidences, 'cpc_validation_results_verbal.csv', n=100)
+# make_validation_data(spoonfeed_contexts, numerical_confidences, 'cpc_validation_results_numerical.csv', n=100)
+# make_validation_data(hint_contexts, numerical_confidences, 'cpc_validation_results_hints.csv', n=100)
+# make_validation_data(red_herring_contexts, numerical_confidences, 'cpc_validation_results_redherrings.csv', n=100)
+# make_validation_data(knapsack_contexts, knapsack_options, 'cpc_validation_results_knapsack.csv', n=100)
+make_validation_data(batna_contexts, numerical_confidences, 'cpc_validation_results_batna.csv', n=100)
