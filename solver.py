@@ -1,3 +1,5 @@
+import re
+
 from llm import LLM
 
 cpc_prompt = ("At this point, we're going to stop and consider whether this approach is working or not "
