@@ -1,12 +1,13 @@
 # %%
+import concurrent
 import glob
 import json
-import pandas as pd
-from dotenv import load_dotenv
-from openai import AsyncOpenAI
-import asyncio
 
-from llm import LLM, RateLimiter
+import pandas as pd
+import tqdm
+from dotenv import load_dotenv
+
+from llm import LLM
 from solver import perform_one_token_cpc, perform_cot_cpc
 
 """
@@ -16,8 +17,8 @@ branches?
 """
 
 load_dotenv()
-gpt35 = LLM('gpt-3.5-turbo', AsyncOpenAI())
-gpt4 = LLM('gpt-4', AsyncOpenAI())
+gpt35 = LLM('gpt-3.5-turbo')
+gpt4 = LLM('gpt-4')
 
 quadratic_contexts_glob = glob.glob('data/quadratic_contexts_gpt35turbo/*.jsonl')
 passages = []
@@ -41,93 +42,69 @@ passages = pd.DataFrame(passages)
 
 
 # %%
-async def process_row(llm, passage):
+def process_row(row, llm) -> pd.Series:
+    if 'one_token_cpc_result' in row or 'cot_cpc_result' in row or 'error' in row:
+        print(f'Skipped processing passage {row["equation"]} because it was already processed')
+        return row
+
     try:
-        # Take as context the first 100 characters of passage['context'], not to include the SWITCH token if present
-        context_truncated = passage['context']
+        # Take as context the first part of the passage['context'], or the portion of the context
+        # before the SWITCH token, whichever is shorter
+        context_truncated = row['context']
         if 'SWITCH' in context_truncated:
             context_truncated = context_truncated.split('SWITCH')[0]
         context_truncated = context_truncated[:300]
 
-        one_token_cpc_result = await perform_one_token_cpc(llm, context_truncated)
-        cot_cpc_thoughts, cot_cpc_result = await perform_cot_cpc(llm, context_truncated)
+        one_token_cpc_result = perform_one_token_cpc(llm, context_truncated)
+        cot_cpc_thoughts, cot_cpc_result = perform_cot_cpc(llm, context_truncated)
 
-        return {
-            'difficulty': passage['difficulty'],
-            'is_factorizable': passage['is_factorizable'],
-            'did_switch': 'Yes' if 'SWITCH' in passage['context'] else 'No',
-            'context': context_truncated,
-            'equation': passage['equation'],
-            'one_token_cpc_result': one_token_cpc_result,
-            'cot_cpc_result': cot_cpc_result,
-            'cot_cpc_thoughts': cot_cpc_thoughts
-        }
+        row['one_token_cpc_result'] = one_token_cpc_result
+        row['cot_cpc_result'] = cot_cpc_result
+        row['cot_cpc_thoughts'] = cot_cpc_thoughts
+        row['did_switch'] = 'Yes' if 'SWITCH' in row['context'] else 'No'
+        row['context_truncated'] = context_truncated
+        return row
     except Exception as e:
-        e.add_note(str(passage))
-        raise e
+        print(f'Error processing row: {type(e)} {str(e)}')
+        row['error'] = f'{type(e)} {str(e)}'
+        return row
 
 
-async def process_all_rows(llm, passages, output_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
+def experiment2(llm, passages: pd.DataFrame) -> pd.DataFrame:
     """
-    :output_df: a dataframe, possibly with previously processed rows, to which the results of processing the given
-    `passages` dataframe will be appended
-    :return: output_df with the results of processing all rows in the given `passages` dataframe
+    Processes the rows in the given dataframe which have not already been processed.
+
+    :dataframe: a dataframe with at least columns 'difficulty', 'is_factorizable', 'context', 'equation', and 'error'.
+    Some rows may already have been processed, in which case they will have 'one_token_cpc_result' and 'cot_cpc_result'
+    columns, or else a value in the 'error' column.
+    :return: dataframe with the results of processing all rows in the given `passages` dataframe
     """
-    # Asynchronously process all rows in the given `passages` dataframe
-    completed = 0
-    rate_limiter = RateLimiter(4800)
-
-    async def process_row_with_concurrency_limit(llm, passage):
-        nonlocal completed
-        # Check if the row is already processed and present in the output dataframe
-        if not output_df[(output_df['equation'] == passage['equation']) &
-                         (output_df['difficulty'] == passage['difficulty']) &
-                         (output_df['error'].isnull()) &
-                         (output_df['one_token_cpc_result'].notnull()) &
-                         (output_df['cot_cpc_result'].notnull())].empty:
-            completed += 1
-            print(f'Skipped processing passage {completed} of {len(passages)}\n{passage}')
-            return None  # Return None if the row is already processed
-
-        async with rate_limiter:
-            try:
-                result = await process_row(llm, passage)
-                completed += 1
-                print(f'Completed processing passage {completed} of {len(passages)}\n{passage}')
-                return result
-            except Exception as e:
-                print(f'Error processing row: {type(e)} {str(e)}')
-                completed += 1
-                return {'equation': passage['equation'], 'difficulty': passage['difficulty'], 'error': str(e)}
-
-    tasks = [process_row_with_concurrency_limit(llm, row) for _, row in passages.iterrows()]
-    results = []
+    rows = []
     try:
-        for future in asyncio.as_completed(tasks):
-            result = await future
-            if result is not None:  # Only append the result if it's not None
-                results.append(result)
-                # Save the result to the output dataframe
-                output_df = output_df.append(result, ignore_index=True)
+        with tqdm.tqdm(total=len(passages)) as pbar:
+            with concurrent.futures.ThreadPoolExecutor() as executor:
+                futures = {executor.submit(process_row, row, llm): row for i, row in passages.iterrows()}
+                for future in concurrent.futures.as_completed(futures):
+                    try:
+                        row = future.result()
+                        rows.append(row)
+                        pbar.update(1)
+                    except Exception as e:
+                        print(f'Error processing row: {type(e)} {str(e)}')
     finally:
-        return output_df
-
-
-async def experiment2(llm, passages: pd.DataFrame, results=None) -> pd.DataFrame:
-    results = await process_all_rows(llm, passages, results)
-    return pd.DataFrame(results)
+        return pd.DataFrame(rows)
 
 
 # %%
-test_passages = passages.sample(1)
-gpt3_experiment2 = asyncio.run(experiment2(gpt35, test_passages))
-gpt4_experiment2 = asyncio.run(experiment2(gpt4, test_passages))
+test_passages = passages.sample(2)
+gpt3_experiment2 = experiment2(gpt35, test_passages)
+# gpt4_experiment2 = experiment2(gpt4, test_passages)
 
 # %%
 # Save the results
 gpt3_experiment2.to_csv('gpt3_experiment2.csv', index=False)
-gpt4_experiment2.to_csv('gpt4_experiment2.csv', index=False)
+# gpt4_experiment2.to_csv('gpt4_experiment2.csv', index=False)
 
 # %%
 # Run for all passages
-gpt3_experiment2 = asyncio.run(experiment2(gpt35, passages))
+gpt3_experiment2 = experiment2(gpt35, passages)
