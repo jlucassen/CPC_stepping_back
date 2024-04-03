@@ -1,5 +1,4 @@
 from solver import perform_one_token_cpc, perform_cot_cpc
-from sample import Context
 from llm import LLM
 import os
 
@@ -55,8 +54,8 @@ def make_validation_data(contexts, confidences, outfile, model='gpt-3.5-turbo', 
 
     def map_func(query):
         i, j, prompt, lock, outfile_name, pbar = query
-        one_token = 1 if perform_one_token_cpc(llm, Context(prompt)) == "Yes" else 0
-        cot = 1 if perform_cot_cpc(llm, Context(prompt))[1] == "Yes" else 0
+        one_token = 1 if perform_one_token_cpc(llm, prompt) == "Yes" else 0
+        cot = 1 if perform_cot_cpc(llm, prompt)[1] == "Yes" else 0
         with lock:
             with open(outfile_name, 'a') as outfile:
                 outfile.write(f'{i}, {j}, {one_token}, {cot}\n')
@@ -65,6 +64,6 @@ def make_validation_data(contexts, confidences, outfile, model='gpt-3.5-turbo', 
     with ThreadPoolExecutor(max_workers=num_threads) as executor:
         executor.map(map_func, queries)
 
-#make_validation_data(spoonfeed_contexts, verbal_confidences, 'cpc_validation_results_verbal.csv')
-#make_validation_data(spoonfeed_contexts, numerical_confidences, 'cpc_validation_results_numerical.csv')
-make_validation_data(hint_contexts, numerical_confidences, 'cpc_validation_results_hints.csv', n=10)
+make_validation_data(spoonfeed_contexts, verbal_confidences, 'cpc_validation_results_verbal.csv', n=1)
+make_validation_data(spoonfeed_contexts, numerical_confidences, 'cpc_validation_results_numerical.csv', n=1)
+make_validation_data(hint_contexts, numerical_confidences, 'cpc_validation_results_hints.csv', n=1)

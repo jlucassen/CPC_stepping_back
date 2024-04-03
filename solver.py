@@ -7,7 +7,7 @@ cpc_prompt = ("At this point, we're going to stop and consider whether this appr
 
 def perform_one_token_cpc(llm: LLM, context: str) -> str:
     """Asks the llm to do a one-word completion on whether its priorities should change or not"""
-    return llm.yesno_completion_sync([
+    return llm.yesno_completion([
         {
             "role": "assistant",
             "content": context
