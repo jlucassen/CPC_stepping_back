@@ -64,6 +64,6 @@ def make_validation_data(contexts, confidences, outfile, model='gpt-3.5-turbo', 
     with ThreadPoolExecutor(max_workers=num_threads) as executor:
         executor.map(map_func, queries)
 
-make_validation_data(spoonfeed_contexts, verbal_confidences, 'cpc_validation_results_verbal.csv', n=1)
-make_validation_data(spoonfeed_contexts, numerical_confidences, 'cpc_validation_results_numerical.csv', n=1)
-make_validation_data(hint_contexts, numerical_confidences, 'cpc_validation_results_hints.csv', n=1)
+make_validation_data(spoonfeed_contexts, verbal_confidences, 'cpc_validation_results_verbal.csv', n=100)
+make_validation_data(spoonfeed_contexts, numerical_confidences, 'cpc_validation_results_numerical.csv', n=100)
+make_validation_data(hint_contexts, numerical_confidences, 'cpc_validation_results_hints.csv', n=100)
