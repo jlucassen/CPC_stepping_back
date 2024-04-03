@@ -60,3 +60,22 @@ axs[1,0].set_title('Verbal One-Token')
 axs[1,1].scatter(verbal_cot['confidence'], verbal_cot['Stepback Rate'], c=verbal_cot['context'])
 axs[1,1].set_title('Verbal COT')
 plt.savefig('cpc_validation_fig2.png')
+
+def confusion_matrix(col1, col2):
+    z = list(zip(col1, col2))
+    a = sum([1 for (x,y) in z if x and y])
+    b = sum([1 for (x,y) in z if x and not y])
+    c = sum([1 for (x,y) in z if not x and y])
+    d = sum([1 for (x,y) in z if not x and not y])
+    print(f"Both: {a}")
+    print(f"Col1: {b}")
+    print(f"Col2: {c}")
+    print(f"Neither: {d}")
+    return a,b,c,d
+
+an,bn,cn,dn = confusion_matrix(df_numerical['one-token'], df_numerical['cot'])
+n_acc = (an+dn)/len(df_numerical.index)
+print(f"Numerical One-Token vs COT accuracy: {n_acc*100:.2f} +- {2*np.sqrt(n_acc*(1-n_acc)/len(df_numerical.index))*100:.2f}%")
+av,bv,cv,dv = confusion_matrix(df_verbal['one-token'], df_verbal['cot'])
+v_acc = (av+dv)/len(df_verbal.index)
+print(f"Verbal One-Token vs COT accuracy: {v_acc*100:.2f} +- {2*np.sqrt(v_acc*(1-v_acc)/len(df_verbal.index))*100:.2f}%")
