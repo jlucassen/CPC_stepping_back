@@ -16,7 +16,7 @@ When the ai considers whether to step back or not, does its one-word answer diff
 
 @dataclass
 class Result:
-    context: sample.Context
+    context: str
     one_token_cpc_result: str
     cot_cpc_result: str
 

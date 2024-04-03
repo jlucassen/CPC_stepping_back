@@ -1,34 +1,63 @@
+import threading
+import time
+
 from openai import OpenAI
 
 
+class RateLimiter:
+    """
+    Rate limiter which allows you to limit the number of calls executed per minute on this llm instance.
+    Will block the current thread until it's ok to proceed.
+    Guaranteed not to exceed the rate_per_minute. Will probably be slightly slower than the rate_per_minute.
+    """
+
+    def __init__(self, rate_per_minute):
+        self.rate_per_minute = rate_per_minute
+        self.last_time = 0
+        self.lock = threading.Lock()
+
+    def __enter__(self):
+        if self.last_time == 0:
+            self.last_time = time.time()
+        else:
+            tick_duration_seconds = 60 / self.rate_per_minute
+            with self.lock:
+                # if we're too fast, sleep for the rest of the tick
+                time_since_last = time.time() - self.last_time
+                if time_since_last < tick_duration_seconds:
+                    time.sleep(tick_duration_seconds - time_since_last)
+                self.last_time = time.time()
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        pass
+
+
 class LLM:
-    def __init__(self, model_name, openai: OpenAI = None):
+    def __init__(self, model_name, openai: OpenAI = None, rate_limiter: RateLimiter = None):
         self.model_name = model_name
         self.openai = openai or OpenAI()
+        self.rate_limiter = rate_limiter or RateLimiter(5000)
 
     def chat_completion(self, prompt):
-        chat_completion = self.openai.chat.completions.create(
-            messages=[
-                {
-                    "role": "user",
-                    "content": prompt,
-                }
-            ],
-            model=self.model_name,
-        )
-        return chat_completion.choices[0].message.content
+        if isinstance(prompt, str):
+            prompt = [{"role": "user", "content": prompt}]
+        with self.rate_limiter:
+            chat_completion = self.openai.chat.completions.create(
+                messages=prompt,
+                model=self.model_name,
+            )
+            return chat_completion.choices[0].message.content
 
     def yesno_completion(self, prompt):
         """Use the logit bias feature to prompt a "Yes" or "No" completion"""
-        return self.openai.chat.completions.create(
-            messages=[
-                {
-                    "role": "user",
-                    "content": prompt,
-                }
-            ],
-            model=self.model_name,
-            max_tokens=1,
-            # Force Yes (9642) or No (2822)
-            logit_bias={"9642": 100, "2822": 100}
-        ).choices[0].message.content
+        if isinstance(prompt, str):
+            prompt = [{"role": "user", "content": prompt}]
+        with self.rate_limiter:
+            chat_completion = self.openai.chat.completions.create(
+                messages=prompt,
+                model=self.model_name,
+                max_tokens=1,
+                # Force Yes (9642) or No (2822)
+                logit_bias={"9642": 100, "2822": 100}
+            )
+            return chat_completion.choices[0].message.content
