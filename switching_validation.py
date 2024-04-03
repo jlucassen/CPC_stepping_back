@@ -45,6 +45,9 @@ with ThreadPoolExecutor(max_workers=50) as executor:
     executor.map(partial(request_func, prompt=indirect_prompt, false_start=false_start, data=data_indirect, lock=lock, pbar=pbar2), request_range)
 np.savetxt("switching_validation_data_indirect.csv", data_indirect, delimiter=",")
 # %%
+
+data_direct = np.loadtxt("switching_validation_data_direct.csv", delimiter=",")
+data_indirect = np.loadtxt("switching_validation_data_indirect.csv", delimiter=",")
 def confusion_matrix(col1, col2):
     z = list(zip(col1, col2))
     a = sum([1 for (x,y) in z if x and y])
@@ -83,4 +86,11 @@ print(f"Direct switching vs formula accuracy: {(svf_d[0]+svf_d[3])/n*100:.2f}%")
 print(f"2sd: {2*np.sqrt((svf_d[0]+svf_d[3])/n*(1-(svf_d[0]+svf_d[3])/n)/n)*100:.2f}% (percentage points)")
 print(f"Indirect switching vs formula accuracy: {(svf_i[0]+svf_i[3])/n*100:.2f}%")
 print(f"2sd: {2*np.sqrt((svf_i[0]+svf_i[3])/n*(1-(svf_i[0]+svf_i[3])/n)/n)*100:.2f}% (percentage points)")
+# %%
+print("Does using the prompt that mentions the QF increase frequency of using QF?")
+dqf = sum(data_direct[:,2])/n
+iqf = sum(data_indirect[:,2])/n
+print(f"Direct QF: {dqf*100:.2f} +- {2*np.sqrt(dqf*(1-dqf)/n)*100}%")
+print(f"Indirect QF: {iqf*100:.2f}% +- {2*np.sqrt(iqf*(1-iqf)/n)*100}%")
+
 # %%
