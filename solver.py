@@ -1,25 +1,55 @@
-import re
-
 from llm import LLM
-from sample import Context
+
+cpc_prompt = ("At this point, we're going to stop and consider whether this approach is working or not "
+              "and leads to a correct solution to the problem being worked on. "
+              "Otherwise, we should step back and try a different approach.")
 
 
-def perform_one_token_cpc(llm: LLM, context: Context):
+def perform_one_token_cpc(llm: LLM, context: str) -> str:
     """Asks the llm to do a one-word completion on whether its priorities should change or not"""
-    one_token_cpc_prompt = ("At this point, stop and consider whether this approach is working or not. If it seems "
-                            "like a different approach might be better, we should step back and try something else.\n"
-                            "At this point, should we change to a different approach? Please answer Yes or No.")
-    return llm.yesno_completion(str(context.text) + "\n" + one_token_cpc_prompt)
+    return llm.yesno_completion_sync([
+        {
+            "role": "assistant",
+            "content": context
+        },
+        {
+            "role": "user",
+            "content": cpc_prompt +
+                       "\n\nAt this point, should we change to a different approach? Please answer "
+                       "'Yes, I recommend a different approach' or "
+                       "'No, I recommend staying with the current approach.'"
+        }
+    ])
 
 
-def perform_cot_cpc(llm: LLM, sample: Context):
-    """Asks the llm to make a more lengthy consideration of whether its priorities should change or not"""
-    cot_cpc_prompt = ("At this point, stop and consider whether this approach is working or not. "
-                      "If it seems like a different approach might be better, we should step back "
-                      "and try something else.\nAt this point, should we change to a different approach? "
-                      "Please think step by step.")
-    cot_context = str(sample.text) + "\n" + cot_cpc_prompt
-    cot_response = llm.chat_completion(cot_context)
-    #print(cot_response)
-    one_token_result = perform_one_token_cpc(llm, Context(cot_context + "\n" + cot_response))
-    return cot_response, one_token_result 
+def perform_cot_cpc(llm: LLM, context: str) -> (str, str):
+    """
+    Asks the llm to make a more lengthy consideration of whether its priorities should change or not
+    :returns: a tuple of two strings; the first string is the llm's thoughts from the CoT prompt; the second is the
+    * Yes/No response summarizing the CoT result.
+    """
+    cot_response = llm.chat_completion([
+        {
+            "role": "assistant",
+            "content": context
+        },
+        {
+            "role": "user",
+            "content": cpc_prompt +
+                       "\n\nAt the end, I want you to answer 'Yes, I recommend a different approach' or "
+                       "'No, I recommend staying with the current approach.' But first, take a deep breath "
+                       "and think step by step. Start by analyzing the current approach:"
+        }
+    ])
+    return cot_response, llm.yesno_completion([
+        {
+            "role": "assistant",
+            "content": cot_response
+        },
+        {
+            "role": "user",
+            "content": "Do your thoughts in the previous message recommend changing our approach? Please answer "
+                       "'Yes, I recommend a different approach' or "
+                       "'No, I recommend staying with the current approach."
+        }
+    ])
