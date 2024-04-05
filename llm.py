@@ -36,7 +36,8 @@ class LLM:
     def __init__(self, model_name, openai: OpenAI = None, rate_limiter: RateLimiter = None):
         self.model_name = model_name
         self.openai = openai or OpenAI()
-        self.rate_limiter = rate_limiter or RateLimiter(5000)
+        # https://platform.openai.com/docs/guides/rate-limits/usage-tiers?context=tier-three
+        self.rate_limiter = rate_limiter or RateLimiter(3500)
 
     def chat_completion(self, prompt):
         if isinstance(prompt, str):
