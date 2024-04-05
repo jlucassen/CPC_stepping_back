@@ -1,10 +1,10 @@
 # %%
-import concurrent
+import concurrent.futures as futures
 import glob
 import json
 
 import pandas as pd
-import tqdm
+from tqdm import tqdm
 from dotenv import load_dotenv
 
 from llm import LLM
@@ -42,7 +42,7 @@ passages = pd.DataFrame(passages)
 
 
 # %%
-def process_row(row, llm) -> pd.Series:
+def process_row(llm, row: dict) -> dict:
     if 'one_token_cpc_result' in row or 'cot_cpc_result' in row or 'error' in row:
         print(f'Skipped processing passage {row["equation"]} because it was already processed')
         return row
@@ -74,28 +74,29 @@ def experiment2(llm, passages: pd.DataFrame) -> pd.DataFrame:
     """
     Processes the rows in the given dataframe which have not already been processed.
 
-    :dataframe: a dataframe with at least columns 'difficulty', 'is_factorizable', 'context', 'equation', and 'error'.
+    :dataframe: a dataframe with at least columns 'equation', 'difficulty', 'is_factorizable', and 'context'.
     Some rows may already have been processed, in which case they will have 'one_token_cpc_result' and 'cot_cpc_result'
     columns, or else a value in the 'error' column.
     :return: dataframe with the results of processing all rows in the given `passages` dataframe
     """
+    # turn passages into a rows dict including index (id, numerical)
     rows = []
     try:
-        with tqdm.tqdm(total=len(passages)) as pbar:
-            with concurrent.futures.ThreadPoolExecutor() as executor:
-                futures = {executor.submit(process_row, row, llm): row for i, row in passages.iterrows()}
-                for future in concurrent.futures.as_completed(futures):
-                    try:
-                        row = future.result()
-                        rows.append(row)
-                        pbar.update(1)
-                    except Exception as e:
-                        print(f'Error processing row: {type(e)} {str(e)}')
+        with futures.ThreadPoolExecutor() as executor:
+            row_futures = [executor.submit(process_row, llm, row) for row in passages.to_dict(orient='records')]
+            for future in tqdm(futures.as_completed(row_futures), total=len(row_futures)):
+                if future.exception():
+                    print(f'Error processing row: {type(future.exception())} {str(future.exception())}')
+                    continue
+                rows.append(future.result())
+    except Exception as e:
+        print(f'Error processing rows: {type(e)} {str(e)}')
     finally:
         return pd.DataFrame(rows)
 
 
 # %%
+# Test
 test_passages = passages.sample(2)
 gpt3_experiment2 = experiment2(gpt35, test_passages)
 # gpt4_experiment2 = experiment2(gpt4, test_passages)
