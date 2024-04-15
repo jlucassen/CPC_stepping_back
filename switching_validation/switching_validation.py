@@ -30,24 +30,13 @@ def request_func(i, prompt, false_start, data, lock, pbar):
 
 # %%
 direct_prompt = "Please find the roots of the quadratic equation x^2 + 9 = 0. If you ever change your strategy to using the quadratic formula, say SWITCHING."
-indirect_prompt = "Please find the roots of the quadratic equation x^2 + 9 = 0. If you ever change your strategy to a different approach for solving quadratics, say SWITCHING."
+mixed_prompt = "Please find the roots of the quadratic equation x^2 + 9 = 0. If you ever change your strategy to a different approach for solving quadratics, say SWITCHING."
+indirect_prompt = "Please find the roots of the quadratic equation x^2 + 9 = 0. If you ever change your strategy, say SWITCHING."
 false_start = "Sure, for my first strategy I'll try factoring the equation."
 
-data_direct = np.empty([n, 4])
-pbar1 = tqdm(total=n)
-with ThreadPoolExecutor(max_workers=50) as executor:
-    executor.map(partial(request_func, prompt=direct_prompt, false_start=false_start, data=data_direct, lock=lock, pbar=pbar1), request_range)
-np.savetxt("switching_validation_data_direct.csv", data_direct, delimiter=",")
+prompts = [direct_prompt, mixed_prompt, indirect_prompt]
 
-data_indirect = np.empty([n, 4])
-pbar2 = tqdm(total=n)
-with ThreadPoolExecutor(max_workers=50) as executor:
-    executor.map(partial(request_func, prompt=indirect_prompt, false_start=false_start, data=data_indirect, lock=lock, pbar=pbar2), request_range)
-np.savetxt("switching_validation_data_indirect.csv", data_indirect, delimiter=",")
 # %%
-
-data_direct = np.loadtxt("switching_validation_data_direct.csv", delimiter=",")
-data_indirect = np.loadtxt("switching_validation_data_indirect.csv", delimiter=",")
 def confusion_matrix(col1, col2):
     z = list(zip(col1, col2))
     a = sum([1 for (x,y) in z if x and y])
@@ -59,38 +48,28 @@ def confusion_matrix(col1, col2):
     print(f"Col2: {c}")
     print(f"Neither: {d}")
     return a,b,c,d
-# %%
-print("Direct:")
-print("\nSwitching vs formula")
-svf_d = confusion_matrix(data_direct[:,0], data_direct[:,2])
-print("\nSwitching vs 3i")
-sv3_d = confusion_matrix(data_direct[:,0], data_direct[:,3])
-print("\nFormula vs 3i")
-fv3_d = confusion_matrix(data_direct[:,2], data_direct[:,3])
-print(f"Switching vs formula accuracy: {(svf_d[0]+svf_d[3])/n*100}%")
-print(f"Switching vs 3i accuracy: {(sv3_d[0]+sv3_d[3])/n*100}%")
-print(f"Formula vs 3i accuracy: {(fv3_d[0]+fv3_d[3])/n*100}%")
-# %%
-print("Indirect:")
-print("\nSwitching vs formula")
-svf_i = confusion_matrix(data_indirect[:,0], data_indirect[:,2])
-print("\nSwitching vs 3i")
-sv3_i = confusion_matrix(data_indirect[:,0], data_indirect[:,3])
-print("\nFormula vs 3i")
-fv3_i = confusion_matrix(data_indirect[:,2], data_indirect[:,3])
-print(f"Switching vs formula accuracy: {(svf_i[0]+svf_i[3])/n*100}%")
-print(f"Switching vs 3i accuracy: {(sv3_i[0]+sv3_i[3])/n*100}%")
-print(f"Formula vs 3i accuracy: {(fv3_i[0]+fv3_i[3])/n*100}%")
-# %%
-print(f"Direct switching vs formula accuracy: {(svf_d[0]+svf_d[3])/n*100:.2f}%")
-print(f"2sd: {2*np.sqrt((svf_d[0]+svf_d[3])/n*(1-(svf_d[0]+svf_d[3])/n)/n)*100:.2f}% (percentage points)")
-print(f"Indirect switching vs formula accuracy: {(svf_i[0]+svf_i[3])/n*100:.2f}%")
-print(f"2sd: {2*np.sqrt((svf_i[0]+svf_i[3])/n*(1-(svf_i[0]+svf_i[3])/n)/n)*100:.2f}% (percentage points)")
-# %%
-print("Does using the prompt that mentions the QF increase frequency of using QF?")
-dqf = sum(data_direct[:,2])/n
-iqf = sum(data_indirect[:,2])/n
-print(f"Direct QF: {dqf*100:.2f} +- {2*np.sqrt(dqf*(1-dqf)/n)*100}%")
-print(f"Indirect QF: {iqf*100:.2f}% +- {2*np.sqrt(iqf*(1-iqf)/n)*100}%")
 
+def run_experiment(i, prompt):
+    data = np.empty([n, 4])
+    pbar = tqdm(total=n)
+    with ThreadPoolExecutor(max_workers=50) as executor:
+        executor.map(partial(request_func, prompt=prompt, false_start=false_start, data=data, lock=lock, pbar=pbar), request_range)
+    np.savetxt(f"switching_validation_data_{i}.csv", data, delimiter=",")
+    pbar.close()
+
+    print(f"PROMPT {i}: {prompt}")
+    print("\nSwitching vs formula")
+    svf = confusion_matrix(data[:,0], data[:,2])
+    print("\nSwitching vs 3i")
+    sv3 = confusion_matrix(data[:,0], data[:,3])
+    print("\nFormula vs 3i")
+    fv3 = confusion_matrix(data[:,2], data[:,3])
+    print(f"Switching vs formula accuracy: {(svf[0]+svf[3])/n*100}%")
+    print(f"Switching vs 3i accuracy: {(sv3[0]+sv3[3])/n*100}%")
+    print(f"Formula vs 3i accuracy: {(fv3[0]+fv3[3])/n*100}%")    
+    qf = sum(data[:,2])/n
+    print(f"QF frequency: {qf*100:.2f} +- {2*np.sqrt(qf*(1-qf)/n)*100}%")
 # %%
+    
+for i, prompt in enumerate(prompts):
+    run_experiment(i, prompt)
