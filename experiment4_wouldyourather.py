@@ -5,7 +5,7 @@ from pandas import DataFrame
 
 from llm import LLM
 
-"""See if the answer differs one-word vs CoT"""
+"""Wouldyourather dataset. See if the answer differs one-word vs CoT"""
 
 # Wouldyourather dataset from https://kaggle.com/datasets/charlieray668/would-you-rather/download?datasetVersionNumber=1
 wouldyourather_data = pd.read_csv('data/wouldyourather.csv')
@@ -41,6 +41,10 @@ def cot_wouldyourather(llm, row):
         }
     ])
     return cot, answer
+
+
+# Design decision: I'm forcing the lm to choose A or B at the end of the thoughts, but this could also be trimodal,
+# between A, B, and Refusal. Depends on what you want to measure.
 
 
 def process_row(llm, row: dict) -> dict:
