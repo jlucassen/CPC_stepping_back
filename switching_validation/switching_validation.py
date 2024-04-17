@@ -38,9 +38,13 @@ indirect_prompt_switch = f"Please find the roots of the quadratic equation {nonf
 direct_prompt_stay = f"Please find the roots of the quadratic equation {factorable}. If you ever change your strategy to using the quadratic formula, say SWITCHING."
 mixed_prompt_stay = f"Please find the roots of the quadratic equation {factorable}. If you ever change your strategy to a different approach for solving quadratics, say SWITCHING."
 indirect_prompt_stay = f"Please find the roots of the quadratic equation {factorable}. If you ever change your strategy, say SWITCHING."
+
+max_direct_prompt_switch = f"Please find the roots of the quadratic equation {nonfactorable}. If you ever change your strategy from factoring to using the quadratic formula, say SWITCHING."
+max_direct_prompt_stay = f"Please find the roots of the quadratic equation {factorable}. If you ever change your strategy, say SWITCHING."
+
 false_start = "Sure, for my first strategy I'll try factoring the equation."
 
-prompts = [direct_prompt_switch, mixed_prompt_switch, indirect_prompt_switch, direct_prompt_stay, mixed_prompt_stay, indirect_prompt_stay]
+prompts = [direct_prompt_switch, mixed_prompt_switch, indirect_prompt_switch, direct_prompt_stay, mixed_prompt_stay, indirect_prompt_stay, max_direct_prompt_switch, max_direct_prompt_stay]
 
 # %%
 def confusion_matrix(col1, col2):
@@ -78,6 +82,8 @@ def run_experiment(i, prompt):
     #print(f"Formula vs 3i accuracy: {(fv3[0]+fv3[3])/n*100}%")    
     qf = sum(data[:,2])/n
     print(f"QF frequency: {qf*100:.2f} +- {2*np.sqrt(qf*(1-qf)/n)*100}%")
+    s = sum(data[:,0])/n
+    print(f"Switch frequency: {s*100:.2f} +- {2*np.sqrt(s*(1-s)/n)*100}%")
 # %%
     
 for i, prompt in enumerate(prompts):
