@@ -64,6 +64,8 @@ def process_row(llm, row: dict) -> dict:
 def experiment4(llm, data: DataFrame):
     with futures.ThreadPoolExecutor() as executor:
         data.reset_index(inplace=True)
+        # noinspection PyTypeChecker
+        # type checker flags this, but it is fine
         return DataFrame(executor.map(lambda row: process_row(llm, row), data.to_dict('records')))
 
 
