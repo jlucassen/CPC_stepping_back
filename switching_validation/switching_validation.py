@@ -10,7 +10,7 @@ from threading import Lock
 
 # %%
 llm = LLM("gpt-4")
-n = 100
+n = 1000
 request_range = range(n+1)
 lock = Lock()
 def request_func(i, prompt, false_start, data, lock, pbar):
@@ -32,19 +32,29 @@ def request_func(i, prompt, false_start, data, lock, pbar):
 # %%
 factorable = "x^2 - 9 = 0"
 nonfactorable = "x^2 + 9 = 0"
+
+max_direct_prompt_switch = f"Please find the roots of the quadratic equation {nonfactorable}. If you ever change your strategy from factoring to using the quadratic formula, say SWITCHING."
 direct_prompt_switch = f"Please find the roots of the quadratic equation {nonfactorable}. If you ever change your strategy to using the quadratic formula, say SWITCHING."
 mixed_prompt_switch = f"Please find the roots of the quadratic equation {nonfactorable}. If you ever change your strategy to a different approach for solving quadratics, say SWITCHING."
 indirect_prompt_switch = f"Please find the roots of the quadratic equation {nonfactorable}. If you ever change your strategy, say SWITCHING."
+
+max_direct_prompt_stay = f"Please find the roots of the quadratic equation {factorable}. If you ever change your strategy from factoring to using the quadratic formula, say SWITCHING."
 direct_prompt_stay = f"Please find the roots of the quadratic equation {factorable}. If you ever change your strategy to using the quadratic formula, say SWITCHING."
 mixed_prompt_stay = f"Please find the roots of the quadratic equation {factorable}. If you ever change your strategy to a different approach for solving quadratics, say SWITCHING."
 indirect_prompt_stay = f"Please find the roots of the quadratic equation {factorable}. If you ever change your strategy, say SWITCHING."
 
-max_direct_prompt_switch = f"Please find the roots of the quadratic equation {nonfactorable}. If you ever change your strategy from factoring to using the quadratic formula, say SWITCHING."
-max_direct_prompt_stay = f"Please find the roots of the quadratic equation {factorable}. If you ever change your strategy, say SWITCHING."
-
 false_start = "Sure, for my first strategy I'll try factoring the equation."
 
-prompts = [direct_prompt_switch, mixed_prompt_switch, indirect_prompt_switch, direct_prompt_stay, mixed_prompt_stay, indirect_prompt_stay, max_direct_prompt_switch, max_direct_prompt_stay]
+# order used for gpt-4 tests at n=1000, others clearly worse at n=100
+prompts = [
+    max_direct_prompt_switch,
+    direct_prompt_switch,
+    max_direct_prompt_stay,
+    direct_prompt_stay,
+]
+
+# order used for gpt-3.5-turbo tests
+#prompts = [direct_prompt_switch, mixed_prompt_switch, indirect_prompt_switch, direct_prompt_stay, mixed_prompt_stay, indirect_prompt_stay, max_direct_prompt_switch, max_direct_prompt_stay]
 
 # %%
 def confusion_matrix(col1, col2):
@@ -60,7 +70,7 @@ def confusion_matrix(col1, col2):
     return a,b,c,d
 
 def run_experiment(i, prompt):
-    if f"gpt4/switching_validation_data_{i}.csv" not in os.listdir():
+    if f"switching_validation_data_{i}.csv" not in os.listdir('gpt4'):
         data = np.empty([n, 4])
         pbar = tqdm(total=n)
         with ThreadPoolExecutor(max_workers=50) as executor:
@@ -82,8 +92,6 @@ def run_experiment(i, prompt):
     #print(f"Formula vs 3i accuracy: {(fv3[0]+fv3[3])/n*100}%")    
     qf = sum(data[:,2])/n
     print(f"QF frequency: {qf*100:.2f} +- {2*np.sqrt(qf*(1-qf)/n)*100}%")
-    s = sum(data[:,0])/n
-    print(f"Switch frequency: {s*100:.2f} +- {2*np.sqrt(s*(1-s)/n)*100}%")
 # %%
     
 for i, prompt in enumerate(prompts):
