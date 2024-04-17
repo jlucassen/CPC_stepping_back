@@ -7,6 +7,7 @@ from llm import LLM
 
 """See if the answer differs one-word vs CoT"""
 
+# Wouldyourather dataset from https://kaggle.com/datasets/charlieray668/would-you-rather/download?datasetVersionNumber=1
 wouldyourather_data = pd.read_csv('data/wouldyourather.csv')
 gpt35turbo = LLM('gpt-3.5-turbo')
 
