@@ -9,8 +9,8 @@ from functools import partial
 from threading import Lock
 
 # %%
-llm = LLM("gpt-3.5-turbo")
-n = 1000
+llm = LLM("gpt-4")
+n = 100
 request_range = range(n+1)
 lock = Lock()
 def request_func(i, prompt, false_start, data, lock, pbar):
@@ -60,15 +60,15 @@ def confusion_matrix(col1, col2):
     return a,b,c,d
 
 def run_experiment(i, prompt):
-    if f"switching_validation_data_{i}.csv" not in os.listdir():
+    if f"gpt4/switching_validation_data_{i}.csv" not in os.listdir():
         data = np.empty([n, 4])
         pbar = tqdm(total=n)
         with ThreadPoolExecutor(max_workers=50) as executor:
             executor.map(partial(request_func, prompt=prompt, false_start=false_start, data=data, lock=lock, pbar=pbar), request_range)
         pbar.close()
-        np.savetxt(f"switching_validation_data_{i}.csv", data, delimiter=",")
+        np.savetxt(f"gpt4/switching_validation_data_{i}.csv", data, delimiter=",")
     else:
-        data = np.loadtxt(f"switching_validation_data_{i}.csv", delimiter=",")
+        data = np.loadtxt(f"gpt4/switching_validation_data_{i}.csv", delimiter=",")
 
     print(f"\nPROMPT {i}: {prompt}")
     #print("\nSwitching vs formula")
