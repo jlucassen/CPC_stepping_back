@@ -20,44 +20,50 @@ from llm import LLM
 model = 'gpt-3.5-turbo' 
 llm = LLM(model)
 
-def process_query(llm, context, confidence, idx, jdx, one_token_prompt_idx, cot_prompt_idx, outfile, lock):
-    formatted_context = context.format(insert=confidence)
-    one_token_result = perform_one_token_cpc(llm, formatted_context)  
-    _, cot_result = perform_cot_cpc(llm, formatted_context)  
-    with lock:
-        with open(outfile, 'a', newline='') as f:
-            writer = csv.writer(f)
-            # log the indices of the prompts used
-            writer.writerow([idx, jdx, one_token_prompt_idx, cot_prompt_idx, one_token_result, cot_result])
+import os
+import csv
+from llm import LLM
+from solver_prompt_sensitivity import perform_one_token_cpc, perform_cot_cpc
+from concurrent.futures import ThreadPoolExecutor
+from threading import Lock
+from tqdm import tqdm
 
-def make_validation_data(context_type, contexts, confidences, outfile, model='gpt-3.5-turbo', n=1):
-    if os.path.exists(outfile):
-        print(f"File {outfile} already exists, skipping generation.")
+def make_validation_data(contexts, confidences, outfile, model='gpt-3.5-turbo', n=1):
+    results_dir = 'results_prompt_sensitivity'
+    os.makedirs(results_dir, exist_ok=True)
+    
+    outfile_path = os.path.join(results_dir, outfile)
+    if os.path.exists(outfile_path):
+        print(f"File {outfile_path} already exists, skipping generation.")
         return
+    
+    # Open file and write headers
+    with open(outfile_path, 'w', newline='') as f:
+        writer = csv.writer(f)
+        writer.writerow(['Context Index', 'Confidence', 'One Token Result', 'CoT Result'])
 
-    llm = LLM(model)
     lock = Lock()
+    num_requests = n * len(contexts) * len(confidences)
+    pbar = tqdm(total=num_requests)
 
-    # for multiple prompt configurations per context type
-    prompt_configurations = context_to_prompt_indices[context_type]
+    queries = [(i, j, context.format(insert=confidence), lock, outfile_path, pbar) for i, context in enumerate(contexts) for j, confidence in enumerate(confidences) for _ in range(n)]
 
-    for one_token_idx, cot_idx in prompt_configurations:
-        # unique folder outputs
-        config_outfile = f"{outfile.replace('.csv', '')}_{one_token_idx}_{cot_idx}.csv"
+    def process_query(query):
+        idx, jdx, formatted_context, lock, outfile, pbar = query
+        one_token_result = 1 if perform_one_token_cpc(llm, formatted_context) == "Yes" else 0  # Continue if "Yes"
+        _, cot_response = perform_cot_cpc(llm, formatted_context)
+        cot_result = 1 if cot_response == "Yes" else 0  # Continue if "Yes"
+        with lock:
+            with open(outfile, 'a', newline='') as f:
+                writer = csv.writer(f)
+                writer.writerow([idx, jdx, one_token_result, cot_result])
+            pbar.update(1)
 
-        with open(config_outfile, 'w', newline='') as f:
-            writer = csv.writer(f)
-            writer.writerow(['Context Index', 'Confidence', 'One Token Prompt Index', 'CoT Prompt Index', 'One Token Result', 'CoT Result'])
+    # Process queries with ThreadPoolExecutor
+    with ThreadPoolExecutor(max_workers=300) as executor:
+        executor.map(process_query, queries)
 
-        with ThreadPoolExecutor(max_workers=10) as executor:
-            futures = []
-            for i, context in enumerate(contexts):
-                for j, confidence in enumerate(confidences):
-                    for _ in range(n):
-                        futures.append(executor.submit(process_query, llm, context, confidence, i, j, one_token_idx, cot_idx, config_outfile, lock))
 
-            for future in tqdm(futures):
-                future.result()
 
 
 # make contexts
@@ -140,5 +146,9 @@ context_to_prompt_indices = {
 
 
 
-make_validation_data('spoonfeed', contexts['spoonfeed'], verbal_confidences, 'cpc_validation_results_verbal.csv', n=100)
-# checking on spoodfeed then will add others
+
+make_validation_data(contexts['spoonfeed'], verbal_confidences + numerical_confidences, 'cpc_validation_spoonfeed.csv', n=100)
+make_validation_data(contexts['knapsack'], list(map(str, knapsack_options)), 'cpc_validation_knapsack.csv', n=100)
+make_validation_data(contexts['hints'], numerical_confidences, 'cpc_validation_hints.csv', n=100)
+make_validation_data(contexts['red_herrings'], numerical_confidences, 'cpc_validation_red_herrings.csv', n=100)
+make_validation_data(contexts['batna'], numerical_confidences, 'cpc_validation_batna.csv', n=100)
