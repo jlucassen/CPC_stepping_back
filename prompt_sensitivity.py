@@ -11,7 +11,7 @@ from dotenv import load_dotenv
 load_dotenv()
 api_key = os.getenv("OPENAI_API_KEY")
 
-# debugging line can remove afer
+# debugging line can remove after
 if not api_key:
     raise ValueError("OPENAI_API_KEY environment variable not found.")
 
@@ -20,15 +20,8 @@ from llm import LLM
 model = 'gpt-3.5-turbo' 
 llm = LLM(model)
 
-import os
-import csv
-from llm import LLM
-from solver_prompt_sensitivity import perform_one_token_cpc, perform_cot_cpc
-from concurrent.futures import ThreadPoolExecutor
-from threading import Lock
-from tqdm import tqdm
 
-def make_validation_data(contexts, confidences, outfile, model='gpt-3.5-turbo', n=1):
+def make_validation_data(context_list, prompt_indices, confidences, outfile, n=1):
     results_dir = 'results_prompt_sensitivity'
     os.makedirs(results_dir, exist_ok=True)
     
@@ -37,32 +30,45 @@ def make_validation_data(contexts, confidences, outfile, model='gpt-3.5-turbo', 
         print(f"File {outfile_path} already exists, skipping generation.")
         return
     
-    # Open file and write headers
-    with open(outfile_path, 'w', newline='') as f:
+    with open(outfile_path, 'a', newline='') as f:
         writer = csv.writer(f)
-        writer.writerow(['Context Index', 'Confidence', 'One Token Result', 'CoT Result'])
+        writer.writerow(['Context Index', 'Confidence', 'Prompt Index for One Token', 'One Token Result', 'Prompt Index for CoT', 'CoT Result'])
 
-    lock = Lock()
-    num_requests = n * len(contexts) * len(confidences)
-    pbar = tqdm(total=num_requests)
+    num_requests = n * len(context_list) * len(confidences)
+    
+    def process_query(idx, confidence, one_token_idx, cot_idx, formatted_context):
+        try:
+            one_token_output = perform_one_token_cpc(llm, formatted_context)
+            #print(f"One Token Output: {one_token_output}")
+            one_token_result = 1 if one_token_output == "No" else 0
+            
+            cot_output, cot_yesno = perform_cot_cpc(llm, formatted_context)
+            #print(f"CoT Output: {cot_output}")
+            #print(f"CoT Yes/No: {cot_yesno}")
+            cot_result = 1 if cot_yesno == "No" else 0
+            
+            return idx, confidence, one_token_idx, one_token_result, cot_idx, cot_result
+        except Exception as e:
+            print(f"Error processing query: {e}")
+            return idx, confidence, one_token_idx, None, cot_idx, None
 
-    queries = [(i, j, context.format(insert=confidence), lock, outfile_path, pbar) for i, context in enumerate(contexts) for j, confidence in enumerate(confidences) for _ in range(n)]
-
-    def process_query(query):
-        idx, jdx, formatted_context, lock, outfile, pbar = query
-        one_token_result = 1 if perform_one_token_cpc(llm, formatted_context) == "Yes" else 0  # Continue if "Yes"
-        _, cot_response = perform_cot_cpc(llm, formatted_context)
-        cot_result = 1 if cot_response == "Yes" else 0  # Continue if "Yes"
-        with lock:
-            with open(outfile, 'a', newline='') as f:
+    with ThreadPoolExecutor(max_workers=100) as executor:
+        futures = []
+        for i, context in enumerate(context_list):
+            one_token_idx, cot_idx = prompt_indices[i % len(prompt_indices)]
+            for confidence in confidences:
+                for _ in range(n):
+                    formatted_context = context.format(insert=confidence)
+                    future = executor.submit(process_query, i, confidence, one_token_idx, cot_idx, formatted_context)
+                    futures.append(future)
+        
+        with tqdm(total=num_requests) as pbar:
+            with open(outfile_path, 'a', newline='') as f:
                 writer = csv.writer(f)
-                writer.writerow([idx, jdx, one_token_result, cot_result])
-            pbar.update(1)
-
-    # Process queries with ThreadPoolExecutor
-    with ThreadPoolExecutor(max_workers=300) as executor:
-        executor.map(process_query, queries)
-
+                for future in futures:
+                    idx, confidence, one_token_idx, one_token_result, cot_idx, cot_result = future.result()
+                    writer.writerow([idx, confidence, one_token_idx, one_token_result, cot_idx, cot_result])
+                    pbar.update(1)
 
 
 
@@ -147,8 +153,8 @@ context_to_prompt_indices = {
 
 
 
-make_validation_data(contexts['spoonfeed'], verbal_confidences + numerical_confidences, 'cpc_validation_spoonfeed.csv', n=100)
-make_validation_data(contexts['knapsack'], list(map(str, knapsack_options)), 'cpc_validation_knapsack.csv', n=100)
-make_validation_data(contexts['hints'], numerical_confidences, 'cpc_validation_hints.csv', n=100)
-make_validation_data(contexts['red_herrings'], numerical_confidences, 'cpc_validation_red_herrings.csv', n=100)
-make_validation_data(contexts['batna'], numerical_confidences, 'cpc_validation_batna.csv', n=100)
+make_validation_data(contexts['spoonfeed'], context_to_prompt_indices['spoonfeed'], numerical_confidences, 'cpc_validation_spoonfeed.csv', n=100)
+#make_validation_data(contexts['knapsack'], context_to_prompt_indices['knapsack'], knapsack_options, 'cpc_validation_knapsack.csv', n=100)
+#make_validation_data(contexts['hints'], context_to_prompt_indices['hints'],  numerical_confidences, 'cpc_validation_hints.csv', n=100)
+#make_validation_data(contexts['red_herrings'], context_to_prompt_indices['red_herrings'], numerical_confidences, 'cpc_validation_red_herrings.csv', n=100)
+#make_validation_data(contexts['batna'], context_to_prompt_indices['batna'], numerical_confidences, 'cpc_validation_batna.csv', n=100)
