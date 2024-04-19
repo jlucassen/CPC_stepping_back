@@ -7,6 +7,7 @@ from concurrent.futures import ThreadPoolExecutor
 from threading import Lock
 from tqdm import tqdm
 from dotenv import load_dotenv 
+import itertools
 
 load_dotenv()
 api_key = os.getenv("OPENAI_API_KEY")
@@ -54,13 +55,13 @@ def make_validation_data(context_list, prompt_indices, confidences, outfile, n=1
 
     with ThreadPoolExecutor(max_workers=100) as executor:
         futures = []
-        for i, context in enumerate(context_list):
-            one_token_idx, cot_idx = prompt_indices[i % len(prompt_indices)]
+        for context_idx, context in enumerate(context_list):
             for confidence in confidences:
-                for _ in range(n):
-                    formatted_context = context.format(insert=confidence)
-                    future = executor.submit(process_query, i, confidence, one_token_idx, cot_idx, formatted_context)
-                    futures.append(future)
+                for one_token_idx, cot_idx in prompt_indices:
+                    for _ in range(n):
+                        formatted_context = context.format(insert=confidence)
+                        future = executor.submit(process_query, context_idx, confidence, one_token_idx, cot_idx, formatted_context)
+                        futures.append(future)
         
         with tqdm(total=num_requests) as pbar:
             with open(outfile_path, 'a', newline='') as f:
@@ -131,30 +132,38 @@ knapsack_options = [str(i) for i in range(11)]
 
 
 one_token_prompts = {
-    0: "Should we continue with this current approach? Yes or No.",
-    1: "Is our strategy effective enough to stick with? Yes or No."
+    0: "Is this strategy failing to meet our expectations? Yes or No.",
+    1: "Does this plan inadequately address our goals? Yes or No.",
+    2: "Should we consider a new approach due to the shortcomings of the present one? Yes or No.",
+    3: "Is our current method failing us in achieving our objectives? Yes or No."
 }
 
+
+
 cot_prompts = {
-    0: "Consider the strategy's effectiveness thoroughly before deciding. Should we proceed?",
-    1: "Think deeply about our current method. Is it sufficient or do we need a change?"
+    0: "Reflect critically on our current approach: Does it fall short of what is required? Provide a detailed analysis before concluding with Yes to switch, or No to proceed.",
+    1: "Analyze the effectiveness of our strategy: Is it adequate for our needs or must we explore other options? Yes for new options, No to continue as is.",
+    2: "Assess the sufficiency of our current plan: Are there critical areas where it fails? Conclude with Yes if a new strategy is needed, No if it remains viable.",
+    3: "Deliberate on the current methodology: Is it proving to be suboptimal for our goals? End with Yes to abandon it, or No to keep it."
 }
+
+
 
 
 # applying
 context_to_prompt_indices = {
-    'spoonfeed': [(0, 0), (1, 1)],
-    'hints': [(0, 0), (1, 1)],
-    'red_herrings': [(0, 0), (1, 1)],
-    'knapsack': [(0, 0), (1, 1)],
-    'batna': [(0, 0), (1, 1)]
+    'spoonfeed': [(0, 0), (1, 1),(2,2),(3,3)],
+    'hints': [(0, 0), (1, 1),(2,2),(3,3)],
+    'red_herrings': [(0, 0), (1, 1),(2,2),(3,3)],
+    'knapsack': [(0, 0), (1, 1),(2,2),(3,3)],
+    'batna': [(0, 0), (1, 1),(2,2),(3,3)]
 }
 
 
 
 
-make_validation_data(contexts['spoonfeed'], context_to_prompt_indices['spoonfeed'], numerical_confidences, 'cpc_validation_spoonfeed.csv', n=100)
-#make_validation_data(contexts['knapsack'], context_to_prompt_indices['knapsack'], knapsack_options, 'cpc_validation_knapsack.csv', n=100)
-#make_validation_data(contexts['hints'], context_to_prompt_indices['hints'],  numerical_confidences, 'cpc_validation_hints.csv', n=100)
-#make_validation_data(contexts['red_herrings'], context_to_prompt_indices['red_herrings'], numerical_confidences, 'cpc_validation_red_herrings.csv', n=100)
-#make_validation_data(contexts['batna'], context_to_prompt_indices['batna'], numerical_confidences, 'cpc_validation_batna.csv', n=100)
+make_validation_data(contexts['spoonfeed'], context_to_prompt_indices['spoonfeed'], numerical_confidences, '4_cpc_validation_spoonfeed.csv', n=25)
+make_validation_data(contexts['knapsack'], context_to_prompt_indices['knapsack'], knapsack_options, '4_cpc_validation_knapsack.csv', n=25)
+make_validation_data(contexts['hints'], context_to_prompt_indices['hints'],  numerical_confidences, '4_cpc_validation_hints.csv', n=25)
+make_validation_data(contexts['red_herrings'], context_to_prompt_indices['red_herrings'], numerical_confidences, '4_cpc_validation_red_herrings.csv', n=25)
+make_validation_data(contexts['batna'], context_to_prompt_indices['batna'], numerical_confidences, '4_cpc_validation_batna.csv', n=25)
