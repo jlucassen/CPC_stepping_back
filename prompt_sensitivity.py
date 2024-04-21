@@ -91,7 +91,7 @@ verbal_confidences = [
     'definitely',
     'absolutely'
 ]
-numerical_confidences = [f"with {i}% probability" for i in range(0, 101, 10)]
+numerical_confidences = [f"I am {i}% sure that my current plan will work" for i in range(0, 101, 10)]
 # contexts
 
 contexts ={
