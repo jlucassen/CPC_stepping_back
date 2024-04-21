@@ -88,7 +88,7 @@ files = [
     '4_cpc_validation_red_herrings.csv'
 ]
 
-# Generate plots for each file
+
 for file in files:
     file_path = os.path.join('results_prompt_sensitivity', file)
     plot_stepback_rates_with_confidence(file_path)
