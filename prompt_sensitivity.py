@@ -40,7 +40,7 @@ def make_validation_data(context_list, prompt_indices, confidences, outfile, n=1
     def process_query(idx, confidence, one_token_idx, cot_idx, formatted_context):
         try:
             one_token_output = perform_one_token_cpc(llm, formatted_context)
-            #print(f"One Token Output: {one_token_output}")
+            #print(f"1t Output: {one_token_output}")
             one_token_result = 1 if one_token_output == "No" else 0
             
             cot_output, cot_yesno = perform_cot_cpc(llm, formatted_context)
