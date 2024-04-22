@@ -62,3 +62,19 @@ class LLM:
                 logit_bias={"9642": 100, "2822": 100}
             )
             return chat_completion.choices[0].message.content
+
+    def chat_completion_false_start(self, prompt, false_start):
+        chat_completion = self.openai.chat.completions.create(
+            messages=[
+                {
+                    "role": "user",
+                    "content": prompt,
+                },
+                {
+                    "role": "assistant",
+                    "content": false_start,
+                }
+            ],
+            model=self.model_name,
+        )
+        return chat_completion.choices[0].message.content
