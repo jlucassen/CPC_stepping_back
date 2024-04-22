@@ -7,11 +7,9 @@ def plot_stepback_rates_with_confidence(file_path):
     df = pd.read_csv(file_path)
     
     if 'knapsack' in file_path:
-        df['Confidence'] = df['Confidence'].apply(lambda x: int(x * 10))
-        xtick_labels = [f'resources expended: {i}' for i in range(1, 11)]
+        xtick_labels = [f'resources expended: {i}' for i in range(0, 11)]
     else:
-        df['Confidence'] = df['Confidence'].astype(str).str.extract(r'with (\d+)% probability').astype(int)
-        xtick_labels = [f'with {i}% probability' for i in range(0, 101, 10)]
+        xtick_labels = [f'{i}% probability' for i in range(0, 101, 10)]
 
     df = df.sort_values('Confidence')
 
@@ -32,7 +30,7 @@ def plot_stepback_rates_with_confidence(file_path):
 
         one_token_stats = group_data.groupby('Confidence', observed=True)['One Token Result'].agg(['mean', 'sem'])
         one_token_stats = one_token_stats.reindex(df['Confidence'].unique()).fillna(0)
-        
+
         axs[0].errorbar(range(len(xtick_labels)), one_token_stats['mean'], yerr=one_token_stats['sem'], fmt=marker, color=color, capsize=5, label=f'Prompt {prompt_idx} One-Token')
 
     for idx, (prompt_idx, group_data) in enumerate(df.groupby('Prompt Index for CoT')):
@@ -94,15 +92,13 @@ def plot_stepback_rates_with_confidence(file_path):
     plt.savefig(os.path.join(graphs_dir, plot_filename), bbox_inches='tight')
     plt.close(fig)
 
-
 files = [
-    '4_cpc_validation_spoonfeed.csv', 
-    '4_cpc_validation_batna.csv', 
-    '4_cpc_validation_hints.csv', 
-    '4_cpc_validation_knapsack.csv', 
-    '4_cpc_validation_red_herrings.csv'
+    '3_cpc_validation_spoonfeed.csv', 
+    '3_cpc_validation_batna.csv', 
+    '3_cpc_validation_hints.csv', 
+    '3_cpc_validation_knapsack.csv', 
+    '3_cpc_validation_red_herrings.csv'
 ]
-
 
 for file in files:
     file_path = os.path.join('results_prompt_sensitivity', file)
