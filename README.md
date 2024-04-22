@@ -6,3 +6,11 @@ Create a file called `.env` in the root of the project. The file should look lik
 ```
 OPENAI_API_KEY=your-api-key
 ```
+
+Dependencies:
+```
+python-dotenv
+pandas
+openai
+tqdm
+```
