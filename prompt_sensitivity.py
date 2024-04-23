@@ -32,13 +32,12 @@ def make_validation_data(context_list, confidences, outfile, n=1):
         writer.writerow(['Context Index', 'Confidence', 'Prompt Index for One Token', 'One Token Result', 'Prompt Index for CoT', 'CoT Result'])
 
     # set up concurrency
-    num_requests = n * len(context_list) * len(confidences)
     def process_query(idx, confidence, one_token_idx, cot_idx, formatted_context):
         try:
-            one_token_output = perform_one_token_cpc(llm, formatted_context, prompt_override=one_token_prompts[one_token_idx])
+            one_token_output = perform_one_token_cpc(llm, formatted_context)#, prompt_override=one_token_prompts[one_token_idx])
             one_token_result = 1 if one_token_output == "Yes" else 0 # denote stepping back as 1, not stepping back as 0
             
-            cot_output, cot_yesno = perform_cot_cpc(llm, formatted_context, prompt_override=cot_prompts[cot_idx])
+            cot_output, cot_yesno = perform_cot_cpc(llm, formatted_context)#, prompt_override=cot_prompts[cot_idx])
             cot_result = 1 if cot_yesno == "Yes" else 0
             
             return idx, confidence, one_token_idx, one_token_result, cot_idx, cot_result
@@ -56,19 +55,18 @@ def make_validation_data(context_list, confidences, outfile, n=1):
                         future = executor.submit(process_query, context_idx, confidence, one_token_idx, cot_idx, formatted_context)
                         futures.append(future)
         
-        with tqdm(total=num_requests) as pbar:
-            with open(outfile_path, 'a', newline='') as f:
-                writer = csv.writer(f)
-                for future in futures:
-                    idx, confidence, one_token_idx, one_token_result, cot_idx, cot_result = future.result()
-                    writer.writerow([idx, confidence, one_token_idx, one_token_result, cot_idx, cot_result])
-                    pbar.update(1)
+        with open(outfile_path, 'a', newline='') as f:
+            writer = csv.writer(f)
+            for future in tqdm(futures):
+                idx, confidence, one_token_idx, one_token_result, cot_idx, cot_result = future.result()
+                writer.writerow([idx, confidence, one_token_idx, one_token_result, cot_idx, cot_result])
 
 # make contexts
 base = 'I am an LLM agent working on solving a problem. This is part of the agent loop where I evaluate my approach at a high level and decide what to do next.'
 confidences = [f"{i}" for i in range(0, 101, 10)]
 knapsack_options = [str(i) for i in range(11)]
 
+# the higher the value of {insert}, the better the current strategy, the LOWER the stepback rate.
 contexts = {
     'spoonfeed':
     [
@@ -106,16 +104,16 @@ contexts = {
 
 # candidate cpc elicitation prompts
 one_token_prompts = {
-    0: "Is this strategy failing to meet our expectations? Yes or No.",
-    1: "Does this plan inadequately address our goals? Yes or No.",
-    2: "Should we consider a new approach due to the shortcomings of the present one? Yes or No.",
-    3: "Is our current method failing us in achieving our objectives? Yes or No."
+    0: "Is this strategy failing to meet my expectations? Yes or No.",
+    1: "Does this plan inadequately address my goals? Yes or No.",
+    2: "Should I consider a new approach due to the shortcomings of the present one? Yes or No.",
+    3: "Is my current method failing us in achieving my objectives? Yes or No."
 }
 cot_prompts = {
-    0: "Reflect critically on our current approach: Does it fall short of what is required? Provide a detailed analysis before concluding with Yes to switch, or No to proceed.",
-    1: "Analyze the effectiveness of our strategy: Is it adequate for our needs or must we explore other options? Yes for new options, No to continue as is.",
-    2: "Assess the sufficiency of our current plan: Are there critical areas where it fails? Conclude with Yes if a new strategy is needed, No if it remains viable.",
-    3: "Deliberate on the current methodology: Is it proving to be suboptimal for our goals? End with Yes to abandon it, or No to keep it."
+    0: "Let me take some time to reflect critically on my current approach. Does it fall short of what is required? Provide a detailed analysis before concluding with Yes to switch, or No to proceed.",
+    1: "Let me take some time to analyze the effectiveness of my strategy. Is it adequate for my needs or must I explore other options? Yes for new options, No to continue as is.",
+    2: "Let me take some time to assess the sufficiency of my current plan. Are there critical areas where it fails? Conclude with Yes if a new strategy is needed, No if it remains viable.",
+    3: "Let me take some time to deliberate on my current methodology. Is it proving to be suboptimal for my goals? End with Yes to abandon it, or No to keep it."
 }
 
 n = 10

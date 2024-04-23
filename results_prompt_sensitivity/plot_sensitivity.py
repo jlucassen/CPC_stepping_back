@@ -7,9 +7,9 @@ def plot_stepback_rates_with_confidence(file_path):
     df = pd.read_csv(file_path)
     
     if 'knapsack' in file_path:
-        xtick_labels = [f'resources expended: {i}' for i in range(0, 11)]
+        xtick_labels = [f'{i}' for i in range(0, 11)]
     else:
-        xtick_labels = [f'{i}% probability' for i in range(0, 101, 10)]
+        xtick_labels = [f'{i}%' for i in range(0, 101, 10)]
 
     df = df.sort_values('Confidence')
 
@@ -19,11 +19,10 @@ def plot_stepback_rates_with_confidence(file_path):
 
     colors = ['b', 'g', 'r', 'c', 'm', 'y', 'k', 'orange', 'purple', 'brown']
     markers = ['o', '^', 's', 'p', '*', '+', 'x', 'd', '<', '>', '|']
-    color_marker_combinations = list(itertools.product(colors, markers))
 
     fig, axs = plt.subplots(1, 3, figsize=(24, 7))
 
-    # One Token and CoT results
+    # One Token results
     for idx, (prompt_idx, group_data) in enumerate(df.groupby('Prompt Index for One Token')):
         color = colors[idx % len(colors)]
         marker = markers[idx % len(markers)]
@@ -33,13 +32,14 @@ def plot_stepback_rates_with_confidence(file_path):
 
         axs[0].errorbar(range(len(xtick_labels)), one_token_stats['mean'], yerr=one_token_stats['sem'], fmt=marker, color=color, capsize=5, label=f'Prompt {prompt_idx} One-Token')
 
+    # CoT results
     for idx, (prompt_idx, group_data) in enumerate(df.groupby('Prompt Index for CoT')):
         color = colors[idx % len(colors)]
         marker = markers[idx % len(markers)]
         
         cot_stats = group_data.groupby('Confidence', observed=True)['CoT Result'].agg(['mean', 'sem'])
         cot_stats = cot_stats.reindex(df['Confidence'].unique()).fillna(0)
-        
+
         axs[1].errorbar(range(len(xtick_labels)), cot_stats['mean'], yerr=cot_stats['sem'], fmt=marker, color=color, capsize=5, label=f'Prompt {prompt_idx} CoT')
 
     # Pairwise accuracy 
@@ -72,9 +72,9 @@ def plot_stepback_rates_with_confidence(file_path):
 
     for ax in axs[:2]:
         ax.set_ylim(0, 1)
-        ax.set_title('Stepback Rate')
-        ax.set_xlabel('Confidence')
-        ax.set_ylabel('Rate')
+        ax.set_title('Stepback Rate Variation with Context')
+        ax.set_xlabel('Hint Confidence') if not 'knapsack' in file_path else ax.set_xlabel('Resource Spent (out of 10)')
+        ax.set_ylabel('Stepback Rate')
         ax.legend(loc='upper left', bbox_to_anchor=(1, 1))
         ax.set_xticks(range(len(xtick_labels)))
         ax.set_xticklabels(xtick_labels, rotation=90)
@@ -88,7 +88,7 @@ def plot_stepback_rates_with_confidence(file_path):
     axs[2].set_xticklabels(xtick_labels, rotation=90)
 
     plt.tight_layout(rect=[0, 0, 0.9, 1])
-    plot_filename = os.path.splitext(os.path.basename(file_path))[0] + '_results_corrected.png'
+    plot_filename = os.path.splitext(os.path.basename(file_path))[0] + '.png'
     plt.savefig(os.path.join(graphs_dir, plot_filename), bbox_inches='tight')
     plt.close(fig)
 

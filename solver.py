@@ -21,7 +21,6 @@ def perform_one_token_cpc(llm: LLM, context: str, prompt_override=None) -> str:
         }
     ])
 
-
 def perform_cot_cpc(llm: LLM, context: str, prompt_override=None) -> tuple[str, str]:
     """
     Asks the llm to make a more lengthy consideration of whether its priorities should change or not
