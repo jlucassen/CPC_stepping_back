@@ -14,7 +14,7 @@ def perform_one_token_cpc(llm: LLM, context: str, prompt_override=None) -> str:
         },
         {
             "role": "user",
-            "content": cpc_prompt if prompt_override is None else prompt_override +
+            "content": (cpc_prompt if prompt_override is None else prompt_override) +
                        "\n\nAt this point, should we change to a different approach? Please answer "
                        "'Yes, I recommend a different approach' or "
                        "'No, I recommend staying with the current approach.'"
@@ -34,7 +34,7 @@ def perform_cot_cpc(llm: LLM, context: str, prompt_override=None) -> tuple[str, 
         },
         {
             "role": "user",
-            "content": cpc_prompt if prompt_override is None else prompt_override +
+            "content": (cpc_prompt if prompt_override is None else prompt_override) +
                        "\n\nAt the end, I want you to answer 'Yes, I recommend a different approach' or "
                        "'No, I recommend staying with the current approach.' But first, take a deep breath "
                        "and think step by step. Start by analyzing the current approach:"
