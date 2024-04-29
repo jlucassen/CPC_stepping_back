@@ -4,9 +4,8 @@ cpc_prompt = ("At this point, we're going to stop and consider whether this appr
               "and leads to a correct solution to the problem being worked on. "
               "Otherwise, we should step back and try a different approach.")
 
-
-def perform_one_token_cpc(llm: LLM, context: str) -> str:
-    """Asks the llm to do a one-word completion on whether its priorities should change or not"""
+def perform_one_token_cpc(llm: LLM, context: str, prompt=cpc_prompt) -> str:
+    """Asks the llm to do a one-word completion on whether its priorities should change or not."""
     return llm.yesno_completion([
         {
             "role": "assistant",
@@ -14,19 +13,16 @@ def perform_one_token_cpc(llm: LLM, context: str) -> str:
         },
         {
             "role": "user",
-            "content": cpc_prompt +
-                       "\n\nAt this point, should we change to a different approach? Please answer "
-                       "'Yes, I recommend a different approach' or "
-                       "'No, I recommend staying with the current approach.'"
+            "content": prompt + "\n\nAt this point, should we change to a different approach? Please answer "
+                       "'Yes, I recommend a different approach' or 'No, I recommend staying with the current approach.'"
         }
     ])
 
-
-def perform_cot_cpc(llm: LLM, context: str) -> (str, str):
+def perform_cot_cpc(llm: LLM, context: str, prompt=cpc_prompt) -> (str, str):
     """
-    Asks the llm to make a more lengthy consideration of whether its priorities should change or not
+    Asks the llm to make a more lengthy consideration of whether its priorities should change or not.
     :returns: a tuple of two strings; the first string is the llm's thoughts from the CoT prompt; the second is the
-    * Yes/No response summarizing the CoT result.
+    Yes/No response summarizing the CoT result.
     """
     cot_response = llm.chat_completion([
         {
@@ -35,8 +31,7 @@ def perform_cot_cpc(llm: LLM, context: str) -> (str, str):
         },
         {
             "role": "user",
-            "content": cpc_prompt +
-                       "\n\nAt the end, I want you to answer 'Yes, I recommend a different approach' or "
+            "content": prompt + "\n\nAt the end, I want you to answer 'Yes, I recommend a different approach' or "
                        "'No, I recommend staying with the current approach.' But first, take a deep breath "
                        "and think step by step. Start by analyzing the current approach:"
         }
@@ -49,7 +44,6 @@ def perform_cot_cpc(llm: LLM, context: str) -> (str, str):
         {
             "role": "user",
             "content": "Do your thoughts in the previous message recommend changing our approach? Please answer "
-                       "'Yes, I recommend a different approach' or "
-                       "'No, I recommend staying with the current approach."
+                       "'Yes, I recommend a different approach' or 'No, I recommend staying with the current approach.'"
         }
     ])
