@@ -10,8 +10,8 @@ from llm import LLM
 dotenv.load_dotenv()
 llm = LLM("gpt-3.5-turbo")
 
-prompt = "Find the roots of {equation}. First, do your best to find the roots by factoring the quadratic. If your attempts to factor the quadratic don't work, use the quadratic equation. When you switch strategy from factoring to using the quadratic equation, make sure to say SWITCHING out loud."
-
+# prompt validated by switching analysis earlier
+prompt = "Please find the roots of the quadratic equation {equation}. If you ever change your strategy from factoring to using the quadratic formula, say SWITCHING."
 
 def solve_quadratic_problems(problem_filename):
     def completion(eq):

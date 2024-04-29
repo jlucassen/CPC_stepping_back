@@ -18,8 +18,6 @@ def make_quadratic_problem(max, factorable):
 
 for max in range(5, 50, 5):
     for factorable in [True, False]:
-        with open(f'quadratic_problems/quadratic_problems_{max}_{factorable}.jsonl', 'w') as outfile:
+        with open(f'data/quadratic_problems/quadratic_problems_{max}_{factorable}.jsonl', 'w') as outfile:
             for _ in range(100):
-                outfile.write(json.dumps({
-                    'equation': make_quadratic_problem(max, factorable)
-                    }) + '\n')
+                outfile.write(make_quadratic_problem(max, factorable) + '\n')
