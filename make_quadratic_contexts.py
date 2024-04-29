@@ -23,7 +23,7 @@ def solve_quadratic_problems(problem_filename):
             return {'equation': eq, 'context': f"Exception: {type(e)} {e}"}
 
     with (open(f'data/quadratic_problems/{problem_filename}', 'r') as problem_file,
-          open('data/quadratic_contexts/' + str.replace(problem_filename, 'problem', 'context'), 'w') as context_file,
+          open('data/quadratic_contexts_3/' + str.replace(problem_filename, 'problem', 'context'), 'w') as context_file,
           futures.ThreadPoolExecutor() as executor):
         fs = [executor.submit(completion, eq) for eq in problem_file.readlines()]
         with tqdm(total=len(fs)) as pbar:
