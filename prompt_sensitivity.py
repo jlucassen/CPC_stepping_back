@@ -39,11 +39,11 @@ def make_validation_data(context_list, prompt_indices, confidences, outfile, n=1
     
     def process_query(idx, confidence, one_token_idx, cot_idx, formatted_context):
         try:
-            one_token_output = perform_one_token_cpc(llm, formatted_context)
+            one_token_output = perform_one_token_cpc(llm, formatted_context, prompt=one_token_prompts[one_token_idx])
             #print(f"One Token Output: {one_token_output}")
             one_token_result = 1 if one_token_output == "No" else 0
             
-            cot_output, cot_yesno = perform_cot_cpc(llm, formatted_context)
+            cot_output, cot_yesno = perform_cot_cpc(llm, formatted_context, prompt=cot_prompts[cot_idx])
             #print(f"CoT Output: {cot_output}")
             #print(f"CoT Yes/No: {cot_yesno}")
             cot_result = 1 if cot_yesno == "No" else 0
@@ -130,12 +130,14 @@ contexts ={
 # knapsack options as confidences?
 knapsack_options = [str(i) for i in range(11)]  
 
+cpc_prompt = "At this point, we're going to stop and consider whether this approach is working or not and leads to a correct solution to the problem being worked on. Otherwise, we should step back and try a different approach."
 
 one_token_prompts = {
     0: "Is this strategy failing to meet our expectations? Yes or No.",
     1: "Does this plan inadequately address our goals? Yes or No.",
     2: "Should we consider a new approach due to the shortcomings of the present one? Yes or No.",
-    3: "Is our current method failing us in achieving our objectives? Yes or No."
+    #3: "Is our current method failing us in achieving our objectives? Yes or No."
+    3: cpc_prompt
 }
 
 
@@ -144,7 +146,8 @@ cot_prompts = {
     0: "Reflect critically on our current approach: Does it fall short of what is required? Provide a detailed analysis before concluding with Yes to switch, or No to proceed.",
     1: "Analyze the effectiveness of our strategy: Is it adequate for our needs or must we explore other options? Yes for new options, No to continue as is.",
     2: "Assess the sufficiency of our current plan: Are there critical areas where it fails? Conclude with Yes if a new strategy is needed, No if it remains viable.",
-    3: "Deliberate on the current methodology: Is it proving to be suboptimal for our goals? End with Yes to abandon it, or No to keep it."
+    #3: "Deliberate on the current methodology: Is it proving to be suboptimal for our goals? End with Yes to abandon it, or No to keep it."
+    3: cpc_prompt
 }
 
 
