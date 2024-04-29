@@ -8,7 +8,7 @@ from tqdm import tqdm
 from llm import LLM
 
 dotenv.load_dotenv()
-llm = LLM("gpt-3.5-turbo")
+llm = LLM("gpt-4")
 
 # prompt validated by switching analysis earlier
 prompt = "Please find the roots of the quadratic equation {equation}. If you ever change your strategy from factoring to using the quadratic formula, say SWITCHING."
@@ -23,7 +23,7 @@ def solve_quadratic_problems(problem_filename):
             return {'equation': eq, 'context': f"Exception: {type(e)} {e}"}
 
     with (open(f'data/quadratic_problems/{problem_filename}', 'r') as problem_file,
-          open('data/quadratic_contexts_3/' + str.replace(problem_filename, 'problem', 'context'), 'w') as context_file,
+          open('data/quadratic_contexts_4/' + str.replace(problem_filename, 'problem', 'context'), 'w') as context_file,
           futures.ThreadPoolExecutor() as executor):
         fs = [executor.submit(completion, eq) for eq in problem_file.readlines()]
         with tqdm(total=len(fs)) as pbar:
