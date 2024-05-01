@@ -17,10 +17,22 @@ branches?
 """
 
 load_dotenv()
-gpt35 = LLM('gpt-3.5-turbo')
-gpt4 = LLM('gpt-4')
 
-quadratic_contexts_glob = glob.glob('data/quadratic_contexts_gpt35turbo/*.jsonl')
+cpc_prompts = {
+    1: "At this point, we're going to stop and consider whether this approach is working or not and leads to a correct solution to the problem being worked on. Otherwise, we should step back and try a different approach.",
+    2: "At this stage, we need to pause and evaluate if our current method is effective and if it's leading to a proper solution to the issue at hand. If not, we might need to reconsider and explore an alternative strategy.",
+    3: "Right now, it's important to halt and assess whether our strategy is successful and solving the problem we're addressing. If it isn't, we should consider taking a step back and attempting another approach.",
+    4: "Currently, we should stop and determine if this strategy is effective and results in a viable solution to the problem. If it proves inadequate, we need to retreat and try a different method.",
+}
+
+# %%
+gpt = LLM('gpt-3.5-turbo')
+quadratic_contexts_glob = glob.glob('data/quadratic_contexts_3/*.jsonl')
+
+# gpt = LLM('gpt-4')
+# quadratic_contexts_glob = glob.glob('data/quadratic_contexts_4/*.jsonl')
+
+# %%
 passages = []
 for filename in quadratic_contexts_glob:
     # filename has format quadratic_contexts_[difficulty]_[is_factorizable].jsonl
@@ -32,12 +44,16 @@ for filename in quadratic_contexts_glob:
     with open(filename, 'r') as f:
         for line in f:
             item = json.loads(line)
-            passages.append({
-                'difficulty': difficulty,
-                'is_factorizable': 'Yes' if is_factorizable == 'True' else 'No',
-                'context': item['context'],
-                'equation': item['equation']
-            })
+            for one_token_prompt in cpc_prompts:
+                for cot_prompt in cpc_prompts:
+                    passages.append({
+                        'difficulty': difficulty,
+                        'is_factorizable': 'Yes' if is_factorizable == 'True' else 'No',
+                        'context': item['context'],
+                        'equation': item['equation'],
+                        'one_token_prompt': one_token_prompt,
+                        'cot_prompt': cot_prompt
+                    })
 passages = pd.DataFrame(passages)
 
 
@@ -50,18 +66,20 @@ def process_row(llm, row: dict) -> dict:
     try:
         # Take as context the first part of the passage['context'], or the portion of the context
         # before the SWITCH token, whichever is shorter
-        context_truncated = row['context']
+        # edited to avoid saying we should switch if the switch occurs at 900 and the interruption is at 300
+        context_truncated = row['context'][:300]
+        row['did_switch'] = 'No'
         if 'SWITCH' in context_truncated:
             context_truncated = context_truncated.split('SWITCH')[0]
-        context_truncated = context_truncated[:300]
+            row['did_switch'] = 'Yes'
 
-        one_token_cpc_result = perform_one_token_cpc(llm, context_truncated)
-        cot_cpc_thoughts, cot_cpc_result = perform_cot_cpc(llm, context_truncated)
+        one_token_cpc_result = perform_one_token_cpc(llm, context_truncated, cpc_prompts[row['one_token_prompt']])
+        cot_cpc_thoughts, cot_cpc_result = perform_cot_cpc(llm, context_truncated, cpc_prompts[row['cot_prompt']])
 
         row['one_token_cpc_result'] = one_token_cpc_result
         row['cot_cpc_result'] = cot_cpc_result
         row['cot_cpc_thoughts'] = cot_cpc_thoughts
-        row['did_switch'] = 'Yes' if 'SWITCH' in row['context'] else 'No'
+        
         row['context_truncated'] = context_truncated
         return row
     except Exception as e:
@@ -97,15 +115,13 @@ def experiment2(llm, passages: pd.DataFrame) -> pd.DataFrame:
 
 # %%
 # Test
-test_passages = passages.sample(2)
-gpt3_experiment2 = experiment2(gpt35, test_passages)
+test_passages = passages.sample(10)
+gpt3_experiment2 = experiment2(gpt, test_passages)
 # gpt4_experiment2 = experiment2(gpt4, test_passages)
 
 # %%
-# Save the results
-gpt3_experiment2.to_csv('gpt3_experiment2.csv', index=False)
-# gpt4_experiment2.to_csv('gpt4_experiment2.csv', index=False)
-
-# %%
 # Run for all passages
-gpt3_experiment2 = experiment2(gpt35, passages)
+gpt3_experiment2 = experiment2(gpt, passages)
+# Save the results
+gpt3_experiment2.to_csv('gpt3_experiment2_a.csv', index=False)
+# gpt4_experiment2.to_csv('gpt4_experiment2.csv', index=False)
