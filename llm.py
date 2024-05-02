@@ -1,6 +1,7 @@
 import threading
 import time
 
+import dotenv
 from openai import OpenAI
 
 
@@ -34,6 +35,8 @@ class RateLimiter:
 
 class LLM:
     def __init__(self, model_name, openai: OpenAI = None, rate_limiter: RateLimiter = None):
+        dotenv.load_dotenv()
+
         self.model_name = model_name
         self.openai = openai or OpenAI()
         # https://platform.openai.com/docs/guides/rate-limits/usage-tiers?context=tier-three
@@ -51,6 +54,13 @@ class LLM:
 
     def yesno_completion(self, prompt):
         """Use the logit bias feature to prompt a "Yes" or "No" completion"""
+        # Force Yes (9642) or No (2822)
+        return self.single_token_completion(prompt, {"9642": 100, "2822": 100})
+
+    def single_token_completion(self, prompt, logit_bias=None):
+        """Use the logit bias feature to force an 'A' or 'B' completion"""
+        if logit_bias is None:
+            logit_bias = {}
         if isinstance(prompt, str):
             prompt = [{"role": "user", "content": prompt}]
         with self.rate_limiter:
@@ -58,7 +68,6 @@ class LLM:
                 messages=prompt,
                 model=self.model_name,
                 max_tokens=1,
-                # Force Yes (9642) or No (2822)
-                logit_bias={"9642": 100, "2822": 100}
+                logit_bias=logit_bias
             )
             return chat_completion.choices[0].message.content
