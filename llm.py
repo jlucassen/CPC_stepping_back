@@ -1,5 +1,6 @@
 import threading
 import time
+import tiktoken
 
 from openai import OpenAI
 
@@ -36,6 +37,7 @@ class LLM:
     def __init__(self, model_name, openai: OpenAI = None, rate_limiter: RateLimiter = None):
         self.model_name = model_name
         self.openai = openai or OpenAI()
+        self.encoding = tiktoken.encoding_for_model(self.model_name)
         # https://platform.openai.com/docs/guides/rate-limits/usage-tiers?context=tier-three
         self.rate_limiter = rate_limiter or RateLimiter(3500)
 
@@ -77,4 +79,21 @@ class LLM:
             ],
             model=self.model_name,
         )
+        return chat_completion.choices[0].message.content
+    
+    def choice_completion(self, prompt, choices):
+        choice_tokens = []
+        for choice in choices:
+            token = self.encoding.encode(choice)
+            if len(token) > 1:
+                raise ValueError(f"Choice \"{choice}\" is not encodable as a single token")
+            choice_tokens += token
+        logit_bias = {str(token): 100 for token in choice_tokens}
+        with self.rate_limiter:
+            chat_completion = self.openai.chat.completions.create(
+                messages=[{"role": "user", "content": prompt}],
+                model=self.model_name,
+                max_tokens=1,
+                logit_bias=logit_bias
+            )
         return chat_completion.choices[0].message.content
