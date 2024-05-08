@@ -143,8 +143,8 @@ When choosing a bandit, respond in json:
         return choice, history
 
 
-# %%
-def experiment5(prompter, num_games=5, game_length=20):
+# %% Run x games of y rounds each
+def experiment5(prompter, num_games=10, game_length=20):
     games = []
     fs = []
     with futures.ThreadPoolExecutor() as executor:
@@ -155,14 +155,39 @@ def experiment5(prompter, num_games=5, game_length=20):
         games.append({
             'num_iterations': game_length,
             'bandits': bandits,
-            'score': score,
-            'score_per_turn': score / game_length,
-            'percent_correct': sum(g['choice'] == bandits.index(max(bandits))) / game_length,
+            'accuracy': sum(g['choice'] == bandits.index(max(bandits))) / game_length,
             'game': json.dumps(g.to_dict())
         })
     return pd.DataFrame(games)
 
 
-games_gpt4 = experiment5(CoTBanditPrompter(gpt4))
-result_game = pd.DataFrame(json.loads(games_gpt4.iloc[4]['game']))
-record = json.loads(result_game.iloc[-1]['history'])
+# %%
+# Run for gpt35t and gpt4, singletoken
+experiment5_singletoken_35t = experiment5(SingleTokenBanditPrompter(gpt35turbo), num_games=15)
+experiment5_singletoken_4 = experiment5(SingleTokenBanditPrompter(gpt4), num_games=15)
+
+# %%
+# average accuracies?
+print(experiment5_singletoken_35t['accuracy'].mean())
+print(experiment5_singletoken_4['accuracy'].mean())
+# save to disk
+experiment5_singletoken_35t.to_csv('results/experiment5_singletoken_35t.csv', index=False)
+experiment5_singletoken_4.to_csv('results/experiment5_singletoken_4.csv', index=False)
+
+# %% again for gpt4 cot
+experiment5_cot_4 = experiment5(CoTBanditPrompter(gpt4), num_games=15)
+print(experiment5_cot_4['accuracy'].mean())
+experiment5_cot_4.to_csv('results/experiment5_cot_condensedcontext_gpt4.csv', index=False)
+
+
+# %% pull out a sample game from experiment5_cot_4
+def sample_game(df):
+    # get the game with the lowest accuracy
+    worst = df.loc[df['accuracy'].idxmin()]
+    game = pd.DataFrame(json.loads(worst['game']))
+    # get the last row of the game
+    return game.iloc[-1]['history']
+
+
+# %%
+print(sample_game(experiment5_cot_4))
