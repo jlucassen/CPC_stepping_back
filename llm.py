@@ -51,7 +51,7 @@ class LLM:
             )
             return chat_completion.choices[0].message.content
 
-    def yesno_completion(self, prompt):
+    def yesno_completion(self, prompt, t=1):
         """Use the logit bias feature to prompt a "Yes" or "No" completion"""
         if isinstance(prompt, str):
             prompt = [{"role": "user", "content": prompt}]
@@ -60,6 +60,7 @@ class LLM:
                 messages=prompt,
                 model=self.model_name,
                 max_tokens=1,
+                temperature=t, # t=1 by default, match openai settings
                 # Force Yes (9642) or No (2822)
                 logit_bias={"9642": 100, "2822": 100}
             )

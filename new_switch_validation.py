@@ -92,11 +92,11 @@ gpt4t = LLM("gpt-4-turbo-2024-04-09") # most up to date 4-turbo
 original_prompt = "This is a reasoning transcript of an agent trying to find the roots of a quadratic equation. The agent will start by attempting to factor the quadratic, and may switch over to using the quadratic formula instead. First you will be shown the full transcript, then just a prefix of the transcript. By the end of the prefix transcript, has the agent switched from factoring to using the quadratic formula yet?"
 
 def original_35t(context, prefix):
-    return gpt35t.yesno_completion(original_prompt+'\n\nFULL TRANSCRIPT:\n'+context+'\n\nPREFIX TRANSCRIPT:\n'+prefix+"\n\nANSWER:\n") == 'Yes'
+    return gpt35t.yesno_completion(original_prompt+'\n\nFULL TRANSCRIPT:\n'+context+'\n\nPREFIX TRANSCRIPT:\n'+prefix+"\n\nANSWER:\n", t=0) == 'Yes'
 def original_4(context, prefix):
-    return gpt4.yesno_completion(original_prompt+'\n\nFULL TRANSCRIPT:\n'+context+'\n\nPREFIX TRANSCRIPT:\n'+prefix+"\n\nANSWER:\n") == 'Yes'
+    return gpt4.yesno_completion(original_prompt+'\n\nFULL TRANSCRIPT:\n'+context+'\n\nPREFIX TRANSCRIPT:\n'+prefix+"\n\nANSWER:\n", t=0) == 'Yes'
 def original_4t(context, prefix):
-    return gpt4t.yesno_completion(original_prompt+'\n\nFULL TRANSCRIPT:\n'+context+'\n\nPREFIX TRANSCRIPT:\n'+prefix+"\n\nANSWER:\n") == 'Yes'
+    return gpt4t.yesno_completion(original_prompt+'\n\nFULL TRANSCRIPT:\n'+context+'\n\nPREFIX TRANSCRIPT:\n'+prefix+"\n\nANSWER:\n", t=0) == 'Yes'
 
 # %% run
 for measure_func in [original_35t, original_4, original_4t]:
@@ -170,7 +170,4 @@ for measure_func in [original_35t, original_4, original_4t]:
         plt.title(name)
         plt.ylim([-0.1, 1.1])
         plt.show()
-# %% does the post-processing reliably increase accuracy? n=25, worst-case error +/- 10 percentage points
-print([(name, np.mean(s)) for name, (_, _, s, _) in saving.items()])
-
 # %%
