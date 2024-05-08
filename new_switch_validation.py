@@ -83,9 +83,9 @@ for measure_func in [dummy1, dummy2, dummy3]:
 # %% quickly trying some actual measurement methods
 saving = {}
 
-gpt35t = LLM("gpt-3.5-turbo")
+gpt35t = LLM("gpt-3.5-turbo-0125") # most up to date 3.5-turbo
 gpt4 = LLM("gpt-4")
-gpt4t = LLM("gpt-4-turbo-2024-04-09") # most up to date t-turbo
+gpt4t = LLM("gpt-4-turbo-2024-04-09") # most up to date 4-turbo
 
 original_prompt = "This is a reasoning transcript of an agent trying to find the roots of a quadratic equation. The agent will start by attempting to factor the quadratic, and may switch over to using the quadratic formula instead. First you will be shown the full transcript, then just a prefix of the transcript. By the end of the prefix transcript, has the agent switched from factoring to using the quadratic formula yet?"
 
