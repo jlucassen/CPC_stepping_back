@@ -2,6 +2,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from tqdm import tqdm
+import json
+import os
 
 from llm import LLM
 llm = LLM("gpt-3.5-turbo")
@@ -11,12 +13,35 @@ factoring_contexts = []
 formula_contexts = []
 
 # file saving/loading
+if 'factoring_contexts.jsonl' not in os.listdir('new_switch_validation'):
+    print('factoring contexts not found, generating...')
+    with open('data/quadratic_problems/quadratic_problems_5_True.jsonl', 'r') as readfile:
+        for line in tqdm(readfile.readlines()):
+            problem = line[:-1]
+            factoring_contexts.append(llm.chat_completion_false_start("Find the roots of the quadratic equation "+problem+" using factoring. Do not use the quadratic equation.", "Sure, I'll use factoring to find the roots of the quadratic equation "+problem+"."))
+    print('factoring contexts generated, writing...')
+    with open('new_switch_validation/factoring_contexts.jsonl', 'w') as writefile:
+        for context in factoring_contexts:
+            writefile.write(json.dumps(context)+'\n')
+else:
+    print('factoring contexts found, loading...')
+    with open('new_switch_validation/factoring_contexts.jsonl', 'r') as readfile:
+        factoring_contexts = [json.loads(line) for line in tqdm(readfile.readlines())] 
 
-with open('data/quadratic_problems/quadratic_problems_5_True.jsonl', 'r') as readfile:
-    for line in tqdm(readfile.readlines()):
-        problem = line[:-1]
-        factoring_contexts.append(llm.chat_completion_false_start("Find the roots of the quadratic equation "+problem+" using factoring. Do not use the quadratic equation.", "Sure, I'll use factoring to find the roots of the quadratic equation "+problem+"."))
-        formula_contexts.append(llm.chat_completion_false_start("Find the roots of the quadratic equation "+problem+" using the quadratic formula. Do not use factoring.", "Sure, I'll use the quadratic formula to find the roots of the quadratic equation "+problem+"."))
+if 'formula_contexts.jsonl' not in os.listdir('new_switch_validation'):
+    print('formula contexts not found, generating...')
+    with open('data/quadratic_problems/quadratic_problems_5_True.jsonl', 'r') as readfile:
+        for line in tqdm(readfile.readlines()):
+            problem = line[:-1]
+            formula_contexts.append(llm.chat_completion_false_start("Find the roots of the quadratic equation "+problem+" using the quadratic formula. Do not use factoring.", "Sure, I'll use the quadratic formula to find the roots of the quadratic equation "+problem+"."))
+    print('formula contexts generated, writing...')
+    with open('new_switch_validation/formula_contexts.jsonl', 'w') as writefile:
+        for context in formula_contexts:
+            writefile.write(json.dumps(context)+'\n')
+else:
+    print('formula contexts found, loading...')
+    with open('new_switch_validation/formula_contexts.jsonl', 'r') as readfile:
+        formula_contexts = [json.loads(line) for line in tqdm(readfile.readlines())]  
 
 spliced_contexts = [factor[:100] + formula[:100] for factor, formula in zip(factoring_contexts, formula_contexts)]
 # %% set up testing
