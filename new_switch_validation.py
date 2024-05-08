@@ -7,8 +7,8 @@ import os
 
 from llm import LLM
 llm = LLM("gpt-3.5-turbo")
-# %% make/load dataset with known switching location
 
+# %% make/load dataset with known switching location
 factoring_contexts = []
 formula_contexts = []
 
@@ -45,7 +45,7 @@ else:
 
 spliced_contexts = [factor[:100] + formula[:100] for factor, formula in zip(factoring_contexts, formula_contexts)]
 # %% set up testing
-def do_test(measure_func, prefix_freq, n_contexts):
+def do_test(measure_func, prefix_freq, n_contexts, post_func = None):
     avg_measured = []
     avg_truth = [] # not strictly necessary but w/e, maybe I'll change up the datasets
     avg_score = []
@@ -53,6 +53,8 @@ def do_test(measure_func, prefix_freq, n_contexts):
         prefixes = [context[:x] for x in range(prefix_freq, len(context)+prefix_freq, prefix_freq)]
         truth = [i >= int(len(prefixes)/2) for i in range(len(prefixes))]
         measured = [measure_func(context, prefix) for prefix in prefixes]
+        if post_func is not None:
+            measured = post_func(measured)
         score = [m==t for m, t in zip(measured, truth)]
         avg_measured.append(measured)
         avg_truth.append(truth)
@@ -96,10 +98,11 @@ def original_4(context, prefix):
 def original_4t(context, prefix):
     return gpt4t.yesno_completion(original_prompt+'\n\nFULL TRANSCRIPT:\n'+context+'\n\nPREFIX TRANSCRIPT:\n'+prefix+"\n\nANSWER:\n") == 'Yes'
 
+# %% run
 for measure_func in [original_35t, original_4, original_4t]:
-    n=10
+    n=25
     m, t, s = do_test(measure_func, 25, n)
-    saving[measure_func.__name__] = (m, t, s)
+    saving[measure_func.__name__] = (m, t, s, n)
     print(measure_func.__name__, np.mean(s))
     plt.errorbar(x=range(len(m)), y=m, yerr = np.sqrt(m*(1-m)/n), label='measured', marker='o', capsize=5)
     plt.errorbar(x=range(len(t)), y=t, yerr = np.sqrt(t*(1-t)/n), label='truth', marker='o', capsize=5)
@@ -110,19 +113,64 @@ for measure_func in [original_35t, original_4, original_4t]:
     plt.show()
 
 # %% using post-processing in a measurement func
-# def make_non_decreasing(arr):
-#     '''
-#     Takes a binary array, returns the index or list of indices at which it takes the fewest flips to make the array non-decreasing.
-#     '''
-#     table = np.zeros([2, len(arr)+1])
-#     table[:, 0] = [0, 0]
-#     for i, element in list(enumerate(arr)):
-#         if element == 1:
-#             table[0, i+1] = table[0, i] + 1 # if you don't want to commit to all 1's yet, need to pay 1 to flip
-#             table[1, i+1] = min(table[0, i], table[1, i]) # no flip needed to commit to 1's now
-#         else:
-#             table[0, i+1] = table[0, i] # no flip needed
-#             table[1, i+1] = table[1, i] + 1 # can  commit to 1's now, if you want
+def make_non_decreasing(arr):
+    '''
+    Takes a binary array, returns the index or list of indices at which it takes the fewest flips to make the array non-decreasing.
+    If there are multiple solutions, returns the first one - hopefully the measurements are close enough so sols are unique and unique sols are correct.
+    '''
+    if all(arr[i] <= arr[i + 1] for i in range(len(arr) - 1)): return arr
 
-#     max_flips = int(min(table[0, -1], table[1, -1]))
-#     return max_flips
+    table = np.zeros([2, len(arr)+1])
+    table[:, 0] = [0, 0]
+    for i, element in list(enumerate(arr)):
+        if element == 1:
+            table[0, i+1] = table[0, i] + 1 # if you don't want to commit to all 1's yet, need to pay 1 to flip
+            table[1, i+1] = min(table[0, i], table[1, i]) # no flip needed to commit to 1's now
+        else:
+            table[0, i+1] = table[0, i] # no flip needed
+            table[1, i+1] = table[1, i] + 1 # can  commit to 1's now, if you want
+
+    max_flips = int(min(table[0, -1], table[1, -1]))
+
+    # backtracking to find actual solution
+    def backtrack(index, current_flips, arr):
+        # Base case: If we've processed the entire array
+        if index == len(arr):
+            if all(arr[i] <= arr[i + 1] for i in range(len(arr) - 1)):
+                return arr[:]
+            else:
+                return None
+        # Recursion: Try without flipping
+        no_flip = backtrack(index + 1, current_flips, arr)
+        if no_flip is not None:
+            return no_flip
+        # Try flipping if within flip limit
+        if current_flips < max_flips:
+            arr[index] = 1 - arr[index]  # Flip the bit
+            yes_flip = backtrack(index + 1, current_flips + 1, arr)
+            if yes_flip is not None:
+                return yes_flip
+            arr[index] = 1 - arr[index]  # Unflip the bit back
+
+    out = backtrack(0, 0, arr[:]) # Start the recursion with a copy of the array
+    return out
+
+# %% run
+for measure_func in [original_35t, original_4, original_4t]:
+    for post_func in [make_non_decreasing]:
+        n=25
+        m, t, s = do_test(measure_func, 25, n, post_func=post_func)
+        name = measure_func.__name__+' '+post_func.__name__
+        saving[name] = (m, t, s, n)
+        print(name, np.mean(s))
+        plt.errorbar(x=range(len(m)), y=m, yerr = np.sqrt(m*(1-m)/n), label='measured', marker='o', capsize=5)
+        plt.errorbar(x=range(len(t)), y=t, yerr = np.sqrt(t*(1-t)/n), label='truth', marker='o', capsize=5)
+        plt.errorbar(x=range(len(s)), y=s, yerr = np.sqrt(s*(1-s)/n), label='score', marker='o', capsize=5)
+        plt.legend()
+        plt.title(name)
+        plt.ylim([-0.1, 1.1])
+        plt.show()
+# %% does the post-processing reliably increase accuracy? n=25, worst-case error +/- 10 percentage points
+print([(name, np.mean(s)) for name, (_, _, s, _) in saving.items()])
+
+# %%
