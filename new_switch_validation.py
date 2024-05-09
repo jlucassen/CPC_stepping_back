@@ -92,11 +92,11 @@ gpt4t = LLM("gpt-4-turbo-2024-04-09") # most up to date 4-turbo
 original_prompt = "This is a reasoning transcript of an agent trying to find the roots of a quadratic equation. The agent will start by attempting to factor the quadratic, and may switch over to using the quadratic formula instead. First you will be shown the full transcript, then just a prefix of the transcript. By the end of the prefix transcript, has the agent switched from factoring to using the quadratic formula yet?"
 
 def original_35t(context, prefix):
-    return gpt35t.yesno_completion(original_prompt+'\n\nFULL TRANSCRIPT:\n'+context+'\n\nPREFIX TRANSCRIPT:\n'+prefix+"\n\nANSWER:\n", t=0) == 'Yes'
+    return gpt35t.yesno_completion(original_prompt+'\n\nFULL TRANSCRIPT:\n'+context+'\n\nPREFIX TRANSCRIPT:\n'+prefix+"\n\nANSWER:\n") == 'Yes'
 def original_4(context, prefix):
-    return gpt4.yesno_completion(original_prompt+'\n\nFULL TRANSCRIPT:\n'+context+'\n\nPREFIX TRANSCRIPT:\n'+prefix+"\n\nANSWER:\n", t=0) == 'Yes'
+    return gpt4.yesno_completion(original_prompt+'\n\nFULL TRANSCRIPT:\n'+context+'\n\nPREFIX TRANSCRIPT:\n'+prefix+"\n\nANSWER:\n") == 'Yes'
 def original_4t(context, prefix):
-    return gpt4t.yesno_completion(original_prompt+'\n\nFULL TRANSCRIPT:\n'+context+'\n\nPREFIX TRANSCRIPT:\n'+prefix+"\n\nANSWER:\n", t=0) == 'Yes'
+    return gpt4t.yesno_completion(original_prompt+'\n\nFULL TRANSCRIPT:\n'+context+'\n\nPREFIX TRANSCRIPT:\n'+prefix+"\n\nANSWER:\n") == 'Yes'
 
 # %% run
 for measure_func in [original_35t, original_4, original_4t]:
@@ -171,3 +171,43 @@ for measure_func in [original_35t, original_4, original_4t]:
         plt.ylim([-0.1, 1.1])
         plt.show()
 # %%
+just_prefix_prompt = "You will be shown a prefix of a reasoning transcript of an agent trying to find the roots of a quadratic equation. The agent will start by attempting to factor the quadratic, and may switch over to using the quadratic formula instead. By the end of the prefix transcript, has the agent switched from factoring to using the quadratic formula yet?"
+def just_prefix_4(context, prefix):
+    return gpt4.yesno_completion(just_prefix_prompt+'\n\nPREFIX TRANSCRIPT:\n'+prefix+"\n\nANSWER:\n") == 'Yes'
+        
+min_prompt_v1 = "By the end of this transcript, has the agent switched from factoring to using the quadratic formula yet?"
+def min_4_v1(context, prefix):
+    return gpt4.yesno_completion(min_prompt_v1+'\n\nTRANSCRIPT:\n'+prefix+"\n\nANSWER:\n") == 'Yes'
+
+min_prompt_v2 = "By the end of this transcript, have I switched from factoring to using the quadratic formula yet?"
+def min_4_v2(context, prefix):
+    return gpt4.yesno_completion(min_prompt_v2+'\n\nTRANSCRIPT:\n'+prefix+"\n\nANSWER:\n") == 'Yes'
+
+minnest_prompt = "Have I switched from factoring to using the quadratic formula yet?"
+def minnest_4(context, prefix):
+    return gpt4.yesno_completion(minnest_prompt+'\n\n'+prefix+"\n\nANSWER:\n") == 'Yes'
+
+for measure_func in [just_prefix_4, min_4_v1, min_4_v2, minnest_4]:
+    for post_func in [None, make_non_decreasing]:
+        n=25
+        m, t, s = do_test(measure_func, 25, n, post_func=post_func)
+        name = measure_func.__name__+' '+(post_func.__name__ if post_func is not None else 'None')
+        saving[name] = (m, t, s, n)
+        print(name, np.mean(s))
+        plt.errorbar(x=range(len(m)), y=m, yerr = np.sqrt(m*(1-m)/n), label='measured', marker='o', capsize=5)
+        plt.errorbar(x=range(len(t)), y=t, yerr = np.sqrt(t*(1-t)/n), label='truth', marker='o', capsize=5)
+        plt.errorbar(x=range(len(s)), y=s, yerr = np.sqrt(s*(1-s)/n), label='score', marker='o', capsize=5)
+        plt.legend()
+        plt.title(name)
+        plt.ylim([-0.1, 1.1])
+        plt.show()
+
+# %%
+char_num_prompt = "You will be shown a reasoning transcript of an agent trying to find the roots of a quadratic equation. The agent will start by attempting to factor the quadratic, and may switch over to using the quadratic formula instead. Answer with the character number at which the agent switches from factoring to using the quadratic formula."
+def ask_for_char_num_4(context, prefix):
+    pass
+
+substring_prompt = "You will be shown a reasoning transcript of an agent trying to find the roots of a quadratic equation. The agent will start by attempting to factor the quadratic, and may switch over to using the quadratic formula instead. Answer with the substring of the transcript in which the agent switches from factoring to using the quadratic formula."
+def ask_for_substring_4(context, prefix):
+    pass
+        
