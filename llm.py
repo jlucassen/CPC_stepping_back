@@ -42,13 +42,14 @@ class LLM:
         # https://platform.openai.com/docs/guides/rate-limits/usage-tiers?context=tier-three
         self.rate_limiter = rate_limiter or RateLimiter(3500)
 
-    def chat_completion(self, prompt):
+    def chat_completion(self, prompt, json=False):
         if isinstance(prompt, str):
             prompt = [{"role": "user", "content": prompt}]
         with self.rate_limiter:
             chat_completion = self.openai.chat.completions.create(
                 messages=prompt,
                 model=self.model_name,
+                response_format={"type": "json_object"} if json else None
             )
             return chat_completion.choices[0].message.content
 

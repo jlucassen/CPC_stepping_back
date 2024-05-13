@@ -1,7 +1,8 @@
 import json
 import random
-from typing import Tuple
 from concurrent import futures
+from typing import Tuple
+import re
 
 import pandas as pd
 from tqdm import tqdm, trange
@@ -18,7 +19,7 @@ class Prompter:
     def __init__(self, llm):
         self.llm = llm
 
-    def prompt(self, history: list) -> Tuple[int, list]:
+    def prompt(self, history: list, remaining_turns: int = None) -> Tuple[int, list]:
         raise NotImplemented
 
 
@@ -29,8 +30,9 @@ def game(prompter, num_iterations=50):
     history = []
     results = []
 
-    for _ in trange(num_iterations, desc='running game'):
-        bandit_index, history = prompter.prompt(history)
+    for turn_index in trange(num_iterations, desc='running game'):
+        remaining_turns = num_iterations - turn_index
+        bandit_index, history = prompter.prompt(history, remaining_turns)
         bandit_result = int(random.gauss(bandits[bandit_index], 30))
         history.append({
             'role': 'user',
@@ -48,7 +50,7 @@ def game(prompter, num_iterations=50):
 
 
 class SingleTokenBanditPrompter(Prompter):
-    def prompt(self, history):
+    def prompt(self, history, remaining_turns=None):
         history = history or [
             {
                 'role': 'user',
@@ -112,7 +114,7 @@ def filter_thoughts(history):
 
 
 class CoTBanditPrompter(Prompter):
-    def prompt(self, history):
+    def prompt(self, history, remaining_turns=None):
         history = history or [
             {
                 'role': 'user',
@@ -144,7 +146,7 @@ When choosing a bandit, respond in json:
 
 
 # %% Run x games of y rounds each
-def experiment5(prompter, num_games=10, game_length=20):
+def experiment5(prompter, num_games=10, game_length=15):
     games = []
     fs = []
     with futures.ThreadPoolExecutor() as executor:
@@ -158,7 +160,22 @@ def experiment5(prompter, num_games=10, game_length=20):
             'accuracy': sum(g['choice'] == bandits.index(max(bandits))) / game_length,
             'game': json.dumps(g.to_dict())
         })
-    return pd.DataFrame(games)
+    result = pd.DataFrame(games)
+    print('average accuracy', result['accuracy'].mean())
+    return result
+
+
+def show_game(df, index=None):
+    # if index is none, show the game with the lowest accuracy
+    if index is None:
+        row = df.loc[df['accuracy'].idxmin()]
+    else:
+        row = df.iloc[index]
+    game_to_show = pd.DataFrame(json.loads(row['game']))
+    game_json = game_to_show.iloc[-1]['history']
+    print(row['bandits'])
+    print('accuracy', row['accuracy'])
+    print(json.dumps(json.loads(game_json), indent=2))
 
 
 # %%
@@ -180,14 +197,143 @@ print(experiment5_cot_4['accuracy'].mean())
 experiment5_cot_4.to_csv('results/experiment5_cot_condensedcontext_gpt4.csv', index=False)
 
 
-# %% pull out a sample game from experiment5_cot_4
-def sample_game(df):
-    # get the game with the lowest accuracy
-    worst = df.loc[df['accuracy'].idxmin()]
-    game = pd.DataFrame(json.loads(worst['game']))
-    # get the last row of the game
-    return game.iloc[-1]['history']
+# %%
+# Let's change our condensation strategy. Instead of filtering out the assistant's thoughts from the context, we'll just
+# replace the chat history with a user message summarizing the game's history so far.
+# For example, { 'role': 'user', 'content': 'You have played 5 rounds so far. In round 1, you chose bandit A and got
+# 100 points. In round 2, you chose bandit B and got 50 points...' }
+def history_summary(history):
+    # Look for the user messages like "You pulled bandit A and got 100 points."
+    summary = []
+    for i, msg in enumerate(history):
+        if msg['role'] == 'user':
+            match = re.match(r'You pulled bandit ([A-C]) and got (\d+) points.', msg['content'])
+            if match:
+                bandit, points = match.groups()
+                summary.append(f'In round {i + 1}, you chose bandit {bandit} and got {points} points.')
+    return '\n'.join(summary)
+
+
+class CoTBanditPrompterSummarization(Prompter):
+    def prompt(self, history, remaining_turns=None):
+        history = history or [
+            {
+                'role': 'user',
+                'content': """You are playing a multi-armed-bandit game with three bandits. The mean payout of each bandit is unknown. Get as much score as possible! Make sure to try all three bandits.
+                
+When choosing a bandit, respond in json:
+{
+    "thoughts": <string, thinking carefully about which bandit to choose; show your work and think step by step.>
+    "choice": "A", "B" or "C"
+}"""
+            }
+        ]
+        history.append({
+            'role': 'user',
+            'content': 'Which bandit do you choose? Respond in json:'
+        })
+        prompt = history[:1] + [{'role': 'user', 'content': history_summary(history)}] + history[-1:]
+        result = self.llm.chat_completion(prompt)
+        history.append({
+            'role': 'assistant',
+            'content': result
+        })
+        try:
+            result_json = json.loads(result)
+            choice = ord(result_json['choice']) - ord('A')
+        except (json.JSONDecodeError, KeyError) as e:
+            history.append({'role': 'user', 'content': str(e)})
+            return self.prompt(history)
+        return choice, history
+
+
+# %% run it for 4 and 3.5
+experiment5_cot_35t = experiment5(CoTBanditPrompterSummarization(gpt35turbo))
+experiment5_cot_4 = experiment5(CoTBanditPrompterSummarization(gpt4))
+# %% save to disk
+experiment5_cot_35t.to_csv('results/experiment5_cot_summarized_gpt35t.csv', index=False)
+experiment5_cot_4.to_csv('results/experiment5_cot_summarized_gpt4.csv', index=False)
+
+
+# %% What if we tell the llm how many turns are remaining?
+def history_summary_with_remaining_turns(history, remaining_turns):
+    summary = history_summary(history)
+    return f'{summary}\nYou have {remaining_turns} turns remaining.'
+
+
+class CoTBanditPrompterSummarizationRemainingTurns(Prompter):
+    def prompt(self, history, remaining_turns=None):
+        history = history or [
+            {
+                'role': 'user',
+                'content': """You are playing a multi-armed-bandit game with three bandits. The mean payout of each bandit is unknown. Get as much score as possible! Make sure to try all three bandits.
+                
+When choosing a bandit, respond in json:
+{
+    "thoughts": <string, thinking carefully about which bandit to choose; show your work and think step by step.>
+    "choice": "A", "B" or "C"
+}"""
+            }
+        ]
+        prompt = history[:1] + [
+            {'role': 'user', 'content': history_summary_with_remaining_turns(history, remaining_turns)}] + [
+                     {'role': 'user', 'content': 'Which bandit do you choose? Respond in json:'}]
+        result = self.llm.chat_completion(prompt)
+        history.append({
+            'role': 'assistant',
+            'content': result
+        })
+        try:
+            result_json = json.loads(result)
+            choice = ord(result_json['choice']) - ord('A')
+        except (json.JSONDecodeError, KeyError, TypeError) as e:
+            history.append({'role': 'user', 'content': str(e)})
+            return self.prompt(history)
+        return choice, history
+
+
+# %% run it for 4 and 3.5
+experiment5_cot_35t = experiment5(CoTBanditPrompterSummarizationRemainingTurns(gpt35turbo), num_games=15)
+experiment5_cot_4 = experiment5(CoTBanditPrompterSummarizationRemainingTurns(gpt4), num_games=15)
+experiment5_cot_35t.to_csv('results/experiment5/experiment5_cot_summarized_remainingturns_gpt35t.csv', index=False)
+experiment5_cot_4.to_csv('results/experiment5/experiment5_cot_summarized_remainingturns_gpt4.csv', index=False)
+
+# %% try gpt4turbo
+gpt4turbo = LLM('gpt-4-turbo')
+experiment5_cot_4turbo = experiment5(CoTBanditPrompterSummarizationRemainingTurns(gpt4turbo))
+experiment5_cot_4turbo.to_csv('results/experiment5/experiment5_cot_summarized_remainingturns_gpt4turbo.csv',
+                              index=False)
 
 
 # %%
-print(sample_game(experiment5_cot_4))
+# Single-token version of CoTBanditPrompterSummarizationRemainingTurns
+class SingleTokenBanditPrompterSummarizationRemainingTurns(Prompter):
+    def prompt(self, history, remaining_turns=None):
+        history = history or [
+            {
+                'role': 'user',
+                'content': """You are playing a multi-armed-bandit game with three bandits. The mean payout of each bandit is unknown. Get as much score as possible! Make sure to try all three bandits."""
+            }
+        ]
+        history.append({
+            'role': 'user',
+            'content': 'Which bandit do you choose? Say A, B, or C:'
+        })
+        prompt = history[:1] + [
+            {'role': 'user', 'content': history_summary_with_remaining_turns(history, remaining_turns)}] + [
+                     {'role': 'user', 'content': 'Which bandit do you choose? Say A, B, or C:'}]
+        print(prompt)
+        result = self.llm.single_token_completion(prompt, {'32': 100, '33': 100, '34': 100})
+        history.append({
+            'role': 'assistant',
+            'content': f'{result}'
+        })
+        choice = ord(result) - ord('A')
+        return choice, history
+
+# %%
+# run it for 4 and 3.5
+experiment5_singletoken_35t = experiment5(SingleTokenBanditPrompterSummarizationRemainingTurns(gpt35turbo), num_games=1)
+experiment5_singletoken_4 = experiment5(SingleTokenBanditPrompterSummarizationRemainingTurns(gpt4), num_games=15)
+experiment5_singletoken_35t.to_csv('results/experiment5/experiment5_singletoken_summarized_remainingturns_gpt35t.csv', index=False)
+experiment5_singletoken_4.to_csv('results/experiment5/experiment5_singletoken_summarized_remainingturns_gpt4.csv', index=False)
