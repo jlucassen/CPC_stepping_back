@@ -1,11 +1,13 @@
 import json
 import random
+import re
 from concurrent import futures
 from typing import Tuple
-import re
 
+import matplotlib.pyplot as plt
 import pandas as pd
-from tqdm import tqdm, trange
+import seaborn as sns
+from tqdm import tqdm
 
 from llm import LLM
 
@@ -23,30 +25,61 @@ class Prompter:
         raise NotImplemented
 
 
-def game(prompter, num_iterations=50):
-    score = 0
-    bandits = [50, 100, 150]
-    random.shuffle(bandits)
+class Bandit:
+    def pull(self) -> int:
+        raise NotImplemented
+
+    # In comparisons, the bandit with the highest EV is the largest bandit
+    def __lt__(self, other):
+        raise NotImplemented
+
+    def to_dict(self):
+        raise NotImplemented
+
+
+class GaussianBandit(Bandit):
+    def __init__(self, mean, std):
+        self.mean = mean
+        self.std = std
+
+    def pull(self) -> int:
+        return int(random.gauss(self.mean, self.std))
+
+    def __str__(self):
+        return f'GaussianBandit(mean={self.mean}, std={self.std})'
+
+    def __lt__(self, other):
+        return self.mean < other.mean
+
+    def to_dict(self):
+        return {'mean': self.mean, 'std': self.std}
+
+
+def default_bandits():
+    bandits = [GaussianBandit(50, 30), GaussianBandit(100, 30), GaussianBandit(150, 30)]
+    return random.sample(bandits, len(bandits))
+
+
+def game(prompter, bandits, num_turns=20):
     history = []
     results = []
 
-    for turn_index in trange(num_iterations, desc='running game'):
-        remaining_turns = num_iterations - turn_index
+    for turn_index in range(num_turns):
+        remaining_turns = num_turns - turn_index
         bandit_index, history = prompter.prompt(history, remaining_turns)
-        bandit_result = int(random.gauss(bandits[bandit_index], 30))
+        bandit_result = bandits[bandit_index].pull()
         history.append({
             'role': 'user',
-            'content': f"You pulled bandit {chr(bandit_index + ord('A'))} and got {bandit_result} points."
+            'content': f'You pulled bandit {chr(bandit_index + ord("A"))} and got {bandit_result} points.'
         })
-        score += bandit_result
         results.append({
+            'bandits': bandits,
             'choice': bandit_index,
             'reward': bandit_result,
-            'score': score,
             'history': json.dumps(history),
         })
 
-    return bandits, score, pd.DataFrame(results)
+    return pd.DataFrame(results)
 
 
 class SingleTokenBanditPrompter(Prompter):
@@ -71,23 +104,18 @@ class SingleTokenBanditPrompter(Prompter):
 
 
 # %%
-bandits, score, g = game(SingleTokenBanditPrompter(gpt35turbo), 15)
-
-
-# %%
 # As we increase the number of iterations, does the player more often converge to the correct bandit, and does their
 # average score-per-turn increase?
 def experiment5_convergence(prompter):
     results = []
-    for num_iterations in tqdm([5, 10, 15, 20, 25, 30, 35, 40, 45], desc='running games'):
-        bandits, score, g = game(prompter, num_iterations)
+    for num_turns in tqdm([5, 10, 15, 20, 25, 30, 35, 40, 45], desc='running games'):
+        bandits = default_bandits()
+        g = game(prompter, bandits, num_turns)
         results.append({
-            'num_iterations': num_iterations,
+            'num_iterations': num_turns,
             'bandits': bandits,
-            'score': score,
-            'score_per_turn': score / num_iterations,
-            'percent_correct': sum(g['choice'] == bandits.index(max(bandits))) / num_iterations,
-            'game': json.dumps(g.to_dict())
+            'accuracy': sum(g['choice'] == bandits.index(max(bandits))) / num_turns,
+            'game': json.dumps(g.to_dict(), default=vars)
         })
     return pd.DataFrame(results)
 
@@ -151,14 +179,14 @@ def experiment5(prompter, num_games=10, game_length=15):
     fs = []
     with futures.ThreadPoolExecutor() as executor:
         for _ in range(num_games):
-            fs.append(executor.submit(game, prompter, game_length))
+            fs.append(executor.submit(game, prompter, default_bandits(), game_length))
     for f in tqdm(futures.as_completed(fs), total=len(fs), desc=f'Running {num_games} games'):
-        bandits, score, g = f.result()
+        g = f.result()
+        bandits = g.iloc[0]['bandits']
         games.append({
             'num_iterations': game_length,
-            'bandits': bandits,
             'accuracy': sum(g['choice'] == bandits.index(max(bandits))) / game_length,
-            'game': json.dumps(g.to_dict())
+            'game': json.dumps(g.to_dict(), default=vars)
         })
     result = pd.DataFrame(games)
     print('average accuracy', result['accuracy'].mean())
@@ -172,15 +200,15 @@ def show_game(df, index=None):
     else:
         row = df.iloc[index]
     game_to_show = pd.DataFrame(json.loads(row['game']))
+    print(chr(game_to_show.iloc[-1]['choice'] + ord('A')), game_to_show['bandits'])
     game_json = game_to_show.iloc[-1]['history']
-    print(row['bandits'])
     print('accuracy', row['accuracy'])
     print(json.dumps(json.loads(game_json), indent=2))
 
 
 # %%
 # Run for gpt35t and gpt4, singletoken
-experiment5_singletoken_35t = experiment5(SingleTokenBanditPrompter(gpt35turbo), num_games=15)
+experiment5_singletoken_35t = experiment5(SingleTokenBanditPrompter(gpt35turbo), num_games=1)
 experiment5_singletoken_4 = experiment5(SingleTokenBanditPrompter(gpt4), num_games=15)
 
 # %%
@@ -305,8 +333,7 @@ experiment5_cot_4turbo.to_csv('results/experiment5/experiment5_cot_summarized_re
                               index=False)
 
 
-# %%
-# Single-token version of CoTBanditPrompterSummarizationRemainingTurns
+# %% Let's try the single-token edition
 class SingleTokenBanditPrompterSummarizationRemainingTurns(Prompter):
     def prompt(self, history, remaining_turns=None):
         history = history or [
@@ -331,9 +358,56 @@ class SingleTokenBanditPrompterSummarizationRemainingTurns(Prompter):
         choice = ord(result) - ord('A')
         return choice, history
 
+
 # %%
 # run it for 4 and 3.5
 experiment5_singletoken_35t = experiment5(SingleTokenBanditPrompterSummarizationRemainingTurns(gpt35turbo), num_games=1)
 experiment5_singletoken_4 = experiment5(SingleTokenBanditPrompterSummarizationRemainingTurns(gpt4), num_games=15)
-experiment5_singletoken_35t.to_csv('results/experiment5/experiment5_singletoken_summarized_remainingturns_gpt35t.csv', index=False)
-experiment5_singletoken_4.to_csv('results/experiment5/experiment5_singletoken_summarized_remainingturns_gpt4.csv', index=False)
+experiment5_singletoken_35t.to_csv('results/experiment5/experiment5_singletoken_summarized_remainingturns_gpt35t.csv',
+                                   index=False)
+experiment5_singletoken_4.to_csv('results/experiment5/experiment5_singletoken_summarized_remainingturns_gpt4.csv',
+                                 index=False)
+
+
+# %% Curious that for CoT, 35t is beating 4. This seems to be because 35t is more exploitative
+# and 4 is more exploratory. In that case I would expect the gap to invert as the bandits become more similar.
+# Is this the case?
+def experiment_bandits_variance_vs_accuracy(prompter, num_games=20, game_length=15):
+    games = []
+    fs = []
+    with futures.ThreadPoolExecutor() as executor:
+        for _ in range(num_games):
+            deviation = random.randint(30, 50)
+            bandits = [
+                GaussianBandit(50, deviation),
+                GaussianBandit(100, deviation),
+                GaussianBandit(150, deviation)
+            ]
+            fs.append(executor.submit(game, prompter, bandits, game_length))
+    for f in tqdm(futures.as_completed(fs), total=len(fs)):
+        g = f.result()
+        bandits = g.iloc[0]['bandits']
+        games.append({
+            'standard_deviation': bandits[0].std,
+            'accuracy': sum(g['choice'] == bandits.index(max(bandits))) / game_length,
+            'game': json.dumps(g.to_dict(), default=vars)
+        })
+    result = pd.DataFrame(games)
+    return result
+
+
+# %%
+bandits_variance_vs_accuracy_35t = experiment_bandits_variance_vs_accuracy(
+    CoTBanditPrompterSummarizationRemainingTurns(gpt35turbo))
+bandits_variance_vs_accuracy_4 = experiment_bandits_variance_vs_accuracy(
+    CoTBanditPrompterSummarizationRemainingTurns(gpt4))
+bandits_variance_vs_accuracy_35t['model'] = 'gpt-3.5-turbo'
+bandits_variance_vs_accuracy_4['model'] = 'gpt-4'
+bandits_variance_vs_accuracy = pd.concat([bandits_variance_vs_accuracy_35t, bandits_variance_vs_accuracy_4])
+bandits_variance_vs_accuracy.to_csv('results/experiment5/bandits_variance_vs_accuracy.csv', index=False)
+
+# %%
+# Analyze variance vs accuracy. How strongly do they correlate? Is there a difference between the models?
+# Linear regression for each model so we can compare the slopes
+sns.lmplot(data=bandits_variance_vs_accuracy, x='standard_deviation', y='accuracy', hue='model')
+plt.show()
