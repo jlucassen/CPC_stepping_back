@@ -27,7 +27,7 @@ cpc_prompts = {
 
 # %%
 gpt = LLM('gpt-3.5-turbo')
-quadratic_contexts_glob = glob.glob('data/quadratic_contexts_3/*.jsonl')
+quadratic_contexts_glob = glob.glob('data/quadratic_contexts_3_ex1/*.jsonl')
 
 # gpt = LLM('gpt-4')
 # quadratic_contexts_glob = glob.glob('data/quadratic_contexts_4/*.jsonl')
@@ -67,11 +67,14 @@ def process_row(llm, row: dict) -> dict:
         # Take as context the first part of the passage['context'], or the portion of the context
         # before the SWITCH token, whichever is shorter
         # edited to avoid saying we should switch if the switch occurs at 900 and the interruption is at 300
-        context_truncated = row['context'][:300]
+        context_truncated = row['context']
         row['did_switch'] = 'No'
-        if 'SWITCH' in context_truncated:
-            context_truncated = context_truncated.split('SWITCH')[0]
+        if 'switch' in context_truncated.lower():
+            switch_index = context_truncated.lower().index('switch')
+            context_truncated = context_truncated[:switch_index]
             row['did_switch'] = 'Yes'
+        else:
+            context_truncated = context_truncated[:int(len(context_truncated) / 2)]
 
         one_token_cpc_result = perform_one_token_cpc(llm, context_truncated, cpc_prompts[row['one_token_prompt']])
         cot_cpc_thoughts, cot_cpc_result = perform_cot_cpc(llm, context_truncated, cpc_prompts[row['cot_prompt']])
@@ -115,13 +118,14 @@ def experiment2(llm, passages: pd.DataFrame) -> pd.DataFrame:
 
 # %%
 # Test
-test_passages = passages.sample(10)
+test_passages = passages.iloc[:10]
 gpt3_experiment2 = experiment2(gpt, test_passages)
 # gpt4_experiment2 = experiment2(gpt4, test_passages)
 
 # %%
 # Run for all passages
-gpt3_experiment2 = experiment2(gpt, passages)
+gpt3_experiment2 = experiment2(gpt, passages.sample(100))
 # Save the results
 gpt3_experiment2.to_csv('gpt3_experiment2_a.csv', index=False)
 # gpt4_experiment2.to_csv('gpt4_experiment2.csv', index=False)
+# %%

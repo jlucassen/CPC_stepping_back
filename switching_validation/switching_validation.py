@@ -20,7 +20,7 @@ def request_func(i, prompt, false_start, data, lock, pbar):
         to_add[0] = 1
     if "SWITCHING" in out:
         to_add[1] = 1
-    if "formula" in out.lower():
+    if "\u221a" in out.lower(): # square root symbol
         to_add[2] = 1
     if "3i" in out:
         to_add[3] = 1
@@ -70,15 +70,16 @@ def confusion_matrix(col1, col2):
     return a,b,c,d
 
 def run_experiment(i, prompt):
-    if f"switching_validation_data_{i}.csv" not in os.listdir('gpt4'):
+    if f"switching_validation_data_{i}.csv" not in os.listdir('gpt3'):
         data = np.empty([n, 4])
         pbar = tqdm(total=n)
         with ThreadPoolExecutor(max_workers=50) as executor:
             executor.map(partial(request_func, prompt=prompt, false_start=false_start, data=data, lock=lock, pbar=pbar), request_range)
         pbar.close()
-        np.savetxt(f"gpt4/switching_validation_data_{i}.csv", data, delimiter=",")
+        np.savetxt(f"gpt3/switching_validation_data_{i}.csv", data, delimiter=",")
     else:
-        data = np.loadtxt(f"gpt4/switching_validation_data_{i}.csv", delimiter=",")
+        print("loading data")
+        data = np.loadtxt(f"gpt3/switching_validation_data_{i}.csv", delimiter=",")
 
     print(f"\nPROMPT {i}: {prompt}")
     #print("\nSwitching vs formula")

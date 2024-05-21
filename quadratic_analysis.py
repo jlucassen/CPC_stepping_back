@@ -2,7 +2,7 @@
 import pandas as pd
 
 # %%
-readfile = 'results/gpt3_experiment2.csv'
+readfile = 'results/gpt3_experiment2_a.csv'
 df = pd.read_csv(readfile)
 # %%
 print(sum(df['one_token_cpc_result'] == df['cot_cpc_result'])/len(df))
