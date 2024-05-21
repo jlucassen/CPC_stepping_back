@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 from tqdm import tqdm
 import json
 import os
+from termcolor import colored
 
 from llm import LLM
 llm = LLM("gpt-3.5-turbo")
@@ -160,7 +161,7 @@ def make_non_decreasing(arr):
     return out
 
 # %% run
-for measure_func in [original_35t]:#, original_4, original_4t]:
+for measure_func in [original_35t, original_4, original_4t]:
     for post_func in [make_non_decreasing]:
         n=25
         m, t, s = do_test(measure_func, 25, n, post_func=post_func)
@@ -206,7 +207,7 @@ for measure_func in [just_prefix_4, min_4_v1, min_4_v2, minnest_4]:
         plt.ylim([-0.1, 1.1])
         plt.show()
 
-# %% Testing on some real data just to see if it looks better
+# %% Testing on some real data just to see if it looks ok
 import json   
 with open('data/quadratic_contexts_3_ex1/quadratic_ex1_contexts_5_False.jsonl') as readfile:
     switch_contexts = [json.loads(s)['context'] for s in readfile.readlines()] # not factorable, therefore switch
@@ -216,18 +217,21 @@ with open('data/quadratic_contexts_3_ex1/quadratic_ex1_contexts_5_True.jsonl') a
 
 # %%
 prefix_res = 50
-for context in switch_contexts[:5]:
+for context in switch_contexts[5:10]:
     prefixes = [context[:x] for x in range(prefix_res, len(context)+prefix_res, prefix_res)]
     measured = [original_4(context, prefix) for prefix in prefixes]
+    measured = make_non_decreasing(measured)[0]
     switch_index = len(context) if 1 not in measured else measured.index(1)*prefix_res
-    print(f"BEFORE: {context[:switch_index]}")
-    print(f"AFTER: {context[switch_index:]}")
+    print(f"{colored(context[:switch_index], 'red')}{colored(context[switch_index:], 'blue')}")
+    print(colored('-------------------------------------', 'green'))
 
-for context in no_switch_contexts[:5]:
+for context in no_switch_contexts[5:10]:
     prefixes = [context[:x] for x in range(prefix_res, len(context)+prefix_res, prefix_res)]
     measured = [original_4(context, prefix) for prefix in prefixes]
+    measured = make_non_decreasing(measured)[0]
     switch_index = len(context) if 1 not in measured else measured.index(1)*prefix_res
-    print(f"BEFORE: {context[:switch_index]}")
-    print(f"AFTER: {context[switch_index:]}")
+    print(f"{colored(context[:switch_index], 'red')}{colored(context[switch_index:], 'blue')}")
+    print(colored('-------------------------------------', 'green'))
+
 
 # %%
