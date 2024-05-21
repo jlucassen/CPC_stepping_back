@@ -45,11 +45,11 @@ else:
 
 spliced_contexts = [factor[:100] + formula[:100] for factor, formula in zip(factoring_contexts, formula_contexts)]
 # %% set up testing
-def do_test(measure_func, prefix_freq, n_contexts, post_func = None):
+def do_test(measure_func, prefix_freq, n_contexts, post_func = None, contexts=spliced_contexts):
     avg_measured = []
     avg_truth = [] # not strictly necessary but w/e, maybe I'll change up the datasets
     avg_score = []
-    for context in spliced_contexts[:n_contexts]:
+    for context in contexts[:n_contexts]:
         prefixes = [context[:x] for x in range(prefix_freq, len(context)+prefix_freq, prefix_freq)]
         truth = [i >= int(len(prefixes)/2) for i in range(len(prefixes))]
         measured = [measure_func(context, prefix) for prefix in prefixes]
@@ -206,12 +206,28 @@ for measure_func in [just_prefix_4, min_4_v1, min_4_v2, minnest_4]:
         plt.ylim([-0.1, 1.1])
         plt.show()
 
-# %%
-char_num_prompt = "You will be shown a reasoning transcript of an agent trying to find the roots of a quadratic equation. The agent will start by attempting to factor the quadratic, and may switch over to using the quadratic formula instead. Answer with the character number at which the agent switches from factoring to using the quadratic formula."
-def ask_for_char_num_4(context, prefix):
-    pass
+# %% Testing on some real data just to see if it looks better
+import json   
+with open('data/quadratic_contexts_3_ex1/quadratic_ex1_contexts_5_False.jsonl') as readfile:
+    switch_contexts = [json.loads(s)['context'] for s in readfile.readlines()] # not factorable, therefore switch
 
-substring_prompt = "You will be shown a reasoning transcript of an agent trying to find the roots of a quadratic equation. The agent will start by attempting to factor the quadratic, and may switch over to using the quadratic formula instead. Answer with the substring of the transcript in which the agent switches from factoring to using the quadratic formula."
-def ask_for_substring_4(context, prefix):
-    pass
-        
+with open('data/quadratic_contexts_3_ex1/quadratic_ex1_contexts_5_True.jsonl') as readfile:
+    no_switch_contexts = [json.loads(s)['context'] for s in readfile.readlines()] # factorable, therefore no switch
+
+# %%
+prefix_res = 50
+for context in switch_contexts[:5]:
+    prefixes = [context[:x] for x in range(prefix_res, len(context)+prefix_res, prefix_res)]
+    measured = [original_4(context, prefix) for prefix in prefixes]
+    switch_index = len(context) if 1 not in measured else measured.index(1)*prefix_res
+    print(f"BEFORE: {context[:switch_index]}")
+    print(f"AFTER: {context[switch_index:]}")
+
+for context in no_switch_contexts[:5]:
+    prefixes = [context[:x] for x in range(prefix_res, len(context)+prefix_res, prefix_res)]
+    measured = [original_4(context, prefix) for prefix in prefixes]
+    switch_index = len(context) if 1 not in measured else measured.index(1)*prefix_res
+    print(f"BEFORE: {context[:switch_index]}")
+    print(f"AFTER: {context[switch_index:]}")
+
+# %%
