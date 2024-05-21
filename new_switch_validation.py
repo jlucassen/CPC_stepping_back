@@ -49,7 +49,6 @@ def do_test(measure_func, prefix_freq, n_contexts, post_func = None):
     avg_measured = []
     avg_truth = [] # not strictly necessary but w/e, maybe I'll change up the datasets
     avg_score = []
-    i = 0
     for context in spliced_contexts[:n_contexts]:
         prefixes = [context[:x] for x in range(prefix_freq, len(context)+prefix_freq, prefix_freq)]
         truth = [i >= int(len(prefixes)/2) for i in range(len(prefixes))]
@@ -58,9 +57,7 @@ def do_test(measure_func, prefix_freq, n_contexts, post_func = None):
             post = post_func(measured[:])
             if len(post) == 1:
                 measured = post[0]
-            else:
-                i += 1
-                print(f'multiple solutions detected, {i}')
+            else: # make a call to some queue here
                 measured = post[0]
         score = [m==t for m, t in zip(measured, truth)]
         avg_measured.append(measured)
