@@ -49,12 +49,20 @@ def do_test(measure_func, prefix_freq, n_contexts, post_func = None):
     avg_measured = []
     avg_truth = [] # not strictly necessary but w/e, maybe I'll change up the datasets
     avg_score = []
+    i = 0
     for context in spliced_contexts[:n_contexts]:
         prefixes = [context[:x] for x in range(prefix_freq, len(context)+prefix_freq, prefix_freq)]
         truth = [i >= int(len(prefixes)/2) for i in range(len(prefixes))]
         measured = [measure_func(context, prefix) for prefix in prefixes]
         if post_func is not None:
-            measured = post_func(measured)
+            post = post_func(measured[:])
+            print(f"{measured=}{post=}")
+            if len(post) == 1:
+                measured = post[0]
+            else:
+                i += 1
+                print(f'multiple solutions detected, {i}')
+                measured = post[0]
         score = [m==t for m, t in zip(measured, truth)]
         avg_measured.append(measured)
         avg_truth.append(truth)
@@ -92,11 +100,11 @@ gpt4t = LLM("gpt-4-turbo-2024-04-09") # most up to date 4-turbo
 original_prompt = "This is a reasoning transcript of an agent trying to find the roots of a quadratic equation. The agent will start by attempting to factor the quadratic, and may switch over to using the quadratic formula instead. First you will be shown the full transcript, then just a prefix of the transcript. By the end of the prefix transcript, has the agent switched from factoring to using the quadratic formula yet?"
 
 def original_35t(context, prefix):
-    return gpt35t.yesno_completion(original_prompt+'\n\nFULL TRANSCRIPT:\n'+context+'\n\nPREFIX TRANSCRIPT:\n'+prefix+"\n\nANSWER:\n") == 'Yes'
+    return 1 if gpt35t.yesno_completion(original_prompt+'\n\nFULL TRANSCRIPT:\n'+context+'\n\nPREFIX TRANSCRIPT:\n'+prefix+"\n\nANSWER:\n") == 'Yes' else 0
 def original_4(context, prefix):
-    return gpt4.yesno_completion(original_prompt+'\n\nFULL TRANSCRIPT:\n'+context+'\n\nPREFIX TRANSCRIPT:\n'+prefix+"\n\nANSWER:\n") == 'Yes'
+    return 1 if gpt4.yesno_completion(original_prompt+'\n\nFULL TRANSCRIPT:\n'+context+'\n\nPREFIX TRANSCRIPT:\n'+prefix+"\n\nANSWER:\n") == 'Yes' else 0
 def original_4t(context, prefix):
-    return gpt4t.yesno_completion(original_prompt+'\n\nFULL TRANSCRIPT:\n'+context+'\n\nPREFIX TRANSCRIPT:\n'+prefix+"\n\nANSWER:\n") == 'Yes'
+    return 1 if gpt4t.yesno_completion(original_prompt+'\n\nFULL TRANSCRIPT:\n'+context+'\n\nPREFIX TRANSCRIPT:\n'+prefix+"\n\nANSWER:\n") == 'Yes' else 0
 
 # %% run
 for measure_func in [original_35t, original_4, original_4t]:
@@ -115,10 +123,9 @@ for measure_func in [original_35t, original_4, original_4t]:
 # %% using post-processing in a measurement func
 def make_non_decreasing(arr):
     '''
-    Takes a binary array, returns the index or list of indices at which it takes the fewest flips to make the array non-decreasing.
-    If there are multiple solutions, returns the first one - hopefully the measurements are close enough so sols are unique and unique sols are correct.
+    Takes a binary array, returns 
     '''
-    if all(arr[i] <= arr[i + 1] for i in range(len(arr) - 1)): return arr
+    if all(arr[i] <= arr[i + 1] for i in range(len(arr) - 1)): return [arr]
 
     table = np.zeros([2, len(arr)+1])
     table[:, 0] = [0, 0]
@@ -132,31 +139,32 @@ def make_non_decreasing(arr):
 
     max_flips = int(min(table[0, -1], table[1, -1]))
 
+    out = []
     # backtracking to find actual solution
     def backtrack(index, current_flips, arr):
-        # Base case: If we've processed the entire array
+        nonlocal out
+        # Base case: If we've processed the entire array. Time to make a decision
         if index == len(arr):
             if all(arr[i] <= arr[i + 1] for i in range(len(arr) - 1)):
-                return arr[:]
+                out.append(arr[:]) # record all valid sols, not just first
+                return True
             else:
-                return None
+                return False
         # Recursion: Try without flipping
         no_flip = backtrack(index + 1, current_flips, arr)
-        if no_flip is not None:
+        if no_flip:
             return no_flip
         # Try flipping if within flip limit
         if current_flips < max_flips:
-            arr[index] = 1 - arr[index]  # Flip the bit
-            yes_flip = backtrack(index + 1, current_flips + 1, arr)
-            if yes_flip is not None:
-                return yes_flip
+            arr[index] = 1 -  arr[index]  # Flip the bit
+            backtrack(index + 1, current_flips + 1, arr)
             arr[index] = 1 - arr[index]  # Unflip the bit back
 
-    out = backtrack(0, 0, arr[:]) # Start the recursion with a copy of the array
+    backtrack(0, 0, arr[:]) # Start the recursion with a copy of the array
     return out
 
 # %% run
-for measure_func in [original_35t, original_4, original_4t]:
+for measure_func in [original_4]:#, original_4, original_4t]:
     for post_func in [make_non_decreasing]:
         n=25
         m, t, s = do_test(measure_func, 25, n, post_func=post_func)
