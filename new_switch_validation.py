@@ -56,7 +56,6 @@ def do_test(measure_func, prefix_freq, n_contexts, post_func = None):
         measured = [measure_func(context, prefix) for prefix in prefixes]
         if post_func is not None:
             post = post_func(measured[:])
-            print(f"{measured=}{post=}")
             if len(post) == 1:
                 measured = post[0]
             else:
@@ -164,7 +163,7 @@ def make_non_decreasing(arr):
     return out
 
 # %% run
-for measure_func in [original_4]:#, original_4, original_4t]:
+for measure_func in [original_35t]:#, original_4, original_4t]:
     for post_func in [make_non_decreasing]:
         n=25
         m, t, s = do_test(measure_func, 25, n, post_func=post_func)
