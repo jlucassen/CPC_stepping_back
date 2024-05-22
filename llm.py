@@ -40,6 +40,7 @@ class LLM:
         self.encoding = tiktoken.encoding_for_model(self.model_name)
         # https://platform.openai.com/docs/guides/rate-limits/usage-tiers?context=tier-three
         self.rate_limiter = rate_limiter or RateLimiter(3500)
+        self.yesno = {self.encoding.encode("Yes")[0]: 100, self.encoding.encode("No")[0]: 100}
 
     def chat_completion(self, prompt):
         if isinstance(prompt, str):
@@ -61,8 +62,7 @@ class LLM:
                 model=self.model_name,
                 max_tokens=1,
                 temperature=t, # t=1 by default, match openai settings
-                # Force Yes (9642) or No (2822)
-                logit_bias={"9642": 100, "2822": 100}
+                logit_bias=self.yesno
             )
             return chat_completion.choices[0].message.content
 

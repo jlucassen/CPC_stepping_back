@@ -93,6 +93,7 @@ saving = {}
 gpt35t = LLM("gpt-3.5-turbo-0125") # most up to date 3.5-turbo
 gpt4 = LLM("gpt-4")
 gpt4t = LLM("gpt-4-turbo-2024-04-09") # most up to date 4-turbo
+gpt4o = LLM("gpt-4o")
 
 original_prompt = "This is a reasoning transcript of an agent trying to find the roots of a quadratic equation. The agent will start by attempting to factor the quadratic, and may switch over to using the quadratic formula instead. First you will be shown the full transcript, then just a prefix of the transcript. By the end of the prefix transcript, has the agent switched from factoring to using the quadratic formula yet?"
 
@@ -102,9 +103,11 @@ def original_4(context, prefix):
     return 1 if gpt4.yesno_completion(original_prompt+'\n\nFULL TRANSCRIPT:\n'+context+'\n\nPREFIX TRANSCRIPT:\n'+prefix+"\n\nANSWER:\n") == 'Yes' else 0
 def original_4t(context, prefix):
     return 1 if gpt4t.yesno_completion(original_prompt+'\n\nFULL TRANSCRIPT:\n'+context+'\n\nPREFIX TRANSCRIPT:\n'+prefix+"\n\nANSWER:\n") == 'Yes' else 0
+def original_4o(context, prefix):
+    return 1 if gpt4o.yesno_completion(original_prompt+'\n\nFULL TRANSCRIPT:\n'+context+'\n\nPREFIX TRANSCRIPT:\n'+prefix+"\n\nANSWER:\n") == 'Yes' else 0
 
 # %% run
-for measure_func in [original_35t, original_4, original_4t]:
+for measure_func in [original_4o]:#original_35t, original_4, original_4t, ]:
     n=25
     m, t, s = do_test(measure_func, 25, n)
     saving[measure_func.__name__] = (m, t, s, n)
@@ -161,7 +164,7 @@ def make_non_decreasing(arr):
     return out
 
 # %% run
-for measure_func in [original_35t, original_4, original_4t]:
+for measure_func in [original_4o]:#35t, original_4, original_4t]:
     for post_func in [make_non_decreasing]:
         n=25
         m, t, s = do_test(measure_func, 25, n, post_func=post_func)
