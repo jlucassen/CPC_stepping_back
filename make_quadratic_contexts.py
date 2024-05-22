@@ -11,7 +11,7 @@ dotenv.load_dotenv()
 llm = LLM("gpt-3.5-turbo")
 
 # prompt validated by switching analysis earlier
-prompt = "Please find the roots of the quadratic equation {equation}. If you ever change your strategy from factoring to using the quadratic formula, say SWITCHING."
+prompt = "Please find the roots of the quadratic equation {equation}. Start by trying to factor the equation. If you can't factor it, then use the quadratic formula. If you factor the equation successfully, do not use the quadratic formula." # removed instruction to say SWITCHING. swapped out for an alternative to enforce factoring first
 
 # remember to force feed the model so it starts by attempting factoring! Otherwise switching will be too low.
 false_start = "First, I'll try solving this equation by factoring."
@@ -27,7 +27,7 @@ def solve_quadratic_problems(problem_filename):
             return {'equation': eq, 'context': f"Exception: {type(e)} {e}"}
 
     with (open(f'data/quadratic_problems/{problem_filename}', 'r') as problem_file,
-          open('data/quadratic_contexts_3_ex1/' + str.replace(problem_filename, 'problem', 'ex1_context'), 'w') as context_file,
+          open('data/quadratic_contexts_3_new/' + str.replace(problem_filename, 'problem', 'new_context'), 'w') as context_file,
           futures.ThreadPoolExecutor() as executor):
         fs = [executor.submit(completion, eq) for eq in problem_file.readlines()]
         with tqdm(total=len(fs)) as pbar:
