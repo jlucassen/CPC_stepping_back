@@ -16,8 +16,12 @@ def make_quadratic_problem(max, factorable):
                 return make_quadratic_problem(max, factorable) # try again
     return f"{a}x^2 - {-b}x + {c} = 0"
 
-for max in range(5, 50, 5):
-    for factorable in [True, False]:
-        with open(f'data/quadratic_problems/quadratic_problems_{max}_{factorable}.jsonl', 'w') as outfile:
-            for _ in range(100):
-                outfile.write(make_quadratic_problem(max, factorable) + '\n')
+def main():
+    for max in range(5, 50, 5):
+        for factorable in [True, False]:
+            with open(f'data/quadratic_problems/quadratic_problems_{max}_{factorable}.jsonl', 'w') as outfile:
+                for _ in range(100):
+                    outfile.write(make_quadratic_problem(max, factorable) + '\n')
+if __name__ == "__main__":
+   # stuff only to run when not called via 'import' here
+   main()

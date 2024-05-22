@@ -7,16 +7,7 @@ from tqdm import tqdm
 
 from llm import LLM
 
-dotenv.load_dotenv()
-llm = LLM("gpt-3.5-turbo")
-
-# prompt validated by switching analysis earlier
-prompt = "Please find the roots of the quadratic equation {equation}. Start by trying to factor the equation. If you can't factor it, then use the quadratic formula. If you factor the equation successfully, do not use the quadratic formula." # removed instruction to say SWITCHING. swapped out for an alternative to enforce factoring first
-
-# remember to force feed the model so it starts by attempting factoring! Otherwise switching will be too low.
-false_start = "First, I'll try solving this equation by factoring."
-
-def solve_quadratic_problems(problem_filename):
+def solve_quadratic_problems(problem_filename, prompt, false_start, llm):
     def completion(eq):
         try:
             llm.chat_completion_false_start(prompt.format(equation=eq), false_start=false_start)
@@ -27,7 +18,7 @@ def solve_quadratic_problems(problem_filename):
             return {'equation': eq, 'context': f"Exception: {type(e)} {e}"}
 
     with (open(f'data/quadratic_problems/{problem_filename}', 'r') as problem_file,
-          open('data/quadratic_contexts_3_new/' + str.replace(problem_filename, 'problem', 'new_context'), 'w') as context_file,
+          open(f'data/quadratic_contexts_{llm.model_name}/' + str.replace(problem_filename, 'problem', 'context'), 'w') as context_file,
           futures.ThreadPoolExecutor() as executor):
         fs = [executor.submit(completion, eq) for eq in problem_file.readlines()]
         with tqdm(total=len(fs)) as pbar:
@@ -43,7 +34,19 @@ def solve_quadratic_problems(problem_filename):
 
 
 # %%
-lines = sum((sum(1 for _ in open(f'data/quadratic_problems/{f}')) for f in os.listdir('data/quadratic_problems')))
-for problem_filename in os.listdir('data/quadratic_problems'):
-    print(f"Solving problems in {problem_filename}")
-    solve_quadratic_problems(problem_filename)
+def main():
+    dotenv.load_dotenv()
+    llm = LLM("gpt-3.5-turbo")
+
+    # prompt validated by switching analysis earlier
+    prompt = "Please find the roots of the quadratic equation {equation}. Start by trying to factor the equation. If you can't factor it, then use the quadratic formula. If you factor the equation successfully, do not use the quadratic formula." # removed instruction to say SWITCHING. swapped out for an alternative to enforce factoring first
+
+    # remember to force feed the model so it starts by attempting factoring! Otherwise switching will be too low.
+    false_start = "First, I'll try solving this equation by factoring."
+
+    for problem_filename in os.listdir('data/quadratic_problems'):
+        print(f"Solving problems in {problem_filename}")
+        solve_quadratic_problems(problem_filename, prompt, false_start, llm)
+
+if __name__ == "__main__":
+    main()
