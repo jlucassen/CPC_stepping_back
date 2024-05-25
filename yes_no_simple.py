@@ -1,15 +1,23 @@
 import os
 import csv
+import logging
 from dotenv import load_dotenv
 from llm import LLM
-from solver_yes_no_simple import perform_one_token_cpc
+from solver_yes_no_simple import perform_one_token_cpc, perform_cot_cpc
 import concurrent.futures
 from tqdm import tqdm
-import matplotlib.pyplot as plt 
-# Load API key
+import matplotlib.pyplot as plt
+import numpy as np
+import scipy.stats as stats
+
+# debug
+logging.basicConfig(filename='output.log', level=logging.INFO)
+
+# API
 load_dotenv()
 api_key = os.getenv("OPENAI_API_KEY")
 if not api_key:
+    logging.error("No OPENAI_API_KEY found in env")
     raise ValueError("No OPENAI_API_KEY found in env")
 
 def test_extraction(llm, dataset, function, prompt_variations, n=50):
@@ -34,14 +42,18 @@ def test_extraction(llm, dataset, function, prompt_variations, n=50):
     
     with tqdm(total=total_iterations, desc="Processing") as pbar:
         with concurrent.futures.ThreadPoolExecutor() as executor:
-            futures = []
-            for question, correct_answer in dataset:
-                for prompt_variation in prompt_variations:
-                    future = executor.submit(task, question, correct_answer, prompt_variation)
-                    futures.append(future)
-                    future.add_done_callback(lambda p: pbar.update())
-            
-            results = [future.result() for future in concurrent.futures.as_completed(futures)]
+            future_to_task = {
+                executor.submit(task, question, correct_answer, prompt_variation): (question, correct_answer, prompt_variation)
+                for question, correct_answer in dataset
+                for prompt_variation in prompt_variations
+            }
+            for future in concurrent.futures.as_completed(future_to_task):
+                try:
+                    result = future.result()
+                    results.append(result)
+                except Exception as e:
+                    logging.error(f"Task for {future_to_task[future]} raised an exception: {e}")
+                pbar.update(1)
 
     return results
 
@@ -56,12 +68,13 @@ def create_box_plot(results, filename):
         
     fig, ax = plt.subplots(figsize=(10, 6))
     ax.boxplot(data.values())
+    ax.set_xticks(range(len(data.keys())))
     ax.set_xticklabels(data.keys(), rotation=45, ha='right')
     ax.set_ylabel('Accuracy Rate')
+    ax.set_ylim(0, 100)
     ax.set_title('Accuracy Rate by Prompt Variation')
     plt.tight_layout()
     plt.savefig(filename)
-
 
 def write_to_csv(results, filename):
     keys = results[0].keys()
@@ -70,20 +83,43 @@ def write_to_csv(results, filename):
         dict_writer.writeheader()
         dict_writer.writerows(results)
 
-if __name__ == "__main__":
-    # Initialize LLM with model details
-    llm = LLM(model_name='gpt-3.5-turbo')
+def create_confidence_interval_plot(results, filename):
+    data = {}
+    for result in results:
+        prompt_variation = result['prompt phrasing']
+        accuracy_rate = result['accuracy rate']
+        if prompt_variation not in data:
+            data[prompt_variation] = []
+        data[prompt_variation].append(accuracy_rate)
     
-    # questions for Yes/No
-    # yes_no_dataset = [
-    #     ("The sky is blue", "Yes"), ("Two plus two equals five", "No"),
-    #     ("Does water boiling at 100 degrees Celsius at sea level?", "Yes"),
-    #     ("Can humans breathe normally in space without any special gear?","No"),
-    #     ("Do all birds have the ability to fly?", "No"), ("Is the sun a star?", "Yes"),
-    #     ("Is the Earth flat?","No")
-    # ]
+    fig, ax = plt.subplots(figsize=(10, 6))
+    x_labels = []
+    means = []
+    lower_errors = []
+    upper_errors = []
+    
+    for prompt_variation, accuracy_rates in data.items():
+        x_labels.append(prompt_variation)
+        mean = np.mean(accuracy_rates)
+        ci = stats.norm.interval(0.95, loc=mean, scale=stats.sem(accuracy_rates))
+        means.append(mean)
+        lower_errors.append(mean - ci[0])
+        upper_errors.append(ci[1] - mean)
+    
+    yerr = [lower_errors, upper_errors]
+    
+    ax.errorbar(range(len(x_labels)), means, yerr=yerr, fmt='o')
+    ax.set_xticks(range(len(x_labels)))
+    ax.set_xticklabels(x_labels, rotation=45, ha='right')
+    ax.set_ylabel('Accuracy Rate')
+    ax.set_ylim(0, 100)
+    ax.set_title('95% Confidence Interval for Accuracy Rate by Prompt Variation')
+    plt.tight_layout()
+    plt.savefig(filename)
 
-    yes_no_dataset =[
+if __name__ == "__main__":
+    # prompt variations
+    yes_no_dataset = [
         ("Is there a prime number larger than any given finite set of primes?", "Yes"),
         ("Is it possible for a person to survive without a brain?", "No"),
         ("Can a person's blood type change over the course of their lifetime?", "No"),
@@ -93,10 +129,8 @@ if __name__ == "__main__":
         ("Is it possible for a person to be allergic to water?", "Yes"),
         ("Is it possible to trisect an angle using only a compass and straightedge?", "No"),
         ("Can a polynomial equation of degree n always be solved using radicals for n greater than 4?", "No")
-
     ]
 
-    # 1t prompt variations
     prompt_variations = [
         "Please respond with 'Yes' if you agree or 'No' if you disagree.",
         "Respond with 'Yes' if you agree or 'No' if you disagree.",
@@ -108,24 +142,41 @@ if __name__ == "__main__":
         "Can you confirm this statement? Answer 'Yes' or 'No'.",
         "Is the above statement true? Respond 'Yes' or 'No'.",
         "Just let me know, is this true? Yes or No?",
-    ""
     ]
 
-    # cot_dataset = [
-    #     ("Is it possible for a person to have situs inversus, where their organs are mirrored from their normal positions?", "Yes"),
-    #     ("Can a Möbius strip be created with only one surface and one edge?", "Yes"),
-    #     ("Can a square have the same area as a circle with rational radius?", "No"),
-    #     ("Is it possible for a polynomial equation of degree 5 or higher to have no algebraic solution in terms of radicals?", "Yes"),
-    #     ("Can a perpetual motion machine of the first kind (which creates energy) be constructed?", "No")
-    # ]
-    
-    # running
-    #yes_no_results = test_extraction(llm, yes_no_dataset, perform_one_token_cpc, prompt_variations)
-    #cot_results = test_extraction(llm, cot_dataset, perform_cot_cpc, prompt_variations)
-    
-    # write out
-    #write_to_csv(yes_no_results, 'yes_no_results.csv')
-    #write_to_csv(cot_results, 'cot_results.csv')
+    cot_dataset = [
+        ("Is the square of the sum of 5 and 3 equal to 64?", "No"),
+        ("If you divide 48 by 6, is the quotient 8?", "Yes"),
+        ("Does multiplying 7 by 9 give a product of 56?", "No"),
+        ("Is the difference between 20 and 12 equal to 8?", "Yes"),
+        ("When you subtract 15 from 30, do you get 25?", "No"),
+        ("If you double 9 and then add 3, is the result 21?", "Yes"),
+        ("Does dividing 100 by 4 give a quotient of 25?", "Yes"),
+        ("If you add 17 and 8, is the sum less than 30?", "Yes"),
+        ("Is the product of 6 and 5 equal to 30?", "Yes"),
+        ("When you subtract 7 from 15, is the result greater than 5?", "Yes")
+    ]
 
-    # create box plot
-    create_box_plot(yes_no_results, 'yes_no_accuracy_box_plot.png')
+    # all models
+    model_names = ['gpt-3.5-turbo', 'gpt-4', 'gpt-4-turbo']
+
+    for model_name in model_names:
+        llm = LLM(model_name=model_name)
+        
+        
+        try:
+            yes_no_results = test_extraction(llm, yes_no_dataset, perform_one_token_cpc, prompt_variations)
+            write_to_csv(yes_no_results, f'{model_name}_yes_no_results.csv')
+            create_box_plot(yes_no_results, f'{model_name}_yes_no_accuracy_box_plot.png')
+            create_confidence_interval_plot(yes_no_results, f'{model_name}_yes_no_confidence_intervals.png')
+        except Exception as e:
+            logging.exception(f"Exception occurred while processing Yes/No questions for model {model_name}")
+        
+        # Run for CoT questions
+        try:
+            cot_results = test_extraction(llm, cot_dataset, perform_cot_cpc, prompt_variations)
+            write_to_csv(cot_results, f'{model_name}_cot_results.csv')
+            create_box_plot(cot_results, f'{model_name}_cot_accuracy_box_plot.png')
+            create_confidence_interval_plot(cot_results, f'{model_name}_cot_confidence_intervals.png')
+        except Exception as e:
+            logging.exception(f"Exception occurred while processing CoT questions for model {model_name}")
