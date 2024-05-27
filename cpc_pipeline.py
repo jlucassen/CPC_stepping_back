@@ -5,7 +5,6 @@ import random
 import os
 from termcolor import colored
 from llm import LLM
-from tqdm import tqdm
 
 from concurrent.futures import ThreadPoolExecutor
 
@@ -35,12 +34,19 @@ def cpc_problems(problem_maker, args):
     return df
 
 def cpc_contexts(problem_df, row_solver):
-    problem_df = problem_df.copy()
-    problem_df['context'] = problem_df['problem'].apply(lambda x: executor.submit(row_solver, x))
-    problem_df['context'] = problem_df['context'].apply(lambda x: x.result())
+    filename = 'cpc_pipeline/'+row_solver.__name__ + str(myHash(problem_df.to_string()))+'.csv'
+    if not os.path.exists(filename):
+        print(f"Creating {filename}...")
+        problem_df = problem_df.copy()
+        problem_df['context'] = problem_df['problem'].apply(lambda x: executor.submit(row_solver, x))
+        problem_df['context'] = problem_df['context'].apply(lambda x: x.result())
+        problem_df.to_csv(filename, index=False)
+    else:
+        print(colored(f"Reading {filename}...", 'blue'))
+        problem_df = pd.read_csv(filename)
     return problem_df
 
-def split_and_judge_switching():
+def split_and_judge_switching(context_df):
     pass
 
 def judge_cpc():
