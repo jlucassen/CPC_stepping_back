@@ -2,6 +2,11 @@ import pandas as pd
 from itertools import product
 import nltk
 import random
+import os
+from termcolor import colored
+import dotenv
+
+dotenv.load_dotenv()
 
 from make_quadratic_problems import make_quadratic_problem
 
@@ -11,8 +16,25 @@ def make_caesar_cipher(word_length):
     shift = random.randint(1, 25)
     return ''.join([chr((ord(c) + shift - 97) % 26 + 97) for c in word]), word
 
+def myHash(text:str):
+  '''
+  Hash with settable seed, to allow deterministic hashing between Python instances
+  '''
+  hash=0
+  for ch in text:
+    hash = ( hash*281  ^ ord(ch)*997) & 0xFFFFFFFF
+  return hash
+
 def cpc_problems(problem_maker, args):
-    return pd.DataFrame([[problem_maker(*setting)]+list(setting) for setting in product(*args.values())], columns=['problem']+list(args.keys()))
+    filename = 'cpc_pipeline/'+problem_maker.__name__ + str(myHash(str(args)))+'.csv'
+    if not os.path.exists(filename):
+        print(f"Creating {filename}...")
+        df = pd.DataFrame([[problem_maker(*setting)]+list(setting) for setting in product(*args.values())], columns=['problem']+list(args.keys()))
+        df.to_csv(filename, index=False)
+    else:
+        print(colored(f"Reading {filename}...", 'blue'))
+        df = pd.read_csv(filename)
+    return df
 
 def cpc_contexts():
     pass
