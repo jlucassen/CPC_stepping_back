@@ -49,19 +49,29 @@ def cpc_contexts(problem_df, row_solver):
     return problem_df
 
 def split_and_judge_switching(context_df, row_split_and_judge, chunk_size):
-    row_results = context_df['context'].apply(lambda row: executor.submit(row_split_and_judge, row, chunk_size))
-    row_results = row_results.apply(lambda x: x.result()) # list of (prefixes, processed_switching) for each context
-    new_df_list = []
-    switch_indices = [switching.index(1) if 1 in switching else len(switching) for _, switching in row_results]
-    for i, (prefixes, processed_switching) in enumerate(row_results):
-        row_info = context_df.iloc[i]
-        for j, (prefix, switch_val) in enumerate(list(zip(prefixes, processed_switching))):
-            new_df_list.append(list(row_info) + [j, prefix, switch_val, switch_indices[i]])
-    return pd.DataFrame(new_df_list, columns=list(context_df.columns)+['index', 'prefix', 'switch', 'switch_index'])
+    filename = 'cpc_pipeline/'+row_split_and_judge.__name__ + str(myHash(context_df.to_string()+str(chunk_size)))+'.csv'
+    if not os.path.exists(filename):
+        print(f"Creating {filename}...")
+        row_results = context_df['context'].apply(lambda row: executor.submit(row_split_and_judge, row, chunk_size))
+        row_results = row_results.apply(lambda x: x.result()) # list of (prefixes, processed_switching) for each context
+        new_df_list = []
+        switch_indices = [switching.index(1) if 1 in switching else len(switching) for _, switching in row_results]
+        for i, (prefixes, processed_switching) in enumerate(row_results):
+            row_info = context_df.iloc[i]
+            for j, (prefix, switch_val) in enumerate(list(zip(prefixes, processed_switching))):
+                new_df_list.append(list(row_info) + [j, prefix, switch_val, switch_indices[i]])
+        switching_df = pd.DataFrame(new_df_list, columns=list(context_df.columns)+['index', 'prefix', 'switch', 'switch_index'])
+        switching_df.to_csv(filename, index=False)
+    else:
+        print(colored(f"Reading {filename}...", 'blue'))
+        switching_df = pd.read_csv(filename)
+    return switching_df
 
-
-def judge_cpc():
-    pass
+def judge_cpc(switching_df, list_of_cpc_functions):
+    switching_df = switching_df.copy()
+    for cpc_function in list_of_cpc_functions:
+        switching_df[cpc_function.__name__] = switching_df[['context', 'prefix']].apply(lambda x: executor.submit(cpc_function, *x), axis=1)
+    return switching_df
 
 def do_analysis():
     pass
