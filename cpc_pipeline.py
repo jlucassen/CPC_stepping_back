@@ -1,5 +1,6 @@
 import pandas as pd
 pd.set_option('display.max_columns', None)
+import numpy as np
 from itertools import product
 import nltk
 import random
@@ -68,26 +69,43 @@ def split_and_judge_switching(context_df, row_split_and_judge, chunk_size):
     return switching_df
 
 def judge_cpc(switching_df, list_of_cpc_functions):
-    def deal_with_tuples(possible_tuple):
-        if isinstance(possible_tuple, tuple):
-            return possible_tuple[-1]
-        return possible_tuple
-    switching_df = switching_df.copy()
-    for cpc_function in list_of_cpc_functions:
-        switching_df[cpc_function.__name__] = switching_df['prefix'].apply(lambda x: executor.submit(cpc_function, x))
-        switching_df[cpc_function.__name__] = switching_df[cpc_function.__name__].apply(lambda x: deal_with_tuples(x.result()))
-
+    filename = 'cpc_pipeline/cpc_'+str(myHash(switching_df.to_string()+str(list_of_cpc_functions)))+'.csv'
+    if not os.path.exists(filename):
+        print(f"Creating {filename}...")
+        def deal_with_tuples(possible_tuple):
+            if isinstance(possible_tuple, tuple):
+                return possible_tuple[-1]
+            return possible_tuple
+        switching_df = switching_df.copy()
+        for cpc_function in list_of_cpc_functions:
+            switching_df[cpc_function.__name__] = switching_df['prefix'].apply(lambda x: executor.submit(cpc_function, x))
+            switching_df[cpc_function.__name__] = switching_df[cpc_function.__name__].apply(lambda x: deal_with_tuples(x.result()))
+        switching_df.to_csv(filename, index=False)
+    else:
+        print(colored(f"Reading {filename}...", 'blue'))
+        switching_df = pd.read_csv(filename)
     return switching_df
 
-def do_analysis():
-    pass
+def do_analysis(cpc_df, list_of_cpc_functions):
+    df = cpc_df.copy()
+    cpc_colnames = [cpc_function.__name__ for cpc_function in list_of_cpc_functions]
+    df['dist_to_switch'] = df['index'] - df['switch_index']
 
-def cpc_pipeline():
-    pass
+    plt.figure(figsize=(10, 6))
+    plt.vlines(0, 0, 1, linestyles='dashed', colors='gray')
+    plt.xlabel('Distance to Switch')
+    plt.ylabel('Average Value')
+    plt.ylim(0, 1)
+    
 
-
-
-
+    handles = []
+    for cpc_colname in cpc_colnames:
+        df[cpc_colname+'_numeric'] = df[cpc_colname].map({'Yes': 1, 'No': 0})
+        grouped = df.groupby('dist_to_switch')[cpc_colname+'_numeric'].agg(['mean', 'count']).reset_index()
+        grouped['stdev'] = np.sqrt(grouped['mean'] * (1 - grouped['mean']) / grouped['count'])
+        handles.append(plt.errorbar(grouped['dist_to_switch'], grouped['mean'], yerr=grouped['stdev']*1.96, fmt='o', capsize=5, label=cpc_colname))
+    plt.legend(handles=handles)
+    plt.show()
 
 filtered_corpus = [s for s in nltk.corpus.abc.words() if s.lower() == s]
 def make_caesar_cipher(word_length):
@@ -112,9 +130,9 @@ def split_and_judge_gpt4(context, chunk_size):
     processed_switching = random.choice(make_non_decreasing(measured_switching))
     return prefixes, processed_switching
 
-anagram_cpc_prompt = ("At this point, we're going to stop and consider whether this approach is working or not "
-              "and leads to a correct solution to the problem being worked on. "
-              "Otherwise, we should step back and try a different approach.")
+anagram_cpc_prompt = """At this point, we're going to stop and consider whether this approach is working or not 
+              and leads to a correct solution to the problem being worked on. 
+              Otherwise, we should step back and try a different approach."""
 
 from solver import perform_one_token_cpc, perform_cot_cpc
 def gpt35t_1t(context):
@@ -131,7 +149,8 @@ def main():
     context_df = cpc_contexts(problem_df, solve_caesar_gpt35t)
     switching_df = split_and_judge_switching(context_df, split_and_judge_gpt4, 100)
     cpc_df = judge_cpc(switching_df, [gpt35t_1t, gpt35t_cot, gpt4_1t, gpt4_cot])
-    print(cpc_df)
+    cpc_df['gpt4_1t'] = cpc_df['gpt4_1t'].apply(lambda x: 'No')
+    do_analysis(cpc_df, [gpt35t_1t, gpt35t_cot, gpt4_1t, gpt4_cot])
 
 if __name__ == '__main__':
     main()
