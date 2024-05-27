@@ -68,9 +68,15 @@ def split_and_judge_switching(context_df, row_split_and_judge, chunk_size):
     return switching_df
 
 def judge_cpc(switching_df, list_of_cpc_functions):
+    def deal_with_tuples(possible_tuple):
+        if isinstance(possible_tuple, tuple):
+            return possible_tuple[-1]
+        return possible_tuple
     switching_df = switching_df.copy()
     for cpc_function in list_of_cpc_functions:
-        switching_df[cpc_function.__name__] = switching_df[['context', 'prefix']].apply(lambda x: executor.submit(cpc_function, *x), axis=1)
+        switching_df[cpc_function.__name__] = switching_df['prefix'].apply(lambda x: executor.submit(cpc_function, x))
+        switching_df[cpc_function.__name__] = switching_df[cpc_function.__name__].apply(lambda x: deal_with_tuples(x.result()))
+
     return switching_df
 
 def do_analysis():
@@ -106,11 +112,26 @@ def split_and_judge_gpt4(context, chunk_size):
     processed_switching = random.choice(make_non_decreasing(measured_switching))
     return prefixes, processed_switching
 
+anagram_cpc_prompt = ("At this point, we're going to stop and consider whether this approach is working or not "
+              "and leads to a correct solution to the problem being worked on. "
+              "Otherwise, we should step back and try a different approach.")
+
+from solver import perform_one_token_cpc, perform_cot_cpc
+def gpt35t_1t(context):
+    return perform_one_token_cpc(gpt35t, context, prompt=anagram_cpc_prompt)
+def gpt35t_cot(context):
+    return perform_cot_cpc(gpt35t, context, prompt=anagram_cpc_prompt)
+def gpt4_1t(context):
+    return perform_one_token_cpc(gpt4, context, prompt=anagram_cpc_prompt)
+def gpt4_cot(context):
+    return perform_cot_cpc(gpt4, context, prompt=anagram_cpc_prompt)
+
 def main():
     problem_df = cpc_problems(make_caesar_cipher, {'word_length': [5, 6, 7]})
     context_df = cpc_contexts(problem_df, solve_caesar_gpt35t)
     switching_df = split_and_judge_switching(context_df, split_and_judge_gpt4, 100)
-    print(switching_df)
+    cpc_df = judge_cpc(switching_df, [gpt35t_1t, gpt35t_cot, gpt4_1t, gpt4_cot])
+    print(cpc_df)
 
 if __name__ == '__main__':
     main()
