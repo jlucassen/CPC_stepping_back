@@ -4,17 +4,15 @@ import nltk
 import random
 import os
 from termcolor import colored
-import dotenv
+from llm import LLM
+from tqdm import tqdm
 
-dotenv.load_dotenv()
+from concurrent.futures import ThreadPoolExecutor
 
-from make_quadratic_problems import make_quadratic_problem
+gpt35t = LLM("gpt-3.5-turbo")
+gpt4 = LLM("gpt-4")
 
-filtered_corpus = [s for s in nltk.corpus.abc.words() if s.lower() == s]
-def make_caesar_cipher(word_length):
-    word = random.choice([s for s in filtered_corpus if len(s) == word_length])
-    shift = random.randint(1, 25)
-    return ''.join([chr((ord(c) + shift - 97) % 26 + 97) for c in word]), word
+executor = ThreadPoolExecutor()
 
 def myHash(text:str):
   '''
@@ -36,8 +34,11 @@ def cpc_problems(problem_maker, args):
         df = pd.read_csv(filename)
     return df
 
-def cpc_contexts():
-    pass
+def cpc_contexts(problem_df, row_solver):
+    problem_df = problem_df.copy()
+    problem_df['context'] = problem_df['problem'].apply(lambda x: executor.submit(row_solver, x))
+    problem_df['context'] = problem_df['context'].apply(lambda x: x.result())
+    return problem_df
 
 def split_and_judge_switching():
     pass
@@ -51,8 +52,21 @@ def do_analysis():
 def cpc_pipeline():
     pass
 
+filtered_corpus = [s for s in nltk.corpus.abc.words() if s.lower() == s]
+def make_caesar_cipher(word_length):
+    word = random.choice([s for s in filtered_corpus if len(s) == word_length])
+    shift = random.randint(1, 25)
+    return ''.join([chr((ord(c) + shift - 97) % 26 + 97) for c in word])
+
+def solve_caesar_gpt35t(problem, prompt=None):
+    if prompt is None:
+        prompt = "This ciphertext is either an anagram or a Caesar cipher. First, assume it's an anagram, and try to unscramble it. If that doesn't work, assume it's a Caesar cipher and try to decrypt it. Ciphertext: {ciphertext}"
+    return gpt35t.chat_completion(prompt.format(ciphertext=problem))
+
 def main():
-    print(cpc_problems(make_caesar_cipher, {'word_length': [5, 6, 7]}))
+    problem_df = cpc_problems(make_caesar_cipher, {'word_length': [5, 6, 7]})
+    context_df = cpc_contexts(problem_df, solve_caesar_gpt35t)
+    print(context_df)
 
 if __name__ == '__main__':
     main()
