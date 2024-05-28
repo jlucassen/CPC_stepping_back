@@ -7,7 +7,7 @@ from typing import Tuple
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
-from tqdm import tqdm, trange
+from tqdm import tqdm
 
 from llm import LLM
 
@@ -471,5 +471,7 @@ experiment5_cot_ucb_35t.to_csv('results/experiment5/experiment5_cot_ucb_gpt35t.c
 experiment5_cot_ucb_4o.to_csv('results/experiment5/experiment5_cot_ucb_gpt4o.csv', index=False)
 
 # %%
-# How do the different models (35t, 4t, 4o) perform across four algorithms (intuitive, random, greedy, and UCB)
+# How do the different models (35t, 4t, 4o) perform across four algorithms (intuitive, random, greedy, and UCB),
+# across singletoken/CoT, and across different standard deviations?
 # To mitigate prompt sensitivity, three prompt variations are used
+
