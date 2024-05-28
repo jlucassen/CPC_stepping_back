@@ -14,7 +14,7 @@ class RateLimiter:
 
     def __init__(self, rate_per_minute, encoding):
         self.rate_per_minute = rate_per_minute
-        self.tpm = 300000
+        self.tpm = 300000/2
         self.last_time = 0
         self.lock = threading.Lock()
         self.encoding = encoding
@@ -39,7 +39,7 @@ class RateLimiter:
         if self.last_time_tpm == 0:
             self.last_time_tpm = time.time()
         else:
-            n_toks = len(self.encoding.encode(prompt))
+            n_toks = len(self.encoding.encode(str(prompt)))
             tick_duration_seconds = 60 * n_toks / self.tpm
             with self.lock:
                 # if we're too fast, sleep for the rest of the tick
@@ -61,7 +61,7 @@ class LLM:
     def chat_completion(self, prompt):
         if isinstance(prompt, str):
             prompt = [{"role": "user", "content": prompt}]
-        # self.rate_limiter.wait_for_tpm(prompt)
+        self.rate_limiter.wait_for_tpm(prompt)
         with self.rate_limiter:
             chat_completion = self.openai.chat.completions.create(
                 messages=prompt,
@@ -73,7 +73,7 @@ class LLM:
         """Use the logit bias feature to prompt a "Yes" or "No" completion"""
         if isinstance(prompt, str):
             prompt = [{"role": "user", "content": prompt}]
-        # self.rate_limiter.wait_for_tpm(prompt)
+        self.rate_limiter.wait_for_tpm(prompt)
         with self.rate_limiter:
             chat_completion = self.openai.chat.completions.create(
                 messages=prompt,
@@ -85,7 +85,7 @@ class LLM:
             return chat_completion.choices[0].message.content
 
     def chat_completion_false_start(self, prompt, false_start):
-        # self.rate_limiter.wait_for_tpm(prompt)
+        self.rate_limiter.wait_for_tpm(prompt)
         with self.rate_limiter:
             chat_completion = self.openai.chat.completions.create(
                 messages=[
@@ -110,7 +110,7 @@ class LLM:
                 raise ValueError(f"Choice \"{choice}\" is not encodable as a single token")
             choice_tokens += token
         logit_bias = {str(token): 100 for token in choice_tokens}
-        # self.rate_limiter.wait_for_tpm(prompt)
+        self.rate_limiter.wait_for_tpm(prompt)
         with self.rate_limiter:
             chat_completion = self.openai.chat.completions.create(
                 messages=[{"role": "user", "content": prompt}],

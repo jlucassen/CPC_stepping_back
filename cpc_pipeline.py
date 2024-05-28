@@ -2,19 +2,18 @@ import pandas as pd
 pd.set_option('display.max_columns', None)
 import numpy as np
 from itertools import product
-import nltk
-import random
 import os
 from termcolor import colored
-from llm import LLM
 import matplotlib.pyplot as plt
 
-from concurrent.futures import ThreadPoolExecutor
+import concurrent.futures
+executor = concurrent.futures.ThreadPoolExecutor()
 
+from llm import LLM
 gpt35t = LLM("gpt-3.5-turbo")
 gpt4 = LLM("gpt-4")
 
-executor = ThreadPoolExecutor()
+
 
 def myHash(text:str):
   '''
@@ -25,11 +24,14 @@ def myHash(text:str):
     hash = ( hash*281  ^ ord(ch)*997) & 0xFFFFFFFF
   return hash
 
-def cpc_problems(problem_maker, args):
-    filename = 'cpc_pipeline/'+problem_maker.__name__ + str(myHash(str(args)))+'.csv'
+def cpc_problems(problem_maker, args, n):
+    filename = 'cpc_pipeline/'+problem_maker.__name__ + str(myHash(str(args)))+f'_{n}.csv'
     if not os.path.exists(filename):
         print(f"Creating {filename}...")
-        df = pd.DataFrame([[problem_maker(*setting)]+list(setting) for setting in product(*args.values())], columns=['problem']+list(args.keys()))
+        df_list = []
+        for setting in product(*args.values()):
+            df_list += [[problem_maker(*setting)]+list(setting) for _ in range(n)]
+        df = pd.DataFrame(df_list, columns=['problem']+list(args.keys()))
         df.to_csv(filename, index=False)
     else:
         print(colored(f"Reading {filename}...", 'blue'))
@@ -69,7 +71,7 @@ def split_and_judge_switching(context_df, row_split_and_judge, chunk_size):
     return switching_df
 
 def judge_cpc(switching_df, list_of_cpc_functions):
-    filename = 'cpc_pipeline/cpc_'+str(myHash(switching_df.to_string()+str(list_of_cpc_functions)))+'.csv'
+    filename = 'cpc_pipeline/cpc_'+str(myHash(switching_df.to_string()+str([x.__name__ for x in list_of_cpc_functions])))+'.csv'
     if not os.path.exists(filename):
         print(f"Creating {filename}...")
         def deal_with_tuples(possible_tuple):
@@ -91,66 +93,18 @@ def do_analysis(cpc_df, list_of_cpc_functions):
     cpc_colnames = [cpc_function.__name__ for cpc_function in list_of_cpc_functions]
     df['dist_to_switch'] = df['index'] - df['switch_index']
 
-    plt.figure(figsize=(10, 6))
-    plt.vlines(0, 0, 1, linestyles='dashed', colors='gray')
-    plt.xlabel('Distance to Switch')
-    plt.ylabel('Average Value')
-    plt.ylim(0, 1)
-    
+    fig, axs = plt.subplots(1, len(cpc_colnames), figsize=(10*len(cpc_colnames), 6), sharey=True)
 
-    handles = []
-    for cpc_colname in cpc_colnames:
+    for i, cpc_colname in enumerate(cpc_colnames):
+        ax = axs[i] if len(cpc_colnames) > 1 else axs
+        ax.vlines(0, 0, 1, linestyles='dashed', colors='gray')
+        ax.set_xlabel('Distance to Switch')
+        ax.set_ylabel('Stepback Probability')
+        ax.set_ylim(0, 1)
+        ax.set_title(cpc_colname)
+
         df[cpc_colname+'_numeric'] = df[cpc_colname].map({'Yes': 1, 'No': 0})
         grouped = df.groupby('dist_to_switch')[cpc_colname+'_numeric'].agg(['mean', 'count']).reset_index()
         grouped['stdev'] = np.sqrt(grouped['mean'] * (1 - grouped['mean']) / grouped['count'])
-        handles.append(plt.errorbar(grouped['dist_to_switch'], grouped['mean'], yerr=grouped['stdev']*1.96, fmt='o', capsize=5, label=cpc_colname))
-    plt.legend(handles=handles)
+        ax.errorbar(grouped['dist_to_switch'], grouped['mean'], yerr=grouped['stdev']*1.96, fmt='o', capsize=5)
     plt.show()
-
-filtered_corpus = [s for s in nltk.corpus.abc.words() if s.lower() == s]
-def make_caesar_cipher(word_length):
-    word = random.choice([s for s in filtered_corpus if len(s) == word_length])
-    shift = random.randint(1, 25)
-    return ''.join([chr((ord(c) + shift - 97) % 26 + 97) for c in word])
-
-def solve_caesar_gpt35t(problem, prompt=None):
-    if prompt is None:
-        prompt = "This ciphertext is either an anagram or a Caesar cipher. First, assume it's an anagram, and try to unscramble it. If that doesn't work, assume it's a Caesar cipher and try to decrypt it. Ciphertext: {ciphertext}"
-    return gpt35t.chat_completion(prompt.format(ciphertext=problem))
-
-from new_switch_utils import make_non_decreasing
-
-anagram_switching_prompt = "This is a reasoning transcript of an agent trying to decipher some ciphertext. The agent will start treating the ciphertext as an anagram and attempting to unscramble it. The agent may then give up and treat the ciphertext as a Caesar cipher instead. First you will be shown the full transcript, then just a prefix of the transcript. By the end of the prefix transcript, has the agent switched from treating the ciphertext as an anagram to treating it as a Caesar cipher yet?"
-def judge_anagram_switching(context, prefix):
-        return 1 if gpt4.yesno_completion(anagram_switching_prompt+'\n\nFULL TRANSCRIPT:\n'+context+'\n\nPREFIX TRANSCRIPT:\n'+prefix+"\n\nANSWER:\n") == 'Yes' else 0
-
-def split_and_judge_gpt4(context, chunk_size):
-    prefixes = [context[:pref_end] for pref_end in range(chunk_size, len(context)+chunk_size, chunk_size)]
-    measured_switching = [judge_anagram_switching(context, prefix) for prefix in prefixes]
-    processed_switching = random.choice(make_non_decreasing(measured_switching))
-    return prefixes, processed_switching
-
-anagram_cpc_prompt = """At this point, we're going to stop and consider whether this approach is working or not 
-              and leads to a correct solution to the problem being worked on. 
-              Otherwise, we should step back and try a different approach."""
-
-from solver import perform_one_token_cpc, perform_cot_cpc
-def gpt35t_1t(context):
-    return perform_one_token_cpc(gpt35t, context, prompt=anagram_cpc_prompt)
-def gpt35t_cot(context):
-    return perform_cot_cpc(gpt35t, context, prompt=anagram_cpc_prompt)
-def gpt4_1t(context):
-    return perform_one_token_cpc(gpt4, context, prompt=anagram_cpc_prompt)
-def gpt4_cot(context):
-    return perform_cot_cpc(gpt4, context, prompt=anagram_cpc_prompt)
-
-def main():
-    problem_df = cpc_problems(make_caesar_cipher, {'word_length': [5, 6, 7]})
-    context_df = cpc_contexts(problem_df, solve_caesar_gpt35t)
-    switching_df = split_and_judge_switching(context_df, split_and_judge_gpt4, 100)
-    cpc_df = judge_cpc(switching_df, [gpt35t_1t, gpt35t_cot, gpt4_1t, gpt4_cot])
-    cpc_df['gpt4_1t'] = cpc_df['gpt4_1t'].apply(lambda x: 'No')
-    do_analysis(cpc_df, [gpt35t_1t, gpt35t_cot, gpt4_1t, gpt4_cot])
-
-if __name__ == '__main__':
-    main()
