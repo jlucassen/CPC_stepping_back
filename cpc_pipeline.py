@@ -79,10 +79,6 @@ def judge_cpc(switching_df, list_of_cpc_functions, radius_left = -1, radius_righ
     filename = 'cpc_pipeline/cpc_'+str(myHash(str(switching_df)+str([x.__name__ for x in list_of_cpc_functions])+str(radius_left)+str(radius_right)))+'.csv'
     if not os.path.exists(filename):
         print(f"Creating {filename}...")
-        def deal_with_tuples(possible_tuple):
-            if isinstance(possible_tuple, tuple):
-                return possible_tuple[-1]
-            return possible_tuple
         switching_df = switching_df.copy()
         switching_df['dist_to_switch'] = switching_df['index'] - switching_df['switch_index']
         if radius_left > -1:
@@ -91,7 +87,13 @@ def judge_cpc(switching_df, list_of_cpc_functions, radius_left = -1, radius_righ
             switching_df = switching_df.loc[switching_df['dist_to_switch'] <= radius_right] # throw out all entries further right than radius_right
         for cpc_function in list_of_cpc_functions:
             switching_df[cpc_function.__name__] = switching_df['prefix'].apply(lambda x: executor.submit(cpc_function, x))
-            switching_df[cpc_function.__name__] = switching_df[cpc_function.__name__].apply(lambda x: deal_with_tuples(x.result()))
+            tuple_holder = switching_df[cpc_function.__name__].apply(lambda x: x.result())
+            if isinstance(tuple_holder[0], tuple):
+                switching_df[cpc_function.__name__] = tuple_holder.apply(lambda x: x[-1])
+                for i in range(len(tuple_holder[0]-1)):
+                    switching_df[cpc_function.__name__ + '_'+str(i)] = tuple_holder.apply(lambda x: x[i])
+            else:
+                switching_df[cpc_function.__name__] = tuple_holder
         switching_df.to_csv(filename, index=False)
     else:
         print(colored(f"Reading {filename}...", 'blue'))
