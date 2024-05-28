@@ -38,6 +38,7 @@ class LLM:
         dotenv.load_dotenv()
 
         self.model_name = model_name
+        self.supports_json = model_name not in ['gpt-4', 'gpt-3.5']
         self.openai = openai or OpenAI()
         # https://platform.openai.com/docs/guides/rate-limits/usage-tiers?context=tier-three
         self.rate_limiter = rate_limiter or RateLimiter(3500)
@@ -49,7 +50,7 @@ class LLM:
             chat_completion = self.openai.chat.completions.create(
                 messages=prompt,
                 model=self.model_name,
-                response_format={"type": "json_object"} if json else None
+                response_format={"type": "json_object"} if json and self.supports_json else None
             )
             return chat_completion.choices[0].message.content
 
