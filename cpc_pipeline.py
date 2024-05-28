@@ -36,7 +36,7 @@ def cpc_problems(problem_maker, args, n, unwrap_colnames=['problem']):
             df = pd.DataFrame(df_list, columns=['problem']+list(args.keys()))
         else:
             df_list_unwrapped = [list(sublist[0]) + sublist[1:] for sublist in df_list] # assume problem_maker output is a tuple
-            df = pd.DataFrame(df_list, columns=unwrap_colnames+list(args.keys()))
+            df = pd.DataFrame(df_list_unwrapped, columns=unwrap_colnames+list(args.keys()))
         df.to_csv(filename, index=False)
     else:
         print(colored(f"Reading {filename}...", 'blue'))
