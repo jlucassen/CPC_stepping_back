@@ -30,7 +30,8 @@ def cpc_problems(problem_maker, args, n):
         print(f"Creating {filename}...")
         df_list = []
         for setting in product(*args.values()):
-            df_list += [[problem_maker(*setting)]+list(setting) for _ in range(n)]
+            for _ in range(n):
+                df_list += [[problem_maker(*setting)]+list(setting) ]
         df = pd.DataFrame(df_list, columns=['problem']+list(args.keys()))
         df.to_csv(filename, index=False)
     else:
