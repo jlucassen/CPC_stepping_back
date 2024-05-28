@@ -12,10 +12,13 @@ class RateLimiter:
     Guaranteed not to exceed the rate_per_minute. Will probably be slightly slower than the rate_per_minute.
     """
 
-    def __init__(self, rate_per_minute):
+    def __init__(self, rate_per_minute, encoding):
         self.rate_per_minute = rate_per_minute
+        self.tpm = 300000
         self.last_time = 0
         self.lock = threading.Lock()
+        self.encoding = encoding
+        self.last_time_tpm = 0
 
     def __enter__(self):
         if self.last_time == 0:
@@ -32,6 +35,19 @@ class RateLimiter:
     def __exit__(self, exc_type, exc_val, exc_tb):
         pass
 
+    def wait_for_tpm(self, prompt):
+        if self.last_time_tpm == 0:
+            self.last_time_tpm = time.time()
+        else:
+            n_toks = len(self.encoding.encode(prompt))
+            tick_duration_seconds = 60 * n_toks / self.tpm
+            with self.lock:
+                # if we're too fast, sleep for the rest of the tick
+                time_since_last = time.time() - self.last_time_tpm
+                if time_since_last < tick_duration_seconds:
+                    time.sleep(tick_duration_seconds - time_since_last)
+                self.last_time_tpm = time.time()
+
 
 class LLM:
     def __init__(self, model_name, openai: OpenAI = None, rate_limiter: RateLimiter = None):
@@ -39,12 +55,13 @@ class LLM:
         self.openai = openai or OpenAI()
         self.encoding = tiktoken.encoding_for_model(self.model_name)
         # https://platform.openai.com/docs/guides/rate-limits/usage-tiers?context=tier-three
-        self.rate_limiter = rate_limiter or RateLimiter(3500)
+        self.rate_limiter = RateLimiter(3500, self.encoding)
         self.yesno = {self.encoding.encode("Yes")[0]: 100, self.encoding.encode("No")[0]: 100}
 
     def chat_completion(self, prompt):
         if isinstance(prompt, str):
             prompt = [{"role": "user", "content": prompt}]
+        # self.rate_limiter.wait_for_tpm(prompt)
         with self.rate_limiter:
             chat_completion = self.openai.chat.completions.create(
                 messages=prompt,
@@ -56,6 +73,7 @@ class LLM:
         """Use the logit bias feature to prompt a "Yes" or "No" completion"""
         if isinstance(prompt, str):
             prompt = [{"role": "user", "content": prompt}]
+        # self.rate_limiter.wait_for_tpm(prompt)
         with self.rate_limiter:
             chat_completion = self.openai.chat.completions.create(
                 messages=prompt,
@@ -67,19 +85,21 @@ class LLM:
             return chat_completion.choices[0].message.content
 
     def chat_completion_false_start(self, prompt, false_start):
-        chat_completion = self.openai.chat.completions.create(
-            messages=[
-                {
-                    "role": "user",
-                    "content": prompt,
-                },
-                {
-                    "role": "assistant",
-                    "content": false_start,
-                }
-            ],
-            model=self.model_name,
-        )
+        # self.rate_limiter.wait_for_tpm(prompt)
+        with self.rate_limiter:
+            chat_completion = self.openai.chat.completions.create(
+                messages=[
+                    {
+                        "role": "user",
+                        "content": prompt,
+                    },
+                    {
+                        "role": "assistant",
+                        "content": false_start,
+                    }
+                ],
+                model=self.model_name,
+            )
         return chat_completion.choices[0].message.content
     
     def choice_completion(self, prompt, choices):
@@ -90,6 +110,7 @@ class LLM:
                 raise ValueError(f"Choice \"{choice}\" is not encodable as a single token")
             choice_tokens += token
         logit_bias = {str(token): 100 for token in choice_tokens}
+        # self.rate_limiter.wait_for_tpm(prompt)
         with self.rate_limiter:
             chat_completion = self.openai.chat.completions.create(
                 messages=[{"role": "user", "content": prompt}],
