@@ -90,7 +90,7 @@ def judge_cpc(switching_df, list_of_cpc_functions, radius_left = -1, radius_righ
             tuple_holder = switching_df[cpc_function.__name__].apply(lambda x: x.result())
             if isinstance(tuple_holder[0], tuple):
                 switching_df[cpc_function.__name__] = tuple_holder.apply(lambda x: x[-1])
-                for i in range(len(tuple_holder[0]-1)):
+                for i in range(len(tuple_holder[0])-1):
                     switching_df[cpc_function.__name__ + '_'+str(i)] = tuple_holder.apply(lambda x: x[i])
             else:
                 switching_df[cpc_function.__name__] = tuple_holder
