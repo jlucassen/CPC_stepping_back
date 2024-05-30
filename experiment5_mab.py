@@ -208,7 +208,7 @@ def show_game(df, index=None):
     else:
         row = df.iloc[index]
     game_to_show = pd.DataFrame(json.loads(row['game']))
-    print(chr(game_to_show.iloc[-1]['choice'] + ord('A')), game_to_show['bandits'])
+    print('bandits', game_to_show.iloc[0]['bandits'])
     game_json = game_to_show.iloc[-1]['history']
     print('accuracy', row['accuracy'])
     print(json.dumps(json.loads(game_json), indent=2))
@@ -338,6 +338,7 @@ experiment5_cot_4.to_csv('results/experiment5/experiment5_cot_summarized_remaini
 experiment5_cot_4o.to_csv('results/experiment5/experiment5_cot_summarized_remainingturns_gpt4o.csv', index=False)
 experiment5_cot_4t.to_csv('results/experiment5/experiment5_cot_summarized_remainingturns_gpt4t.csv', index=False)
 
+
 # %% Let's try the single-token edition
 class SingleTokenBanditPrompterSummarizationRemainingTurns(Prompter):
     def prompt(self, history, remaining_turns=0):
@@ -371,7 +372,7 @@ experiment5_singletoken_4 = experiment5(SingleTokenBanditPrompterSummarizationRe
 experiment5_singletoken_35t.to_csv('results/experiment5/experiment5_singletoken_summarized_remainingturns_gpt35t.csv',
                                    index=False)
 experiment5_singletoken_4o.to_csv('results/experiment5/experiment5_singletoken_summarized_remainingturns_gpt4o.csv',
-                                 index=False)
+                                  index=False)
 
 
 # %% Curious that for CoT, 35t is beating 4. This seems to be because 35t is more exploitative
@@ -439,7 +440,7 @@ class CoTBanditPrompterUCB(Prompter):
             {
                 'role': 'user',
                 'content': """\nYou are playing a multi-armed-bandit game with three bandits. Each arm returns from a gaussian distribution with unknown mean and standard deviation. It's optimal therefore to use the Upper Confidence Bound algorithm.\n"""
-                + UCB_explanation + """\nRespond in json like this:
+                           + UCB_explanation + """\nRespond in json like this:
 {
     "thoughts": <string. Here you will think step by step to using the UCB algorithm. After the exploration phase, you must calculate a UCB value for each arm here in this "thoughts" block.>
     "choice": "A", "B" or "C"
@@ -448,7 +449,8 @@ class CoTBanditPrompterUCB(Prompter):
         ]
         summary = {'role': 'user', 'content': history_summary_with_remaining_turns(history, remaining_turns)}
         history.append(summary)
-        prompt = history[:1] + [summary] + [{'role': 'user', 'content': 'Which bandit do you choose? Begin your answer with a left curly brace ({):'}]
+        prompt = history[:1] + [summary] + [
+            {'role': 'user', 'content': 'Which bandit do you choose? Begin your answer with a left curly brace ({):'}]
         result = self.llm.chat_completion(prompt, json=True)
         history.append({
             'role': 'assistant',
@@ -470,8 +472,141 @@ experiment5_cot_ucb_4o = experiment5(CoTBanditPrompterUCB(gpt4o))
 experiment5_cot_ucb_35t.to_csv('results/experiment5/experiment5_cot_ucb_gpt35t.csv', index=False)
 experiment5_cot_ucb_4o.to_csv('results/experiment5/experiment5_cot_ucb_gpt4o.csv', index=False)
 
+
 # %%
 # How do the different models (35t, 4t, 4o) perform across four algorithms (intuitive, random, greedy, and UCB),
 # across singletoken/CoT, and across different standard deviations?
-# To mitigate prompt sensitivity, three prompt variations are used
+# To mitigate prompt sensitivity, a random prompt is chosen for each completion.
 
+
+class BanditChainOfThoughtPrompter(Prompter):
+    def __init__(self, llm, prompts_file):
+        super().__init__(llm)
+        self.prompts = json.load(open(prompts_file))
+
+    def prompt(self, history, remaining_turns=None):
+        summary = {'role': 'user', 'content': history_summary_with_remaining_turns(history, remaining_turns)}
+        history.append(summary)
+        prompt = (
+                [{'role': 'user', 'content': random.choice(self.prompts)}] +
+                [summary] +
+                [{'role': 'user',
+                  'content': 'Which bandit do you choose? Answer in json:'}])
+        result = self.llm.chat_completion(prompt, json=True)
+        history.append({'role': 'assistant', 'content': result})
+        try:
+            result_json = json.loads(result)
+            choice = ord(result_json['choice']) - ord('A')
+        except (json.JSONDecodeError, KeyError, TypeError) as e:
+            history.append({'role': 'user', 'content': f"'''{result}'''\n\n{str(e)}"})
+            return self.prompt(history, remaining_turns)
+        return choice, history
+
+
+class BanditSingleTokenPrompter(Prompter):
+    def __init__(self, llm, prompts_file):
+        super().__init__(llm)
+        self.prompts = json.load(open(prompts_file))
+
+    def prompt(self, history, remaining_turns=None):
+        summary = {'role': 'user', 'content': history_summary_with_remaining_turns(history, remaining_turns)}
+        history.append(summary)
+        prompt = (
+                [{'role': 'user', 'content': random.choice(self.prompts)}] +
+                [summary] +
+                [{'role': 'user', 'content': 'Which bandit do you choose? Say A, B, or C:'}])
+        result = self.llm.single_token_completion(prompt, {'32': 100, '33': 100, '34': 100})
+        history.append({'role': 'assistant', 'content': f'{result}'})
+        choice = ord(result) - ord('A')
+        return choice, history
+
+
+def bandits_for_stddev(standard_deviation):
+    return random.sample([
+        GaussianBandit(50, standard_deviation),
+        GaussianBandit(100, standard_deviation),
+        GaussianBandit(150, standard_deviation)
+    ], 3)
+
+
+# Define a function to run the experiment. Runs for all three models, all four algorithms, both prompt types, and a range of standard deviations.
+# Outputs a DataFrame that includes columns 'model', 'algorithm', 'prompt_type', 'standard_deviation', 'accuracy' in
+# addition to the usual columns.
+# Note the prompts are in directory "prompts/experiment5" and are named "{algorithm}_{cot|singletoken}.json" for
+# algorithm in ['random', 'intuitive', 'greedy', 'ucb'].
+def experiment5_all(models=None, prompters=None, algorithms=None, std_devs=None, num_turns=12):
+    if models is None:
+        models = [gpt35turbo, gpt4t, gpt4o]
+    if prompters is None:
+        prompters = [BanditChainOfThoughtPrompter, BanditSingleTokenPrompter]
+    if algorithms is None:
+        algorithms = ['random', 'intuitive', 'greedy', 'ucb']
+    if std_devs is None:
+        std_devs = [20, 30, 35, 40, 50]
+    results = []
+
+    with futures.ThreadPoolExecutor() as executor:
+        game_futures = []
+        for model in models:
+            for prompter_class in prompters:
+                for algorithm in algorithms:
+                    for standard_deviation in std_devs:
+                        prompt_type = 'cot' if prompter_class == BanditChainOfThoughtPrompter else 'singletoken'
+                        prompter = prompter_class(model, f'prompts/experiment5/{algorithm}_{prompt_type}.json')
+                        pbar = tqdm(total=num_turns,
+                                    desc=f"{model.model_name} {algorithm} {prompt_type} {standard_deviation}")
+                        bandits = bandits_for_stddev(standard_deviation)
+                        game_future = executor.submit(game, prompter, bandits, num_turns, pbar)
+                        game_futures.append({
+                            'future': game_future,
+                            'prompt_type': prompt_type,
+                            'algorithm': algorithm,
+                            'model': model.model_name,
+                            'bandits': bandits,
+                            'standard_deviation': standard_deviation
+                        })
+
+        futures.wait(gf['future'] for gf in game_futures)
+        for game_future in game_futures:
+            g = game_future['future'].result()
+            bandits = game_future['bandits']
+            accuracy = sum(g['choice'] == bandits.index(max(bandits))) / num_turns
+            results.append({
+                'bandits': bandits,
+                'model': game_future['model'],
+                'algorithm': game_future['algorithm'],
+                'prompt_type': game_future['prompt_type'],
+                'standard_deviation': game_future['standard_deviation'],
+                'accuracy': accuracy,
+                'game': json.dumps(g.to_dict(), default=vars)
+            })
+
+    return pd.DataFrame(results)
+
+
+def chart_results(results: pd.DataFrame):
+    g = sns.FacetGrid(results, row='algorithm', col='prompt_type', col_order=['singletoken', 'cot'], hue='model',
+                      height=5, aspect=1.25)
+    g.map(sns.regplot, 'standard_deviation', 'accuracy')
+    g.add_legend()
+    g.set_axis_labels('Standard Deviation', 'Accuracy')
+    g.set(ylim=(0, 1.05))
+    plt.show()
+
+
+# %%
+test_result = experiment5_all()
+show_game(test_result)
+chart_results(test_result)
+
+# %%
+much_more = experiment5_all(models=[gpt4, gpt4o, gpt35turbo, gpt4t], std_devs=range(59, 70, 2))
+chart_results(much_more)
+test_result = pd.concat([test_result, much_more])
+chart_results(test_result)
+show_game(test_result, 717 + 70)
+
+# Slim down the data to save to disk
+# remove the content of the "game" column, replacing it with a note saying it was removed for disk space reasons
+test_result['game'] = 'game data removed to save disk size'
+test_result.to_csv('results/experiment5/experiment5_all.csv', index=False)

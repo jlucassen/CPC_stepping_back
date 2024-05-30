@@ -1,0 +1,5 @@
+[
+  "In a 3-armed bandit game with bandits A, B, and C, choose each bandit with equal probability.",
+  "Select uniformly at random between bandits A, B, and C in this multi-armed bandit scenario.",
+  "Make a random choice with equal likelihood from options A, B, and C for this bandit problem."
+]
