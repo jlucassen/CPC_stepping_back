@@ -45,6 +45,12 @@ else:
         formula_contexts = [json.loads(line) for line in tqdm(readfile.readlines())]  
 
 spliced_contexts = [factor[:100] + formula[:100] for factor, formula in zip(factoring_contexts, formula_contexts)]
+
+# %% print some sample spliced context
+
+for context in spliced_contexts[:5]:
+    print(colored(context[:100], 'red')+colored(context[100:], 'blue'))
+
 # %% set up testing
 def do_test(measure_func, prefix_freq, n_contexts, post_func = None, contexts=spliced_contexts):
     avg_measured = []
@@ -69,14 +75,16 @@ def do_test(measure_func, prefix_freq, n_contexts, post_func = None, contexts=sp
     avg_score = np.mean(avg_score, axis=0)
     return avg_measured, avg_truth, avg_score
 
-def dummy1(context, prefix): # 100%
+def no_then_yes(context, prefix): # 100%
     return not any(prefix in fc for fc in factoring_contexts)
-def dummy2(context, prefix): # 50%
+def always_no(context, prefix): # 50%
     return any(prefix in fc for fc in formula_contexts)
-def dummy3(context, prefix): # 50%
+def always_yes(context, prefix): # 50%
     return any(prefix in fc for fc in spliced_contexts)
+def yes_then_no(context, prefix): # 100%
+    return any(prefix in fc for fc in factoring_contexts)
 
-for measure_func in [dummy1, dummy2, dummy3]:
+for measure_func in [no_then_yes, always_no, always_yes, yes_then_no]:
     m, t, s = do_test(measure_func, 25, 2)
     print(measure_func.__name__, np.mean(s))
     plt.plot(m, label='measured', marker='o')
@@ -97,17 +105,17 @@ gpt4o = LLM("gpt-4o")
 
 original_prompt = "This is a reasoning transcript of an agent trying to find the roots of a quadratic equation. The agent will start by attempting to factor the quadratic, and may switch over to using the quadratic formula instead. First you will be shown the full transcript, then just a prefix of the transcript. By the end of the prefix transcript, has the agent switched from factoring to using the quadratic formula yet?"
 
-def original_35t(context, prefix):
+def with_context_35t(context, prefix):
     return 1 if gpt35t.yesno_completion(original_prompt+'\n\nFULL TRANSCRIPT:\n'+context+'\n\nPREFIX TRANSCRIPT:\n'+prefix+"\n\nANSWER:\n") == 'Yes' else 0
-def original_4(context, prefix):
+def with_context_4(context, prefix):
     return 1 if gpt4.yesno_completion(original_prompt+'\n\nFULL TRANSCRIPT:\n'+context+'\n\nPREFIX TRANSCRIPT:\n'+prefix+"\n\nANSWER:\n") == 'Yes' else 0
-def original_4t(context, prefix):
+def with_context_4t(context, prefix):
     return 1 if gpt4t.yesno_completion(original_prompt+'\n\nFULL TRANSCRIPT:\n'+context+'\n\nPREFIX TRANSCRIPT:\n'+prefix+"\n\nANSWER:\n") == 'Yes' else 0
-def original_4o(context, prefix):
+def with_context_4o(context, prefix):
     return 1 if gpt4o.yesno_completion(original_prompt+'\n\nFULL TRANSCRIPT:\n'+context+'\n\nPREFIX TRANSCRIPT:\n'+prefix+"\n\nANSWER:\n") == 'Yes' else 0
 
 # %% run
-for measure_func in [original_4o]:#original_35t, original_4, original_4t, ]:
+for measure_func in [with_context_35t, with_context_4, with_context_4t, with_context_4o]:
     n=25
     m, t, s = do_test(measure_func, 25, n)
     saving[measure_func.__name__] = (m, t, s, n)
@@ -164,7 +172,7 @@ def make_non_decreasing(arr):
     return out
 
 # %% run
-for measure_func in [original_4o]:#35t, original_4, original_4t]:
+for measure_func in [with_context_35t, with_context_4, with_context_4t, with_context_4o]:
     for post_func in [make_non_decreasing]:
         n=25
         m, t, s = do_test(measure_func, 25, n, post_func=post_func)
@@ -184,18 +192,18 @@ def just_prefix_4(context, prefix):
     return gpt4.yesno_completion(just_prefix_prompt+'\n\nPREFIX TRANSCRIPT:\n'+prefix+"\n\nANSWER:\n") == 'Yes'
         
 min_prompt_v1 = "By the end of this transcript, has the agent switched from factoring to using the quadratic formula yet?"
-def min_4_v1(context, prefix):
+def just_prefix_4_min1(context, prefix):
     return gpt4.yesno_completion(min_prompt_v1+'\n\nTRANSCRIPT:\n'+prefix+"\n\nANSWER:\n") == 'Yes'
 
 min_prompt_v2 = "By the end of this transcript, have I switched from factoring to using the quadratic formula yet?"
-def min_4_v2(context, prefix):
+def just_prefix_4_min2(context, prefix):
     return gpt4.yesno_completion(min_prompt_v2+'\n\nTRANSCRIPT:\n'+prefix+"\n\nANSWER:\n") == 'Yes'
 
 minnest_prompt = "Have I switched from factoring to using the quadratic formula yet?"
-def minnest_4(context, prefix):
+def just_prefix_4_min3(context, prefix):
     return gpt4.yesno_completion(minnest_prompt+'\n\n'+prefix+"\n\nANSWER:\n") == 'Yes'
 
-for measure_func in [just_prefix_4, min_4_v1, min_4_v2, minnest_4]:
+for measure_func in [just_prefix_4, just_prefix_4_min1, just_prefix_4_min2, just_prefix_4_min3]:
     for post_func in [None, make_non_decreasing]:
         n=25
         m, t, s = do_test(measure_func, 25, n, post_func=post_func)
@@ -222,7 +230,7 @@ with open('data/quadratic_contexts_3_ex1/quadratic_ex1_contexts_5_True.jsonl') a
 prefix_res = 50
 for context in switch_contexts[5:10]:
     prefixes = [context[:x] for x in range(prefix_res, len(context)+prefix_res, prefix_res)]
-    measured = [original_4(context, prefix) for prefix in prefixes]
+    measured = [with_context_4(context, prefix) for prefix in prefixes]
     measured = make_non_decreasing(measured)[0]
     switch_index = len(context) if 1 not in measured else measured.index(1)*prefix_res
     print(f"{colored(context[:switch_index], 'red')}{colored(context[switch_index:], 'blue')}")
@@ -230,7 +238,7 @@ for context in switch_contexts[5:10]:
 
 for context in no_switch_contexts[5:10]:
     prefixes = [context[:x] for x in range(prefix_res, len(context)+prefix_res, prefix_res)]
-    measured = [original_4(context, prefix) for prefix in prefixes]
+    measured = [with_context_4(context, prefix) for prefix in prefixes]
     measured = make_non_decreasing(measured)[0]
     switch_index = len(context) if 1 not in measured else measured.index(1)*prefix_res
     print(f"{colored(context[:switch_index], 'red')}{colored(context[switch_index:], 'blue')}")
