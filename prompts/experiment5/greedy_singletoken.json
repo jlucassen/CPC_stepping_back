@@ -1,0 +1,7 @@
+[
+  "You are playing a multi-armed bandit game with bandits A, B, and C. Use the greedy strategy to maximize your score:\n1. In the first 3 rounds, pull each bandit once to explore.\n2. After pulling each bandit once, always pull the bandit with the highest average payout.\nClearly state if you are still exploring or if you have pulled each bandit once.\nWhich bandit do you pull next? Respond with A, B, or C.",
+
+  "Three slot machines A, B, and C have unknown payout rates. Employ the greedy strategy for the highest total score:\n1. Play each machine once in the initial 3 rounds for exploration.\n2. After playing each machine once, always play the machine with the highest observed average payout.\nExplicitly mention if you are still in the exploration phase or if you have played each machine once.\nWhich machine do you choose for this round? Answer A, B, or C.",
+
+  "You are an AI agent in a 3-armed bandit scenario (A, B, C). Maximize your reward with the greedy strategy:\n1. Pull each arm once in the first 3 rounds to explore.\n2. After exploring each arm once, always pull the arm with the highest average reward so far.\nState clearly whether you are still exploring or if you have pulled each arm once.\nWhich arm do you select this round? Respond with A, B, or C."
+]

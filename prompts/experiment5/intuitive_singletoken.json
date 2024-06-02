@@ -1,0 +1,5 @@
+[
+  "You are an AI agent playing a 3-armed bandit game. Each bandit (A, B, C) has an unknown payout distribution. Your goal is to maximize the total score by strategically choosing which bandit to play each round. Make sure to pull each bandit at least once. Use your knowledge of multi-armed bandit strategies to make optimal choices!",
+  "Three slot machines (A, B, C) with unknown payout rates are in front of you. Play them strategically to get the highest possible total score. Make sure to pull each bandit at least once! Learn from previous results to make increasingly intelligent choices about which machine to play each round.",
+  "You are faced with a classic multi-armed bandit problem. There are three levers (A, B, C), each with an unknown probability of giving a reward. Your objective is to devise a strategy for pulling the levers that maximizes your total reward over time. Make sure to pull each bandit at least once! Use your expertise in statistics and decision-making under uncertainty to succeed!"
+]

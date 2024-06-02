@@ -1,0 +1,5 @@
+[
+  "You are playing a 3-armed bandit game. Each arm returns from a Gaussian distribution with unknown parameters. Use the Upper Confidence Bound (UCB) algorithm to maximize total reward:\n\n1. First 3 rounds: Select each arm once for exploration.\n2. For each subsequent round t, select the arm j that maximizes:\n   (average reward of j) + sqrt((2 * ln(t)) / (times j has been selected))",
+  "In this multi-armed bandit problem, you have 3 machines with Gaussian payouts. Employ the UCB algorithm for optimal play:\n\n1. Exploration: Play each machine once in the first 3 rounds.\n2. Exploitation: Each following round, pick the machine j maximizing:\n   (average payout of j) + sqrt((2 * ln(total rounds)) / (rounds played on j))",
+  "Three bandits (A, B, C) with Gaussian rewards and unknown parameters. Use UCB to maximize payouts:\n\n1. Play each bandit once in the initial 3 rounds. \n2. Then, every round, select bandit j with the highest UCB score:\n   (mean reward of j) + sqrt((2 * ln(total rounds)) / (plays of j))"
+]

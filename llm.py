@@ -1,6 +1,7 @@
 import threading
 import time
 
+import dotenv
 from openai import OpenAI
 
 
@@ -34,23 +35,34 @@ class RateLimiter:
 
 class LLM:
     def __init__(self, model_name, openai: OpenAI = None, rate_limiter: RateLimiter = None):
+        dotenv.load_dotenv()
+
         self.model_name = model_name
+        self.supports_json = model_name not in ['gpt-4', 'gpt-3.5']
         self.openai = openai or OpenAI()
         # https://platform.openai.com/docs/guides/rate-limits/usage-tiers?context=tier-three
         self.rate_limiter = rate_limiter or RateLimiter(3500)
 
-    def chat_completion(self, prompt):
+    def chat_completion(self, prompt, json=False):
         if isinstance(prompt, str):
             prompt = [{"role": "user", "content": prompt}]
         with self.rate_limiter:
             chat_completion = self.openai.chat.completions.create(
                 messages=prompt,
                 model=self.model_name,
+                response_format={"type": "json_object"} if json and self.supports_json else None
             )
             return chat_completion.choices[0].message.content
 
     def yesno_completion(self, prompt):
         """Use the logit bias feature to prompt a "Yes" or "No" completion"""
+        # Force Yes (9642) or No (2822)
+        return self.single_token_completion(prompt, {"9642": 100, "2822": 100})
+
+    def single_token_completion(self, prompt, logit_bias=None):
+        """Use the logit bias feature to force an 'A' or 'B' completion"""
+        if logit_bias is None:
+            logit_bias = {}
         if isinstance(prompt, str):
             prompt = [{"role": "user", "content": prompt}]
         with self.rate_limiter:
@@ -58,7 +70,6 @@ class LLM:
                 messages=prompt,
                 model=self.model_name,
                 max_tokens=1,
-                # Force Yes (9642) or No (2822)
-                logit_bias={"9642": 100, "2822": 100}
+                logit_bias=logit_bias
             )
             return chat_completion.choices[0].message.content

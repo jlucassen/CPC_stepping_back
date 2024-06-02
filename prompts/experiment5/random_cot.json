@@ -1,0 +1,5 @@
+[
+  "You are playing a 3-armed bandit game with bandits A, B, and C. Choose each bandit with equal probability. Output your choice in this JSON format:\n{\n    \"thoughts\": \"Choosing randomly with equal probability.\",\n    \"choice\": <\"A\", \"B\", or \"C\">\n}",
+  "In this 3-armed bandit game, select bandits A, B, and C uniformly at random. Provide your choice as:\n{\n    \"thoughts\": \"Selecting a bandit uniformly at random.\",\n    \"choice\": <\"A\", \"B\", or \"C\">  \n}",
+  "For this multi-armed bandit problem with options A, B, and C, make your choice randomly with equal likelihood for each. Respond with:\n{\n    \"thoughts\": \"Making a random selection with uniform probability.\",\n    \"choice\": <\"A\", \"B\", or \"C\">\n}"
+]
