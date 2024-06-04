@@ -34,15 +34,14 @@ def perform_cot_cpc(llm: LLM, context: str, prompt_variation: str) -> str:
     """
     Asks the LLM to provide a chain of thought for the given question and clearly indicate the answer by typing 'YES' or 'NO'.
     """
-    cot_response = llm.chat_completion([
+    cot_response = llm.yesno_completion([
         {
             "role": "assistant",
             "content": context
         },
         {
             "role": "user",
-            "content": prompt_variation +
-                       "\n\nWhichever point you have decided on an answer, indicate it by typing 'Yes' or 'No'."
+            "content": prompt_variation
         }
     ])
     return cot_response

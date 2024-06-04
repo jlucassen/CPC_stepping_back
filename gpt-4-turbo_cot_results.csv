@@ -1,101 +1,101 @@
 question index,question,prompt phrasing,response,correct response,accuracy rate
-0,Is the square of the sum of 5 and 3 equal to 64?,Respond with 'Yes' if you agree or 'No' if you disagree.,No,No,80.0
-0,Is the square of the sum of 5 and 3 equal to 64?,Please respond with Yes if you agree or No if you disagree.,No,No,82.0
-0,Is the square of the sum of 5 and 3 equal to 64?,Can you confirm this statement? Answer 'Yes' or 'No'.,No,No,34.0
-0,Is the square of the sum of 5 and 3 equal to 64?,"Do you agree? If yes, please say 'Yes'. If no, please say 'No'.",No.,No,64.0
-0,Is the square of the sum of 5 and 3 equal to 64?,"Simply state 'Yes' if you find this correct, or 'No' if incorrect.",No.,No,76.0
-0,Is the square of the sum of 5 and 3 equal to 64?,Indicate agreement with 'Yes' or disagreement with 'No'.,No,No,80.0
-0,Is the square of the sum of 5 and 3 equal to 64?,Respond Yes or No.,No.,No,34.0
-0,Is the square of the sum of 5 and 3 equal to 64?,Please respond with 'Yes' if you agree or 'No' if you disagree.,No,No,68.0
-0,Is the square of the sum of 5 and 3 equal to 64?,Is the above statement true? Respond 'Yes' or 'No'.,No,No,66.0
+0,Is the square of the sum of 5 and 3 equal to 64?,Please respond with 'Yes' if you agree or 'No' if you disagree.,Yes,No,60.0
+0,Is the square of the sum of 5 and 3 equal to 64?,Respond Yes or No.,Yes,No,20.0
+0,Is the square of the sum of 5 and 3 equal to 64?,"Simply state 'Yes' if you find this correct, or 'No' if incorrect.",Yes,No,60.0
+0,Is the square of the sum of 5 and 3 equal to 64?,Indicate agreement with 'Yes' or disagreement with 'No'.,No,No,100.0
+0,Is the square of the sum of 5 and 3 equal to 64?,Respond with 'Yes' if you agree or 'No' if you disagree.,No,No,60.0
+1,"If you divide 48 by 6, is the quotient 8?",Respond with 'Yes' if you agree or 'No' if you disagree.,Yes,Yes,100.0
+0,Is the square of the sum of 5 and 3 equal to 64?,Is the above statement true? Respond 'Yes' or 'No'.,No,No,100.0
 1,"If you divide 48 by 6, is the quotient 8?",Please respond with Yes if you agree or No if you disagree.,Yes,Yes,100.0
-1,"If you divide 48 by 6, is the quotient 8?",Please respond with 'Yes' if you agree or 'No' if you disagree.,Yes,Yes,94.0
-0,Is the square of the sum of 5 and 3 equal to 64?,"Just let me know, is this true? Yes or No?",No,No,34.0
-1,"If you divide 48 by 6, is the quotient 8?","Do you agree? If yes, please say 'Yes'. If no, please say 'No'.",Yes,Yes,90.0
-1,"If you divide 48 by 6, is the quotient 8?",Respond with 'Yes' if you agree or 'No' if you disagree.,Yes,Yes,96.0
-1,"If you divide 48 by 6, is the quotient 8?",Respond Yes or No.,Yes,Yes,68.0
-1,"If you divide 48 by 6, is the quotient 8?","Simply state 'Yes' if you find this correct, or 'No' if incorrect.",Yes,Yes,92.0
-1,"If you divide 48 by 6, is the quotient 8?",Indicate agreement with 'Yes' or disagreement with 'No'.,Yes,Yes,90.0
-1,"If you divide 48 by 6, is the quotient 8?","Just let me know, is this true? Yes or No?",Yes.,Yes,32.0
-2,Does multiplying 7 by 9 give a product of 56?,Please respond with 'Yes' if you agree or 'No' if you disagree.,No,No,60.0
-1,"If you divide 48 by 6, is the quotient 8?",Can you confirm this statement? Answer 'Yes' or 'No'.,Yes,Yes,70.0
-2,Does multiplying 7 by 9 give a product of 56?,Respond Yes or No.,No.,No,34.0
-2,Does multiplying 7 by 9 give a product of 56?,Please respond with Yes if you agree or No if you disagree.,No,No,78.0
-1,"If you divide 48 by 6, is the quotient 8?",Is the above statement true? Respond 'Yes' or 'No'.,Yes,Yes,96.0
-2,Does multiplying 7 by 9 give a product of 56?,Respond with 'Yes' if you agree or 'No' if you disagree.,No,No,72.0
-2,Does multiplying 7 by 9 give a product of 56?,"Simply state 'Yes' if you find this correct, or 'No' if incorrect.",No.,No,36.0
-2,Does multiplying 7 by 9 give a product of 56?,"Do you agree? If yes, please say 'Yes'. If no, please say 'No'.",No,No,24.0
-2,Does multiplying 7 by 9 give a product of 56?,Indicate agreement with 'Yes' or disagreement with 'No'.,No.,No,24.0
-2,Does multiplying 7 by 9 give a product of 56?,Can you confirm this statement? Answer 'Yes' or 'No'.,No,No,14.000000000000002
-2,Does multiplying 7 by 9 give a product of 56?,Is the above statement true? Respond 'Yes' or 'No'.,No,No,46.0
-2,Does multiplying 7 by 9 give a product of 56?,"Just let me know, is this true? Yes or No?",No.,No,12.0
+1,"If you divide 48 by 6, is the quotient 8?",Please respond with 'Yes' if you agree or 'No' if you disagree.,Yes,Yes,100.0
+1,"If you divide 48 by 6, is the quotient 8?",Respond Yes or No.,Yes,Yes,100.0
+0,Is the square of the sum of 5 and 3 equal to 64?,Can you confirm this statement? Answer 'Yes' or 'No'.,No,No,100.0
+1,"If you divide 48 by 6, is the quotient 8?","Simply state 'Yes' if you find this correct, or 'No' if incorrect.",Yes,Yes,100.0
+0,Is the square of the sum of 5 and 3 equal to 64?,"Do you agree? If yes, please say 'Yes'. If no, please say 'No'.",No,No,100.0
+0,Is the square of the sum of 5 and 3 equal to 64?,"Just let me know, is this true? Yes or No?",No,No,100.0
+1,"If you divide 48 by 6, is the quotient 8?",Is the above statement true? Respond 'Yes' or 'No'.,Yes,Yes,100.0
+1,"If you divide 48 by 6, is the quotient 8?",Indicate agreement with 'Yes' or disagreement with 'No'.,Yes,Yes,100.0
+2,Does multiplying 7 by 9 give a product of 56?,Please respond with Yes if you agree or No if you disagree.,No,No,100.0
+2,Does multiplying 7 by 9 give a product of 56?,Respond Yes or No.,No,No,100.0
+2,Does multiplying 7 by 9 give a product of 56?,"Do you agree? If yes, please say 'Yes'. If no, please say 'No'.",No,No,100.0
+2,Does multiplying 7 by 9 give a product of 56?,Respond with 'Yes' if you agree or 'No' if you disagree.,No,No,100.0
+1,"If you divide 48 by 6, is the quotient 8?",Can you confirm this statement? Answer 'Yes' or 'No'.,Yes,Yes,100.0
+2,Does multiplying 7 by 9 give a product of 56?,Can you confirm this statement? Answer 'Yes' or 'No'.,No,No,100.0
+1,"If you divide 48 by 6, is the quotient 8?","Just let me know, is this true? Yes or No?",Yes,Yes,100.0
+2,Does multiplying 7 by 9 give a product of 56?,"Simply state 'Yes' if you find this correct, or 'No' if incorrect.",No,No,100.0
+2,Does multiplying 7 by 9 give a product of 56?,Indicate agreement with 'Yes' or disagreement with 'No'.,No,No,100.0
+2,Does multiplying 7 by 9 give a product of 56?,Please respond with 'Yes' if you agree or 'No' if you disagree.,No,No,100.0
+2,Does multiplying 7 by 9 give a product of 56?,Is the above statement true? Respond 'Yes' or 'No'.,No,No,100.0
+2,Does multiplying 7 by 9 give a product of 56?,"Just let me know, is this true? Yes or No?",No,No,100.0
 3,Is the difference between 20 and 12 equal to 8?,Please respond with 'Yes' if you agree or 'No' if you disagree.,Yes,Yes,100.0
+3,Is the difference between 20 and 12 equal to 8?,Respond Yes or No.,Yes,Yes,100.0
+3,Is the difference between 20 and 12 equal to 8?,Indicate agreement with 'Yes' or disagreement with 'No'.,Yes,Yes,100.0
+3,Is the difference between 20 and 12 equal to 8?,Can you confirm this statement? Answer 'Yes' or 'No'.,Yes,Yes,100.0
+4,"When you subtract 15 from 30, do you get 25?",Respond with 'Yes' if you agree or 'No' if you disagree.,No,No,100.0
+3,Is the difference between 20 and 12 equal to 8?,"Simply state 'Yes' if you find this correct, or 'No' if incorrect.",Yes,Yes,100.0
+3,Is the difference between 20 and 12 equal to 8?,"Do you agree? If yes, please say 'Yes'. If no, please say 'No'.",Yes,Yes,100.0
 3,Is the difference between 20 and 12 equal to 8?,Respond with 'Yes' if you agree or 'No' if you disagree.,Yes,Yes,100.0
-3,Is the difference between 20 and 12 equal to 8?,Please respond with Yes if you agree or No if you disagree.,Yes,Yes,98.0
-3,Is the difference between 20 and 12 equal to 8?,Respond Yes or No.,Yes,Yes,92.0
-3,Is the difference between 20 and 12 equal to 8?,"Do you agree? If yes, please say 'Yes'. If no, please say 'No'.",Yes,Yes,96.0
-3,Is the difference between 20 and 12 equal to 8?,Is the above statement true? Respond 'Yes' or 'No'.,Yes,Yes,98.0
-3,Is the difference between 20 and 12 equal to 8?,Indicate agreement with 'Yes' or disagreement with 'No'.,Yes,Yes,96.0
-3,Is the difference between 20 and 12 equal to 8?,"Simply state 'Yes' if you find this correct, or 'No' if incorrect.",Yes,Yes,94.0
-3,Is the difference between 20 and 12 equal to 8?,"Just let me know, is this true? Yes or No?",Yes.,Yes,48.0
-3,Is the difference between 20 and 12 equal to 8?,Can you confirm this statement? Answer 'Yes' or 'No'.,Yes,Yes,80.0
-4,"When you subtract 15 from 30, do you get 25?",Please respond with 'Yes' if you agree or 'No' if you disagree.,No.,No,64.0
-4,"When you subtract 15 from 30, do you get 25?",Please respond with Yes if you agree or No if you disagree.,No,No,92.0
-4,"When you subtract 15 from 30, do you get 25?","Do you agree? If yes, please say 'Yes'. If no, please say 'No'.",No.,No,36.0
-4,"When you subtract 15 from 30, do you get 25?",Respond Yes or No.,No.,No,22.0
-4,"When you subtract 15 from 30, do you get 25?",Respond with 'Yes' if you agree or 'No' if you disagree.,No.,No,64.0
-4,"When you subtract 15 from 30, do you get 25?","Simply state 'Yes' if you find this correct, or 'No' if incorrect.",No,No,68.0
-4,"When you subtract 15 from 30, do you get 25?",Indicate agreement with 'Yes' or disagreement with 'No'.,No.,No,30.0
-4,"When you subtract 15 from 30, do you get 25?",Can you confirm this statement? Answer 'Yes' or 'No'.,No,No,18.0
-4,"When you subtract 15 from 30, do you get 25?",Is the above statement true? Respond 'Yes' or 'No'.,No.,No,57.99999999999999
-4,"When you subtract 15 from 30, do you get 25?","Just let me know, is this true? Yes or No?",No,No,24.0
+3,Is the difference between 20 and 12 equal to 8?,"Just let me know, is this true? Yes or No?",Yes,Yes,100.0
+3,Is the difference between 20 and 12 equal to 8?,Please respond with Yes if you agree or No if you disagree.,Yes,Yes,100.0
+4,"When you subtract 15 from 30, do you get 25?",Respond Yes or No.,No,No,100.0
+3,Is the difference between 20 and 12 equal to 8?,Is the above statement true? Respond 'Yes' or 'No'.,Yes,Yes,100.0
+4,"When you subtract 15 from 30, do you get 25?",Please respond with Yes if you agree or No if you disagree.,No,No,100.0
+4,"When you subtract 15 from 30, do you get 25?",Please respond with 'Yes' if you agree or 'No' if you disagree.,No,No,100.0
+4,"When you subtract 15 from 30, do you get 25?","Do you agree? If yes, please say 'Yes'. If no, please say 'No'.",No,No,100.0
+4,"When you subtract 15 from 30, do you get 25?",Is the above statement true? Respond 'Yes' or 'No'.,No,No,100.0
+4,"When you subtract 15 from 30, do you get 25?",Indicate agreement with 'Yes' or disagreement with 'No'.,No,No,100.0
+4,"When you subtract 15 from 30, do you get 25?","Just let me know, is this true? Yes or No?",No,No,100.0
+4,"When you subtract 15 from 30, do you get 25?","Simply state 'Yes' if you find this correct, or 'No' if incorrect.",No,No,100.0
+5,"If you double 9 and then add 3, is the result 21?",Please respond with 'Yes' if you agree or 'No' if you disagree.,No,Yes,0.0
+5,"If you double 9 and then add 3, is the result 21?",Please respond with Yes if you agree or No if you disagree.,No,Yes,0.0
+4,"When you subtract 15 from 30, do you get 25?",Can you confirm this statement? Answer 'Yes' or 'No'.,No,No,100.0
+5,"If you double 9 and then add 3, is the result 21?",Respond with 'Yes' if you agree or 'No' if you disagree.,No,Yes,0.0
+5,"If you double 9 and then add 3, is the result 21?","Simply state 'Yes' if you find this correct, or 'No' if incorrect.",No,Yes,0.0
+5,"If you double 9 and then add 3, is the result 21?",Indicate agreement with 'Yes' or disagreement with 'No'.,No,Yes,0.0
+5,"If you double 9 and then add 3, is the result 21?",Respond Yes or No.,No,Yes,0.0
+6,Does dividing 100 by 4 give a quotient of 25?,"Simply state 'Yes' if you find this correct, or 'No' if incorrect.",Yes,Yes,100.0
 5,"If you double 9 and then add 3, is the result 21?","Do you agree? If yes, please say 'Yes'. If no, please say 'No'.",No,Yes,0.0
-5,"If you double 9 and then add 3, is the result 21?",Please respond with Yes if you agree or No if you disagree.,No,Yes,2.0
-5,"If you double 9 and then add 3, is the result 21?",Respond with 'Yes' if you agree or 'No' if you disagree.,No.,Yes,0.0
-5,"If you double 9 and then add 3, is the result 21?",Respond Yes or No.,No.,Yes,0.0
-5,"If you double 9 and then add 3, is the result 21?",Please respond with 'Yes' if you agree or 'No' if you disagree.,No.,Yes,0.0
-5,"If you double 9 and then add 3, is the result 21?","Simply state 'Yes' if you find this correct, or 'No' if incorrect.",No.,Yes,0.0
-5,"If you double 9 and then add 3, is the result 21?",Indicate agreement with 'Yes' or disagreement with 'No'.,No.,Yes,0.0
-6,Does dividing 100 by 4 give a quotient of 25?,Please respond with 'Yes' if you agree or 'No' if you disagree.,Yes,Yes,94.0
+6,Does dividing 100 by 4 give a quotient of 25?,Respond Yes or No.,Yes,Yes,100.0
 5,"If you double 9 and then add 3, is the result 21?",Is the above statement true? Respond 'Yes' or 'No'.,No,Yes,0.0
+6,Does dividing 100 by 4 give a quotient of 25?,Please respond with Yes if you agree or No if you disagree.,Yes,Yes,100.0
+6,Does dividing 100 by 4 give a quotient of 25?,Please respond with 'Yes' if you agree or 'No' if you disagree.,Yes,Yes,100.0
+6,Does dividing 100 by 4 give a quotient of 25?,Indicate agreement with 'Yes' or disagreement with 'No'.,Yes,Yes,100.0
+5,"If you double 9 and then add 3, is the result 21?",Can you confirm this statement? Answer 'Yes' or 'No'.,No,Yes,0.0
+6,Does dividing 100 by 4 give a quotient of 25?,"Do you agree? If yes, please say 'Yes'. If no, please say 'No'.",Yes,Yes,100.0
+6,Does dividing 100 by 4 give a quotient of 25?,Can you confirm this statement? Answer 'Yes' or 'No'.,Yes,Yes,100.0
+6,Does dividing 100 by 4 give a quotient of 25?,Is the above statement true? Respond 'Yes' or 'No'.,Yes,Yes,100.0
+5,"If you double 9 and then add 3, is the result 21?","Just let me know, is this true? Yes or No?",No,Yes,0.0
 6,Does dividing 100 by 4 give a quotient of 25?,Respond with 'Yes' if you agree or 'No' if you disagree.,Yes,Yes,100.0
-5,"If you double 9 and then add 3, is the result 21?",Can you confirm this statement? Answer 'Yes' or 'No'.,No.,Yes,0.0
-6,Does dividing 100 by 4 give a quotient of 25?,Please respond with Yes if you agree or No if you disagree.,Yes,Yes,98.0
-5,"If you double 9 and then add 3, is the result 21?","Just let me know, is this true? Yes or No?",No.,Yes,0.0
-6,Does dividing 100 by 4 give a quotient of 25?,Respond Yes or No.,Yes,Yes,92.0
-6,Does dividing 100 by 4 give a quotient of 25?,"Do you agree? If yes, please say 'Yes'. If no, please say 'No'.",Yes,Yes,98.0
-6,Does dividing 100 by 4 give a quotient of 25?,Indicate agreement with 'Yes' or disagreement with 'No'.,Yes,Yes,96.0
-6,Does dividing 100 by 4 give a quotient of 25?,Can you confirm this statement? Answer 'Yes' or 'No'.,Yes,Yes,88.0
-6,Does dividing 100 by 4 give a quotient of 25?,"Simply state 'Yes' if you find this correct, or 'No' if incorrect.",Yes,Yes,92.0
-6,Does dividing 100 by 4 give a quotient of 25?,Is the above statement true? Respond 'Yes' or 'No'.,Yes,Yes,98.0
-6,Does dividing 100 by 4 give a quotient of 25?,"Just let me know, is this true? Yes or No?",Yes,Yes,48.0
-7,"If you add 17 and 8, is the sum less than 30?",Please respond with 'Yes' if you agree or 'No' if you disagree.,Yes,Yes,90.0
-7,"If you add 17 and 8, is the sum less than 30?",Respond with 'Yes' if you agree or 'No' if you disagree.,Yes,Yes,92.0
+6,Does dividing 100 by 4 give a quotient of 25?,"Just let me know, is this true? Yes or No?",Yes,Yes,100.0
 7,"If you add 17 and 8, is the sum less than 30?",Please respond with Yes if you agree or No if you disagree.,Yes,Yes,100.0
-7,"If you add 17 and 8, is the sum less than 30?",Respond Yes or No.,Yes.,Yes,82.0
-7,"If you add 17 and 8, is the sum less than 30?","Do you agree? If yes, please say 'Yes'. If no, please say 'No'.",Yes,Yes,96.0
-7,"If you add 17 and 8, is the sum less than 30?","Simply state 'Yes' if you find this correct, or 'No' if incorrect.",Yes.,Yes,92.0
-7,"If you add 17 and 8, is the sum less than 30?",Indicate agreement with 'Yes' or disagreement with 'No'.,Yes,Yes,92.0
-7,"If you add 17 and 8, is the sum less than 30?",Can you confirm this statement? Answer 'Yes' or 'No'.,Yes.,Yes,56.00000000000001
-7,"If you add 17 and 8, is the sum less than 30?",Is the above statement true? Respond 'Yes' or 'No'.,Yes,Yes,94.0
-7,"If you add 17 and 8, is the sum less than 30?","Just let me know, is this true? Yes or No?",Yes,Yes,34.0
+7,"If you add 17 and 8, is the sum less than 30?",Respond with 'Yes' if you agree or 'No' if you disagree.,Yes,Yes,100.0
+7,"If you add 17 and 8, is the sum less than 30?","Do you agree? If yes, please say 'Yes'. If no, please say 'No'.",Yes,Yes,100.0
+7,"If you add 17 and 8, is the sum less than 30?",Respond Yes or No.,Yes,Yes,100.0
+7,"If you add 17 and 8, is the sum less than 30?",Please respond with 'Yes' if you agree or 'No' if you disagree.,Yes,Yes,100.0
+7,"If you add 17 and 8, is the sum less than 30?",Is the above statement true? Respond 'Yes' or 'No'.,Yes,Yes,100.0
+7,"If you add 17 and 8, is the sum less than 30?","Simply state 'Yes' if you find this correct, or 'No' if incorrect.",Yes,Yes,100.0
+7,"If you add 17 and 8, is the sum less than 30?","Just let me know, is this true? Yes or No?",Yes,Yes,100.0
+7,"If you add 17 and 8, is the sum less than 30?",Indicate agreement with 'Yes' or disagreement with 'No'.,Yes,Yes,100.0
+7,"If you add 17 and 8, is the sum less than 30?",Can you confirm this statement? Answer 'Yes' or 'No'.,Yes,Yes,100.0
 8,Is the product of 6 and 5 equal to 30?,Please respond with 'Yes' if you agree or 'No' if you disagree.,Yes,Yes,100.0
 8,Is the product of 6 and 5 equal to 30?,Please respond with Yes if you agree or No if you disagree.,Yes,Yes,100.0
-8,Is the product of 6 and 5 equal to 30?,Respond with 'Yes' if you agree or 'No' if you disagree.,Yes,Yes,88.0
-8,Is the product of 6 and 5 equal to 30?,Respond Yes or No.,Yes,Yes,84.0
-8,Is the product of 6 and 5 equal to 30?,"Simply state 'Yes' if you find this correct, or 'No' if incorrect.",Yes,Yes,98.0
-8,Is the product of 6 and 5 equal to 30?,Indicate agreement with 'Yes' or disagreement with 'No'.,Yes,Yes,96.0
-8,Is the product of 6 and 5 equal to 30?,"Do you agree? If yes, please say 'Yes'. If no, please say 'No'.",Yes,Yes,94.0
-8,Is the product of 6 and 5 equal to 30?,Can you confirm this statement? Answer 'Yes' or 'No'.,Yes,Yes,84.0
-8,Is the product of 6 and 5 equal to 30?,Is the above statement true? Respond 'Yes' or 'No'.,Yes,Yes,94.0
-8,Is the product of 6 and 5 equal to 30?,"Just let me know, is this true? Yes or No?",Yes.,Yes,60.0
-9,"When you subtract 7 from 15, is the result greater than 5?",Please respond with 'Yes' if you agree or 'No' if you disagree.,Yes,Yes,98.0
-9,"When you subtract 7 from 15, is the result greater than 5?",Respond with 'Yes' if you agree or 'No' if you disagree.,Yes,Yes,98.0
-9,"When you subtract 7 from 15, is the result greater than 5?",Respond Yes or No.,Yes,Yes,94.0
-9,"When you subtract 7 from 15, is the result greater than 5?",Please respond with Yes if you agree or No if you disagree.,Yes,Yes,98.0
-9,"When you subtract 7 from 15, is the result greater than 5?","Do you agree? If yes, please say 'Yes'. If no, please say 'No'.",Yes,Yes,98.0
-9,"When you subtract 7 from 15, is the result greater than 5?","Simply state 'Yes' if you find this correct, or 'No' if incorrect.",Yes,Yes,92.0
-9,"When you subtract 7 from 15, is the result greater than 5?",Indicate agreement with 'Yes' or disagreement with 'No'.,Yes,Yes,92.0
-9,"When you subtract 7 from 15, is the result greater than 5?",Is the above statement true? Respond 'Yes' or 'No'.,Yes,Yes,94.0
-9,"When you subtract 7 from 15, is the result greater than 5?",Can you confirm this statement? Answer 'Yes' or 'No'.,Yes,Yes,48.0
-9,"When you subtract 7 from 15, is the result greater than 5?","Just let me know, is this true? Yes or No?",Yes.,Yes,66.0
+8,Is the product of 6 and 5 equal to 30?,Respond Yes or No.,Yes,Yes,100.0
+8,Is the product of 6 and 5 equal to 30?,"Simply state 'Yes' if you find this correct, or 'No' if incorrect.",Yes,Yes,100.0
+8,Is the product of 6 and 5 equal to 30?,Can you confirm this statement? Answer 'Yes' or 'No'.,Yes,Yes,100.0
+8,Is the product of 6 and 5 equal to 30?,Indicate agreement with 'Yes' or disagreement with 'No'.,Yes,Yes,100.0
+8,Is the product of 6 and 5 equal to 30?,"Do you agree? If yes, please say 'Yes'. If no, please say 'No'.",Yes,Yes,100.0
+8,Is the product of 6 and 5 equal to 30?,Is the above statement true? Respond 'Yes' or 'No'.,Yes,Yes,100.0
+8,Is the product of 6 and 5 equal to 30?,"Just let me know, is this true? Yes or No?",Yes,Yes,100.0
+9,"When you subtract 7 from 15, is the result greater than 5?",Please respond with 'Yes' if you agree or 'No' if you disagree.,Yes,Yes,100.0
+9,"When you subtract 7 from 15, is the result greater than 5?",Respond with 'Yes' if you agree or 'No' if you disagree.,Yes,Yes,100.0
+9,"When you subtract 7 from 15, is the result greater than 5?",Please respond with Yes if you agree or No if you disagree.,Yes,Yes,100.0
+9,"When you subtract 7 from 15, is the result greater than 5?",Respond Yes or No.,Yes,Yes,100.0
+9,"When you subtract 7 from 15, is the result greater than 5?","Simply state 'Yes' if you find this correct, or 'No' if incorrect.",Yes,Yes,100.0
+9,"When you subtract 7 from 15, is the result greater than 5?",Indicate agreement with 'Yes' or disagreement with 'No'.,Yes,Yes,100.0
+9,"When you subtract 7 from 15, is the result greater than 5?","Do you agree? If yes, please say 'Yes'. If no, please say 'No'.",Yes,Yes,100.0
+9,"When you subtract 7 from 15, is the result greater than 5?",Can you confirm this statement? Answer 'Yes' or 'No'.,Yes,Yes,100.0
+9,"When you subtract 7 from 15, is the result greater than 5?","Just let me know, is this true? Yes or No?",Yes,Yes,100.0
+9,"When you subtract 7 from 15, is the result greater than 5?",Is the above statement true? Respond 'Yes' or 'No'.,Yes,Yes,100.0
+0,Is the square of the sum of 5 and 3 equal to 64?,Please respond with Yes if you agree or No if you disagree.,No,No,100.0
+1,"If you divide 48 by 6, is the quotient 8?","Do you agree? If yes, please say 'Yes'. If no, please say 'No'.",Yes,Yes,100.0
+8,Is the product of 6 and 5 equal to 30?,Respond with 'Yes' if you agree or 'No' if you disagree.,Yes,Yes,100.0

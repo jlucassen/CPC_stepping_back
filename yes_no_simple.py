@@ -20,7 +20,7 @@ if not api_key:
     logging.error("No OPENAI_API_KEY found in env")
     raise ValueError("No OPENAI_API_KEY found in env")
 
-def test_extraction(llm, dataset, function, prompt_variations, n=50):
+def test_extraction(llm, dataset, function, prompt_variations, n=5):
     results = []
     total_iterations = len(dataset) * len(prompt_variations) * n
 
@@ -165,14 +165,14 @@ if __name__ == "__main__":
         llm = LLM(model_name=model_name)
         
         
-        #yes_no_results = test_extraction(llm, yes_no_dataset, perform_one_token_cpc, prompt_variations)
-        #write_to_csv(yes_no_results, f'{model_name}_yes_no_results.csv')
-        yes_no_results = csv.DictReader(open(f'{model_name}_yes_no_results.csv'))
-        create_box_plot(yes_no_results, f'{model_name}_yes_no_accuracy_box_plot.png')
-        create_confidence_interval_plot(yes_no_results, f'{model_name}_yes_no_confidence_intervals.png')
+        # yes_no_results = test_extraction(llm, yes_no_dataset, perform_one_token_cpc, prompt_variations)
+        # write_to_csv(yes_no_results, f'{model_name}_yes_no_results.csv')
+        # #yes_no_results = csv.DictReader(open(f'{model_name}_yes_no_results.csv'))
+        # create_box_plot(yes_no_results, f'{model_name}_yes_no_accuracy_box_plot.png')
+        # create_confidence_interval_plot(yes_no_results, f'{model_name}_yes_no_confidence_intervals.png')
         
-        #cot_results = test_extraction(llm, cot_dataset, perform_cot_cpc, prompt_variations)
-        #write_to_csv(cot_results, f'{model_name}_cot_results.csv')
-        cot_results = csv.DictReader(open(f'{model_name}_cot_results.csv'))
+        cot_results = test_extraction(llm, cot_dataset, perform_cot_cpc, prompt_variations)
+        write_to_csv(cot_results, f'{model_name}_cot_results.csv')
+        # cot_results = csv.DictReader(open(f'{model_name}_cot_results.csv'))
         create_box_plot(cot_results, f'{model_name}_cot_accuracy_box_plot.png')
         create_confidence_interval_plot(cot_results, f'{model_name}_cot_confidence_intervals.png')
