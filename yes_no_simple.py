@@ -67,12 +67,13 @@ def create_box_plot(results, filename):
         data[prompt_variation].append(accuracy_rate)
         
     fig, ax = plt.subplots(figsize=(10, 6))
-    ax.boxplot(data.values())
-    ax.set_xticks(range(len(data.keys())))
-    ax.set_xticklabels(data.keys(), rotation=45, ha='right')
+    ax.boxplot([[float(x) for x in l] for l in list(data.values())], showfliers=False)
+    ax.set_xticks(range(1, len(data.keys())+1))
+    #ax.set_xticklabels(data.keys(), rotation=45, ha='right')
     ax.set_ylabel('Accuracy Rate')
-    ax.set_ylim(0, 100)
-    ax.set_title('Accuracy Rate by Prompt Variation')
+    ax.set_xlabel('Prompt Variation')
+    ax.set_ylim(0, 105)
+    ax.set_title(f'Accuracy Rate by Prompt Variation, {filename[:filename.index("_")]}, {"one_token" if "yes" in filename else "cot"}')
     plt.tight_layout()
     plt.savefig(filename)
 
@@ -164,19 +165,14 @@ if __name__ == "__main__":
         llm = LLM(model_name=model_name)
         
         
-        try:
-            yes_no_results = test_extraction(llm, yes_no_dataset, perform_one_token_cpc, prompt_variations)
-            write_to_csv(yes_no_results, f'{model_name}_yes_no_results.csv')
-            create_box_plot(yes_no_results, f'{model_name}_yes_no_accuracy_box_plot.png')
-            create_confidence_interval_plot(yes_no_results, f'{model_name}_yes_no_confidence_intervals.png')
-        except Exception as e:
-            logging.exception(f"Exception occurred while processing Yes/No questions for model {model_name}")
+        #yes_no_results = test_extraction(llm, yes_no_dataset, perform_one_token_cpc, prompt_variations)
+        #write_to_csv(yes_no_results, f'{model_name}_yes_no_results.csv')
+        yes_no_results = csv.DictReader(open(f'{model_name}_yes_no_results.csv'))
+        create_box_plot(yes_no_results, f'{model_name}_yes_no_accuracy_box_plot.png')
+        create_confidence_interval_plot(yes_no_results, f'{model_name}_yes_no_confidence_intervals.png')
         
-        # Run for CoT questions
-        try:
-            cot_results = test_extraction(llm, cot_dataset, perform_cot_cpc, prompt_variations)
-            write_to_csv(cot_results, f'{model_name}_cot_results.csv')
-            create_box_plot(cot_results, f'{model_name}_cot_accuracy_box_plot.png')
-            create_confidence_interval_plot(cot_results, f'{model_name}_cot_confidence_intervals.png')
-        except Exception as e:
-            logging.exception(f"Exception occurred while processing CoT questions for model {model_name}")
+        #cot_results = test_extraction(llm, cot_dataset, perform_cot_cpc, prompt_variations)
+        #write_to_csv(cot_results, f'{model_name}_cot_results.csv')
+        cot_results = csv.DictReader(open(f'{model_name}_cot_results.csv'))
+        create_box_plot(cot_results, f'{model_name}_cot_accuracy_box_plot.png')
+        create_confidence_interval_plot(cot_results, f'{model_name}_cot_confidence_intervals.png')

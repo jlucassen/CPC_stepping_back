@@ -1,0 +1,91 @@
+question index,question,prompt phrasing,response,correct response,accuracy rate
+0,Is there a prime number larger than any given finite set of primes?,Indicate agreement with 'Yes' or disagreement with 'No'.,Yes,Yes,100.0
+0,Is there a prime number larger than any given finite set of primes?,Please respond with 'Yes' if you agree or 'No' if you disagree.,Yes,Yes,100.0
+0,Is there a prime number larger than any given finite set of primes?,Respond with 'Yes' if you agree or 'No' if you disagree.,Yes,Yes,100.0
+0,Is there a prime number larger than any given finite set of primes?,Please respond with Yes if you agree or No if you disagree.,Yes,Yes,100.0
+0,Is there a prime number larger than any given finite set of primes?,"Do you agree? If yes, please say 'Yes'. If no, please say 'No'.",Yes,Yes,100.0
+0,Is there a prime number larger than any given finite set of primes?,"Simply state 'Yes' if you find this correct, or 'No' if incorrect.",Yes,Yes,100.0
+0,Is there a prime number larger than any given finite set of primes?,Can you confirm this statement? Answer 'Yes' or 'No'.,Yes,Yes,100.0
+0,Is there a prime number larger than any given finite set of primes?,Respond Yes or No.,Yes,Yes,100.0
+0,Is there a prime number larger than any given finite set of primes?,Is the above statement true? Respond 'Yes' or 'No'.,Yes,Yes,100.0
+0,Is there a prime number larger than any given finite set of primes?,"Just let me know, is this true? Yes or No?",Yes,Yes,100.0
+1,Is it possible for a person to survive without a brain?,Please respond with 'Yes' if you agree or 'No' if you disagree.,No,No,100.0
+1,Is it possible for a person to survive without a brain?,"Do you agree? If yes, please say 'Yes'. If no, please say 'No'.",No,No,100.0
+1,Is it possible for a person to survive without a brain?,Respond Yes or No.,No,No,100.0
+1,Is it possible for a person to survive without a brain?,Respond with 'Yes' if you agree or 'No' if you disagree.,No,No,100.0
+1,Is it possible for a person to survive without a brain?,Please respond with Yes if you agree or No if you disagree.,No,No,100.0
+1,Is it possible for a person to survive without a brain?,"Simply state 'Yes' if you find this correct, or 'No' if incorrect.",No,No,100.0
+1,Is it possible for a person to survive without a brain?,Can you confirm this statement? Answer 'Yes' or 'No'.,No,No,100.0
+1,Is it possible for a person to survive without a brain?,"Just let me know, is this true? Yes or No?",No,No,100.0
+1,Is it possible for a person to survive without a brain?,Indicate agreement with 'Yes' or disagreement with 'No'.,No,No,100.0
+1,Is it possible for a person to survive without a brain?,Is the above statement true? Respond 'Yes' or 'No'.,No,No,100.0
+2,Can a person's blood type change over the course of their lifetime?,Please respond with 'Yes' if you agree or 'No' if you disagree.,No,No,100.0
+2,Can a person's blood type change over the course of their lifetime?,Please respond with Yes if you agree or No if you disagree.,No,No,100.0
+2,Can a person's blood type change over the course of their lifetime?,Respond with 'Yes' if you agree or 'No' if you disagree.,No,No,100.0
+2,Can a person's blood type change over the course of their lifetime?,Respond Yes or No.,No,No,100.0
+2,Can a person's blood type change over the course of their lifetime?,"Simply state 'Yes' if you find this correct, or 'No' if incorrect.",No,No,100.0
+2,Can a person's blood type change over the course of their lifetime?,"Do you agree? If yes, please say 'Yes'. If no, please say 'No'.",No,No,82.0
+2,Can a person's blood type change over the course of their lifetime?,Is the above statement true? Respond 'Yes' or 'No'.,No,No,98.0
+2,Can a person's blood type change over the course of their lifetime?,Can you confirm this statement? Answer 'Yes' or 'No'.,No,No,100.0
+2,Can a person's blood type change over the course of their lifetime?,Indicate agreement with 'Yes' or disagreement with 'No'.,No,No,100.0
+3,Can a person's fingerprints change naturally over the course of their lifetime?,Please respond with 'Yes' if you agree or 'No' if you disagree.,Yes,No,32.0
+2,Can a person's blood type change over the course of their lifetime?,"Just let me know, is this true? Yes or No?",No,No,100.0
+3,Can a person's fingerprints change naturally over the course of their lifetime?,Respond with 'Yes' if you agree or 'No' if you disagree.,Yes,No,40.0
+3,Can a person's fingerprints change naturally over the course of their lifetime?,Respond Yes or No.,Yes,No,10.0
+3,Can a person's fingerprints change naturally over the course of their lifetime?,"Do you agree? If yes, please say 'Yes'. If no, please say 'No'.",Yes,No,0.0
+3,Can a person's fingerprints change naturally over the course of their lifetime?,Indicate agreement with 'Yes' or disagreement with 'No'.,Yes,No,0.0
+3,Can a person's fingerprints change naturally over the course of their lifetime?,Please respond with Yes if you agree or No if you disagree.,No,No,10.0
+3,Can a person's fingerprints change naturally over the course of their lifetime?,Is the above statement true? Respond 'Yes' or 'No'.,No,No,20.0
+3,Can a person's fingerprints change naturally over the course of their lifetime?,"Simply state 'Yes' if you find this correct, or 'No' if incorrect.",Yes,No,2.0
+3,Can a person's fingerprints change naturally over the course of their lifetime?,Can you confirm this statement? Answer 'Yes' or 'No'.,Yes,No,8.0
+3,Can a person's fingerprints change naturally over the course of their lifetime?,"Just let me know, is this true? Yes or No?",Yes,No,2.0
+4,Is it possible for a person to have two different colored eyes?,Please respond with 'Yes' if you agree or 'No' if you disagree.,Yes,Yes,100.0
+4,Is it possible for a person to have two different colored eyes?,Respond with 'Yes' if you agree or 'No' if you disagree.,Yes,Yes,100.0
+4,Is it possible for a person to have two different colored eyes?,Respond Yes or No.,Yes,Yes,100.0
+4,Is it possible for a person to have two different colored eyes?,"Simply state 'Yes' if you find this correct, or 'No' if incorrect.",Yes,Yes,100.0
+4,Is it possible for a person to have two different colored eyes?,"Do you agree? If yes, please say 'Yes'. If no, please say 'No'.",Yes,Yes,100.0
+4,Is it possible for a person to have two different colored eyes?,Please respond with Yes if you agree or No if you disagree.,Yes,Yes,100.0
+4,Is it possible for a person to have two different colored eyes?,Indicate agreement with 'Yes' or disagreement with 'No'.,Yes,Yes,100.0
+4,Is it possible for a person to have two different colored eyes?,Can you confirm this statement? Answer 'Yes' or 'No'.,Yes,Yes,100.0
+4,Is it possible for a person to have two different colored eyes?,Is the above statement true? Respond 'Yes' or 'No'.,Yes,Yes,100.0
+4,Is it possible for a person to have two different colored eyes?,"Just let me know, is this true? Yes or No?",Yes,Yes,100.0
+5,"Is it possible to find a perfect cuboid (a rectangular box with integer side lengths, face diagonals, and body diagonal)?",Please respond with Yes if you agree or No if you disagree.,No,No,100.0
+5,"Is it possible to find a perfect cuboid (a rectangular box with integer side lengths, face diagonals, and body diagonal)?",Respond Yes or No.,No,No,100.0
+5,"Is it possible to find a perfect cuboid (a rectangular box with integer side lengths, face diagonals, and body diagonal)?",Respond with 'Yes' if you agree or 'No' if you disagree.,No,No,100.0
+5,"Is it possible to find a perfect cuboid (a rectangular box with integer side lengths, face diagonals, and body diagonal)?","Do you agree? If yes, please say 'Yes'. If no, please say 'No'.",No,No,96.0
+5,"Is it possible to find a perfect cuboid (a rectangular box with integer side lengths, face diagonals, and body diagonal)?",Please respond with 'Yes' if you agree or 'No' if you disagree.,No,No,100.0
+5,"Is it possible to find a perfect cuboid (a rectangular box with integer side lengths, face diagonals, and body diagonal)?","Simply state 'Yes' if you find this correct, or 'No' if incorrect.",No,No,100.0
+5,"Is it possible to find a perfect cuboid (a rectangular box with integer side lengths, face diagonals, and body diagonal)?",Indicate agreement with 'Yes' or disagreement with 'No'.,No,No,100.0
+5,"Is it possible to find a perfect cuboid (a rectangular box with integer side lengths, face diagonals, and body diagonal)?",Can you confirm this statement? Answer 'Yes' or 'No'.,No,No,100.0
+5,"Is it possible to find a perfect cuboid (a rectangular box with integer side lengths, face diagonals, and body diagonal)?",Is the above statement true? Respond 'Yes' or 'No'.,No,No,100.0
+5,"Is it possible to find a perfect cuboid (a rectangular box with integer side lengths, face diagonals, and body diagonal)?","Just let me know, is this true? Yes or No?",No,No,100.0
+6,Is it possible for a person to be allergic to water?,Respond with 'Yes' if you agree or 'No' if you disagree.,Yes,Yes,94.0
+6,Is it possible for a person to be allergic to water?,Please respond with Yes if you agree or No if you disagree.,Yes,Yes,90.0
+6,Is it possible for a person to be allergic to water?,Please respond with 'Yes' if you agree or 'No' if you disagree.,Yes,Yes,100.0
+6,Is it possible for a person to be allergic to water?,Respond Yes or No.,Yes,Yes,100.0
+6,Is it possible for a person to be allergic to water?,"Do you agree? If yes, please say 'Yes'. If no, please say 'No'.",Yes,Yes,96.0
+6,Is it possible for a person to be allergic to water?,"Simply state 'Yes' if you find this correct, or 'No' if incorrect.",Yes,Yes,98.0
+6,Is it possible for a person to be allergic to water?,Indicate agreement with 'Yes' or disagreement with 'No'.,Yes,Yes,100.0
+6,Is it possible for a person to be allergic to water?,Can you confirm this statement? Answer 'Yes' or 'No'.,Yes,Yes,100.0
+6,Is it possible for a person to be allergic to water?,"Just let me know, is this true? Yes or No?",Yes,Yes,100.0
+6,Is it possible for a person to be allergic to water?,Is the above statement true? Respond 'Yes' or 'No'.,Yes,Yes,100.0
+7,Is it possible to trisect an angle using only a compass and straightedge?,Please respond with 'Yes' if you agree or 'No' if you disagree.,No,No,100.0
+7,Is it possible to trisect an angle using only a compass and straightedge?,Respond with 'Yes' if you agree or 'No' if you disagree.,No,No,100.0
+7,Is it possible to trisect an angle using only a compass and straightedge?,Please respond with Yes if you agree or No if you disagree.,No,No,100.0
+7,Is it possible to trisect an angle using only a compass and straightedge?,Respond Yes or No.,No,No,100.0
+7,Is it possible to trisect an angle using only a compass and straightedge?,"Do you agree? If yes, please say 'Yes'. If no, please say 'No'.",No,No,96.0
+7,Is it possible to trisect an angle using only a compass and straightedge?,"Simply state 'Yes' if you find this correct, or 'No' if incorrect.",No,No,100.0
+7,Is it possible to trisect an angle using only a compass and straightedge?,Can you confirm this statement? Answer 'Yes' or 'No'.,No,No,100.0
+7,Is it possible to trisect an angle using only a compass and straightedge?,Indicate agreement with 'Yes' or disagreement with 'No'.,No,No,100.0
+7,Is it possible to trisect an angle using only a compass and straightedge?,Is the above statement true? Respond 'Yes' or 'No'.,No,No,98.0
+7,Is it possible to trisect an angle using only a compass and straightedge?,"Just let me know, is this true? Yes or No?",No,No,100.0
+8,Can a polynomial equation of degree n always be solved using radicals for n greater than 4?,Please respond with 'Yes' if you agree or 'No' if you disagree.,No,No,100.0
+8,Can a polynomial equation of degree n always be solved using radicals for n greater than 4?,Respond with 'Yes' if you agree or 'No' if you disagree.,No,No,100.0
+8,Can a polynomial equation of degree n always be solved using radicals for n greater than 4?,Please respond with Yes if you agree or No if you disagree.,No,No,100.0
+8,Can a polynomial equation of degree n always be solved using radicals for n greater than 4?,"Do you agree? If yes, please say 'Yes'. If no, please say 'No'.",No,No,100.0
+8,Can a polynomial equation of degree n always be solved using radicals for n greater than 4?,"Simply state 'Yes' if you find this correct, or 'No' if incorrect.",No,No,100.0
+8,Can a polynomial equation of degree n always be solved using radicals for n greater than 4?,Respond Yes or No.,No,No,100.0
+8,Can a polynomial equation of degree n always be solved using radicals for n greater than 4?,Indicate agreement with 'Yes' or disagreement with 'No'.,No,No,100.0
+8,Can a polynomial equation of degree n always be solved using radicals for n greater than 4?,Can you confirm this statement? Answer 'Yes' or 'No'.,No,No,100.0
+8,Can a polynomial equation of degree n always be solved using radicals for n greater than 4?,Is the above statement true? Respond 'Yes' or 'No'.,No,No,100.0
+8,Can a polynomial equation of degree n always be solved using radicals for n greater than 4?,"Just let me know, is this true? Yes or No?",No,No,100.0
