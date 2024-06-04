@@ -1,5 +1,5 @@
 import openai
-from solver_prompt_sensitivity import perform_one_token_cpc, perform_cot_cpc
+from solver import perform_one_token_cpc, perform_cot_cpc
 
 import os
 import csv
