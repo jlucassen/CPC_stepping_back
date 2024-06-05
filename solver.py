@@ -4,6 +4,10 @@ cpc_prompt = ("At this point, we're going to stop and consider whether this appr
               "and leads to a correct solution to the problem being worked on. "
               "Otherwise, we should step back and try a different approach.")
 
+yesno_extract = "Respond Yes or No."
+
+cot_extract = 'Think through the question but do not answer yet.'
+
 def perform_one_token_cpc(llm: LLM, context: str, prompt=cpc_prompt) -> str:
     """Asks the llm to do a one-word completion on whether its priorities should change or not."""
     return llm.yesno_completion([
@@ -13,8 +17,7 @@ def perform_one_token_cpc(llm: LLM, context: str, prompt=cpc_prompt) -> str:
         },
         {
             "role": "user",
-            "content": prompt + "\n\nAt this point, should we change to a different approach? Please answer "
-                       "'Yes, I recommend a different approach' or 'No, I recommend staying with the current approach.'"
+            "content": prompt + ' ' + yesno_extract
         }
     ])
 
@@ -31,19 +34,24 @@ def perform_cot_cpc(llm: LLM, context: str, prompt=cpc_prompt) -> (str, str):
         },
         {
             "role": "user",
-            "content": prompt + "\n\nAt the end, I want you to answer 'Yes, I recommend a different approach' or "
-                       "'No, I recommend staying with the current approach.' But first, take a deep breath "
-                       "and think step by step. Start by analyzing the current approach:"
+            "content": prompt + ' ' + cot_extract
         }
     ])
     return cot_response, llm.yesno_completion([
+        {
+            "role": "assistant",
+            "content": context
+        },
+        {
+            "role": "user",
+            "content": prompt + ' ' + cot_extract
+        },
         {
             "role": "assistant",
             "content": cot_response
         },
         {
             "role": "user",
-            "content": "Do your thoughts in the previous message recommend changing our approach? Please answer "
-                       "'Yes, I recommend a different approach' or 'No, I recommend staying with the current approach.'"
-        }
+            "content": prompt + ' ' + yesno_extract
+        },
     ])

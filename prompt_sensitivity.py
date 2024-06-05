@@ -1,5 +1,5 @@
 import openai
-from solver_prompt_sensitivity import perform_one_token_cpc, perform_cot_cpc
+from solver import perform_one_token_cpc, perform_cot_cpc
 
 import os
 import csv
@@ -22,7 +22,7 @@ model = 'gpt-3.5-turbo'
 llm = LLM(model)
 
 
-def make_validation_data(context_list, prompt_indices, confidences, outfile, n=1):
+def make_validation_data(context_list, prompt_indices, confidences, outfile, n=10):
     results_dir = 'results_prompt_sensitivity'
     os.makedirs(results_dir, exist_ok=True)
     
@@ -39,11 +39,11 @@ def make_validation_data(context_list, prompt_indices, confidences, outfile, n=1
     
     def process_query(idx, confidence, one_token_idx, cot_idx, formatted_context):
         try:
-            one_token_output = perform_one_token_cpc(llm, formatted_context, prompt=one_token_prompts[one_token_idx])
+            one_token_output = perform_one_token_cpc(llm, formatted_context, prompt=cpc_prompts[one_token_idx])
             #print(f"One Token Output: {one_token_output}")
             one_token_result = 1 if one_token_output == "No" else 0
             
-            cot_output, cot_yesno = perform_cot_cpc(llm, formatted_context, prompt=cot_prompts[cot_idx])
+            cot_output, cot_yesno = perform_cot_cpc(llm, formatted_context, prompt=cpc_prompts[cot_idx])
             #print(f"CoT Output: {cot_output}")
             #print(f"CoT Yes/No: {cot_yesno}")
             cot_result = 1 if cot_yesno == "No" else 0
@@ -112,12 +112,6 @@ contexts ={
         base + 'My goal is to finish my homework by 5pm. I think {insert} that I have some hot cocoa when I am done.',
         base + 'My plan is to write a best-selling novel this year. I might have to renew my driver\'s license this year, {insert}.'
     ],
-    'knapsack': [
-        base+'I am planning to build a machine, which needs five new tools. I brought $20 cash to the hardware store. The first tool costs ${insert}.',
-        base+'I am aiming to get home before sunset. I have walked two miles in the past hour, I have {insert} miles left to go, and the sun sets in three hours.',
-        base+'My goal is to raise $100 for charity over the next ten days. Today I went door-to-door and fell short of my $10 goal for the day by ${insert}.',
-    ],
-
     'batna': [
         base+'I am trying to make money. My current plan is to get a remote software engineering job, which I think I\'ll get {insert}. Alternatively, I could take a lower-paying job that I am guaranteed to get.',
         base+'I am working on proving a theorem. I have a proof strategy that I think {insert} will be applicable. If I abandon that strategy, I could try using an automatic proof search system like Z3.',
@@ -127,28 +121,13 @@ contexts ={
 }
    
 
-# knapsack options as confidences?
-knapsack_options = [str(i) for i in range(11)]  
-
-cpc_prompt = "At this point, we're going to stop and consider whether this approach is working or not and leads to a correct solution to the problem being worked on. Otherwise, we should step back and try a different approach."
-
-one_token_prompts = {
-    0: "Is this strategy failing to meet our expectations? Yes or No.",
-    1: "Does this plan inadequately address our goals? Yes or No.",
-    2: "Should we consider a new approach due to the shortcomings of the present one? Yes or No.",
-    #3: "Is our current method failing us in achieving our objectives? Yes or No."
-    3: cpc_prompt
+cpc_prompts = {
+    0: "Would it be better to switch to a different strategy? Yes or No.",
+    1: "Do you think a different approach would solve this problem more efficiently? Yes or No.",
+    2: "Would it be worthwhile to change plans and solve this problem another way? Yes or No.",
+    3: "Do you think some other method would be more effective? Yes or No.",
 }
 
-
-
-cot_prompts = {
-    0: "Reflect critically on our current approach: Does it fall short of what is required? Provide a detailed analysis before concluding with Yes to switch, or No to proceed.",
-    1: "Analyze the effectiveness of our strategy: Is it adequate for our needs or must we explore other options? Yes for new options, No to continue as is.",
-    2: "Assess the sufficiency of our current plan: Are there critical areas where it fails? Conclude with Yes if a new strategy is needed, No if it remains viable.",
-    #3: "Deliberate on the current methodology: Is it proving to be suboptimal for our goals? End with Yes to abandon it, or No to keep it."
-    3: cpc_prompt
-}
 
 
 
@@ -164,9 +143,16 @@ context_to_prompt_indices = {
 
 
 
+# model = 'gpt-3.5-turbo' 
+# llm = LLM(model)
+# make_validation_data(contexts['spoonfeed'], context_to_prompt_indices['spoonfeed'], numerical_confidences, 'cpc_validation_spoonfeed.csv', n=10)
+# make_validation_data(contexts['hints'], context_to_prompt_indices['hints'],  numerical_confidences, 'cpc_validation_hints.csv', n=10)
+# make_validation_data(contexts['red_herrings'], context_to_prompt_indices['red_herrings'], numerical_confidences, 'cpc_validation_red_herrings.csv', n=10)
+# make_validation_data(contexts['batna'], context_to_prompt_indices['batna'], numerical_confidences, 'cpc_validation_batna.csv', n=10)
 
-make_validation_data(contexts['spoonfeed'], context_to_prompt_indices['spoonfeed'], numerical_confidences, '4_cpc_validation_spoonfeed.csv', n=10)
-make_validation_data(contexts['knapsack'], context_to_prompt_indices['knapsack'], knapsack_options, '4_cpc_validation_knapsack.csv', n=10)
-make_validation_data(contexts['hints'], context_to_prompt_indices['hints'],  numerical_confidences, '4_cpc_validation_hints.csv', n=10)
-make_validation_data(contexts['red_herrings'], context_to_prompt_indices['red_herrings'], numerical_confidences, '4_cpc_validation_red_herrings.csv', n=10)
+model = 'gpt-4'
+llm = LLM(model)
+# make_validation_data(contexts['spoonfeed'], context_to_prompt_indices['spoonfeed'], numerical_confidences, '4_cpc_validation_spoonfeed.csv', n=10)
+# make_validation_data(contexts['hints'], context_to_prompt_indices['hints'],  numerical_confidences, '4_cpc_validation_hints.csv', n=10)
+# make_validation_data(contexts['red_herrings'], context_to_prompt_indices['red_herrings'], numerical_confidences, '4_cpc_validation_red_herrings.csv', n=10)
 make_validation_data(contexts['batna'], context_to_prompt_indices['batna'], numerical_confidences, '4_cpc_validation_batna.csv', n=10)
