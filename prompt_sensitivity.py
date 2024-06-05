@@ -112,12 +112,6 @@ contexts ={
         base + 'My goal is to finish my homework by 5pm. I think {insert} that I have some hot cocoa when I am done.',
         base + 'My plan is to write a best-selling novel this year. I might have to renew my driver\'s license this year, {insert}.'
     ],
-    'knapsack': [
-        base+'I am planning to build a machine, which needs five new tools. I brought $20 cash to the hardware store. The first tool costs ${insert}.',
-        base+'I am aiming to get home before sunset. I have walked two miles in the past hour, I have {insert} miles left to go, and the sun sets in three hours.',
-        base+'My goal is to raise $100 for charity over the next ten days. Today I went door-to-door and fell short of my $10 goal for the day by ${insert}.',
-    ],
-
     'batna': [
         base+'I am trying to make money. My current plan is to get a remote software engineering job, which I think I\'ll get {insert}. Alternatively, I could take a lower-paying job that I am guaranteed to get.',
         base+'I am working on proving a theorem. I have a proof strategy that I think {insert} will be applicable. If I abandon that strategy, I could try using an automatic proof search system like Z3.',
@@ -126,9 +120,6 @@ contexts ={
 
 }
    
-
-# knapsack options as confidences?
-knapsack_options = [str(i) for i in range(11)]  
 
 cpc_prompts = {
     0: "Would it be better to switch to a different strategy? Yes or No.",
@@ -152,9 +143,16 @@ context_to_prompt_indices = {
 
 
 
+model = 'gpt-3.5-turbo' 
+llm = LLM(model)
+make_validation_data(contexts['spoonfeed'], context_to_prompt_indices['spoonfeed'], numerical_confidences, 'cpc_validation_spoonfeed.csv', n=10)
+make_validation_data(contexts['hints'], context_to_prompt_indices['hints'],  numerical_confidences, 'cpc_validation_hints.csv', n=10)
+make_validation_data(contexts['red_herrings'], context_to_prompt_indices['red_herrings'], numerical_confidences, 'cpc_validation_red_herrings.csv', n=10)
+make_validation_data(contexts['batna'], context_to_prompt_indices['batna'], numerical_confidences, 'cpc_validation_batna.csv', n=10)
 
-make_validation_data(contexts['spoonfeed'], context_to_prompt_indices['spoonfeed'], numerical_confidences, '4_cpc_validation_spoonfeed.csv', n=10)
-make_validation_data(contexts['knapsack'], context_to_prompt_indices['knapsack'], knapsack_options, '4_cpc_validation_knapsack.csv', n=10)
-make_validation_data(contexts['hints'], context_to_prompt_indices['hints'],  numerical_confidences, '4_cpc_validation_hints.csv', n=10)
-make_validation_data(contexts['red_herrings'], context_to_prompt_indices['red_herrings'], numerical_confidences, '4_cpc_validation_red_herrings.csv', n=10)
-make_validation_data(contexts['batna'], context_to_prompt_indices['batna'], numerical_confidences, '4_cpc_validation_batna.csv', n=10)
+# model = 'gpt-4'
+# llm = LLM(model)
+# make_validation_data(contexts['spoonfeed'], context_to_prompt_indices['spoonfeed'], numerical_confidences, '4_cpc_validation_spoonfeed.csv', n=10)
+# make_validation_data(contexts['hints'], context_to_prompt_indices['hints'],  numerical_confidences, '4_cpc_validation_hints.csv', n=10)
+# make_validation_data(contexts['red_herrings'], context_to_prompt_indices['red_herrings'], numerical_confidences, '4_cpc_validation_red_herrings.csv', n=10)
+# make_validation_data(contexts['batna'], context_to_prompt_indices['batna'], numerical_confidences, '4_cpc_validation_batna.csv', n=10)
