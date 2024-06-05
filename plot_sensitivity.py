@@ -8,7 +8,7 @@ def rearrange_indices(len):
 
 def plot_stepback_rates_with_confidence(file_path):
     df = pd.read_csv(file_path)
-    results_dir = 'graphs_4_prompts'
+    results_dir = 'results_prompt_sensitivity'
     os.makedirs(results_dir, exist_ok=True)
 
     # Create a list of color-marker combinations
@@ -60,7 +60,7 @@ def plot_stepback_rates_with_confidence(file_path):
 
     for ax in axs:
         ax.set_ylim(0, 1)
-        ax.set_title('Stepback Rate' if ax != axs[2] else 'Pairwise Accuracy')
+        ax.set_title(('Stepback Rate' if ax != axs[2] else 'Pairwise Accuracy') + ', ' + ('gpt-3.5-turbo' if '4' not in file_path else 'gpt-4') + ', ' + file_path.split('_')[-1][:-4])
         ax.set_xlabel('Confidence')
         ax.set_ylabel('Rate' if ax != axs[2] else 'Accuracy')
         ax.legend(loc='upper left', bbox_to_anchor=(1, 1))
@@ -71,6 +71,9 @@ def plot_stepback_rates_with_confidence(file_path):
     plt.savefig(os.path.join(results_dir, plot_filename), bbox_inches='tight')
     plt.close(fig)
 
-files = ['4_cpc_validation_spoonfeed.csv', '4_cpc_validation_batna.csv', '4_cpc_validation_hints.csv', '4_cpc_validation_knapsack.csv', 'cpc_validation_red_herrings.csv']
-for file in files:
+results_dir = 'results_prompt_sensitivity'
+files = ['cpc_validation_spoonfeed.csv', 'cpc_validation_batna.csv', 'cpc_validation_hints.csv', 'cpc_validation_red_herrings.csv']
+for file in [results_dir+'/'+x for x in files]:
+    plot_stepback_rates_with_confidence(file)
+for file in [results_dir+'/4_'+x for x in files]:
     plot_stepback_rates_with_confidence(file)

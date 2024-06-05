@@ -22,7 +22,7 @@ model = 'gpt-3.5-turbo'
 llm = LLM(model)
 
 
-def make_validation_data(context_list, prompt_indices, confidences, outfile, n=1):
+def make_validation_data(context_list, prompt_indices, confidences, outfile, n=10):
     results_dir = 'results_prompt_sensitivity'
     os.makedirs(results_dir, exist_ok=True)
     
@@ -143,16 +143,16 @@ context_to_prompt_indices = {
 
 
 
-model = 'gpt-3.5-turbo' 
-llm = LLM(model)
-make_validation_data(contexts['spoonfeed'], context_to_prompt_indices['spoonfeed'], numerical_confidences, 'cpc_validation_spoonfeed.csv', n=10)
-make_validation_data(contexts['hints'], context_to_prompt_indices['hints'],  numerical_confidences, 'cpc_validation_hints.csv', n=10)
-make_validation_data(contexts['red_herrings'], context_to_prompt_indices['red_herrings'], numerical_confidences, 'cpc_validation_red_herrings.csv', n=10)
-make_validation_data(contexts['batna'], context_to_prompt_indices['batna'], numerical_confidences, 'cpc_validation_batna.csv', n=10)
-
-# model = 'gpt-4'
+# model = 'gpt-3.5-turbo' 
 # llm = LLM(model)
+# make_validation_data(contexts['spoonfeed'], context_to_prompt_indices['spoonfeed'], numerical_confidences, 'cpc_validation_spoonfeed.csv', n=10)
+# make_validation_data(contexts['hints'], context_to_prompt_indices['hints'],  numerical_confidences, 'cpc_validation_hints.csv', n=10)
+# make_validation_data(contexts['red_herrings'], context_to_prompt_indices['red_herrings'], numerical_confidences, 'cpc_validation_red_herrings.csv', n=10)
+# make_validation_data(contexts['batna'], context_to_prompt_indices['batna'], numerical_confidences, 'cpc_validation_batna.csv', n=10)
+
+model = 'gpt-4'
+llm = LLM(model)
 # make_validation_data(contexts['spoonfeed'], context_to_prompt_indices['spoonfeed'], numerical_confidences, '4_cpc_validation_spoonfeed.csv', n=10)
 # make_validation_data(contexts['hints'], context_to_prompt_indices['hints'],  numerical_confidences, '4_cpc_validation_hints.csv', n=10)
 # make_validation_data(contexts['red_herrings'], context_to_prompt_indices['red_herrings'], numerical_confidences, '4_cpc_validation_red_herrings.csv', n=10)
-# make_validation_data(contexts['batna'], context_to_prompt_indices['batna'], numerical_confidences, '4_cpc_validation_batna.csv', n=10)
+make_validation_data(contexts['batna'], context_to_prompt_indices['batna'], numerical_confidences, '4_cpc_validation_batna.csv', n=10)
