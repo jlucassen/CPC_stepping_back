@@ -63,7 +63,7 @@ def split_and_judge_switching(context_df, row_split_and_judge, chunk_size):
         row_results = context_df['context'].apply(lambda row: executor.submit(row_split_and_judge, row, chunk_size))
         row_results = row_results.apply(lambda x: x.result()) # list of (prefixes, processed_switching) for each context
         new_df_list = []
-        switch_indices = [switching.index(1) if 1 in switching else len(switching) for _, switching in row_results]
+        switch_indices = [switching.index(1) if 1 in switching else None for _, switching in row_results]
         for i, (prefixes, processed_switching) in enumerate(row_results):
             row_info = context_df.iloc[i]
             for j, (prefix, switch_val) in enumerate(list(zip(prefixes, processed_switching))):
