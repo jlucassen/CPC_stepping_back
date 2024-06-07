@@ -5,11 +5,15 @@ cpc_prompt = ("At this point, we're going to stop and consider whether this appr
               "At this point, should we change to a different approach?")
 
 yesno_extract = "Respond Yes or No." # same as Solver, shown to be best on trivia
-cot_extract = 'Think through the question but do not answer yet.' # shown to be best on CPC
+cot_extract = 'Think through whether we should change to a different approach, but do not answer yet.' # shown to be best on CPC
 
-def perform_one_token_cpc(llm: LLM, context: str, cpc_prompt=cpc_prompt) -> str:
+def perform_one_token_cpc(llm: LLM, context: str, task_descr, cpc_prompt=cpc_prompt) -> str:
     """Asks the llm to do a one-word completion on whether its priorities should change or not."""
     messages_1t = [
+        {
+            "role": "user",
+            "content": task_descr
+        },
         {
             "role": "assistant",
             "content": context
@@ -21,13 +25,17 @@ def perform_one_token_cpc(llm: LLM, context: str, cpc_prompt=cpc_prompt) -> str:
     ]
     return llm.yesno_completion(messages_1t)
 
-def perform_cot_cpc(llm: LLM, context: str, cpc_prompt=cpc_prompt) -> (str, str):
+def perform_cot_cpc(llm: LLM, context: str, task_descr, cpc_prompt=cpc_prompt) -> (str, str):
     """
     Asks the llm to make a more lengthy consideration of whether its priorities should change or not.
     :returns: a tuple of two strings; the first string is the llm's thoughts from the CoT prompt; the second is the
     Yes/No response summarizing the CoT result.
     """
     messages_cot = [
+        {
+            "role": "user",
+            "content": task_descr
+        },
         {
             "role": "assistant",
             "content": context
