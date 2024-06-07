@@ -5,7 +5,7 @@ cpc_prompt = ("At this point, we're going to stop and consider whether this appr
               "At this point, should we change to a different approach?")
 
 yesno_extract = "Respond Yes or No." # same as Solver, shown to be best on trivia
-cot_extract = 'Think through whether we should change to a different approach, but do not answer yet.' # shown to be best on CPC
+cot_extract = 'Think through whether we should change to a different approach, but do not answer yet. What approaches have been tried? How have they fared?' # shown to be best on CPC
 
 def perform_one_token_cpc(llm: LLM, context: str, task_descr, cpc_prompt=cpc_prompt) -> str:
     """Asks the llm to do a one-word completion on whether its priorities should change or not."""
