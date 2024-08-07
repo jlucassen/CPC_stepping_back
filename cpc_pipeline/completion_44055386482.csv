@@ -1,0 +1,3718 @@
+problem,max,factorable,context
+3x^2 - 21x + 30 = 0,5,True,"The quadratic equation 3x^2 - 21x + 30 = 0 can be factored as follows:
+
+3(x^2 - 7x + 10) = 0
+
+We can factor the quadratic expression within the parenthesis as:
+
+3(x - 2)(x - 5) = 0
+
+Setting each factor equal to zero gives the solutions:
+
+x - 2 = 0  -->  x = 2
+x - 5 = 0  -->  x = 5
+
+Therefore, the roots of the quadratic equation are x = 2 and x = 5."
+2x^2 - 10x + 8 = 0,5,True,"We have the equation 2x^2 - 10x + 8 = 0.
+
+First, we can factor out a 2: 
+
+2(x^2 - 5x + 4) = 0.
+
+Then, we can set the factor (x^2 - 5x + 4) equal to zero and factor it:
+
+x^2 - 5x + 4 = 0
+(x - 4)(x - 1) = 0
+
+Then, we can set each factor (x - 4) and (x - 1) equal to zero and solve for x:
+
+x - 4 = 0 yields x = 4
+x - 1 = 0 yields x = 1
+
+So the roots of the quadratic equation 2x^2 - 10x + 8 = 0 are 1 and 4."
+4x^2 - 28x + 40 = 0,5,True,"I'll start by factoring out the common factor of 4 from all terms in the equation. This leads to the equation:
+
+4(x^2 - 7x + 10) = 0
+
+Now, let's factorise x^2 - 7x + 10:
+
+(x - 5)(x - 2) = 0.
+
+Setting each factor equal to zero gives the solutions:
+
+x - 5 = 0   -->   x = 5
+x - 2 = 0   -->   x = 2
+
+Therefore, the roots of the equation 4x^2 - 28x + 40 = 0 are x = 5 and x = 2."
+4x^2 - 24x + 20 = 0,5,True,"The given equation is 4x^2 - 24x + 20 = 0.
+
+First, factor by common factor (4) from all terms in the quadratic equation. 
+
+This will leave:
+
+4(x^2 - 6x + 5) = 0
+
+Next, we then set the expression in the parenthesis equal to zero since the product of this and 4 gives zero. The equation to solve then becomes:
+
+x^2 - 6x + 5 = 0
+
+We look for factors of 5 that sum up to 6. The factors are 5 and 1.
+
+Therefore we can factorize the equation to be: 
+
+(x -1)(x -5) = 0
+
+Using the zero-product property (if ab=0, then a=0 or b=0), we have:
+
+x - 1 = 0    or    x - 5 = 0 
+
+Solving these equations gives the roots of the given equation as:
+
+x = 1  or x = 5."
+3x^2 - 24x + 45 = 0,5,True,"The original equation is 3x^2 - 24x + 45 = 0.
+
+Factor out a 3 to make the equation easier to solve:
+
+3(x^2 - 8x + 15) = 0 
+
+Now let's factor the quadratic expression inside the parentheses:
+
+x^2 - 8x + 15 can be factored into (x - 3)(x - 5)
+
+So, we have 3(x - 3)(x - 5) = 0
+
+A product of factors equals to zero only if at least one of the factors is zero. So, we set each factor equal to zero:
+
+x - 3 = 0  or  x - 5 = 0
+
+Giving us solutions:
+
+x = 3  and  x = 5
+
+Therefore, the roots of the equation 3x^2 - 24x + 45 = 0 are x = 3 and x = 5. We factored the equation successfully, so there's no need to use the quadratic formula."
+2x^2 - 12x + 18 = 0,5,True,"First, we can simplify the equation by factoring out a 2 from each term to get:
+
+2(x^2 - 6x + 9) = 0
+
+This simplifies to:
+
+2(x - 3)^2 = 0
+
+This means that the equation equals zero when (x - 3) equals zero. So, 
+
+x - 3 = 0
+
+Solve for x to find the roots:
+
+x = 3
+
+So, the equation has one root at x = 3. This occurs when the discriminant of the quadratic is zero, meaning the quadratic touches the x axis at this point, thus having only one real root. This quadratic equation is a perfect square trinomial."
+2x^2 - 6x + 4 = 0,5,True,"Upon examining the equation, it appears that the equation cannot be factored using integer values. Therefore, to solve it, we will need to use the quadratic formula.
+
+The quadratic formula is x = [-b ± sqrt(b^2 - 4ac)] / 2a. 
+
+Here, a = 2, b = -6, and c = 4.
+
+We plug those numbers into the quadratic formula as follows:
+
+x = [6 ± sqrt((-6)^2 - 4*2*4)] / 2*2
+= [6 ± sqrt(36 - 32)] / 4
+= [6 ± sqrt(4)] / 4
+= [6 ± 2] / 4.
+
+This gives us the two solutions x = 8/4 = 2 and x = 4/4 = 1."
+1x^2 - 8x + 15 = 0,5,True,"To factor the equation, we look for two numbers that multiply to give a product of 15 (the constant term) and add up to give -8 (the coefficient of the middle term).
+
+These two numbers are -5 and -3 because:
+
+-5*-3 = 15
+-5 - 3 = -8
+
+So, we can factor the quadratic equation as follows:
+
+x^2 - 8x + 15 = 0
+
+(x - 5)(x - 3) = 0
+
+Now, we can solve the equation by setting each factor equal to zero:
+
+x - 5 = 0 or x - 3 = 0
+
+Solving each equation gives:
+
+x = 5 or x = 3
+
+So, the roots of the quadratic equation are 5 and 3."
+3x^2 - 27x + 60 = 0,5,True,"We can simplify the equation to make the factorization process easier:
+
+3x^2 - 27x + 60 = 0
+
+We can factor out a 3:
+
+3(x^2 - 9x + 20) = 0
+
+Then, the quadratic inside the parentheses can be factored as well:
+
+3(x - 4)(x - 5) = 0
+
+Now, we can set the factors equal to zero:
+
+x - 4 = 0 or x - 5 = 0
+
+So, x = 4 or x = 5
+
+Therefore, the roots of the quadratic equation are x = 4 and x = 5."
+2x^2 - 6x + 4 = 0,5,True,"We can begin by seeing if we can factor the equation by searching for two factors that multiply to 4 (the third term in the quadratic) and add to -6 (the coefficient of the second term in the quadratic). 
+
+In this case, it doesn't seem like we have integers that can satisfy both these conditions as potential factors, so let's use the quadratic formula: 
+
+The Quadratic Formula is: 
+  x = [-b ± sqrt (b² - 4ac)] / 2a 
+
+Here, a = 2, b = -6 and c = 4. 
+
+Substitute these values into the formula to find the roots of the equation:
+
+x = [6 ± sqrt ((-6)² - 4×2×4)] / 2×2 
+x = [6 ± sqrt (36 - 32)] / 4
+x = [6 ± sqrt (4)] / 4
+x = [6 ± 2] / 4
+
+Therefore, the roots of the equation are:
+x = 8 / 4 = 2 
+and 
+x = 4 / 4 = 1 
+
+So the solutions to the equation 2x² - 6x + 4 = 0 are x = 2 and x = 1."
+5x^2 - 50x + 127 = 0,5,False,"However, factoring results in a non-integer solution which indicates that the quadratic equation is not factorable. Therefore, I will use the Quadratic Formula instead.
+
+The Quadratic Formula is given by:
+x = [ -b ± sqrt(b^2 - 4ac) ] / 2a
+
+For the equation 5x^2 - 50x + 127 = 0, a = 5, b = -50, and c = 127.
+
+Substituting these values into the Quadratic Formula, we get:
+
+x = [ 50 ± sqrt((-50)^2 - 4*5*127) ] / (2*5)
+x = [ 50 ± sqrt(2500 - 2540) ] / 10
+x = [ 50 ± sqrt(-40) ] / 10
+This results in a imaginary roots as square root of a negative number is imaginary.
+
+Writing the root in the form of a + bj, we get x = 5 ± sqrt(10)*i
+where i is the imaginary unit with the property i^2 = -1."
+3x^2 - 21x + 37 = 0,5,False,"This equation doesn't look like it will easily factor, so we can go ahead and use the quadratic formula.
+
+The quadratic formula is as follows:
+
+x = [ -b ± sqrt(b^2 - 4ac) ] / 2a
+
+In our equation, a = 3, b = -21 and c = 37.
+
+Let's plug these values into quadratic formula:
+
+x = [ -(-21) ± sqrt((-21)^2 - 4*3*37) ] / 2*3
+x = [ 21 ± sqrt((441) - (444)) ] / 6
+x = [ 21 ± sqrt(-3) ] / 6.
+
+We have a negative number under the square root, which means our solutions are imaginary or complex.
+
+So, the solutions for the equation are:
+
+x = 21/6 ± √3*i/6
+x = 3.5 ± (0.5)i√3. So the roots of the equation are 3.5 + (0.5)i√3 and 3.5 - (0.5)i√3."
+5x^2 - 30x + 27 = 0,5,False,"After looking at it, seems like this quadratic equation does not factor nicely. So, I'll use the quadratic formula: x = [-b +/- sqrt(b² - 4ac)] / 2a .
+
+a, b, and c in the equation are:
+
+a = 5,
+b = -30,
+and c = 27.
+
+The quadratic formula becomes:
+
+x = [30 +/- sqrt((-30)² - 4*5*27)] / 2*5
+x = [30 +/- sqrt(900 - 540)] / 10
+x = [30 +/- sqrt(360)] / 10
+x = [30 +/- 6*sqrt(10)] / 10
+x = 3 +/- sqrt(10)
+
+So, the roots of the quadratic equation are x = 3 + sqrt(10) and x = 3 - sqrt(10)."
+2x^2 - 10x + 17 = 0,5,False,"Upon attempting to factor, it appears that this equation cannot be factored using integers. Therefore, next step is to apply the quadratic formula 
+
+x = [-b ± sqrt(b^2 - 4ac)] / (2a)
+
+in this case a = 2, b = -10, and c = 17.
+
+Plugging these values into the formula:
+
+x = [10 ± sqrt((-10)^2 - 4*2*17)] / (2*2)
+
+x = [10 ± sqrt(100 - 136)] / 4
+
+The value under the square root is negative, that means the roots of this equation are complex numbers.
+
+x = [10 ± sqrt(-36)] / 4
+
+x = [10 ± 6i] / 4
+
+After simplifying, we get
+
+x1 = 10/4 + 6i/4 = 2.5 + 1.5i
+
+x2 = 10/4 - 6i/4 = 2.5 - 1.5i
+
+So, the roots of the quadratic equation 2x^2 - 10x + 17 = 0 are 2.5 + 1.5i and 2.5 - 1.5i."
+1x^2 - 4x + 7 = 0,5,False,"However, the equation 1x^2 - 4x + 7 = 0 is not easily factorable. So I have to use the quadratic formula instead. 
+
+The quadratic formula is given by: 
+
+x = [ -b ± sqrt( b² - 4ac ) ] / (2a) 
+
+In this equation, a = 1, b = -4, and c = 7.
+
+So substituting these values in the formula, the solutions of the equation are:
+
+x = {[4 ± sqrt((-4)² - 4*1*7)] / 2*1}
+x = {[4 ± sqrt(16 - 28)] / 2}
+x = {[4 ± sqrt(-12)] / 2}
+Since the result under the square root is negative, we'll have imaginary roots. The √-1 equivalent to 'i'.
+
+Therefore: 
+
+x = {[4 ± 2i√3] / 2}
+which simplifies to:
+x = 2 ± i√3 
+
+So, the roots of the equation 1x^2 - 4x + 7 = 0 are 2 + i√3 and 2 - i√3, which are complex roots."
+3x^2 - 18x + 25 = 0,5,False,"Unfortunately, 3x^2 - 18x + 25 doesn't factor nicely into a simple product of binomials. Now, we have to use the quadratic formula:
+
+The quadratic formula is x = [-b ± sqrt(b^2 - 4ac)] / (2a).
+
+In 3x^2 - 18x + 25 = 0, a = 3, b = -18, c = 25.
+
+Substitute these values into the quadratic formula:
+x = [-(-18) ± sqrt((-18)^2 - 4*3*25)] / (2*3),
+x = [18 ± sqrt(324 - 300)] /6,
+x = [18 ± sqrt(24)] /6,
+x = [18 ± 2sqrt(6) ] /6,
+x = 3 ± sqrt(6).
+
+Hence, the roots are x = 3 - sqrt(6) and x = 3 + sqrt(6)."
+2x^2 - 12x + 20 = 0,5,False,"Every term in the equation has a factor of 2, so I'm going to factor that out first:
+
+2(x^2 - 6x + 10) = 0
+
+This leaves us with a simplified equation of:
+
+x^2 - 6x + 10 = 0
+
+To factor this, I'm looking for two numbers that multiply to give 10 and add to give -6. However, no two such numbers exist. 
+
+Therefore, I am unable to factor this equation and will use the quadratic formula instead. The quadratic formula is given by:
+
+x = [-b ± sqrt(b^2 - 4ac)] / 2a
+
+In this problem, a = 1, b = -6, and c = 10. Plugging these values in gives:
+
+x = [6 ± sqrt((-6)^2 - 4*1*10)] / 2*1
+x = [6 ± sqrt(36 - 40)] / 2
+x = [6 ± sqrt(-4)] / 2
+
+Since the value inside the square root is negative, this equation has no real roots. Instead, it has two complex roots. 
+
+The square root of -4 is 2i, where i is the imaginary unit. Therefore, the roots of the equation are:
+
+x = 3 ± i."
+5x^2 - 30x + 29 = 0,5,False,"Looking at the coefficient of the quadratic term (5) and the constant term (29), it could be quite difficult to find two numbers which multiply to 145 and add to -30. Therefore, factoring might not be possible for this equation. 
+
+So, I have to use the quadratic formula, which is x = [-b ± sqrt(b² - 4ac)] / 2a. 
+
+In this equation, a = 5, b = -30, and c = 29. So,
+
+x = [30 ± sqrt((-30)² - 4*5*29)] / 2*5
+x = [30 ± sqrt(900 - 580)] / 10
+x = [30 ± sqrt(320)] / 10
+x = [30 ± 20]/10
+x = [10, 5].
+
+Therefore, the roots of the quadratic equation 5x^2 - 30x + 29 = 0 are x = 1 and x = 5."
+5x^2 - 35x + 61 = 0,5,False,"Sadly, the quadratic equation 5x^2 - 35x + 61 = 0 doesn't factor nicely, so we'll use the quadratic formula instead.
+
+The quadratic formula is x = [-b ± sqrt(b^2 - 4ac)] / (2a)
+
+For this equation, a = 5, b = -35, and c = 61.
+
+First, find the value inside the square root, which is b^2 - 4ac = (-35)^2 - 4*5*61 = 1225 - 1220 = 5
+
+So, we have x = [35 ± sqrt(5)] / (2 * 5)
+
+Therefore, the roots of the given equation are:
+
+x = 35/10 + sqrt(5)/10 = 7 + sqrt(5)/2
+and
+x = 35/10 - sqrt(5)/10 = 7 - sqrt(5)/2."
+2x^2 - 10x + 13 = 0,5,False,"Since the coefficients are large numbers, factoring is difficult, and in this case, the equation cannot be factored easily. Hence, I will use the quadratic formula. 
+
+The quadratic formula for an equation ax^2 + bx + c = 0 is given by:
+
+x = [ -b ± sqrt(b^2 - 4ac) ] / 2a
+
+Here, a = 2, b = -10, and c = 13
+
+Hence,
+
+x = [ 10 ± sqrt((-10)^2 - 4*2*13) ] / 2*2
+
+x = [ 10 ± sqrt(100 - 104) ] / 4
+
+x = [10 ± sqrt(-4)] / 4
+
+Since we have a negative number under the square root, the roots will be complex/imaginary.
+
+We first rewrite sqrt(-4) as sqrt(4)*sqrt(-1) = 2i (where i is the imaginary unit).
+
+Now, we can calculate the complex roots:
+
+x = 10/4 ± (2i) / 4
+
+Hence, the roots of the equation are:
+
+x1 = 2.5 + 0.5i
+x2 = 2.5 - 0.5i"
+5x^2 - 80x + 320 = 0,10,True,"We can start by finding the greatest common factor (GCF) of all terms. Here, the GCF of 5x^2, -80x, and 320 is 5. So, the simplified equation after factorising the GCF would be:
+
+5(x^2 - 16x + 64) = 0
+
+Now, if we look at the equation within the brackets, it is a perfect square trinomial. It can be factored into (x - a)^2, where a is the square root of the third term (64), which is 8. Thus, the factored form of this equation is:
+
+5(x - 8)^2 = 0
+
+Setting our factored equation equal to zero and solving for x gives the roots of our original quadratic equation:
+
+5(x - 8)^2 = 0
+=> (x - 8)^2 = 0  [Dividing both sides by 5]
+=> x - 8 = 0
+=> x = 8
+
+Therefore, the roots of the equation 5x^2 - 80x + 320 = 0 are x = 8 and x = 8. This equation actually has only one unique root, x = 8, which has a multiplicity of 2."
+10x^2 - 110x + 100 = 0,10,True,"Let's factor 10 out from the quadratic equation first:
+
+10x^2 - 110x + 100 = 0 
+=> 10(x^2 - 11x + 10) = 0 
+
+So, we get the equation as:
+x^2 - 11x + 10 = 0
+
+Now, let's try to break the middle term:
+x^2 - x - 10x + 10 = 0 
+
+Grouping like terms together:
+x(x - 1) - 10(x - 1) = 0 
+
+Now, we get the equation as:
+(x - 1)(x - 10) = 0 
+
+By setting these equal to zero, we can find the roots of the equation.
+So, x - 1 = 0 => x = 1 
+And, x - 10 = 0 => x = 10 
+
+Therefore, the roots of the given quadratic equation are 1 and 10."
+3x^2 - 33x + 54 = 0,10,True,"To get started with factoring, let's break down the equation:
+
+3x^2 - 33x + 54 = 0
+
+It can be rewritten as:
+
+3*(x^2 - 11x + 18) = 0
+
+The quadratic x^2 - 11x + 18 can be easily factored into:
+
+(x - 2)(x - 9)
+
+So, our initial equation can be rewritten as:
+
+3*(x - 2)(x - 9) = 0
+
+Then, for 3*(x - 2)(x - 9) to be zero, either (x - 2) = 0, or (x - 9) = 0.
+
+Solving (x - 2) = 0:
+x = 2
+
+Solving (x - 9) = 0:
+x = 9
+
+Thus, the roots of the equation 3x^2 - 33x + 54 = 0 are x = 2 and x = 9."
+5x^2 - 35x + 30 = 0,10,True,"All terms of this equation are multiples of 5, which can be factored out:
+
+5(x^2 - 7x + 6) = 0.
+
+Breaking down x^2 - 7x + 6 = 0 further gives us:
+
+(x - 1)(x - 6) = 0.
+
+Setting each factor equal to zero gives the solutions:
+
+x - 1 = 0  => x = 1
+
+and
+
+x - 6 = 0  => x = 6.
+
+So, the solutions to the equation 5x^2 - 35x + 30 = 0 are x = 1, and x = 6."
+10x^2 - 70x + 120 = 0,10,True,"We can simplify the quadratic equation by dividing every term with 10:
+
+x^2 - 7x + 12 = 0
+
+This quadratic equation can be factored as:
+
+(x - 4) (x - 3) = 0
+
+Setting each factor equal to zero gives the solutions of the equation:
+
+x - 4 = 0   =>   x = 4
+
+x - 3 = 0   =>   x = 3
+
+Therefore, the roots of the quadratic equation 10x^2 - 70x + 120 = 0 are x=3 and x=4."
+3x^2 - 27x + 60 = 0,10,True,"The given equation is 3x^2 - 27x + 60 = 0.
+ 
+We can simplify this equation by taking out a common factor of 3. 
+
+Let me calculate it.
+
+3(x^2 - 9x + 20) = 0. 
+
+Now our simplified equation looked like:
+x^2 - 9x + 20 = 0.
+
+Let's try expressing the simplified equation as a product of two binomials: 
+
+(x - a)(x - b) = 0, 
+
+Where a and b are factors of 20 that when added equals 9.
+
+Factors of 20 are: 1, 2, 4, 5, 10, 20.
+
+Looking at the list, we see that 4 and 5 multiply to make 20 and they add up to 9.
+
+So we can write:
+
+(x - 4)(x - 5) = 0.
+
+Setting each binomial equal to zero gives us the roots of the equation:
+
+x - 4 = 0  => x = 4
+
+x - 5 = 0  => x = 5
+
+Therefore, the roots of the equation 3x^2 - 27x + 60 = 0 are x = 4 and x = 5."
+3x^2 - 30x + 63 = 0,10,True,"Notice that all coefficients in the equation are divisible by 3. Let's divide through by 3 to simplify the equation:
+
+3x^2 - 30x + 63 = 0 becomes x^2 - 10x + 21 = 0.
+
+Can we find two numbers that multiply to 21 and add up to -10? Yes, we can. They are -7 and -3. Therefore, we can factor the equation as follows:
+
+x^2 - 10x + 21 = 0
+= (x - 7)(x - 3) = 0
+
+Setting each factor equal to zero gives the solutions: 
+
+x - 7 = 0 => x = 7
+x - 3 = 0 => x = 3
+
+Thus, the roots of the equation 3x^2 - 30x + 63 = 0 are x = 3 and x = 7."
+9x^2 - 126x + 405 = 0,10,True,"We first notice that all coefficients are divisible by 9, so we can simplify our equation a bit:
+
+9x^2 - 126x + 405 = 0
+x^2 - 14x + 45 = 0
+
+Now, we factorize the quadratic equation:
+
+(x - 5)(x - 9) = 0
+
+Setting each factor equal to zero yields the solutions of x = 5 and x = 9. So, that's the roots of the quadratic equation."
+1x^2 - 10x + 21 = 0,10,True,"The given quadratic equation is 1x^2 - 10x + 21= 0.
+
+A quadratic equation ax^2+bx+c can be factored into the form a(x-𝛼)(x-𝛽) = 0, where 𝛼 and 𝛽 are the roots of the equation.
+
+In this case, we need to find two numbers that multiply to 21 (the constant term) and add up to 10 (the coefficient of x).
+
+Let's check numbers that can multiply to 21: 1 and 21, 3 and 7.
+
+Out of these, 3 and 7 also add up to 10. Therefore, we can write 1x^2 - 10x + 21= 0 as x^2 - 7x - 3x + 21= 0.
+
+Factoring by grouping, we get: x(x - 7) - 3(x - 7) = 0
+
+Taking out the common factor (x - 7), we get: (x - 7)(x - 3)= 0
+
+Setting each factor equal to zero gives the solutions: x - 7 = 0 => x = 7 and x - 3 = 0 => x = 3.
+
+Therefore, the roots of the equation 1x^2 - 10x + 21= 0 are 3 and 7.
+"
+7x^2 - 84x + 224 = 0,10,True,"Notice that all the coefficients in the equation are divisible by 7. Let's factor out a 7 from each term:
+
+7x^2 - 84x + 224 = 0 becomes 7(x^2 - 12x + 32)  = 0
+
+This allows the quadratic equation to be simplified to x^2 - 12x + 32 = 0
+
+We're now looking for two numbers that multiply to 32 and add to -12. These numbers are -4 and -8.
+
+So we can rewrite the equation as follows:  
+
+x^2 - 4x - 8x + 32 = 0.
+
+Factoring by grouping, we get x(x-4) - 8(x-4) = 0.
+
+Factor out (x-4), then we find (x-4)(x-8) = 0
+
+Setting each factor equal to 0 gives the solutions: x=4 and x=8."
+8x^2 - 48x + 43 = 0,10,False,"The given quadratic equation doesn't seem to be easily factorable. Therefore, we will apply the Quadratic Formula instead.
+
+The Quadratic Formula is: x = [-b ± sqrt(b² - 4ac)] / (2a)
+
+Given the quadratic equation 8x^2 - 48x + 43 =0, we can identify:
+a = 8, 
+b = -48, and 
+c = 43
+
+Substituting these into the Quadratic Formula gives:
+x = [48 ± sqrt((-48)² - 4*8*43)] / (2*8)
+x = [48 ± sqrt(2304 - 1376)] / 16
+x = [48 ± sqrt(928)] / 16
+x = [48 ± 2*sqrt(232)] / 16
+x = [3 ± sqrt(58/4)]
+x = [3 ± sqrt(14.5)]
+
+So there are two solutions:
+x = 3 + sqrt(14.5)
+x = 3 - sqrt(14.5)"
+1x^2 - 20x + 106 = 0,10,False,"Unfortunately, the equation 1x^2 - 20x + 106 = 0 does not factorise over the integers. As a result, we'll need to use the quadratic formula, which states that for any quadratic equation ax^2 + bx + c = 0, the solutions for x are given by:
+
+x = [ -b ± sqrt(b^2 - 4ac) ] / 2a 
+
+Here, a = 1, b = -20, and c = 106. Substituting these values into the formula gives:
+
+x = [ 20 ± sqrt((-20)^2 - 4*1*106) ] / 2*1
+x = [ 20 ± sqrt(400 - 424) ] / 2
+x = [ 20 ± sqrt(-24) ] / 2
+x = [ 20 ± sqrt(24)i ] / 2
+x = 10 ± 5sqrt(6)i
+
+So, the equation 1x^2 - 20x + 106 = 0 has two complex roots: 10 + 5sqrt(6)i and 10 - 5sqrt(6)i."
+1x^2 - 8x + 11 = 0,10,False,"Unfortunately, the quadratic equation 1x^2 - 8x + 11 = 0 cannot be factored easily. That means we have to solve it using the quadratic formula which is x = [-b ± sqrt(b^2 - 4ac)] / 2a. Here:
+
+a = 1 (coefficient of x^2)
+
+b = -8 (coefficient of x)
+
+c = 11 (constant term)
+
+By substituting these values into the formula, we got:
+
+x = [8 ± sqrt((-8)^2 - 4*1*11)] / 2*1
+
+x = [8 ± sqrt(64 - 44)] / 2
+
+x = [8 ± sqrt(20)] / 2
+
+x = [8 ± 2*sqrt(5)] / 2
+
+x = 4 ± sqrt(5)
+
+So, the roots are:
+
+x = 4 + sqrt(5)
+
+and
+
+x = 4 - sqrt(5)."
+8x^2 - 72x + 66 = 0,10,False,"In this case, the equation is quite complex and doesn't seem to have an easy factoring approach, so let's go with using the quadratic formula, which is given by 
+
+`x = [-b ± sqrt(b² - 4ac)] / (2a)`
+
+For this equation, a = 8, b = -72, and c = 66. 
+
+So, 
+`x = [72 ± sqrt((-72)² - 4*8*66)] / (2*8)
+     = [72 ± sqrt(5184 - 2112)] / 16
+     = [72 ± sqrt(3072)] / 16
+     = [72 ± 4*sqrt(192)] / 16
+     = [72 ± 4*8*sqrt(3) ] / 16
+     = [72 ± 32*sqrt(3)] / 16
+     = 4.5 ± 2*sqrt(3)`
+
+So, the roots of the equation are `4.5 + 2*sqrt(3)` and `4.5 - 2*sqrt(3)`."
+4x^2 - 64x + 258 = 0,10,False,"Honestly, it looks really hard to factorize this equation, and I think it will be faster to use the quadratic formula. The quadratic formula we'll use is given by: 
+x = [-b +- sqrt(b^2 - 4ac)] / (2a)
+
+Here in our given equation 4x^2 - 64x + 258 = 0, we can see that:
+a = 4,
+b = -64, and 
+c = 258.
+
+Substituting these values into the formula gives us:
+
+x = [64 ± sqrt((-64)^2 - 4*4*258)] / (2*4)
+x = [64 ± sqrt(4096 - 4128)] / 8
+x = [64 ± sqrt(-32)] /8.
+
+Since the term under the root symbol is negative, I can tell you that the roots of this equation are complex numbers. In fact, they're:
+
+x = [64 ± sqrt(-32)] /8
+x = [64 ± sqrt(32)i] /8
+x = [64 ± 4*sqrt(2)i] /8
+x = 8 ± sqrt(2)i
+
+So the roots of the equation are 8 + sqrt(2)i and 8 - sqrt(2)i."
+5x^2 - 90x + 409 = 0,10,False,"However, looking at the coefficients, it seems unlikely that this equation can be factored easily. Let's use the quadratic formula.
+
+The quadratic formula is x = [-b ± sqrt(b² - 4ac)] / 2a. In this case, a = 5, b = -90, and c = 409.
+
+First, we calculate the square root term, sqrt(b² - 4ac) = sqrt((-90)² - 4*5*409) = sqrt(8100 - 8180) = sqrt(-80).
+
+Since the discriminant (80) is negative, it means the roots are imaginary and complex.
+
+Let's proceed and calculate these complex roots.
+
+Real_part=(-b)/(2*a)=90/(2*5)=9
+
+Imaginary_part=sqrt(abs(-80))/(2*a)=sqrt(80)/10=sqrt(8)
+
+Therefore, the roots of the quadratic equation 5x² - 90x + 409 = 0 are x = 9 + sqrt(8)i and x = 9 - sqrt(8)i."
+8x^2 - 56x + 97 = 0,10,False,"Upon analyzing the equation 8x^2 - 56x + 97 = 0, it does not seem that it can be factored easily. We can therefore use the quadratic formula to solve it.
+
+The quadratic formula is x = [ -b ± sqrt(b^2 - 4ac) ] / 2a.
+
+For our equation, a = 8, b = -56, and c = 97.
+
+Let's substitute these values into the quadratic formula:
+
+x = [ -(-56) ± sqrt((-56)^2 - 4*8*97) ] / 2*8
+x = [ 56 ± sqrt(3136 - 3104) ] / 16
+x = [ 56 ± sqrt(32) ] / 16
+x = [ 56 ± 4sqrt(2) ] / 16
+
+Now we can simplify by dividing each term inside the brackets by 16:
+
+x = 3.5 ± 0.5sqrt(2)
+
+So the solutions for the equation 8x^2 - 56x + 97 = 0 are x = 3.5 + 0.5sqrt(2) and x = 3.5 - 0.5sqrt(2)."
+9x^2 - 27x + 21 = 0,10,False,"We can write down the quadratic equation as follows:
+
+9x^2 - 27x + 21 = 0
+
+Let's try factoring out a common factor first:
+
+9(x^2 - 3x + 7/3) = 0
+
+So the common factor is 9. Now, let's look at the quadratic left after factoring out the 9. It's not possible to factor (x^2 - 3x + 7/3) into two binomials using integers or simple fractions because it does not factor nicely. 
+
+Therefore, we must resort to the quadratic formula. The quadratic formula is:
+
+x = [ -(-b) ± sqrt( (b)^2 - 4ac ) ] / (2a)
+
+Here, a = 1 (after factoring out 9), b = -3, and c = 7/3. Substituting these values in gives:
+
+x = [ -(-3) ± sqrt( (-3)^2 - 4*1*7/3 ) ] / (2*1)
+x = [ 3 ± sqrt( 9 - 28/3 ) ] / 2
+x = [ 3± sqrt(27/3 - 28/3) ] / 2
+x = [ 3± sqrt(-1/3) ] / 2 = 3/2 ± (sqrt(1/3) * i)/2
+
+So the roots of the equation 9x^2 - 27x + 21 = 0 are complex numbers:
+
+x = 3/2 + ( sqrt(1/3) * i )/2
+x = 3/2 - ( sqrt(1/3) * i )/2
+
+Note: i is the imaginary unit, which is the square root of -1."
+4x^2 - 44x + 46 = 0,10,False,"However, it's not easy to factor this equation. 
+
+Let's use the quadratic formula. The quadratic formula is: 
+
+x = [-b +/- sqrt(b^2 - 4ac)] / 2a 
+
+where 
+a, b and c are coefficients of quadratic equation ax^2 + bx + c = 0.
+
+For the given equation 4x^2 - 44x + 46 = 0, a = 4 , b = -44 and c = 46
+
+Substitute a, b and c values into the formula.
+
+x = [(44) +/- sqrt((-44)^2 - 4*4*46)] / 2*4
+
+Use the order of operations (PEMDAS/BODMAS) to solve the equation.
+
+x = [44 +/- sqrt(1936 - 736)] / 8
+
+x = [44 +/- sqrt(1200)] / 8
+
+Since 1200 is a perfect square, it can be simplified to 10*sqrt(12).
+
+x = [44 +/- 10*sqrt(12)] / 8
+
+Finally, to get two possible results for x:
+
+x1 = (44 + 10*sqrt(12)) / 8 
+
+x2 = (44 - 10*sqrt(12)) / 8
+
+Calculating these values, we will get approximately:
+
+x1 ≈ 5.63
+x2 ≈ 1.63"
+7x^2 - 42x + 44 = 0,10,False,"This equation seems tricky to factor initially. Therefore, let's use the quadratic formula to determine the roots. The quadratic formula is given by:
+
+x = [-b ± sqrt(b^2 - 4ac)] / (2a)
+
+In our equation, a = 7, b = -42, and c = 44.
+
+Trying to substitute those values in:
+
+x = [42 ± sqrt((-42)^2 - 4*7*44)] / (2*7)
+x = [42 ± sqrt(1764 - 1232)] / 14
+x = [42 ± sqrt(532)] / 14
+x = [42 ± sqrt(4*133)] / 14
+x = [42 ± 2*sqrt(133)] / 14
+x = [21 ± sqrt(133)] / 7
+
+Therefore, the roots of the equation 7x^2 - 42x + 44 = 0 are x = (21 + sqrt(133)) / 7 and x = (21 - sqrt(133)) / 7."
+2x^2 - 52x + 336 = 0,15,True,"It might be hard to see how to factor this at first, given the large number. However, noticing that all coefficients are divisible by 2 could lead to an easier to manage equation. Divide the entire equation by 2 to simplify:
+
+x^2 - 26x + 168 = 0
+
+Now, let's try to factor this equation:
+
+Looking for two numbers that add up to -26 and multiply to 168. 
+Those two numbers are -14 and -12.
+
+So, we can write x^2 - 26x + 168 = 0 as (x -14)(x -12) = 0
+
+Setting each factor equal to zero gives the solutions:
+x -14 = 0  =>  x = 14
+x -12 = 0  =>  x = 12
+
+Therefore, the roots (or solutions) of the quadratic equation 2x^2 - 52x + 336 = 0 are x = 14 and x = 12."
+12x^2 - 216x + 780 = 0,15,True,"The quadratic equation given is 12x^2 - 216x + 780 = 0.
+
+Let's simplify by dividing through by the common factor 12:
+
+x^2 - 18x + 65 = 0 .
+
+Now, let's see if this equation can be factored.
+
+We are looking for numbers that multiply to 65 and add up to -18.
+
+The numbers -13 and -5 meet these criteria, because -13 x -5 = 65 and -13 + -5 = -18.
+
+Therefore, we can factor the equation as follows: (x - 13)(x - 5) = 0.
+
+Setting each bracket equal to zero gives the solutions:
+
+x - 13 = 0 so x = 13, and
+x - 5 = 0 so x = 5.
+
+Therefore, the roots of the quadratic equation 12x^2 - 216x + 780 = 0 are x = 13 and x = 5. 
+
+There was no need to use the quadratic formula because we were able to factor the equation."
+6x^2 - 72x + 66 = 0,15,True,"All terms in this equation have a greatest common factor of 6, so we can divide the whole equation by 6, which gives us:
+
+x^2 - 12x + 11 = 0
+
+Now we need to find two numbers that multiply to 11 and add up to -12. These numbers are -11 and -1.
+
+So, the equation can be factored to:
+
+(x - 1)(x - 11) = 0
+
+Setting each set of parentheses equal to zero gives the solutions:
+
+x - 1 = 0   -->   x = 1
+x - 11 = 0  -->   x = 11
+
+So, the roots of the equation are x = 1 and x = 11."
+2x^2 - 50x + 312 = 0,15,True,"Since factoring seems a bit difficult in this case, let's use the quadratic formula. The quadratic formula is given by:
+
+x = [-b ± sqrt(b^2 - 4ac)] / (2a)
+
+For our equation, a = 2, b = -50, and c = 312.
+
+So the roots of the equation are:
+
+x = [50 ± sqrt((-50)^2 - 4*2*312)] / (2*2)
+
+= [50 ± sqrt(2500 - 2496)] / 4
+
+= [50 ± sqrt(4)] / 4
+
+= [50 ± 2] / 4
+
+So the two roots are x = 52 / 4 = 13 and x = 48 / 4 = 12."
+2x^2 - 38x + 176 = 0,15,True,"The quadratic equation is in standard form,
+
+ax^2 + bx + c = 0
+
+where,
+a = 2, b = -38 and c = 176
+
+Now, we need two numbers which multiply to give ac = (2)(176) = 352 and when added together should give b = -38.
+
+After trying multiple combinations, it is clear that the equation cannot be factored using integer values since there are no two numbers that satisfy these conditions.
+
+Therefore, we will have to solve the equation using the quadratic formula:
+
+x = [-b ± sqrt(b^2 - 4ac)] / (2a)
+
+Substituting the values a = 2, b = -38, and c = 176 into the quadratic formula gives:
+
+x = [38 ± sqrt((-38)^2 - 4*2*176)] / (2*2)
+x = [38 ± sqrt(1444 - 1408)] / 4
+x = [38 ± sqrt(36)] / 4
+x = [38 ± 6] / 4
+
+So, the solutions are x = 44/4 = 11 and x = 32/4 = 8. 
+
+Thus, the roots of the given quadratic equation are x = 8 and x = 11."
+5x^2 - 60x + 175 = 0,15,True,"It appears this quadratic equation 5x^2 - 60x + 175 = 0 can't be factored directly. Hence, let's apply the quadratic formula.
+
+The quadratic formula is:
+
+x = [-b ± sqrt(b^2 - 4ac)] / (2a)
+
+Where a, b, c are the coefficients of the quadratic equation. So for the given equation a = 5, b = -60, and c = 175.
+
+Let's substitute these values into the formula:
+
+x = [60 ± sqrt((-60)^2 - 4*5*175)] / (2*5)
+x = [60 ± sqrt(3600 - 3500)] / 10
+x = [60 ± sqrt(100)] / 10
+x = [60 ± 10] / 10
+
+So the roots of the quadratic equation 5x^2 - 60x + 175 = 0 are x = 70/10 = 7 and x = 50/10 = 5."
+15x^2 - 240x + 945 = 0,15,True,"Factoring the left side of the equation:
+
+15x^2 - 240x + 945 can be factored into 15(x^2-16x+63).
+
+The equation now has a simple form: 15(x^2 - 16x + 63) = 0
+
+Dividing by 15, we get x^2 - 16x + 63 = 0
+
+We can write that as x^2 - 2*8*x + (8)^2 - (8)^2 + 63 = 0
+
+Rearranging, we can write it as  (x-8)^2 - (8)^2 + 63 = 0.
+
+This gives (x-8)^2 = (8)^2 -63.
+
+And after simplifying, we get:
+
+(x-8)^2 = 64 - 63 = 1.
+
+Square-rooting both sides, we have:
+
+x - 8 = 1 or x - 8 = -1
+
+If x - 8 = 1, x = 8 + 1 = 9
+
+And if x - 8 = -1, x = 8 - 1 = 7.
+
+So the roots of the equation are x = 7 and x = 9."
+14x^2 - 196x + 630 = 0,15,True,"The equation has the form ax^2 - bx + c = 0, where a=14, b=196, and c=630. 
+
+To make it easier to factor, we should divide the equation by 14 to give us 
+
+x^2 - 14x + 45 = 0.
+
+Now, for this to be factorable, we need to find factors of 45 that add up to 14. The numbers 9 and 5 are factors of 45 and they add to 14. 
+
+Using these numbers, we can rewrite our quadratic equation as 
+
+(x - 9)(x - 5) = 0
+
+Now, this equation equals zero if either (x - 9) = 0 or (x - 5) = 0. This gives us our two solutions:
+
+x = 9 and x = 5. 
+
+So, the roots of the equation 14x^2 - 196x + 630 = 0 are x = 9 and x = 5."
+8x^2 - 192x + 1120 = 0,15,True,"Let's try to simplify the given expression first. You'll notice that 8, 192, and 1120 have a common factor: 8.
+
+Upon dividing all terms by 8, we get: 
+x^2 - 24x + 140 = 0. 
+
+We can now rewrite it like this: 
+(x - 10)(x - 14) = 0.
+
+Setting each expression equal to zero gives us:
+
+x - 10 = 0 => x = 10 and x - 14 = 0 => x = 14.
+
+Therefore, the roots of the given equation are x = 10 and x = 14."
+2x^2 - 36x + 154 = 0,15,True,"Factoring the given quadratic expression would typically involve finding two numbers that multiply to the constant term (154) and add up to the coefficient of the middle term (-36). However, it doesn't seem possible to find two such numbers in this case, so we have to resort to the quadratic formula.
+
+The quadratic formula is given by:
+
+x = [ -b ± sqrt(b² - 4ac) ] / 2a
+
+For the given equation, a = 2, b = -36, and c = 154.
+
+Substituting these values into the formula yields:
+
+x = [ -(-36) ± sqrt((-36)² - 4*2*154) ] / 2*2
+x = [ 36 ± sqrt(1296 - 1232) ] / 4
+x = [ 36 ± sqrt(64) ] / 4
+x = [ 36 ± 8 ] / 4
+
+So, the roots of the equation are x = 44/4 = 11 and x = 28/4 = 7."
+9x^2 - 171x + 760 = 0,15,False,"On a closer inspection, it seems like the equation is not factorizable, so we have to use the quadratic formula: 
+x = [−(-b) ± sqrt ((-b)^2 - 4ac)]/ (2a). After substituting the coefficients from the quadratic equation:
+
+x = [171 ± sqrt ((171)^2 - 4*9*760)] / (2*9)
+x = [171 ± sqrt (29241 - 27360)] / 18
+x = [171 ± sqrt (1881)] / 18
+
+Now calculate the two possible x values:
+x1 = (171 + sqrt (1881)) / 18 = 10
+x2 = (171 - sqrt (1881)) / 18 = 76/9
+
+So the roots of the quadratic equation 9x^2 - 171x + 760 = 0 are x = 10 and x = 76/9."
+4x^2 - 28x + 60 = 0,15,False,"After trying several times, I couldn't factor the equation. So, it's time to use the quadratic formula, which is given by: x = [ -b ± sqrt(b² - 4ac) ] / 2a. 
+
+In the given equation: 4x^2 - 28x + 60 = 0, we can see that:
+a = 4, b = -28, and c = 60.
+
+Substituting these values into the quadratic formula, we get:
+
+x = [ 28 ± sqrt((-28)² - 4*4*60) ] / 2*4
+x = [ 28 ± sqrt(784 - 960) ] / 8
+x = [ 28 ± sqrt(-176) ] / 8
+
+Since squaring any real number never gives a negative result, we can't take square root of a negative number in the set of real numbers.
+
+Thus, the equation 4x^2 - 28x + 60 = 0 doesn't have any real roots."
+6x^2 - 102x + 190 = 0,15,False,"Factoring the given equation seems difficult as the constant values aren't exact squares and the equation doesn't have obvious factors. Therefore, it would be more efficient to solve it using the quadratic formula.
+
+The quadratic formula is given by x = [-b ± sqrt(b^2 - 4ac)] / (2a)
+
+For the given equation, a = 6, b = -102, and c = 190. 
+
+Therefore, 
+
+x = [102 ± sqrt((102)^2 - 4*6*190)] / (2*6)
+= (102 ± sqrt(10404 - 4560)) / 12
+= (102 ± sqrt(5844)) / 12
+= (102 ± 76.44707138) / 12
+
+So, the roots of the equation will be:
+
+x1 = (102 + 76.44707138) / 12 = 14.87058928 (approximately 15)
+and
+x2 = (102 - 76.44707138) / 12 = 2.129410717 (approximately 2)"
+15x^2 - 255x + 1000 = 0,15,False,"After several attempts, I didn't find a way to factor this quadratic equation, so I'll resort to using the quadratic formula. The quadratic formula is given by:
+
+x = [-b ± sqrt(b^2 - 4ac)] / (2a)
+
+In this case:
+a = 15
+b = -255
+c = 1000
+
+So, plug these into the formula:
+
+x = [255 ± sqrt((-255)^2 - 4*15*1000)] / (2*15)
+x = [255 ± sqrt(65025 - 60000)] / 30
+x = [255 ± sqrt(5025)] / 30
+x = [255 ± 75] / 30
+x = 330 / 30 = 11 and 180 / 30 = 6
+
+So, the roots of the equation are x = 11 and x = 6."
+14x^2 - 168x + 295 = 0,15,False,"Let's start by trying to simplify the given quadratic equation.
+
+14x^2 - 168x + 295 = 0
+
+Divide every term by their greatest common factor, which is 7:
+
+2x^2 - 24x + 42 = 0
+
+However, this simplified quadratic equation doesn't seem to factor into any simple terms.
+
+So, we'll have to use the quadratic formula.
+
+The quadratic formula for an equation ax^2 + bx + c = 0 is x = [-b ± sqrt(b² - 4ac)] / 2a. 
+
+Here, a = 2, b = -24, and c = 42.
+
+Applying these values to the formula, we have:
+
+x = [24 ± sqrt((-24)² - 4*2*42)] / 2*2,
+x = [24 ± sqrt(576 - 336)] / 4,
+x = [24 ± sqrt(240)] / 4,
+x = [24 ± 2*sqrt(60)] / 4,
+x = 6 ± sqrt(60).
+
+This means the roots of the equation are x = 6 + sqrt(60), x = 6 - sqrt(60). If you want, you can evaluate them further to have decimal approximation i.e. approximately x = 13.7446 and x = -1.7446."
+3x^2 - 21x + 37 = 0,15,False,"However, the equation 3x^2 - 21x + 37 = 0 does not factor easily over the integers, so we'll turn to the quadratic formula instead. 
+
+The quadratic formula is x = [-b ± sqrt(b^2 - 4ac)] / (2a). 
+
+Here, a, b, and c are the coefficients of x^2, x and the constant term of the equation: 
+
+a = 3, 
+b = -21, 
+c = 37.
+
+Applying the quadratic formula gives:
+
+x = [21 ± sqrt((-21)^2 - 4*3*37)] / (2*3)
+  = [21 ± sqrt(441 - 444)] / 6
+  = [21 ± sqrt(-3)] / 6
+  = [21 ± sqrt(3)*i] / 6
+  = 3.5 ± 0.5*sqrt(3)*i.
+
+So, the roots of the equation 3x^2 - 21x + 37 = 0 are complex, and they are 3.5 - 0.5sqrt(3)i, 3.5 + 0.5sqrt(3)i."
+12x^2 - 120x + 204 = 0,15,False,"Factor the equation by finding a common factor. We can divide each term by 12. This gives us:
+
+x^2 - 10x + 17 = 0
+
+Looking at the equation, it doesn't seem like it can be factored any further. So, we'll need to use the quadratic formula:
+x = [ -(-10) ± sqrt( (-10)^2 - 4(1)(17) ) ] / 2(1)
+This simplifies to:
+x = [ 10 ± sqrt(100 - 68) ] / 2
+x = [ 10 ± sqrt(32) ] / 2
+x = [ 10 ± 4sqrt(2) ] / 2
+x = 5 ± 2sqrt(2)
+
+Therefore, the roots of the original equation are x = 5 + 2sqrt(2) and x = 5 - 2sqrt(2)."
+6x^2 - 114x + 543 = 0,15,False,"After attempting to factorize the equation, it appears that it can't be factored. Therefore, let's use the quadratic formula:
+
+The quadratic formula is given by: 
+
+x = [ -b ± sqrt( b^2 - 4ac ) ] / 2a
+
+In this equation:
+
+a = 6
+b = -114
+c = 543
+
+Substituting these values into the formula gives us:
+
+x = [ 114 ± sqrt( (-114)^2 - 4*6*543 ) ] / 2*6
+
+Calculating the values inside the square root:
+
+114^2 = 12996
+4*6*543 = 13032
+
+So, we calculate the square root:
+
+sqrt(12996 - 13032) = sqrt(-36). The square root of a negative number is imaginary, so the roots of this equation are complex. 
+
+Making the all the substitutions we get:
+
+x = [ 114 ± sqrt(-36) ] / 12
+
+Therefore, the roots of the equation are:
+
+x = 114/12 ± √(-36)/12 = 9.5 ± (6i/12) 
+
+So, the roots of the equation are x = 9.5 ± 0.5i."
+1x^2 - 13x + 43 = 0,15,False,"But after checking, it seems the quadratic equation 1x^2 - 13x + 43 = 0 cannot be factored easily, as 43 isn't easily expressed as a product of two numbers that add up to -13. So let's proceed by using the quadratic formula.
+
+Recall the quadratic formula is given by
+
+x = [ -b ± sqrt(b^2 - 4ac) ] / 2a,
+
+where a is the coefficient of the x^2 term, b is the coefficient of the x term, and c is the constant term.
+
+In the equation 1x^2 - 13x + 43 = 0, we have a = 1, b = -13, and c = 43.
+
+Substituting these values into the quadratic formula, we get
+
+x = [ -(-13) ± sqrt((-13)^2 - 4*1*43) ] / 2*1
+  = [ 13 ± sqrt(169 - 172) ] / 2
+  = [ 13 ± sqrt(-3) ] / 2
+  = 13/2 ± sqrt(3)i / 2
+  = 6.5 ± 0.86603i,
+
+where ""i"" is the imaginary unit (i^2 = -1).
+
+Therefore, the roots of 1x^2 - 13x + 43 = 0 are complex numbers: 
+
+x = 6.5 + 0.86603i 
+x = 6.5 - 0.86603i.
+"
+12x^2 - 168x + 543 = 0,15,False,"Upon further observation, we can see that the coefficients 12, 168, and 543 are divisible by 3. Hence, it would be more convenient to factor the equation after dividing through by 3:
+
+4x^2 - 56x + 181 = 0
+
+Still, it's hard to identify its factors, which would simplify the equation. Therefore, the quadratic formula should solve it.
+
+Here is the quadratic formula:
+
+x = [-b ± sqrt(b^2 - 4ac)] / 2a
+
+Here are our a, b, and c values:
+
+a = 4
+b = -56
+c = 181
+
+Let’s plug these into the quadratic formula:
+
+x = [56 ± sqrt((-56)^2 - 4*4*181)] / 2*4
+x = [56 ± sqrt((3136 - 2896)] / 8
+x = [56 ± sqrt(240)] / 8
+x = [56 ± 2sqrt(60)] / 8
+x = [28 ± sqrt(60)] / 4
+x = 7 ± sqrt(15)
+
+So the roots of the quadratic equation 12x^2 - 168x + 543 = 0 are x = 7 - sqrt(15) and x = 7 + sqrt(15)."
+19x^2 - 589x + 4446 = 0,20,True,"This quadratic equation cannot be factored nicely due to the large coefficients and non-simple roots. Thus, I will need to use the quadratic formula.
+
+The quadratic formula is x = [-b ± sqrt(b² - 4ac)] / (2a)
+
+For the provided quadratic equation, a = 19, b = -589, c = 4446.
+
+Let's put these values into the quadratic formula:
+
+x = [589 ± sqrt((-589)² - 4*19*4446)] / (2*19)
+
+x = [589 ± sqrt(346921 - 168748)] / 38
+
+x = [589 ± sqrt(178173)] / 38
+
+The square root of 178173 is not a neat square root. Therefore, the roots of the quadratic are 
+
+x = [589 + sqrt(178173)] / 38 and x = [589 - sqrt(178173)] / 38
+
+These are the exact roots of the equation 19x² - 589x + 4446 = 0. If you need a decimal approximation of these roots, they are 
+
+x = 14.13 and x = 16.67
+
+We find these values by evaluating each with a calculator."
+3x^2 - 87x + 612 = 0,20,True,"The quadratic equation is: 3x^2 - 87x + 612 = 0
+
+If we factor by grouping, we first multiply a and c from the general quadratic formula ax^2 + bx + c = 0. In this case, a = 3, b = -87, and c = 612.
+
+So, ac = 3 * 612 = 1836
+
+We're looking for two numbers that multiply to give ac (1836), and add up to b (-87). These two numbers are -36 and -51, as -36 * -51 is 1836 and -36 - 51 equals -87.
+
+We can write the original quadratic equation as follows:
+
+3x^2 - 36x - 51x + 612 = 0
+
+Reorder the terms:
+
+3x^2 - 36x - 51x + 612 = 0
+
+Group the terms:
+
+(3x^2 - 36x) - (51x - 612) = 0
+
+Factor out a GCF from each binomial:
+
+3x(x - 12) - 51(x - 12) = 0
+
+Now, you will see that (x - 12) is a common factor. We can factor that out to get:
+
+(3x - 51)(x - 12) = 0
+
+This gives us our potential roots: x = 51/3 and x = 12.
+
+To finish we divide 51 by 3 to get: 17.
+
+So, the solutions to the equation 3x^2 - 87x + 612 = 0 are:
+
+x = 17 and x = 12."
+19x^2 - 285x + 950 = 0,20,True,"The quadratic equation is given by:
+
+    19x^2 - 285x + 950 = 0
+
+Factoring common factors 19 out of each term gives:
+
+    19(x^2 - 15x + 50) = 0
+
+So,
+
+    x^2 - 15x + 50 = 0
+
+In order to factor this, we need to find two numbers that add up to -15, and multiply to 50. In this case, those numbers are -10 and -5. 
+
+So, this factors to:
+
+    (x - 10)(x - 5) = 0
+
+Setting each of these equal to zero gives the solutions:
+
+    x - 10 = 0  => x = 10
+    x - 5 = 0   => x = 5
+
+Therefore, the roots of the equation are x = 10 and x = 5."
+11x^2 - 220x + 704 = 0,20,True,"The general form of a quadratic equation is ax² + bx + c = 0. The roots can be found by factoring if the equation can be written as (dx - e)² = 0, where d and e are constants, and x is the variable.
+
+The given equation is 11x² - 220x + 704 = 0. This doesn't obviously factor, so let's simplify the equation by dividing the entire equation by 11 (to remove the coefficient on x²):
+
+x² - 20x + 64 = 0
+
+Now, the equation is in the form x² - 2(a)x + a² = 0, where a = 10. It matches the formula for a perfect square equation which can be written as:
+
+(x - a)² = 0
+
+In this case, our equation can be written as:
+
+(x - 10)² = 0
+
+Setting this equal to zero gives:
+
+x - 10 = 0
+
+Solving this equation gives one root:
+
+x = 10
+
+It's a perfect square trinomial, so it has a repeated root and thus our roots are 10 and 10."
+11x^2 - 374x + 3168 = 0,20,True,"Sorry, but this quadratic equation can't be factored by using integers. 
+
+So, let's use the quadratic formula instead. This formula is:
+
+x = [-b ± sqrt(b² - 4ac)] / (2a)
+
+The coefficients in the equation 11x^2 - 374x + 3168 = 0 are a = 11, b = -374, and c = 3168.
+
+Therefore, the formula becomes:
+
+x = [374 ± sqrt((-374)² - 4*11*3168)] / (2*11)
+
+We can now start to solve this. Here's how: 
+
+x = [374 ± sqrt(139876 - 138816)] / 22
+x = [374 ± sqrt(1060)] / 22
+x = [374 ± sqrt(1060)] / 22
+= [374 + sqrt(1060)] / 22 and [374 - sqrt(1060)] / 22
+
+Thus, the roots of the quadratic equation 11x^2 - 374x + 3168 = 0 are:
+
+x = [374 + sqrt(1060)] / 22 ≈ 16 and x = [374 - sqrt(1060)] / 22 ≈ 18."
+8x^2 - 80x + 192 = 0,20,True,"Dividing all terms by 8, the quadratic equation simplifies to x^2 - 10x + 24 = 0.
+
+This equation can be factored as (x-4)(x-6)=0.
+
+Setting each factor equal to zero gives the roots as x=4 and x=6."
+7x^2 - 77x + 126 = 0,20,True,"Given expression can be rewritten as 7(x^2 - 11x + 18) = 0.
+
+Now, inside the bracket, we can do prime factorization of 18. The factors are 1, 2, 3, 6, 9, 18. Looking for pairs that add up to 11, we find that 2 and 9 indeed does. 
+
+So, x^2 - 11x + 18 = 0 can be written as:
+
+(x - 2)(x - 9) = 0.
+
+Setting each factor equal to 0 gives x = 2 and x = 9.
+
+So, the roots of the equation are 2 and 9. 
+
+Remember, when we factored out the 7, it didn't affect the roots of the equation. This is because multiplying an equation by a nonzero constant doesn't change its set of roots."
+11x^2 - 253x + 836 = 0,20,True,"I'm sorry, but this equation is not factorable. Thus, we will need to use the quadratic formula to solve it. 
+
+The quadratic formula is given by:
+
+x = [ -b ± sqrt(b² - 4ac) ] / (2a)
+
+For the equation 11x^2 - 253x + 836 = 0, the parameters a, b, and c correspond to:
+
+a = 11, b = -253, c = 836
+
+We plug these values into the quadratic formula:
+
+x = [ 253 ± sqrt((-253)² - 4*11*836) ] / (2*11)
+
+Let's first calculate the discriminant (the value under the square root):
+
+(-253)² - 4*11*836 = 63909 - 36896 = 27013
+
+Now, we calculate the two values of x:
+
+x₁ = (253 + sqrt(27013)) / 22 = (253 + 164.364) / 22 = 18.98 (rounded to two decimal places)
+x₂ = (253 - sqrt(27013)) / 22 = (253 - 164.364) / 22 = 4.02 (rounded to two decimal places)
+
+So, the solutions of the equation 11x^2 - 253x + 836 = 0 are x ≈ 18.98 and x ≈ 4.02."
+13x^2 - 156x + 260 = 0,20,True,"We can easily find a simpler form of this equation by dividing it with a common factor, that is 13:
+
+So, that equation becomes: x^2 - 12x + 20 = 0
+
+We can factor the equation as follows:
+
+a=1, b=-12 and c=20
+
+Looking for two numbers that, when multiplied, give a*c (which is 20) and when added give b (which is -12). Those two numbers are -10 and -2.
+
+So the equation can be factored to:
+
+(x-10)(x-2) = 0
+
+Setting each group in the parentheses equal to 0 gives the solutions:
+
+x - 10 = 0 => x = 10
+
+x - 2 = 0 => x = 2
+
+The roots of the equation 13x^2 - 156x + 260 = 0 are 10 and 2."
+13x^2 - 130x + 117 = 0,20,True,"Looking at the equation, 13x^2 - 130x + 117 = 0, I can see that all coefficients are multiples of 13, so I can simplify the equation to:
+
+x^2 - 10x + 9 = 0.
+
+This equation can be factored as follows:
+
+(x - 1)(x - 9) = 0
+
+Setting each factor equal to zero gives us the solutions:
+
+x - 1 = 0     or     x - 9 = 0
+
+So, x = 1 or x = 9 are the roots of the quadratic equation."
+13x^2 - 247x + 1015 = 0,20,False,"The equation 13x² - 247x + 1015 = 0 doesn't seem to be factorable into integer factors. 
+
+Now, I'll use the quadratic formula which is x = [-b ± sqrt(b² - 4ac)] / 2a.
+
+Here, a = 13, b = -247, and c = 1015. 
+
+Substituting these values into the quadratic formula, we can find the roots:
+
+x = [247 ± sqrt((-247)² - 4*13*1015)] / 2*13 
+x = [247 ± sqrt(61009 - 52780)] / 26
+x = [247 ± sqrt(8229)] / 26
+x = [247 ± 91] / 26
+
+So, the roots of the equation are x = (247 + 91) / 26 = 338 / 26 = 13 and x = (247 - 91) / 26 = 156 / 26 = 6. Therefore, the roots of the given quadratic equation are 13 and 6."
+2x^2 - 68x + 592 = 0,20,False,"It is a bit complicated to factor this equation directly. Therefore, let us use the quadratic formula. 
+
+The quadratic formula is x = [-b ± sqrt(b^2 - 4ac)] / 2a
+
+Here, a = 2, b = - 68, and c = 592
+
+We find that b^2 - 4ac = (-68)^2 - 4*2*592 = 4624 - 4736 = -112
+
+Since b^2 - 4ac is negative, the roots of the quadratic equation are complex numbers. 
+
+So, the roots of the equation are x = [68 ± sqrt(112)i] / 4 = 17 ± 5.29i"
+17x^2 - 476x + 3278 = 0,20,False,"Noticing that the coefficients are relatively high, factoring might not be straightforward. I'll now try to solve it using the quadratic formula. 
+
+The quadratic formula is x = [-b ± sqrt(b^2 - 4ac)] / (2a)
+
+For this equation, a = 17, b = -476, c = 3278.
+
+x = [476 ± sqrt((-476)^2 - 4*17*3278)] / (2*17)
+
+Calculating the terms we get:
+
+x = [476 ± sqrt((226176) - (222968))] / 34
+
+x = [476 ± sqrt(3208)] / 34
+
+Breaking down the root:
+
+The root of 3208 is approximately 56.66.
+
+Putting it all together, we get:
+
+x = [476 ± 56.66] / 34
+
+Solving for the two potential values:
+
+x = 532.66 / 34 = 15.672 or
+x = 419.34 / 34 = 12.334
+
+So, the roots of the equation are approximately x = 15.672 and x = 12.334."
+12x^2 - 276x + 1095 = 0,20,False,"Next, look at the equation:
+
+12x^2 - 276x + 1095 = 0
+
+We see that all the coefficients are multiples of 3. We can simplify this equation by dividing by 3:
+
+4x^2 - 92x + 365 = 0
+
+However, the factoring of this simplified quadratic is not straightforward. As such, we would need to use the quadratic formula.
+
+The quadratic formula is given as x = [-b +- sqrt(b^2 - 4ac)] / 2a
+
+For our equation, a = 4, b = -92, and c = 365. Plugging these values into the quadratic formula gives:
+
+x = [92 +- sqrt((-92)^2 - 4*4*365)] / (2*4)
+x = [92 +- sqrt(8464 - 5840)] / 8
+x = [92 +- sqrt(2624)] / 8
+x = [92 +- 51.2] / 8
+
+This gives the two roots of the equation: 
+
+x = (92 + 51.2) / 8 = 143.2 / 8 = 17.9
+x = (92 - 51.2) / 8 = 40.8 / 8 = 5.1
+
+Therefore, the roots of the equation 12x^2 - 276x + 1095 = 0 are x = 17.9 and x = 5.1"
+18x^2 - 234x + 409 = 0,20,False,"Factoring the equation doesn't seem to be a straightforward task. Let's use the quadratic formula, which states that the roots of the equation ax²+bx+c=0 are given by (-b±√(b²-4ac))/(2a). Here, a=18, b=-234, and c=409. 
+
+Substituting these values into the quadratic formula, we get:
+
+x = [234 ± sqrt((-234)^2 - 4*18*409)] / (2 * 18)
+   = [234 ± sqrt(54756 - 29448)] / 36
+   = [234 ± sqrt(25308)] / 36
+   = [234 ± 159] / 36
+
+So, the roots are x = 393/36 = 10.91667 and x = 75/36 = 2.08333."
+3x^2 - 48x + 118 = 0,20,False,"The equation is 3x^2 - 48x + 118 = 0
+
+It's not obvious how this equation can be factored. 
+
+So I will use the quadratic formula instead. 
+
+The quadratic formula is given by 
+
+X = [ -b ± sqrt (b^2 - 4ac) ] / 2a
+
+Where a, b and c are coefficients of the quadratic equation ax^2 + bx + c
+
+For the given equation 3x^2 - 48x + 118 = 0
+a = 3, b = -48, and c = 118
+
+Substituting a, b and c into the quadratic formula we get:
+
+x = [48 ± sqrt ((-48)^2 - 4*3*118)] / (2*3)
+x = [48 ± sqrt (2304 - 1416)] / 6
+x = [48 ± sqrt(888)] / 6
+x = [48 ± (2*2*3*37)^0.5] / 6
+x = [48 ± 2*2*3] / 6
+x = [48 ± 12] / 6
+x can therefore be 60/6 = 10 or 36/6 = 6.
+
+So the roots of the quadratic equation 3x^2 - 48x + 118 = 0 are x = 10 & x = 6."
+9x^2 - 207x + 821 = 0,20,False,"Unfortunately, this numbers look complicated and this value will not easily factor. So we need to solve using a quadratic formula. 
+
+The quadratic formula is x = [-b + sqrt(b^2 - 4ac)] / 2a OR x = [-b - sqrt(b^2 - 4ac)] / 2a. 
+
+This quadratic equation is already in the form ax^2 + bx + c = 0, where:
+
+a = 9, 
+b = -207, 
+c = 821.
+
+By plugging these values into the quadratic formula, 
+
+we get x = [207 ± sqrt((-207)^2 - 4*9*821)] / (2 * 9) 
+
+= [207 ± sqrt((42849 - 29556)] / 18 
+   
+= [207 ± sqrt(13293)] / 18
+   
+= [207 ± 115.29] / 18.
+
+Finally, solving the equation we get two roots: 
+
+x1 = (207 + 115.29) / 18 = 17.9 approximately,
+x2 = (207 - 115.29) / 18 = 5.1 approximately."
+8x^2 - 192x + 1043 = 0,20,False,"However, the given quadratic equation does not readily factor. So, we'll have to use the quadratic formula.
+
+The quadratic formula is given as:
+
+x = [ -b ± sqrt(b² - 4ac) ] / 2a
+
+where a, b, and c are the coefficients from the quadratic equation ax² + bx + c = 0.
+
+So, for the given equation 8x² - 192x + 1043 = 0,
+a = 8, b = -192, and c = 1043.
+
+Substituting these values into the quadratic formula gives:
+
+x = [ 192 ± sqrt((-192)² - 4*8*1043) ] / 2*8
+
+   = [ 192 ± sqrt(36864 - 33344) ] / 16
+
+   = [ 192 ± sqrt(3520) ] / 16,
+
+The square root of 3520 is approximately 59.3. Hence,
+
+x = [ 192 ± 59.3 ] / 16
+
+So, the roots of the equation are
+
+x = ( 192 + 59.3 ) / 16 ≈ 15.7 and x = ( 192 - 59.3 ) / 16 ≈ 8.3.
+
+So, the solutions to the given quadratic equation are x ≈ 15.7 and x ≈ 8.3."
+18x^2 - 216x + 497 = 0,20,False,"This equation does not seem to be factorable. Using the quadratic formula would thus be a suitable method instead. 
+
+The quadratic formula is given as:
+x = [-b ± sqrt(b^2 - 4ac)] / (2a)
+
+From the equation 18x^2 - 216x + 497 = 0, we can identify the coefficients as follows:
+a = 18, b = -216, and c = 497.
+
+Plugging these coefficients into the quadratic formula gives us:
+
+x = [216± sqrt((-216)^2 - 4*18*497)] / (2*18)
+x = [216± sqrt(46656 - 35784)] / 36
+x = [216± sqrt(10872)] / 36
+x = [216± 104.26] / 36
+From here we get the roots of the equation as:
+x = [216 + 104.26] / 36 = 8.9 or
+x = [216 - 104.26] / 36 = 3.1
+
+So, the roots of the quadratic equation 18x^2 - 216x + 497 = 0 are x = 3.1 and x = 8.9."
+7x^2 - 133x + 247 = 0,20,False,"This quadratic equation cannot be factored using whole numbers. 
+
+In this case, we use the quadratic formula, which is x = [-b ± sqrt(b^2 - 4ac)] / 2a. 
+In this formula, a = 7, b = -133, and c = 247. 
+
+The solutions to the equation are:
+
+x1 = [133+ sqrt((-133)^2-4*7*247)]/ (2*7)
+x2 = [133- sqrt((-133)^2-4*7*247)]/ (2*7) 
+
+First, we calculate the determinant, which is b^2 - 4ac = (-133)^2 - 4*7*247 = 17689 - 6908 = 10781.
+
+So, our solutions in decimal form will be:
+
+x1 = (133 + sqrt(10781)) / 14 = 133 + 103.84 = 237.84 / 14 = 16.99
+x2 = (133 - sqrt(10781)) / 14 = 133 - 103.84 = 29.16 / 14 = 2.08
+
+So, the roots of the quadratic equation are approximately x1 ≈ 16.99 and x2 ≈ 2.08."
+18x^2 - 486x + 900 = 0,25,True,"The given equation assumes the form of ax^2 - bx + c = 0, where a, b and c are constants. For the given equation, a = 18, b = 486, and c = 900.
+
+It appears all coefficients are multiples of 18. So, let's divide the equation by 18 to simplify it:
+
+18x^2 - 486x + 900 = 0 divided by 18 gives x^2 - 27x + 50 = 0.
+
+Next, the factored form of the equation should look something like (x - m)(x - n) = 0, where m and n are the proposed solutions or roots of the equation.
+
+To ascertain if x^2 - 27x + 50 = 0 can be factored, we have to find two numbers that multiply to 50 (the term without x, also known as the constant term, c) and add up to the coefficient -27 of the term with x (also known as the coefficient b).
+
+The two numbers that satisfy this requirement are -2 and -25 because:
+
+- A multiplication of -2 and -25 gives 50 (the constant term).
+- An addition of -2 and -25 results in -27 (the term with x).
+
+Therefore, x^2 - 27x + 50 = 0 can be factored as follows:
+
+(x - 2)(x - 25) = 0.
+
+The roots of the equation are obtained by setting each factor equal to zero and solving for x. As such, the roots are:
+
+x - 2 = 0, solving this gives x = 2,
+
+and
+
+x - 25 = 0, solving this gives x = 25.
+
+In conclusion, the equation 18x^2 - 486x + 900 = 0 has two roots, and they are 2 and 25."
+18x^2 - 810x + 9108 = 0,25,True,"First, I'll divide the whole equation by 2 to simplify it:
+
+9x^2 - 405x + 4554 = 0
+
+We can see that this equation does not factorise simply. So, we need to use the quadratic formula to solve the equation. The quadratic formula is given by:
+
+x = [-b ± sqrt(b^2 - 4ac)] / 2a
+
+where a, b and c are coefficients of the quadratic equation ax^2 + bx + c. So in our case a = 9, b = -405, and c = 4554.
+
+Let's substitute these values to find the roots:
+
+x = [405 ± sqrt((-405)^2 - 4*9*4554)] / (2*9)
+x = [405 ± sqrt(164025 - 163944)] / 18
+x = [405 ± sqrt(81)] / 18
+x = [405 ± 9] / 18
+
+This gives the roots x = 23 and x = 22."
+5x^2 - 240x + 2875 = 0,25,True,"I am sorry for the confusion, but this quadratic equation can't be factored using integers. So we will use the quadratic formula to find the roots. 
+
+The quadratic formula is x = [-b ± sqrt(b^2 - 4ac)] / (2a).
+
+For this equation, a = 5, b = -240, and c = 2875 respectively.
+
+Applying these values to the quadratic formula, we get:
+
+x = [240 ± sqrt((-240)^2 - 4*5*2875)] / (2*5)
+x = [240 ± sqrt(57600 - 57500)] / 10
+x = [240 ± sqrt(100)] / 10
+x = [240 ± 10] / 10
+So the roots of the equation are x = 25 and x = 23."
+17x^2 - 357x + 1768 = 0,25,True,"It is difficult to factorize this equation so we should use the quadratic formula. The quadratic formula is:
+
+x = [ -b ± sqrt(b² - 4ac) ] / (2a)
+
+For this equation, a = 17, b = -357, and c = 1768.
+
+x = [ 357 ± sqrt((-357)² - 4*17*1768) ] / (2*17)
+
+After calculating, it gives: 
+
+x = [ 357 ± sqrt(127449 - 120768) ] / 34,
+
+x = [ 357 ± sqrt(6681) ] / 34,
+
+x = [ 357 ± 81.74 ] / 34. 
+
+Therefore, the roots of the quadratic equation are:
+
+x = (357 + 81.74) / 34 = 12.89 and 
+x = (357 - 81.74) / 34 = 8.08."
+15x^2 - 450x + 2640 = 0,25,True,"We realize that each coefficient is divisible by 15, hence, we can simplify the expression first by factoring out 15. That gives us: 
+
+15(x^2 - 30x + 176) = 0
+
+This implies that:
+
+x^2 - 30x + 176 = 0
+
+However, this equation does not factor easily. Hence, we will use the quadratic formula. 
+
+The quadratic formula is given by: 
+
+x = [-b ± sqrt(b^2 - 4ac)] / 2a
+
+For the quadratic equation x^2 - 30x + 176 = 0: 
+
+a = 1
+b = -30
+c = 176
+
+Hence;
+
+x = [30 ± sqrt((-30)^2 - 4 * 1 * 176 )] / (2 * 1)
+x = [30 ± sqrt(900 - 704 )] / 2
+x = [30 ± sqrt(196)] / 2
+x = [30 ± 14] / 2
+x = [16, 14]
+
+So the roots of the quadratic equation are x = 8 and x = 7."
+5x^2 - 140x + 935 = 0,25,True,"Unfortunately, this equation doesn't factor nicely, so we'll have to use the quadratic formula to find the roots. 
+
+The quadratic formula is:
+
+x = [-b ± sqrt(b^2 - 4ac)] / 2a
+
+For this equation, a = 5, b = -140, and c = 935.
+
+Plugging these values into the formula, we get:
+
+x = [140 ± sqrt((-140)^2 - 4*5*935)] / 2*5
+x = [140 ± sqrt(19600 - 18700)] / 10
+x = [140 ± sqrt(900)] / 10
+x = [140 ± 30] / 10
+x = 170 / 10 or x = 110 / 10
+So the roots of the equation are 17 and 11."
+21x^2 - 504x + 2688 = 0,25,True,"I'll start by factoring out the greatest common factor of 21, which simplifies the equation down to:
+
+21(x^2 - 24x + 128) = 0
+
+Breaking down the quadratic inside the parentheses, we look for two numbers that both multiply to 128 and add to -24. The numbers that fit these criteria are -16 and -8. This means the equation can indeed be factored:
+
+21(x - 16)(x - 8) = 0
+
+This gives us two solutions. Setting each factor equal to zero, we have:
+
+x - 16 = 0 => x = 16
+x - 8 = 0 => x = 8
+
+Therefore, the roots of the quadratic equation are x = 16 and x = 8."
+3x^2 - 39x + 120 = 0,25,True,"The equation can be written as 3*(x^2 - 13x + 40) = 0.
+Next step is to factor the brackets. 
+The equation in the brackets can be written as x^2 - 13x + 5*8 = 0.
+So, by factoring this, the equation becomes (x - 5) * (x - 8)= 0.
+
+Setting these factors to 0 we find the roots of the equation:
+
+x - 5 = 0;  x = 5
+and
+x - 8 = 0; x = 8
+
+So, the roots of the given quadratic equation are x = 5 and x = 8."
+2x^2 - 52x + 306 = 0,25,True,"The given quadratic equation is 2x^2 - 52x + 306 = 0.
+
+To factor out this quadratic equation, we'll need to find two numbers that when multiplied give the multiple of the coefficient of x^2 term (2) and the constant term (306) and when added, give the coefficient of x term (-52).
+
+However, it appears that there are no such numbers that fit these criteria. Therefore, it is not possible to factorize this equation.
+
+In such cases, as suggested, we use the quadratic formula, which is as follows:
+
+x = [ -b ± sqrt(b^2 - 4ac)] / 2a
+
+where `a`, `b` and `c` are coefficients of the quadratic equation ax^2 + bx + c = 0.
+
+For the given equation, a = 2, b = -52, and c = 306.
+
+So, the roots of the quadratic equation can be calculated as follows:
+
+x = [ 52 ± sqrt((-52)^2 -4*2*306)] / 2*2
+x = [ 52 ± sqrt(2704 - 2448)] / 4
+x = [ 52 ± sqrt(256)] / 4
+x = [ 52 ± 16] / 4
+
+So, the roots are x = 68/4 = 17 and x = 36/4 = 9."
+19x^2 - 874x + 10032 = 0,25,True,"This quadratic equation cannot be easily factored, so we will use the quadratic formula, which is x = [-b ± sqrt(b^2 - 4ac)] / 2a. 
+
+For the equation 19x^2 - 874x + 10032 = 0, a = 19, b = -874, and c = 10032.
+
+Let's calculate the values now:
+
+The discriminant b^2 - 4ac = (-874)^2 - 4*19*10032 = 763876 - 761216 = 2660.
+
+Therefore, 
+
+x = [-(-874) ± sqrt(2660)] / (2 * 19)
+x = [874 ± sqrt(2660)] / 38
+x = [874 ± 51.58] / 38 
+
+So, the two solutions are x1 = (874 + 51.58) / 38 = 24.345, and x2 = (874 - 51.58) / 38 = 21.645.
+We will round these to the nearest thousandth, so the solutions are x1 = 24.345 and x2 = 21.645."
+7x^2 - 70x + 170 = 0,25,False,"This equation does not seem to be easily factorable. Therefore, we would need to use the quadratic formula, which is:
+
+x = [-b ± sqrt(b² - 4ac)] / (2a)
+
+For the equation 7x² - 70x + 170 = 0, the coefficients a, b, and c are as follows:
+
+a = 7, b = -70, c = 170
+
+We can substitute these values into the quadratic formula:
+
+x = [70 ± sqrt((-70)² - 4*7*170)] / (2*7)
+x = [70 ± sqrt(4900 - 4760)] / 14
+x = [70 ± sqrt(140)] / 14
+x = [70 ± sqrt(4*35)] / 14
+x = [70 ± 2*sqrt(35)] / 14
+x = 5 ± sqrt(35)
+
+Therefore, the roots of the equation 7x^2 - 70x + 170 = 0 are x = 5 + sqrt(35) and x = 5 - sqrt(35)."
+1x^2 - 33x + 246 = 0,25,False,"This equation is hard to factorize. Let's use the quadratic formula, which is given by:
+
+x = [-b ± sqrt(b^2 - 4ac)] / 2a
+
+For this equation, a = 1, b = -33, c = 246. By substituting these values in, we obtain:
+
+x = [33 ± sqrt((-33)^2 - 4*1*246)] / 2*1
+x = [33 ± sqrt(1089 - 984)] / 2
+x = [33 ± sqrt(105)] / 2
+x = [33 ± sqrt(105)] / 2
+
+So the roots of the equation are given by x = (33 + sqrt(105)) / 2 and x = (33 - sqrt(105)) / 2, which are approximately x = 24.16228 and x = 10.83772."
+24x^2 - 696x + 3706 = 0,25,False,"Attempt to factor:
+
+In order to factor an equation in the form of ax²+bx+c = 0, the factors must satisfy the relationship that the product of the factors equals ""c"", and the sum of the factors equals ""b"" divided by ""a"". 
+
+In the given equation 24x² - 696x + 3706 = 0, let's make the terms divisible by 2. 
+
+So we get: 12x² - 348x + 1853 = 0.
+
+Now we need two numbers whose multiplication is 1853 and whose sum is 348. Unfortunately, there are no such two numbers which can be used to factorize this quadratic equation. 
+
+Therefore, factoring is not possible for this quadratic equation. 
+
+Now, let's use the quadratic formula: x = [-b± sqrt(b²-4ac)]/2a. 
+
+Here, a = 24, b = -696, c = 3706.
+
+If the result of sqrt(b²-4ac) is a real number, then the equation has real roots. If the result is imaginary, then the equation has complex roots. Let's find out.
+
+Calculating the discriminant b²-4ac:
+
+Discriminant = (-696)² - 4*24*3706
+= 485616 - 355584
+= 130032.
+
+Since the discriminant is a positive number, the roots of the equation are real.
+
+Plugging into the quadratic formula:
+
+x = [696 ± sqrt(130032)] / (2*24)
+= [696 ± 360] / 48
+= {1056/48, 336/48}
+= {22, 7}.
+
+Therefore, the roots of the equation 24x² - 696x + 3706 = 0 are x = 22 and x = 7."
+23x^2 - 920x + 9117 = 0,25,False,"This quadratic equation is non-factorable. Thus, we will need to use the quadratic formula:
+
+    x = [-b ± sqrt(b^2 - 4ac)] / (2a)
+
+In this equation, a is the coefficient of the x^2 term, b is the coefficient of the x term, and c is the constant. In your quadratic equation, a=23, b=-920, and c=9117.
+
+So we substitute a, b, and c into the quadratic formula:
+
+    x = [920 ± sqrt((-920)^2 - 4*23*9117)] / (2*23)
+    x = [920 ± sqrt(846400 - 837944)] / 46
+    x = [920 ± sqrt(8456)] / 46
+    x = [920 ± 92] / 46
+
+This gives us the roots:
+
+    x = (920 + 92) / 46 = 22
+    x = (920 - 92) / 46 = 18
+
+Therefore, the roots of the quadratic equation 23x^2 - 920x + 9117 = 0 are x = 22 and x = 18."
+12x^2 - 276x + 514 = 0,25,False,"Given the quadratic equation 12x^2 - 276x + 514, the best method for determining the roots is unlikely to be straight factoring because we usually factor when the factors are immediately clear or relatively simple to figure out. In this case, the numbers are fairly large and thus don't lend themselves to easy factoring.
+
+Given this, we'll go straight to the quadratic formula, `x = [-b ± sqrt(b^2 - 4ac)] / 2a`:
+
+Given that a = 12, b = -276, and c = 514, we can substitute these into the formula like so:
+
+x = [276 ± sqrt((-276)^2 - 4*12*514)] / 2*12
+= [276 ± sqrt(76176 - 24672)] / 24
+= [276 ± sqrt(51504)] / 24.
+
+The square root of 51504 is 227.
+
+Therefore, the roots are:
+
+x = [276 + 227] / 24 = 21
+x = [276 - 227] / 24 = 2.
+
+Hence, the roots of the given quadratic equation are x = 21 and x = 2."
+16x^2 - 416x + 1128 = 0,25,False,"Actually, the given equation is already in the standard form of a quadratic equation which is (ax²+bx+c=0), where a, b, c are coefficients.
+
+Now, let’s try to simplify the equation before we start factoring it.
+
+16x² - 416x + 1128 = 0
+
+I can see that all coefficients are divisible by 16,
+
+So we divide each term by 16
+
+x² - 26x + 70.5 = 0
+
+Now let's try to factor the equation,
+
+(x - 23.5)(x - 3) = 0
+
+Setting each grouping to 0, we get x - 23.5 = 0, which gives x = 23.5 &
+                                                     x - 3 = 0, which gives x = 3.
+
+So, the roots of the equation 16x² - 416x + 1128 are x1 = 23.5, and x2 = 3.
+  
+Moreover, these roots can be crosschecked using a discriminant (b² - 4ac = 0). Here b = -416, a = 16, and c = 1128. The discriminant, in this case, comes out to be zero, suggesting that the roots obtained are correct."
+6x^2 - 60x + 151 = 0,25,False,"Given the equation 6x^2 - 60x + 151 = 0, 
+
+first, we look if any obvious factors are present for this equation, but no such factors exist which can easily separate this equation into two brackets of the form (ax + b)(cx + d). Hence, we cannot factor this equation.
+
+Since we cannot factor this equation, we have to use the quadratic formula to find its roots. The quadratic formula is given by:
+
+x = [-b ± sqrt(b^2 - 4ac)] / (2a)
+
+For our equation, a = 6, b = -60, and c = 151.
+
+So, replacing a, b, and c in the quadratic formula, we get:
+
+x = [60 ± sqrt((-60)^2 - 4*6*151)] / (2*6)
+x = [60 ± sqrt(3600 - 3612)] / 12
+x = [60 ± sqrt(-12)] / 12
+
+Since the term inside the square root is negative, it means our solutions are going to be complex. 
+
+So, x = [60 ± sqrt(12)*i] / 12
+x = [60 ± 2sqrt(3)*i] / 12
+Our solutions are x = 5 ± sqrt(3)*i/6. 
+
+Therefore, the roots of the given quadratic equation are x = 5 + sqrt(3)*i/6 and x = 5 - sqrt(3)*i/6."
+24x^2 - 504x + 1942 = 0,25,False,"First, you might notice that 24, 504, and 1942 can all be divided by 6 to simplify:
+
+4x^2 - 84x + 323 = 0
+
+Unfortunately, this equation does not seem to be factorable either, as there are no integer pairs that multiply to give us 323 and add up to -84. Therefore, we will use the quadratic formula. 
+
+The quadratic formula is:
+
+x = [-b ± sqrt(b^2 - 4ac)] / (2a)
+
+where a, b and c are the coefficients in the quadratic equation ax^2 + bx + c = 0.
+
+For the given equation 4x^2 - 84x + 323 = 0, we have a = 4, b = -84 and c = 323.
+
+Substituting these into the quadratic formula gives:
+
+x = [84 ± sqrt((-84)^2 - 4*4*323)] / (2*4)
+x = [84 ± sqrt(7056 - 5168)] / 8
+x = [84 ± sqrt(1888)] / 8
+Next, simplify the square root:
+√1888 ≈ 43.44 
+
+Returning to formula:
+x = [84 ± 43.44] / 8
+
+which gives the two solutions:
+x = 127.44 / 8 =15.93  
+and
+x = 40.56 / 8 =5.07  
+
+So the roots of the quadratic equation are approximately x = 15.93 and x = 5.07."
+4x^2 - 60x + 203 = 0,25,False,"The given equation doesn't seem to be factorable, so I will use the quadratic formula. The quadratic formula is:
+
+x = [-b ± sqrt(b^2 - 4ac)] / (2a)
+
+Here, a = 4, b = -60, and c = 203.
+
+So, 
+
+x = [60 ± sqrt((-60)^2 - 4*4*203)] / (2*4)
+x = [60 ± sqrt(3600 - 3248)] / 8
+x = [60 ± sqrt(352)] / 8
+x = [60 ± √352] / 8
+x = [60 ± 2√22] / 8
+x = [30 ± √22]
+
+These are the roots of the quadratic equation 4x^2 - 60x + 203 = 0."
+6x^2 - 114x + 560 = 0,25,False,"To simplify the equation, we can first divide all terms by the greatest common factor, which is 2. This gives us:
+
+3x^2 - 57x + 280 = 0
+
+Now, we need to find two numbers that multiply to 280*3 = 840 and add up to -57. After some thinking, we find that these numbers are -40 and -21 (because -40*-21 = 840 and -40 + -21 = -57).
+
+This means we can write the equation as follows:
+
+3x^2 -40x -17x + 280 = 0.
+
+Now, we can group the terms to factor by grouping:
+
+x(3x - 40) - 7(3x - 40) = 0.
+
+Finally, we can factor out the common factor of (3x - 40), which gives us:
+
+(3x - 40)(x - 7) = 0.
+
+Setting each factor equal to zero gives the following solutions:
+
+3x - 40 = 0  --> x = 40/3
+x - 7 = 0     --> x = 7.
+
+So the solutions of the equation are x = 40/3 and x = 7."
+30x^2 - 1800x + 27000 = 0,30,True,"Upon examination, we can see that each term in the equation can be divided by 30:
+
+30x^2 - 1800x + 27000 = 0
+
+That simplifies to:
+
+x^2 - 60x + 900 = 0
+
+This equation does factor to:
+
+(x - 30)(x - 30) = 0
+
+So, the roots of the equation are x = 30 and x = 30 (or one repeated root at x = 30)."
+3x^2 - 108x + 780 = 0,30,True,"The given equation is 3x² - 108x + 780 = 0.
+
+Let's try to factorize it by taking out 3 as a common factor:
+
+We got 3(x² - 36x + 260) = 0.
+
+In order to factor the quadratic expression, we need to find two numbers that multiply to 260 and add to -36. 
+
+After examining various pairs of factors of 260, it did not seem possible to find a suitable pair. Therefore, the equation does not appear to be factorable.
+
+Then, let's use the quadratic formula:
+
+x = [-b ± sqrt(b² - 4ac)] / 2a
+
+For the given equation, a = 3, b = -108, and c = 780. 
+
+We substitute these values into the quadratic formula:
+
+x = [108 ± sqrt((-108)² - 4*3*780)] / 2*3
+   = [108 ± sqrt(11664 - 9360)] / 6
+   = [108 ± sqrt(2304)] / 6
+   = [108 ± 48] / 6
+
+Therefore, the roots of the equation are:
+
+x₁ = (108 + 48) / 6 = 156 / 6 = 26
+x₂ = (108 - 48) / 6 = 60 / 6 = 10
+
+So, the roots of the equation 3x² - 108x + 780 = 0 are x = 26 and x = 10."
+25x^2 - 1025x + 10450 = 0,30,True,"Factoring is not possible in this case because there are no two numbers which multiply to be 10450 and add to be -1025.
+
+Next, I will use the quadratic formula, x = [-b ± sqrt(b^2 - 4ac)] / (2a).
+
+In the quadratic formula, 'a' is the coefficient of the squared term, 'b' is the coefficient of the linear term, and 'c' is the constant term. In this equation, we have a = 25, b = -1025, and c = 10450.
+
+Let's first find the value inside the square root (b^2 - 4ac), known as the discriminant:
+
+Discriminant = (-1025)^2 - 4 * 25 * 10450 = 1050625 - 1045000 = 5625.
+
+Next, let's plug the values into the quadratic formula. 
+
+x₁ = [-(-1025) + sqrt(5625)] / (2 * 25)
+  = (1025 + 75) / 50
+  = 22
+
+
+x₂ = [-(-1025) - sqrt(5625)] / (2 * 25)
+  = (1025 - 75) / 50
+  = 19 
+
+So the roots of the equation, 25x^2 - 1025x + 10450 = 0, are x = 22 and x = 19.
+"
+23x^2 - 644x + 3036 = 0,30,True,"The quadratic equation is 23x^2 - 644x + 3036 = 0.
+
+Since the value of each coefficient is a large number, factoring may potentially be complicated or even impossible.
+
+The quadratic formula: x = [ -b ± sqrt(b² - 4ac) ] / (2a)
+
+Here, a = 23, b = -644 and c = 3036.
+
+Let's use this formula:
+
+x = { [-(-644) ± sqrt((-644)² - 4*23*3036)] / (2*23)
+
+x = [ 644 ± sqrt(414,916 - 279,328)] / 46
+
+x = [ 644 ± sqrt(135,588)] / 46
+
+Taking the square root of 135,588, we get 368.
+
+So, x = [ 644 ± 368] / 46
+
+So, the roots of the equation will be:
+
+x1 = (644 + 368) / 46 = 1,012 / 46 = 22
+
+x2 = (644 - 368) / 46 = 276 / 46 = 6
+
+So, the solutions of the equation 23x^2 - 644x + 3036 = 0 are x = 22 and x = 6."
+23x^2 - 851x + 7176 = 0,30,True,"It looks like this equation can't be factored easily. So let's use the quadratic formula instead. The quadratic formula is:
+
+x = [ -b ± sqrt(b² - 4ac) ] / (2a)
+
+Here, a = 23, b = -851, c = 7176
+
+First, let's calculate the value under the square root, which is called the discriminant (b² - 4ac).
+
+discriminant = (-851)^2 - 4*23*7176 = 723801 - 658848 = 64953
+
+Now, let's plug the values of a, b and the discriminant into the quadratic formula.
+
+x = [ 851 ± sqrt(64953) ] / (2*23) 
+
+Compute the values of x:
+
+x = [ 851 + sqrt(64953) ] / 46 = 33
+x = [ 851 - sqrt(64953) ] / 46 = 8 
+
+Therefore, the solutions to the equation 23x^2 - 851x + 7176 = 0 are x = 33 and x = 8."
+25x^2 - 975x + 7250 = 0,30,True,"To factor this quadratic equation, I will try to factorise 25x^2 - 975x + 7250.
+
+Unfortunately, this equation cannot be factored using integer numbers. This is due to the given conditions and the nature of the numbers present in the equation.
+
+So, let's proceed with the quadratic formula, which is x = [-b ± sqrt(b^2 - 4ac)]/2a
+
+Here in this equation: 
+a = 25, 
+b = -975, 
+c = 7250 
+
+x = [975 ± sqrt((-975)^2 - 4*25*7250)]/2*25
+   = [975 ± sqrt(950625 - 725000)]/50
+   = [975 ± sqrt(225625)]/50
+   = [975 ± 475]/50
+
+Therefore, the roots of equation are: 
+
+x1 = (975+475)/50 = 29 
+
+and 
+
+x2 = (975-475)/50 = 10"
+4x^2 - 132x + 800 = 0,30,True,"But, unfortunately, we cannot factor this equation as the product of two binomials with integer coefficients.
+
+Since we cannot factor this equation, we'll need to use the quadratic formula for this. The quadratic formula is given by:
+
+x = [ -(-b) ± √((-b)^2 - 4ac) ] / 2a
+
+Given the quadratic equation 4x^2 - 132x + 800 = 0,
+
+our a = 4,
+our b = -132, and
+our c = 800.
+
+Substitute these values into the quadratic formula:
+
+x = [ -(-132) ± √((-132)^2 - 4 * 4 * 800) ] / 2 * 4
+
+x = [ 132 ± √(17424 - 12800) ] / 8
+
+x = [ 132 ± √(4624) ] / 8
+
+x = [ 132 ± 68 ] / 8
+
+So, the solutions to the equation 4x^2 - 132x + 800 = 0 are:
+
+x = 200 / 8 = 25 and x = 64 / 8 = 8."
+20x^2 - 780x + 7360 = 0,30,True,"Looking at the quadratic equation:
+
+20x^2 - 780x + 7360 = 0
+
+We can simplify this equation by dividing every term by 20.
+
+This results in:
+
+x^2 - 39x + 368 = 0
+
+Now let's try to factor this equation:
+
+(x - 16)(x - 23) = 0
+
+Setting each factor equal to zero gives the solutions to the equation:
+
+x - 16 = 0   =>   x = 16
+
+and 
+
+x - 23 = 0   =>   x = 23
+
+So, the roots of the equation are x = 16 and x = 23."
+26x^2 - 468x + 2080 = 0,30,True,"The quadratic equation is 26x^2 - 468x + 2080 = 0.
+
+Let's try to factor it.
+
+The equation is a quadratic trinomial (Ax^2 + Bx + C = 0). It is easier to factor it if we divide through by A to make A = 1.
+
+So, divide the entire equation by 26:
+
+x^2 - 18x + 80 = 0
+
+Now, let's split the middle term. We're looking for two numbers that multiply to 80 and add up to -18. These numbers are -10 and -8.
+
+So, re-write the equation:
+
+x^2 - 10x - 8x + 80 = 0
+
+Now, factor by grouping:
+
+(x^2 - 10x) - (8x - 80) = 0
+
+x(x - 10) - 8(x - 10) = 0
+
+(x - 10)(x - 8) = 0
+
+Setting each factor equal to 0 gives the solutions:
+
+x - 10 = 0  =>  x = 10
+
+and
+
+x - 8 = 0  =>  x = 8
+
+So, the roots of the quadratic equation 26x^2 - 468x + 2080 = 0 are x = 10 and x = 8."
+21x^2 - 651x + 2268 = 0,30,True,"This quadratic equation can't be factored easily so we should use the quadratic formula instead. The quadratic formula is x = [-b ± sqrt(b² - 4ac)] / (2a). For this equation, a = 21, b = -651, and c = 2268.
+
+Let's plug these values into the formula:
+
+x = [651 ± sqrt((-651)² - 4*21*2268)] / (2*21)
+x = [651 ± sqrt(423801 - 190512)] / 42
+x = [651 ± sqrt(233289)] / 42
+x = [651 ± 483] / 42
+
+So the solutions to the equation are:
+
+x = (651 + 483) / 42 = 26.95... (approximately)
+and
+x = (651 - 483) / 42 = 4.
+So, the roots of the quadratic equation are roughly x = 26.95 and x = 4."
+2x^2 - 58x + 299 = 0,30,False,"Checking the factors of 2 and 299, it seems that they do not satisfy the b term, which is -58x. Hence, factoring is not possible in this case.
+
+We therefore have to use the quadratic formula, which can be given as:
+`x = [ -b ± sqrt(b² - 4ac) ] / 2a`
+
+Here, a = 2, b = -58, and c = 299
+
+So, the roots of the equation,
+= [ 58 ± sqrt((-58)² - 4*2*299) ] / 2*2
+= [ 58 ± sqrt(3364 - 2392) ] / 4
+= [ 58 ± sqrt(972) ] / 4
+= [ 58 ± 31.1769 ] / 4
+
+Therefore, the roots of the equation are:
+x₁ = (58 + 31.1769) / 4 = 22.2942 
+x₂ = (58 - 31.1769) / 4 = 6.7058
+
+So, the roots of the quadratic equation 2x^2 - 58x + 299 = 0 are 22.2942 and 6.7058."
+7x^2 - 182x + 1191 = 0,30,False,"The equation provided is 7x^2 - 182x + 1191 = 0, however, this does not factor easily.
+
+So, I will use the quadratic formula:
+
+The quadratic formula is given as: x = [-b ± sqrt(b^2 - 4ac)] / 2a
+
+In your equation, a = 7, b = -182, and c = 1191.
+
+So, let’s place these values into the quadratic formula:
+
+x = [182 ± sqrt((-182)^2 - 4*7*1191)] / 2*7
+x = [182 ± sqrt(33124 - 33344)] / 14
+x = [182 ± sqrt(-220)] / 14
+
+Since we have a negative value under the square root, we are dealing with complex roots. This can be simplified into the form a ± bi by taking the square root of the negative number, which results in an imaginary number. So, the square root of -220 is equal to sqrt(220)*i or approximately 14.832 * i.
+
+So, the roots of the equation 7x^2 - 182x + 1191 = 0 are x = 13 ± 14.832i."
+12x^2 - 408x + 1742 = 0,30,False,"This equation is difficult to factor, therefore I'm going to use the quadratic formula: 
+
+The quadratic formula is  x = [-b ± sqrt(b^2 - 4ac)] / 2a.
+
+For the equation 12x^2 - 408x + 1742 = 0, a = 12, b = -408, and c = 1742.
+
+Let's plug these values into the quadratic formula:
+x = [408 ± sqrt((-408)^2 - 4*12*1742)] / (2 * 12)
+  = [408 ± sqrt(166464 - 83568)] / 24
+  = [408 ± sqrt(82896)] / 24
+  = [408 ± 288] / 24
+
+Solving for x gives us two possible solutions:
+x =  696 / 24 = 29
+and
+x = 120 / 24 = 5
+
+So, the roots of the equation are x = 29 and x = 5."
+12x^2 - 96x + 92 = 0,30,False,"It's a quadratic equation in the form ax^2 + bx + c = 0. We can simplify this equation by dividing each term by 4:
+
+3x^2 - 24x + 23 = 0
+
+Now, let's try to factorize it. We're looking for two numbers that add up to -24 (the coefficient of x) and multiply to 23 (the constant term).
+If we notice, the only possible factor pairs of 23 are 23 and 1 or -23 and -1. But neither of these pairs of numbers would add up to -24.
+Therefore, this equation cannot be factored.
+
+Since it can't be factored, we should use the Quadratic Formula. The formula is x = [-b ± sqrt(b^2 - 4ac)] / (2a).
+
+Substitute
+a = 3, b = -24, and c = 23 into the formula:
+
+x = [24 ± sqrt((-24)^2 - 4*3*23)] / (2*3)
+x = [24 ± sqrt(576 - 276)] / 6
+x = [24 ± sqrt(300)] / 6
+x = [24 ± (10√3)] / 6
+
+which simplifies to 
+x = 4 ± (10/3)√3
+
+Hence, the roots of the equation 12x^2 - 96x + 92 = 0 are 4 + (10/3)√3 and 4 - (10/3)√3."
+26x^2 - 806x + 5466 = 0,30,False,"The quadratic equation cannot be factored. So, let's use the quadratic formula, which states: given the equation ax^2 + bx + c = 0, x is found by using the formula x = [-b ± sqrt(b^2 - 4ac)] / 2a.
+
+For our equation, a = 26, b = -806 and c = 5466.
+
+Plugging these into the quadratic formula gives:
+
+x = [806 ± sqrt((-806)^2 - 4 * 26 * 5466)] / (2 * 26)
+
+= [806 ± sqrt(649636 - 567232)] / 52 
+
+= [806 ± sqrt(82404)] / 52
+
+= [806 ± 287] / 52
+
+which gives us the roots x = 21 and x = 10."
+19x^2 - 741x + 7225 = 0,30,False,"Unfortunately, this quadratic equation cannot be factored using integers. I will now use the quadratic formula x = [-b ± sqrt(b^2-4ac)] / 2a
+
+Here, a = 19, b = -741, and c = 7225.
+
+So x = [741 ± sqrt((-741)^2-4*19*7225)] / 2*19
+   = [741 ± sqrt(548881 - 549000)] / 38
+   = [741 ± sqrt(-119)] / 38
+
+Because the value under the square root in the quadratic formula is negative, the solutions will be complex numbers.
+
+So,
+x = (741 ± i sqrt(119)) / 38,
+
+which simplifies to x = 38.5 ± (0.5 * sqrt(119) * i).
+
+So the roots of the quadratic equation are:
+x = 38.5 + 0.5 * sqrt(119) * i and x = 38.5 - 0.5 * sqrt(119) * i
+
+Here, i is the imaginary unit, which is equal to the square root of -1."
+5x^2 - 150x + 1009 = 0,30,False,"This equation doesn't appear to be factorable due to the large prime number in the constant term, 1009, and the coefficients' differences. So, I will use the quadratic formula, which gives roots of a quadratic equation as:
+
+x = [ -b ± sqrt(b^2 - 4ac) ] / (2a)
+
+Here, a = 5, b = -150, and c = 1009.
+
+Let's substitute these values into the quadratic formula:
+
+x = [ -(-150) ± sqrt((-150)^2 - 4*5*1009) ] / (2*5)
+x = [ 150 ± sqrt(22500 - 20180) ] / 10
+x = [ 150 ± sqrt(2320) ] / 10
+x = [ 150 ± 48.2 ] / 10
+
+This gives us our roots:
+
+x = 198.2 / 10 and x = 101.8 / 10
+
+or, simplified:
+
+x = 19.82 and x = 10.18"
+20x^2 - 620x + 2620 = 0,30,False,"Actually, this equation is not easily factorizable. Hence the best approach would be to use the quadratic formula, which is x = [ -b ± sqrt(b^2 - 4ac) ] / 2a.
+
+Given the quadratic equation 20x^2 - 620x + 2620 = 0, we have:
+a = 20
+b = -620
+c = 2620
+
+Then plug these values into the formula.
+
+x = [620 ± sqrt((-620)^2 - 4*20*2620)] / 2*20
+x = [620 ± sqrt(384400 - 209600)] / 40
+x = [620 ± sqrt(174800)] / 40
+x = [620 ± 418] / 40
+
+This gives us two possible solutions:
+
+x = (620 + 418) / 40 = 25.95
+x = (620 - 418) / 40 = 5.05
+
+So, the roots of the equation 20x^2 - 620x + 2620 = 0 are x = 25.95 and x = 5.05."
+4x^2 - 120x + 345 = 0,30,False,"Tried factoring the equation but it doesn't seem to factorize. Hence, we will use the quadratic formula for finding the roots. It is given as:
+
+x = [-b ± sqrt(b² - 4ac)] / 2a
+
+Where:
+  a, b and c are coefficients of a quadratic equation (ax²+bx+c).
+  
+In our equation:
+  a = 4, b = -120, c = 345.
+
+By substituting these values in the quadratic formula, we get:
+
+x = {120 ± sqrt[(-120)² - 4*4*345]} / (2*4)
+  = {120 ± sqrt[14400 - 5520]} / 8
+  = {120 ± sqrt[8880]} / 8
+  = {120 ± 94.28090415820634} / 8
+  = 15 or 3.21426210734958.
+
+Therefore, the roots of the given quadratic equation are 15 and 3.21426210734958."
+6x^2 - 114x + 425 = 0,30,False,"Apologies for the confusion. It is very difficult to find the factors of 6x^2 - 114x + 425 = 0 quickly and accurately. We would have to find two numbers that multiply to (6 * 425) = 2550 and sum to -114. Therefore, I'm going to move on to using the quadratic formula.
+
+The quadratic formula is:
+
+x = [ -b ± sqrt(b^2 - 4ac) ] / (2a)
+
+In the equation 6x^2 - 114x + 425 = 0, we have:
+
+a = 6, b = -114, and c = 425.
+
+Now we can substitute these values into the quadratic formula:
+
+x = [ -(-114) ± sqrt((-114)^2 - 4*6*425) ] / (2*6)
+x = [ 114 ± sqrt(12996 - 10200) ] / 12
+x = [ 114 ± sqrt(2796) ] / 12
+x = [ 114 ± 52.92 ] / 12
+
+This gives us two solutions:
+
+x = (114 + 52.92) / 12 = 13.91
+and
+x = (114 - 52.92) / 12 = 5.09
+
+So, the equation has two roots: 13.91 and 5.09 ."
+14x^2 - 224x + 672 = 0,35,True,"The given quadratic equation is 14x^2 - 224x + 672 = 0
+
+In order to start factoring the equation, we can look for a common factor among all the terms. Here, all the coefficients are divisible by 14.
+
+So, we can factor out a 14:
+
+14(x^2 - 16x + 48) = 0
+
+Now, we have a quadratic in the form of (ax-b)^2. Let's try to express the quadratic in the brackets as a square of binomial. The square root of 48 is approximately 6.93. Since the constant term in quadratic is positive and the term with 'x' is negative, the quadratic may be represented as a square of binomial with subtraction.  
+
+We recognize the second term as twice the product of a and b if a equals to x and b equals to 8, and the third term as the square of 8: 
+
+x^2 - 16x + 64 = (x - 8)^2
+
+But in the equation we have x^2 - 16x + 48, not x^2 - 16x + 64. Thus, we make an additional step:
+
+x^2 - 16x + 48 = (x - 8)^2 - 16
+
+And we have:
+
+14[(x - 8)^2 - 16] = 0
+
+Now can express the equation in difference of squares form:
+
+14[(x - 8 - 4)(x - 8 + 4)] = 0
+
+That simplifies to:
+
+14[(x - 12)(x - 4)] = 0
+
+Setting each factor equal to 0 gives the solutions: 
+
+x - 12 = 0 => x = 12
+
+x - 4 = 0 => x = 4
+
+So, the roots of the equation 14x^2 - 224x + 672 = 0 are x = 12 and x = 4."
+5x^2 - 240x + 2275 = 0,35,True,"The quadratic equation isn't simple to factor by inspection. Therefore, we will use the quadratic formula which is given by:
+
+x = [ -b ± sqrt(b² - 4ac) ] / 2a 
+
+Given the general form of a quadratic equation: ax²+bx+c = 0 
+
+Here, a = 5, b = -240, c = 2275 
+
+We can substitute these values into the quadratic formula:
+
+x = [240 ± sqrt((-240)² - 4*5*2275) ] / 2*5 
+= [240 ± sqrt(57600 - 45500)] / 10 
+= [240 ± sqrt(12100)] / 10 
+= [240 ± 110] / 10
+
+We get two roots: 
+
+x₁ = (240+110)/10 = 35
+
+and
+
+x₂ = (240-110)/10 = 13 
+
+So, the roots of the quadratic equation 5x² - 240x + 2275 = 0 are x = 35 and x = 13."
+34x^2 - 1122x + 9044 = 0,35,True,"This equation can be rewritten as: 
+
+2*(17x^2 - 561x + 4522) = 0.
+
+Unfortunately, the quadratic expression inside brackets doesn't factorize nicely, so let's use the quadratic formula now:
+
+The quadratic formula is given by:
+
+X = [ -b ± sqrt( b^2 - 4ac ) ] / 2a.
+
+Here, a = 34, b = -1122 and c = 9044.
+
+So, the roots are given by -
+
+X = [ 1122 ± sqrt( (-1122)^2 - 4*34*9044 ) ] / (2*34),
+X = [ 1122 ± sqrt( 1258884 - 1225984 ) ] / 68,
+X = [ 1122 ± sqrt( 32900 ) ] / 68,
+X = [ 1122 ± 181 ] / 68.
+
+So, the roots of the given quadratic equation are -
+
+X1 = (1122 + 181) / 68 = 1303 / 68 = 19.161764705882352 and
+X2 = (1122 - 181) / 68 = 941 / 68 = 13.838235294117647.
+
+Thus, the roots of the quadratic equation 34x^2 - 1122x + 9044 = 0 are approximately 19.16 and 13.84."
+19x^2 - 855x + 7904 = 0,35,True,"I'm sorry but your equation can't be factored easily, so let's use the quadratic formula which is:
+
+x = [-b ± sqrt(b² - 4ac)] / 2a
+
+Here, a = 19, b = -855, and c = 7904.
+
+The roots of the equation can then be calculated as follows:
+
+x = [855 ± sqrt((-855)² - 4*19*7904)] / 2*19
+x = [855 ± sqrt(730725 - 300576)] / 38
+x = [855 ± sqrt(430149)] / 38
+x = [855 ± 655] / 38
+
+Hence, the roots of the equation are:
+
+x = (855 + 655)/38 = 39.73684   (approximately)
+
+and 
+
+x = (855 - 655)/38 = 5.26316   (approximately)"
+17x^2 - 493x + 3366 = 0,35,True,"After attempting to find factors of 3366, it's pretty clear that this equation can't be factored easily.
+
+Therefore, we should use the quadratic formula. 
+
+The quadratic formula is given by:
+
+x = [-b ± sqrt(b² - 4ac)] / 2a
+
+Here, a = 17, b = -493, and c = 3366.
+
+Let's substitute these values into the formula:
+
+x = [493 ± sqrt((-493)² - 4*17*3366)] / (2*17)
+x = [493 ± sqrt(243049 - 228248)] / 34
+x = [493 ± sqrt(14801)] / 34
+x = [493 ± 121.66] / 34
+
+Therefore, the solutions to the equation are:
+
+x = [493 + 121.66] / 34 = 18.08 (3 dp)
+x = [493 - 121.66] / 34 = 10.92 (3 dp)
+
+So, the roots of the given quadratic equation are 18.08 and 10.92."
+10x^2 - 420x + 2450 = 0,35,True,"We notice that every coefficient is divisible by 10, so we can simplify the equation by dividing everything by 10. 
+
+We get x^2 - 42x + 245 = 0. 
+
+To figure out if it can be factored, you need to find two numbers that multiply to give you 245 and add to give you -42. 
+
+Notice that -35 and -7 are two such numbers because -35*-7 = 245 and -35-7 = -42. Thus, we can factor the equation as following: 
+
+x^2 - 42x + 245 = (x - 35)(x - 7) = 0
+
+Setting each of these equations equal to 0 we solve for x:
+
+x - 35 = 0   --->   x = 35
+
+and
+
+x - 7 = 0   --->   x = 7
+
+So, the roots of the equation 10x^2 - 420x + 2450 = 0 are x = 35 and x = 7."
+14x^2 - 406x + 756 = 0,35,True,"The equation 14x^2 - 406x + 756 = 0 is a bit complicated to factor. Let's move on and use the quadratic formula:
+
+The quadratic formula is given as:
+
+x = [-b ± sqrt(b^2 - 4ac)] / 2a
+
+Here, a = 14, b = -406, c = 756. 
+
+Substituting these values in formula:
+
+x = [406 ± sqrt((-406)^2 - 4*14*756)] / 2*14
+x = [406 ± sqrt(164836 - 42336)] / 28
+x = [406 ± sqrt(122500)] / 28
+x = [406 ± 350] / 28
+x = [756/28, 56/28]
+x = [27, 2]
+
+So, the roots of the equation 14x^2 - 406x + 756 = 0 are 27 and 2."
+23x^2 - 322x + 299 = 0,35,True,"After trying to factor the equation, we can notice that the coefficient of the x^2 term (23) is a prime number. 
+
+As such, it would make it pretty difficult to come up with factors that when multiplied will give us the constant term (299).
+
+As a result, this method is quite complicated here and factoring the equation doesn't appear to be possible or the most efficient method.
+
+So, we can use the quadratic formula, which states that the roots of an equation ax^2 + bx + c = 0 can be found using the formula 
+
+x= [-b ± sqrt(b^2 -4ac)] / 2a
+
+For the equation 23x^2 - 322x + 299 = 0:
+
+a = 23, b = -322, c = 299. 
+
+Firstly, calculate the value under the square root in the quadratic formula known as the discriminant (b^2 -4ac):
+
+b^2 -4ac = (-322)^2 - 4*23*299 = 103684 - 27556 = 76128.
+
+The discriminant is positive so there are two distinct roots.
+
+Now, we can find the roots using this value:
+
+x1 = [322 + sqrt(76128)] / (2 * 23) = (322 + 276) / 46 = 13.
+x2 = [322 - sqrt(76128)] / (2 * 23) = (322 - 276) / 46 = 1.
+
+So the roots of the equation 23x^2 - 322x + 299 = 0 are x = 13 and x = 1."
+32x^2 - 1024x + 8160 = 0,35,True,"Upon attempting to factorize the equation, we find that the given quadratic equation can't be factorized using integer factors. Therefore, we will use the quadratic formula:
+
+The quadratic formula is given by:
+
+x = [ -b ± sqrt(b² - 4ac) ] / 2a
+
+For the equation 32x² - 1024x + 8160 = 0 :
+
+a = 32
+b = -1024
+c = 8160
+
+Plug these values into the quadratic formula:
+
+x = [ 1024 ± sqrt((-1024)² - 4 * 32 * 8160) ] / 2 * 32
+
+= [ 1024 ± sqrt(1048576 - 1048576) ] / 64
+
+= [ 1024 ± sqrt(0) ] / 64
+
+= [ 1024 ± 0 ] / 64
+
+Therefore, we get 2 equal roots of value 16.
+
+So, the roots of 32x^2 - 1024x + 8160 = 0 are x1 = x2 = 16."
+31x^2 - 744x + 2480 = 0,35,True,"This equation isn't easily factored because 31, 744, and 2480 don't have the kind of factors that would make for a simple factoring solution. So, I'll go ahead and solve it using the quadratic formula instead. 
+
+The quadratic formula is x = [-b ± sqrt(b² - 4ac)] / (2a). For this equation, a = 31, b = -744, and c = 2480.  
+
+This gives us x = [744 ± sqrt((-744)² - 4*31*2480)] / (2*31). 
+
+Calculating the term under the square root gets us x = [744 ± sqrt((552960) - (244160))] / 62.
+
+This simplifies to x = [744 ± sqrt(308800)] /62.
+
+And further simplifies to x = [744 ± 556] /62.
+
+Which gives us the two roots: x = 130/31 and x = 3. These are the two solutions to the equation."
+25x^2 - 750x + 5414 = 0,35,False,"Sorry, the above equation can't be factored easily.
+
+Let's use the quadratic formula:
+
+In general, the solutions of any quadratic equation ax^2 + bx + c = 0 can be found using the quadratic formula:
+
+x = [ -b ± sqrt(b^2 - 4ac)] / (2a)
+
+Applying this to our equation:
+
+x = [750 ± sqrt((750)^2 - 4*25*5414)] / (2*25)
+
+Then calculating the discriminant:
+
+D = (750)^2 - 4*25*5414 = 362500 - 5414000 = -5051500
+
+Since the determinant is negative, it means the roots will be imaginary or complex numbers.
+
+Calculate the roots:
+
+x = [750 ± sqrt(-5051500)] / (2*25)
+
+x = 750/50 ± sqrt(-5051500)/50
+
+So, the roots of the quadratic equation 25x^2 - 750x + 5414 = 0 are complex and given by
+
+x = 15 ± sqrt(-5051500)/50 i
+
+where ""i"" is the imaginary unit with the property i^2 = -1."
+4x^2 - 92x + 269 = 0,35,False,"This equation does not factor easily, so we will use the quadratic formula instead.
+
+The quadratic formula is x = [-b ± sqrt(b^2 - 4ac)] / 2a.
+
+For the given equation 4x^2 - 92x + 269 = 0, a = 4, b = -92, and c = 269.
+
+Substituting these into the formula gives
+
+x = [92 ± sqrt((-92)^2 - 4*4*269)] / (2*4)
+x = [92 ± sqrt(8464 - 4304)] / 8
+x = [92 ± sqrt(4160)] / 8
+x = [92 ± 64.5] / 8
+
+Therefore, the roots of the equation are x = 19.5625 and x = 3.4375."
+12x^2 - 756x + 11883 = 0,35,False,"Unfortunately, due to the large numbers involved in the coefficients, 12, -756 and 11883, trying to factorise this equation is quite difficult.
+
+When the quadratic is not easily factored, we can use the quadratic formula, which is expressed as follows:
+
+x = [-b ± sqrt(b² - 4ac)] / (2a)
+
+Let's identify a, b, and c from our original quadratic equation, 12x² - 756x + 11883 = 0:
+
+a = 12
+b = -756
+c = 11883
+
+Now plug these values into the quadratic formula to solve for x:
+
+x = [756 ± sqrt((-756)² - 4*12*11883)] / (2*12)
+x = [756 ± sqrt(571536 - 285792)] / 24
+x = [756 ± sqrt(285744)] / 24
+x = [756 ± 534] / 24
+
+So, the solutions to the quadratic equation are:
+
+x = (756 + 534) / 24 = 54
+x = (756 - 534) / 24 = 9.25
+
+Therefore, the roots of the quadratic equation 12x² - 756x + 11883 = 0 are 54 and 9.25."
+10x^2 - 350x + 2177 = 0,35,False,"Looking at the equation, it could not be simplified by common factoring. Therefore, we would need to use the Quadratic Formula to solve it.
+
+The Quadratic Formula is given by: x = [-b ± sqrt(b² - 4ac)] / (2a)
+
+In this case: 
+a = 10
+b = -350
+c = 2177
+
+Substituting a, b and c into the quadratic formula, we get:
+
+x = [350 ± sqrt((-350)² - 4*10*2177)] / (2*10)
+x = [350 ± sqrt(122500 - 87080)] / 20
+x = [350 ± sqrt(35420)] / 20
+x = [350 ± sqrt(35420)] / 20
+x = [350 ± 188.21] / 20
+
+This equation has two solutions:
+
+x₁ = (350 + 188.21) / 20 = 26.91
+x₂ = (350 - 188.21) / 20 = 8.09
+
+So the roots of the quadratic equation 10x² - 350x + 2177 = 0 are x₁ = 26.91 and x₂ = 8.09."
+30x^2 - 1200x + 10929 = 0,35,False,"After a quick check, it appears this equation cannot be factored nicely. Thus, we should use the quadratic formula next.
+
+The quadratic formula is:
+
+x = [ -b ± sqrt(b^2 - 4ac) ] / 2a
+
+Plugging the values from our equation, we get:
+
+x = [ 1200 ± sqrt((1200)^2 - 4*30*10929) ] / (2*30)
+
+By simplifying under the square root:
+
+x = [ 1200 ± sqrt((1440000 - 1307460) ] / 60
+
+Further simplifying:
+
+x = [ 1200 ± sqrt(132540) ] / 60
+
+The square root of 132540 is approximately 364.07, so,
+
+x = [ 1200 ± 364.07 ] / 60
+
+This gives us two potential solutions for x:
+
+x = (1200 + 364.07) / 60 = 26.07
+
+and
+
+x = (1200 - 364.07) / 60 = 13.93
+
+Therefore, the roots of the quadratic equation are x = 26.07 and x = 13.93."
+11x^2 - 594x + 8033 = 0,35,False,"I am sorry it appear that my previous message was incorrect. This equation cannot be factored easily as it involves large coefficients to work with. If you try to factor, there would not be a pair of integers that multiply to (11*8033) and sum up to -594.
+
+So the efficient way is to apply the quadratic formula.
+
+Let's recall the quadratic formula is given as:
+
+x = [ -b ± sqrt(b^2 - 4ac) ] / (2a)
+
+where,
+a, b, and c are the coefficients of the quadratic equation.
+Here, a = 11, b = -594, c = 8033.
+
+Let's substitute these values into the formula:
+
+x = [ -(-594) ± sqrt((-594)^2 - 4*11*8033) ] / (2*11)
+x = [ 594 ± sqrt((352836) - 354726) ] / 22
+x = [ 594 ± sqrt(-1890) ] / 22
+
+Since we have a negative value under the square root, we realize that this will result in complex roots (i.e., they involve the imaginary unit i).
+
+x = [ 594 ± sqrt(1890) * i ] /22
+So, the roots of the equation are:
+x = 27 - 20i 
+and 
+x = 27 + 20i. 
+
+Those are the complex roots of the equation 11x^2 - 594x + 8033 = 0."
+25x^2 - 1375x + 17877 = 0,35,False,"This quadratic equation is not easily factorable. Therefore, we will use the quadratic formula. The quadratic formula is as follows:
+
+x = [-b ± sqrt(b² - 4ac)] / 2a
+
+Here, a=25, b=-1375 and c=17877. Let's plug these into the formula.
+
+x = [1375 ± sqrt((-1375)² - 4*25*17877)] / 2*25
+x = [1375 ± sqrt(1890625 - 1787700)] / 50
+x = [1375 ± sqrt(102925)] / 50
+x = [1375 ± 321] / 50
+
+Therefore, the roots of this quadratic equation are:
+
+x = (1375 + 321) / 50 = 33.92
+x = (1375 - 321) / 50 = 21.08"
+7x^2 - 259x + 957 = 0,35,False,"Upon inspection, this doesn't seem to be easily factorable. Let's use the quadratic formula, instead.
+
+The quadratic formula is:
+
+    x = [-b ± sqrt(b^2 - 4ac)] / 2a
+
+For this equation, a = 7, b = -259, and c = 957. Let's apply these values to the formula and solve for x:
+
+x = [259 ± sqrt((-259)^2 - 4*7*957)] / (2*7)
+
+Square -259, then subtract 4*7*957 from this, and take the square root of the result.
+
+x = [259 ± sqrt((67081 - 26718)] / 14
+
+Calculating the square root:
+
+x = [259 ± sqrt(40363)] / 14
+
+Take the square root of 40363, and complete the calculations inside the brackets:
+
+x = [259 ± 201] / 14
+
+Now we get two possible results for x. The sum and the difference of 259 and 201:
+
+x1 = (260 + 201) / 14 = 33
+x2 = (260 - 201) / 14 = 4
+
+So, the roots of the quadratic equation 7x^2 - 259x + 957 = 0 are x1 = 33, x2 = 4."
+34x^2 - 714x + 3689 = 0,35,False,"The quadratic equation cannot be factored so we need to use the quadratic formula which states that `For an equation of the form ax^2 + bx + c = 0,
+
+The roots, x, can be given by x = [-b ± sqrt(b^2 - 4ac)] / 2a
+
+In this case:
+a = 34
+b = -714
+c = 3689
+
+Substituting these values into the formula gives:
+
+x = [714 ± sqrt((-714)^2 - 4*34*3689)] / 2*34
+
+This simplifies to:
+
+x = [714 ± sqrt(509796 - 500404)] / 68
+x = [714 ± sqrt(9392)] / 68
+
+x = [714 ± sqrt(9392)] / 68 can be calculated to approximately:
+
+x = [714 ± 97] / 68
+
+So, the solutions are:
+
+x = 811 / 68 ≈ 11.9265 (approximated to 4 decimal places)
+
+and
+
+x= 617 / 68 ≈ 9.0735 (approximated to 4 decimal places)"
+23x^2 - 874x + 3814 = 0,35,False,"Factorizing the quadratic equation 23x^2 - 874x + 3814 = 0 does not seem feasible due to the complex values of the coefficients. 
+
+Let's now proceed to use the quadratic formula:
+
+The quadratic formula is given by:
+
+    x = [-b ± sqrt(b^2 - 4ac)] / (2a)
+
+For the equation 23x^2 - 874x + 3814 = 0:
+
+    a = 23
+    b = -874
+    c = 3814
+
+So, let's substitute these values in our quadratic formula:
+
+x = [874 ± sqrt((-874)^2 - 4*23*3814)] / (2*23)
+
+x = [874 ± sqrt(763876 - 350072)] / 46
+
+x = [874 ± sqrt(413804)] / 46
+
+Taking the square root of 413804 gives approximately 643.13. 
+
+So the two possible solutions are:
+
+x1 = (874 + 643.13) / 46 ≈ 33
+
+x2 = (874 - 643.13) / 46 ≈ 5 
+
+So, the roots of the equation are approximately x1 = 33 and x2 = 5."
+34x^2 - 1802x + 20808 = 0,40,True,"It turns out that this equation is a bit too complex to factor easily. Therefore, the quadratic formula has to be used instead.
+
+Remember, the quadratic formula is as follows: 
+
+\[ x = {-b ± sqrt(b^2 - 4ac)} / {2a} \] 
+
+Here, a = 34 , b = -1802 and c = 20808.
+
+Let's calculate the discriminant first: 
+\[ D = b^2 - 4ac = (-1802)^2 - 4*34*20808 = 3247204 - 2832136 = 415068 \]
+
+Since the discriminant (D) is positive, it means there are 2 different real roots
+
+Now, let's find the two roots by using the quadratic formula:
+
+\[ x1 = [1802 + sqrt(415068)] / (2 * 34) = (1802 + 644) / 68 = 36 \]
+
+\[ x2 = [1802 - sqrt(415068)] / (2 * 34) = (1802 - 644) / 68 = 17 \]
+
+Thus, the roots of the equation 34x^2 - 1802x + 20808 = 0 are x = 36 and x = 17."
+35x^2 - 1470x + 15120 = 0,40,True,"This quadratic equation is actually factorable. We'll start by factoring out the Greatest Common Factor (GCF) from all terms. The factors of 35, 1470, and 15120 that are common to all are 35. So we'll factor that out:
+
+35*(x^2 - 42x + 432) = 0
+
+Now, we try to express the quadratic expression x^2 - 42x + 432 in terms of two binomials.
+
+(x - 36)(x - 6) = 0
+
+Setting each factor equal to zero gives the solutions:
+
+x - 36 = 0   =>  x = 36
+
+x - 6 = 0   =>  x = 6
+
+Therefore, the roots of the equation 35x^2 - 1470x + 15120 = 0 are x = 36 and x = 6."
+15x^2 - 960x + 14985 = 0,40,True,"It appears that this equation doesn't readily factor, so I'll solve it using the quadratic formula.
+
+The quadratic formula is x = [-b ± sqrt(b^2 - 4ac)] / 2a.
+In this equation, a = 15, b = -960, and c = 14985.
+
+So the roots of this equation are x = [960 ± sqrt((-960)^2 - 4*15*14985)] / (2 * 15)
+= [960 ± sqrt(921600 - 899100)] / 30
+= [960 ± sqrt(22500)] / 30
+= [960 ± 150] / 30.
+
+Thus, the roots of the equation are x = (960 + 150) / 30 = 1110 / 30 = 37 and x = (960 - 150) / 30 = 810 / 30 = 27."
+28x^2 - 1148x + 10584 = 0,40,True,"Let's divide the quadratic equation by 28 (the coefficient of x²) to make calculations a bit easier:
+
+x² - 41x + 378 = 0 
+
+Now, let's look for two numbers that add to -41 (the coefficient of x) and multiply to 378 (the constant term).
+
+The numbers -9 and -42 fit these conditions, since -9 + -42 = -41 and -9 × -42 = 378.
+
+Therefore, we can write the quadratic equation in its factored form:
+
+(x - 9)(x - 42) = 0
+
+Setting each factor equal to zero and solving for x, we get:
+
+x - 9 = 0 => x = 9
+x - 42 = 0 => x = 42
+
+Thus, the roots of the equation 28x² - 1148x + 10584 = 0 are x = 9, 42."
+21x^2 - 819x + 3570 = 0,40,True,"It seems like this equation is not easily factored. Let us proceed to solve it using the quadratic formula.
+
+The quadratic formula is given as:
+
+x = [-b ± sqrt(b² - 4ac)] / (2a), where:
+   a = 21
+   b = -819
+   c = 3570
+
+Substituting these values into the formula:
+
+x = [819 ± sqrt((-819)² - 4*21*3570)] / (2 * 21)
+x = [819 ± sqrt(670761 - 299160)] / 42
+x = [819 ± sqrt(371601)] / 42
+x = [819 ± 610] / 42
+
+We end up with two solutions:
+
+x = (819 + 610) / 42 = 34
+x = (819 - 610) / 42 = 5
+
+Thus, the roots of the equation 21x^2 - 819x + 3570 = 0 are 34 and 5."
+24x^2 - 1056x + 10080 = 0,40,True,"We notice that each of the coefficients in the equation is divisible by 24. We can simplify the equation by dividing all terms by 24:
+
+x^2 - 44x + 420 = 0
+
+Next, we try to factor the equation if possible. Since 20 and 21 both add up to 44, and when multiplied gives 420, we can factor the quadratic equation as such:
+
+(x - 20) * (x - 21) = 0  
+
+Meaning, the roots of the equation are x = 20 and x = 21."
+20x^2 - 1460x + 26640 = 0,40,True,"Let's start by observing the equation:
+
+20x^2 - 1460x + 26640 = 0
+
+I notice that every coefficient and the constant term is divisible by 20. So, let's factor it out:
+
+20 * (x^2 - 73x + 1332) = 0
+
+Now we have a simpler quadratic equation to deal with: x^2 - 73x + 1332 = 0. 
+
+I see that 1332 is 12*111 and 111 = 37*3, and 37+36 = 73, so let's try to break it down:
+
+x^2 - 37x - 36x + 1332 = 0. 
+
+We can now group the terms:
+
+x(x - 37) - 36(x - 37) = 0.
+
+This allows us to factor out an (x - 37):
+
+(x - 36)(x - 37) = 0.
+
+Setting each factor equal to zero gives the solutions of the equation as x1 = 36 and x2 = 37. These two numbers are the roots of the quadratic equation."
+8x^2 - 472x + 6720 = 0,40,True,"Finding perfect factors of 8, 472, and 6720 is a difficult task. It seems that factoring might not be the best route. So, let's proceed with the quadratic formula:
+
+The quadratic formula is:
+
+x = [-b ± sqrt(b^2 - 4ac)] / 2a
+
+In this equation, a = 8, b = -472, and c = 6720.
+
+Before we proceed further, we know that if (b^2 - 4ac) is negative, the roots are complex (not real). So let's check the value of (b^2 - 4ac):
+
+b^2 - 4ac = (-472)^2 - 4*8*6720 = 222784 - 215040 = 7744
+
+So, it is not negative and proceeds with the quadratic formula:
+
+x = [472 ± sqrt(7744)] / (2 * 8)
+  = [472 ± 88] / 16
+
+There will be two solutions: one with the plus sign and another with the minus.
+
+x = (472 + 88) / 16 = 560 / 16 = 35
+x = (472 - 88) / 16 = 384 / 16 = 24
+
+So, the roots of the equation are 35 and 24."
+25x^2 - 1700x + 28500 = 0,40,True,"The given equation is not easily factorizable. So, we need to use the quadratic formula to find the roots. The quadratic formula is given by:
+
+x = [ -b ± sqrt( b^2 - 4ac ) ] / 2a 
+
+Here, a = 25, b = -1700 and c = 28500.
+
+First, calculate the determinant:
+
+b^2 - 4ac 
+= (-1700)^2 - 4*25*28500 
+= 2890000 - 2850000 
+= 40000
+
+The determinant is positive, so the roots are real and distinct.
+
+Now, use the quadratic formula:
+
+x = [ -(-1700) ± sqrt(40000) ] / 2*25
+= (1700 ± 200) / 50
+= {1900/50, 1500/50}
+= {38, 30}
+
+So, the roots of the given equation are 38 and 30."
+20x^2 - 540x + 2200 = 0,40,True,"Unfortunately, after attempting to factor this equation, it becomes clear that the equation cannot easily be factored given its current form. Hence, we'll resort to using the quadratic formula to solve for the roots of the equation.
+
+The quadratic formula is given as:
+
+x = [-b ± sqrt(b^2 - 4ac)] / (2a)
+
+For our given equation, that gives us:
+
+a = 20, b = -540, and c = 2200
+
+Plugging these into the quadratic formula gives us:
+
+x = [540 ± sqrt((-540)^2 - 4*20*2200)] / (2*20)
+x = [540 ± sqrt((291600 - 176000)] / 40
+x = [540 ± sqrt(115600)] / 40
+x = [540 ± 340] / 40
+
+This gives us two possible solutions:
+
+x = 880 / 40 = 22
+x = 200 / 40 = 5
+
+So the roots of the equation 20x^2 - 540x + 2200 = 0 are x = 22, 5."
+37x^2 - 1406x + 11011 = 0,40,False,"It seems challenging to factor this equation due to large coefficients. So, let's use the quadratic formula to find its roots. The quadratic formula is given by:
+
+x = [-b ± sqrt(b² - 4ac)] / 2a
+
+In the equation 37x² - 1406x + 11011 = 0, 
+a = 37, b = -1406, and c = 11011.
+
+Let's substitute these values into the quadratic formula to get the roots:
+
+x = [1406 ± sqrt((-1406)² - 4*37*11011)] / (2*37)
+x = [1406 ± sqrt(1978836 - 1620804)] / 74
+x = [1406 ± sqrt(358032)] / 74
+x = [1406 ± 598] / 74
+
+So, the roots of the given quadratic equation are:
+x₁ = (1406 + 598) / 74 = 27
+x₂ = (1406 - 598) / 74 = 11
+
+Thus, the roots of the equation 37x² - 1406x + 11011 = 0 are 27 and 11."
+38x^2 - 1710x + 19178 = 0,40,False,"Attempting to factor this quadratic equation is quite complicated due to its large coefficients. Hence, I'll solve the equation using the quadratic formula instead:
+
+The quadratic formula is given by x = [-b ± sqrt(b² - 4ac)] / 2a.
+
+Where:
+a = 38
+b = -1710
+c = 19178
+
+So x will be [-(-1710) ± sqrt((1710)² - 4*38*19178)] / 2*38
+Using calculator to simplify sqrt((1710)² - 4*38*19178) we get 650
+
+So x = [1710 ± 650] / 76.
+
+Therefore, the roots of the equation are:
+
+x = (1710 + 650) / 76 = 31.05263 (approx)
+and
+x = (1710 - 650) / 76 = 13.94737 (approx)
+
+So, the roots of the quadratic equation are approximately x = 31.05263 and x = 13.94737."
+35x^2 - 2590x + 47640 = 0,40,False,"After having a look at the quadratic equation, it can be seen that the coefficients are quite large and not easily factored. 
+
+So, we are going to use the quadratic formula:
+
+The quadratic formula is used to solve the quadratic equation and is given by:
+
+x = [ -b ± sqrt(b^2 - 4ac) ] / 2a
+
+a = 35, b = -2590, and c = 47640.
+
+Applying these values to the formula, we get:
+
+x = [2590 ± sqrt((-2590)^2 - 4*35*47640)] / 2*35
+  = [2590 ± sqrt(6707600 - 6658400)] / 70
+  = [2590 ± sqrt(49200)] / 70
+  = [2590 ± 220] / 70
+
+The roots are:
+
+x1 = (2590 + 220) / 70 = 2810 / 70 = 40
+x2 = (2590 - 220) / 70 = 2370 / 70 = 34
+
+So, the roots of the given quadratic equation are x1 = 40 and x2 = 34."
+33x^2 - 1782x + 22461 = 0,40,False,"Attempt to factor the equation
+
+The standard form of a quadratic equation is
+
+ax² + bx + c = 0
+
+where
+a, b, and c are constants,
+a ≠ 0,
+and x represents an unknown variable.
+
+The quadratic in question is already in standard form, where:
+a = 33, b = -1782, and c = 22461.
+
+After observation, it does not appear that a, b, and c share any common factors besides 1 and thus, the quadratic equation does not seem to be factorable. Hence, we are going to make use of the quadratic formula to solve for the roots. 
+
+The quadratic formula is
+
+x = [-b ± sqrt(b²-4ac)] / 2a
+
+Here, 
+
+b² - 4ac = (-1782)² - 4 * 33 * 22461 = 3175524 - 2962026 = 213498.
+
+Since the discriminant (b² - 4ac) is greater than zero, the roots of the equation are real and different.
+
+Now compute the roots:
+
+x₁ = [1782 + sqrt(213498)] / (2 * 33) 
+   = [1782 + 462] / 66 
+   = 2244 / 66 
+   = 34.
+
+x₂ = [1782 - sqrt(213498)] / (2 * 33) 
+   = [1782 - 462] / 66 
+   = 1320 / 66 
+   = 20.
+
+So, the roots of the equation 33x² - 1782x + 22461 = 0 are x = 34 and x = 20."
+5x^2 - 160x + 989 = 0,40,False,"I see that the equation is of the form:
+
+5x^2 - 160x + 989 = 0
+
+But this equation cannot be factored simply, so we will have to use the quadratic formula to find the roots.
+
+We have:
+
+a = 5
+b = -160
+c = 989
+
+The quadratic formula is:
+
+x = [ -b ± sqrt(b² - 4ac) ] / 2a
+
+First, we calculate the term inside the square root:
+
+b² - 4ac = (-160)² - 4*5*989 = 25600 - 19780 = 5820
+
+Now, we substitute the values of a, b and sqrt(b² - 4ac) into the quadratic formula:
+
+x = [ 160 ± sqrt(5820) ] / 10
+
+This gives us two possible values for x:
+
+x₁ = (160 + sqrt(5820)) / 10
+x₂ = (160 - sqrt(5820)) / 10
+
+Using a calculator, we find:
+
+x₁ ≈ 32.6
+x₂ ≈ 6.04
+
+So the roots of the equation are approximately 32.6 and 6.04."
+10x^2 - 270x + 740 = 0,40,False,"Upon trying to factor the quadratic equation, we're getting complex numbers as solutions which are not easy to manage in factoring. Hence, we have to resort to using the quadratic formula. 
+
+The quadratic formula is given by `x = [-b ± sqrt(b^2 - 4ac)] / (2a)`. In this case,
+
+a = 10
+b = -270
+c = 740
+
+Now, calculate the discriminant `b^2 - 4ac`:
+
+= (-270)² - 4*10*740 
+= 72900 - 29600 
+= 43300 
+
+The discriminant is positive hence we can proceed.
+
+Now that we have the numbers, we can compute x as:
+
+x = [270 ± sqrt(43300)] / 20
+
+The roots x are:
+
+x₁ = [270 + sqrt(43300)] / 20 
+x₁ = 27 
+
+and 
+
+x₂= [270 - sqrt(43300)] / 20 
+x₂ = 2.74
+
+So the solution to 10x² - 270x + 740 = 0 are x = 27 and x = 2.74."
+15x^2 - 645x + 6305 = 0,40,False,"The given quadratic equation is of the form ax^2+bx+c=0
+
+Where,
+a = 15, b = -645, c = 6305
+
+First, we need to take the common out from the equation.
+The equation becomes 15(x^2 - 43x + 421).
+
+Now let's try and factor the quadratic expression inside the bracket. Since 421 is a prime number and no two numbers multiply to 421 and add to -43, we cannot factor this equation.
+
+Now we can solve it by using the quadratic formula.
+The quadratic formula is given by:
+
+x = [-b ± sqrt(b^2 - 4ac)] / (2a)
+
+Substituting the values of a, b and c into the formula, we get,
+
+x = [645 ± sqrt((-645)^2 - 4*15*6305)] / (2*15)
+x = [645 ± sqrt(416025 - 378300)] / 30
+x = [645 ± sqrt(37725)] / 30
+x = [645 ± 195] / 30
+
+So, the roots of the equation are,
+x = (645 + 195) / 30 = 28
+x = (645 - 195) / 30 = 15
+
+Therefore, the roots of the quadratic equation 15x^2 - 645x + 6305 = 0 are 28 and 15."
+7x^2 - 63x + 73 = 0,40,False,"Looking at the equation, it seems that factoring will be difficult because 63 and 73 are not small numbers and don't appear to factor nicely in relation to 7. Let's move on to the quadratic formula. 
+
+The quadratic equation is given by: 
+
+x = [ -b ± sqrt(b^2 - 4ac) ] / 2a
+
+In this equation, a = 7, b = -63, and c = 73.
+
+So, the answer would be: 
+
+x = [ 63 ± sqrt( (-63)^2 - 4(7)(73)) ] / (2 * 7)
+x = [ 63 ± sqrt( 3969 - 2044) ] / 14
+x = [ 63 ± sqrt(1925) ] / 14
+x = [ 63 ± 43.873 ] / 14
+x = [ 106.873 / 14, 19.127 / 14 ]
+x = [ 7.633, 1.366 ]
+
+So, the roots of the given quadratic equation are x = 7.633 and x = 1.366."
+35x^2 - 1260x + 4498 = 0,40,False,"Upon inspecting the equation, I've realized it will be too complicated to factor it. Instead, let's use the quadratic formula to find the roots.
+
+The quadratic formula is given by:
+
+x = [-b ± sqrt(b² - 4ac)] / (2a)
+
+In the given equation 35x^2 - 1260x + 4498 = 0, a = 35, b = -1260, and c = 4498.
+
+Let's substitute these values into the formula:
+
+x = [1260 ± sqrt((-1260)² - 4*35*4498)] / (2*35)
+x = [1260 ± sqrt(1587600 - 629300)] / 70
+x = [1260 ± sqrt(958300)] / 70
+x = [1260 ± 980] / 70
+
+Therefore, x = 32 or x = 4 which are the roots of the given quadratic equation."
+17x^2 - 867x + 9556 = 0,40,False,"Unfortunately, this equation cannot be factored using integers. Therefore, we need to use the quadratic formula:
+
+The quadratic formula is x = [ -b ± sqrt(b^2 - 4ac) ] / 2a
+
+In this equation, a = 17, b = -867, and c = 9556
+
+So, applying these values to the quadratic formula:
+
+x = [ -(-867) ± sqrt( (-867)^2 - 4*17*9556) ] / (2*17)
+
+= [ 867 ± sqrt(751689 - 650304) ] / 34
+
+= [867 ± sqrt(101385) ] / 34
+
+Now, we'll work out the square root:
+
+x = [867 ± sqrt(101385)] / 34 = [867 ± 318.41] / 34
+
+Next, we'll solve for the two possible values of x:
+
+x = (867 + 318.41) / 34 = 34.87
+
+and
+
+x = (867 - 318.41) / 34 = 16.13
+
+So, the roots of the equation are x = 34.87 and x = 16.13"
+37x^2 - 370x + 592 = 0,45,True,"The given quadratic equation is:
+
+37x^2 - 370x + 592 = 0
+
+Here, a = 37, b = -370, and c = 592
+
+Trying to factorize this equation doesn't yield any obvious solutions, so we should go ahead and solve it using the quadratic formula.
+
+The quadratic formula is given by:
+
+x = [-b ± sqrt(b^2 - 4ac)] / (2a)
+
+Applying this formula:
+
+x = [370 ± sqrt((-370)^2 - 4*37*592)] / (2*37)
+x = [370 ± sqrt(136900 - 87808)] / 74
+x = [370 ± sqrt(49092)] / 74
+x = [370 ± 221.61] / 74
+
+We get two solutions for x:
+
+x = (370+221.61)/74 = 7.96 (approx.)
+and
+x = (370-221.61)/74 = 2.004 (approx.)
+
+Therefore, the roots of the given quadratic equation are 7.96 and 2.004."
+8x^2 - 360x + 3808 = 0,45,True,"On inspection, it's clear that this equation can't be factored directly. These coefficients are pretty large, so there isn't an obvious easy factorization.
+
+We'll solve this quadratic equation using the quadratic formula:
+
+x = [ -(-360) ± sqrt( (360)^2 - 4*8*3808) ] / (2 * 8)
+
+Solving the inside of the square root first:
+
+(360)^2 - 4*8*3808 = 129600 - 121664 = 7936
+
+Then
+
+x = [ 360 ± sqrt (7936) ] / 16
+
+sqrt (7936) = 89 
+Therefore, our solutions for the equation are 
+
+x = [ 360 + 89 ] / 16 = 449 / 16 = 28.0625
+And 
+x = [ 360 - 89 ] / 16 = 271 / 16 = 16.9375
+
+So, the roots of the equation are x = 28.0625 and x = 16.9375."
+4x^2 - 88x + 480 = 0,45,True,"Notice that all coefficients are multiples of 4. Hence we can simplify the equation by dividing every term by 4:
+
+x² - 22x + 120 = 0
+
+Now, we try factoring:
+
+(x - a)(x - b) = 0 
+
+We need to find two numbers 'a' and 'b' that add up to 22 (the cint spelled out because you would subtract them from x in the equation, which means they’d be subtracted from one another) and multiply together to get 120.
+
+The numbers 10 and 12 work. 10+12=22 and 10×12=120.
+
+So, we get:
+
+(x - 10)(x - 12) = 0
+
+Setting each factor equal to zero gives the solutions:
+
+x - 10 = 0   =>   x = 10
+
+and
+
+x - 12 = 0   =>   x = 12
+
+So, the roots of the equation 4x² - 88x + 480 = 0 are x = 10 and x = 12."
+3x^2 - 156x + 1785 = 0,45,True,"It is found that the given equation cannot be factored easily. 
+
+Therefore, we resort to the quadratic formula. The quadratic formula is x = [-b ± sqrt(b² - 4ac)] / (2a).
+
+Here, a = 3, b = -156, and c = 1785.
+
+Let's first calculate the discriminant, which is (b² - 4ac) = (-156)² - 4*3*1785 = 24336 - 21420 = 2916
+
+The square root of 2916 is 54.
+
+Substitute a, b, and √(b² - 4ac) into the quadratic formula, we get: 
+
+x = [156 ± 54] / 6
+
+So, the solutions for x are:
+
+x1 = (156 + 54) / 6 = 210 / 6 = 35
+
+x2 = (156 - 54) / 6 = 102 / 6 = 17
+
+So, the roots of the equation are 35 and 17."
+18x^2 - 396x + 1530 = 0,45,True,"This quadratic equation does not seem to be easily factorable, so let's use the quadratic formula instead.
+
+The quadratic formula is: 
+x = [-b ± sqrt(b^2 - 4ac)] / (2a)
+where in our equation:
+a = 18, 
+b = -396, 
+c = 1530.
+
+First, we'll calculate the value under the square root, which is b^2 - 4ac:
+
+(-396) ^2 - 4*18*1530 = 156816 - 110160 = 46656.
+
+The square root of 46656 is equal to 216.
+
+So, the roots are:
+
+x1 = [396 + 216] / (2 * 18) = 612 / 36 = 17
+x2 = [396 - 216] / (2 * 18) = 180 / 36 = 5
+
+Therefore, the roots of the quadratic equation 18x^2 - 396x + 1530 = 0 are x1=17 and x2=5."
+1x^2 - 30x + 144 = 0,45,True,"The equation is 1x^2 - 30x + 144 = 0.
+
+We need to find two numbers whose product is 144 (the constant term) and whose sum is -30 (the coefficient of the linear term).
+
+The numbers -24 and -6 satisfy these conditions because -24*-6 = 144 and -24 + -6 = -30.
+
+Therefore, the quadratic can be factored as follows: 1x^2 - 30x + 144 = (x - 24)(x - 6) = 0.
+
+Setting each factor equal to zero gives the solutions: 
+
+x - 24 = 0  -->  x = 24,
+
+x - 6 = 0   -->  x = 6.
+
+So, the roots of the quadratic equation are 24 and 6."
+35x^2 - 1365x + 10150 = 0,45,True,"Unfortunately, the quadratic equation 35x^2 - 1365x + 10150 = 0 doesn't factor easily. Let's try to solve it using the quadratic formula instead.
+
+The quadratic formula is:
+
+x = [-b ± sqrt(b² - 4ac)] / 2a
+
+where:
+  a, b, and c are coefficients in the quadratic equation ax² + bx + c = 0.
+
+So in this equation, a = 35, b = -1365, and c = 10150.
+
+We plug these numbers into the quadratic formula:
+
+x = [1365 ± sqrt((-1365)² - 4*35*10150)] / (2*35)
+x = [1365 ± sqrt(1863225 - 1421000)] / 70
+x = [1365 ± sqrt(442225)] / 70
+x = [1365 ± 665] / 70
+
+This gives us two solutions: 
+
+x = (1365 + 665) / 70 = 2030 / 70 = 29
+and
+x = (1365 - 665) / 70 = 700 / 70 = 10
+
+Therefore, the roots of the equation 35x^2 - 1365x + 10150 = 0 are x = 29 and x = 10."
+4x^2 - 80x + 204 = 0,45,True,"Unfortunately, the quadratic equation 4x^2 - 80x + 204 = 0 cannot be factored easily. Therefore, the quadratic formula will have to be used.
+
+The quadratic formula is as follows: x = [ -b ± sqrt(b^2 - 4ac) ] / 2a
+
+For the given equation, a = 4, b = -80, and c = 204.
+
+So, x = [ -(-80) ± sqrt((-80)^2 - 4*4*204) ] / 2*4
+   = [ 80 ± sqrt(6400 - 3264) ] / 8
+   = [ 80 ± sqrt(3136) ] / 8
+   = [ 80 ± 56 ] / 8
+
+Therefore, the roots are x1 = (80 + 56) / 8 = 17 and x2 = (80 - 56) / 8 = 3. 
+
+So, the solutions of the equation 4x^2 - 80x + 204 = 0 are x = 17 and x = 3."
+3x^2 - 204x + 3393 = 0,45,True,"The quadratic 3x^2 - 204x + 3393 = 0 is not easily factored. To find the roots we will have to use the quadratic formula x = [-b ± sqrt(b^2 - 4ac)] / 2a for ax^2 + bx + c = 0.
+
+Here, a = 3, b = -204, and c = 3393.
+
+The quadratic formula gives us:
+
+x = [204 ± sqrt((-204)^2 - 4*3*3393)] / 2*3,
+x = [204 ± sqrt(41616 - 40644)] / 6,
+x = [204 ± sqrt(972)] / 6,
+x = [204 ± 31.1769] / 6.
+
+So the roots of the quadratic equation 3x^2 - 204x + 3393 = 0 are 
+
+x = [204 + 31.1769] / 6 
+and 
+x = [204 - 31.1769] / 6
+or
+x = 39.19615
+and
+x = 28.80385.
+The roots are approximately 39.20 and 28.80."
+45x^2 - 1755x + 14580 = 0,45,True,"Actually, I've made a mistake. We can divide through by 45 to simplify the equation, which yields:
+
+x^2 - 39x + 324 = 0
+
+Now, let's try to factor this. The factored equation would take a form of (x - a) * (x - b) = 0, where a and b are two numbers such that:
+
+1. They multiply together to equal the constant term in the quadratic equation (324 in this case)
+
+2. They add up to equal the coefficient on the x term in the quadratic equation (-39 in this case)
+
+The numbers which satisfy these conditions are 36 and 3, because 36 + 3 = 39 and 36 * 3 = 108.
+
+So, our factored equation is:
+
+(x - 36)(x - 3) = 0
+
+Now, we set each factor equal to zero and solve for x to find the roots of the equation:
+
+x - 36 = 0 => x = 36
+
+x - 3 = 0 => x = 3
+
+So, The roots of the equation are x = 36, and x = 3."
+8x^2 - 464x + 6443 = 0,45,False,"The general equation for a quadratic is ax^2 + bx + c = 0. The equation given (8x^2 - 464x + 6443 = 0) doesn't easily lend itself to simple factoring. Dividing each term by 8 gives x^2 - 58x + 805.375 = 0, which is still difficult to factor. 
+
+According to the quadratic formula, the solutions to a quadratic equation ax^2 + bx + c = 0 are given by the formula 
+
+x = [-b ± sqrt(b^2 - 4ac)] / (2a)
+
+So, for this quadratic equation (8x^2 - 464x +6443 = 0), 
+
+a = 8, b = -464, and c = 6443. 
+
+We get,
+
+x = [464 ± sqrt((-464)^2 - 4*8*6443)] / (2*8)
+= [464 ± sqrt(215296 - 51544)] / 16
+= [464 ± sqrt(163752)] / 16
+= [464 ± 404] / 16
+
+So the solutions are x = 868/16 = 54.25 and x = 60/16 = 3.75."
+17x^2 - 765x + 2831 = 0,45,False,"The factorisation of this equation doesn't seem straightforward. Therefore, I will use the quadratic formula. The quadratic formula is x = [-b ± sqrt(b^2 - 4ac)] / (2a). 
+
+Given the equation 17x^2 - 765x + 2831 = 0, the values of a, b, and c are:
+a = 17,
+b = -765, 
+c = 2831.
+
+Substituting these values into the quadratic formula gives:
+
+x = [765 ± sqrt((-765)^2 - 4*17*2831)] / (2*17)
+= [765 ± sqrt(585225 - 192338)] / 34
+= [765 ± sqrt(392887)] / 34
+= [765 ± 627] / 34.
+
+Hence, the solutions would be x = 41, 4."
+20x^2 - 840x + 1602 = 0,45,False,"It appears to be difficult to factor the equation. Now, I'll try using the quadratic formula, which states that if you have an equation in the form ax^2 + bx + c = 0, the solutions for x are given by the formula:
+
+x = [-b ± sqrt(b^2 - 4ac)] / 2a
+
+For our equation, a = 20, b = -840, c = 1602.
+
+So,
+
+x = [840 ± sqrt((-840)^2 - 4*20*1602)] / 2*20
+x = [840 ± sqrt(705600 - 64160)] / 40
+x = [840 ± sqrt(641440)] / 40
+x = [840 ± 800] / 40
+
+So the solutions are: 
+
+x = (840 + 800) / 40 = 41
+x = (840 - 800) / 40 = 1 
+
+Therefore, the roots of the equation 20x^2 - 840x + 1602 = 0 are x = 1 and x = 41."
+8x^2 - 248x + 691 = 0,45,False,"Looking at the equation, it's not easily factorable. We will use the quadratic formula. The quadratic formula is x = [ -b ± sqrt(b^2 - 4ac) ] / 2a
+
+Starting with the equation,
+8x^2 - 248x + 691 = 0, we can identify a, b, and c from the equation standard form ax^2 + bx + c = 0.
+
+a = 8
+b = -248
+c = 691
+
+Applying these values to the quadratic formula gives us:
+
+x = [ 248 ± sqrt((-248)^2 - 4*8*691) ] / (2*8)
+= [ 248 ± sqrt(61696 - 21744) ] / 16
+= [ 248 ± sqrt(39952) ] / 16
+= [ 248 ± 200 ] / 16
+= [48 / 16, 448 / 16]
+x = [3, 28].
+
+So, the roots of the equation 8x^2 - 248x + 691 = 0 are x = 3 and x = 28."
+25x^2 - 1250x + 10006 = 0,45,False,"However, this equation does not factor easily. Therefore, I will use the quadratic formula:
+
+The quadratic formula is given as:
+
+x = [-b ± sqrt(b² - 4ac)] / 2a
+
+For the given equation 25x^2 - 1250x + 10006 = 0,
+a = 25, b = -1250, c = 10006.
+
+So, we substitute these values into the quadratic formula:
+
+x = [1250 ± sqrt((-1250)² - 4*25*10006)] / 2*25
+x = [1250 ± sqrt((1562500 - 1000600)] / 50
+x = [1250 ± sqrt(561900)] / 50
+x = [1250 ± 750] / 50
+Therefore, the roots of the given quadratic equation are x = 40 and x = 10."
+29x^2 - 2088x + 37489 = 0,45,False,"Upon attempting to factor the equation, it becomes evident that it cannot be factored easily. Let's now use the quadratic formula to find the roots.
+
+Just a quick recap, the quadratic formula is given by: 
+
+x = [ -b ± sqrt(b^2 - 4ac) ] / 2a 
+
+where a, b, and c are coefficients of the quadratic equation ax^2 + bx + c = 0.
+
+In this equation, a=29, b=-2088, and c=37489.
+
+Let's substitute these values into the quadratic formula.
+
+x = [ 2088 ± sqrt((-2088)^2 - 4*29*37489) ] / 2*29 
+
+x = [ 2088 ± sqrt(4361344 - 4346444) ] / 58 
+
+x = [ 2088 ± sqrt(14900) ] / 58 
+
+x = [ 2088 ± 122 ] / 58 
+
+Therefore, the roots of the quadratic equation are:
+
+x1 = (2088 + 122) / 58 = 38
+
+x2 = (2088 - 122) / 58 = 34"
+2x^2 - 118x + 1445 = 0,45,False,"Upon trying to factor the quadratic equation, it seems that the equation does not factor nicely. Therefore, we will need to use the Quadratic Formula to solve this equation. 
+
+The Quadratic Formula is: x = [-b ± sqrt(b^2 - 4ac)] / (2a)
+
+For our equation, a = 2, b = -118, and c = 1445.
+
+x = [118 ± sqrt((118)^2 - 4*2*1445)] / (2*2)
+
+x = [118 ± sqrt((13924 - 11560)] / 4
+
+x = [118 ± sqrt(2364)] / 4
+
+x = [118 ± 48.6] / 4
+
+Therefore, the roots of the equation are:
+
+x1 = [118 + 48.6] / 4 = 41.65
+x2 = [118 - 48.6] / 4 = 17.35
+
+So, the roots of the equation 2x^2 - 118x + 1445 = 0 are x = 41.65 and x = 17.35."
+1x^2 - 60x + 921 = 0,45,False,"This quadratic equation cannot be factored using integers.
+
+Now, let's use the quadratic formula to solve the equation.
+The quadratic formula is x = [ -b ± sqrt(b^2 - 4ac) ] / 2a
+
+For the given quadratic equation 1x^2 - 60x + 921 = 0, a = 1, b = -60, and c = 921.
+
+Now, let's plug these values into the formula:
+
+x = [ 60 ± sqrt((-60)^2 - 4*1*921) ] / 2*1
+x = [ 60 ± sqrt(3600 - 3684) ] / 2
+x = [ 60 ± sqrt(-84) ] / 2
+
+Since the value under the square root is negative, the roots of this equation are complex/imaginary.
+
+The final solution is:
+
+x = [ 60 ± sqrt(84)i ] / 2
+x = [ 30 ± sqrt(21)i ] 
+
+Here, i is the imaginary unit with the property i^2 = -1."
+1x^2 - 63x + 998 = 0,45,False,"The equation seems to not be easily factorable. Hence, we have to resort to the quadratic formula, which is x = [-b ± sqrt(b² - 4ac)] / (2a).
+
+In this equation, a = 1, b = -63, and c = 998.
+
+Now, let's input these values into the quadratic formula to find the roots:
+
+x = [63 ± sqrt((-63)² - 4*1*998)] / (2*1)
+x = [63 ± sqrt(3969 - 3992)] / 2
+x = [63 ± sqrt(-23)] / 2
+
+Since we're getting a negative number under the square root, the roots of this equation are complex.
+
+x = 63/2 ± sqrt(23)i/2
+x = 31.5 ± (4.79)i
+
+So the roots of the quadratic equation 1x^2 - 63x + 998 = 0 are 31.5 + 4.79i and 31.5 - 4.79i."
+39x^2 - 2301x + 33736 = 0,45,False,"I'm afraid it is difficult to do this with factoring, we will need to use the quadratic formula. The quadratic formula is x = [-b ± sqrt(b^2 - 4ac)] / (2a), where a, b and c are coefficients in the quadratic equation ax^2 + bx + c. For this equation, a = 39, b = -2301, and c = 33736.
+
+Solving the equation using the quadratic formula gives:
+
+x = [2301 ± sqrt((-2301)^2 - 4*39*33736)] / (2*39)
+  = [2301 ± sqrt(5294601 - 5279448)] / 78
+  = [2301 ± sqrt(5153)] / 78
+  = [2301 ± 71.8] / 78
+So the solutions are x = 2301 + 71.8 / 78 = 30.36 and x = 2301 - 71.8 / 78 = 28.36.
+
+We have the two roots of the equation as x = 30.36 and x = 28.36."
